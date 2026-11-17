@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-09T20:24:14.906Z",
+ "generated_at": "2026-11-17T03:51:29.624Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
  "count": 123,
  "items": [
@@ -24,8 +24,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -60,7 +60,7 @@
    "ui": true,
    "top": {
     "value": "13:00",
-    "confidence": 0.96,
+    "confidence": 0.955,
     "sources": 2,
     "evidence": [
      {
@@ -122,8 +122,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -332,8 +332,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -354,7 +354,7 @@
    "ui": true,
    "top": {
     "value": "12:00",
-    "confidence": 0.96,
+    "confidence": 0.955,
     "sources": 2,
     "evidence": [
      {
@@ -367,9 +367,9 @@
      {
       "grade": "MENTION",
       "src": "review_search",
-      "url": "https://blog.naver.com/cherrycookies/224225077185",
-      "at": "2026-03-22",
-      "quote": "군위전투전승기념공원 캠핑 입실 13시 퇴실 12시 글램핑 입실 14시 퇴실 11시 지인이 맛나게 요리해준 목살, 피자, 사리곰탕, 마시멜로꼬치, 아이들 데리야끼 치킨 공기 좋고 여유 롭고 군위캠핑장 너무 좋은 곳을 알게 되었다."
+      "url": "https://leports.sailing-blog.click/14",
+      "at": "2025-10-31",
+      "quote": "- 퇴실 12:00"
      }
     ]
    },
@@ -416,8 +416,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -479,8 +479,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -550,8 +550,8 @@
    "ui": true,
    "top": {
     "value": "15:00",
-    "confidence": 0.99,
-    "sources": 2,
+    "confidence": 0.996,
+    "sources": 3,
     "evidence": [
      {
       "grade": "OPERATOR",
@@ -563,8 +563,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -586,7 +586,7 @@
       "src": "review_search",
       "url": "https://blog.naver.com/hyochi-/223927033208",
       "at": "2025-07-09",
-      "quote": "체크아웃 11:00 (입실은 밤9시까지 , 일몰 후 체크인시 사전연락 필요) - 매너타임 :…"
+      "quote": "체크아웃 11:00 (입실은 밤9시까지 , 일몰 후 체크인시 사전연락 필요) - 매너타임..."
      }
     ]
    }
@@ -627,7 +627,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261031",
-      "at": "2026-11-09",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -648,7 +648,7 @@
    "ui": true,
    "top": {
     "value": "11:00",
-    "confidence": 0.94,
+    "confidence": 0.939,
     "sources": 2,
     "evidence": [
      {
@@ -661,9 +661,9 @@
      {
       "grade": "MENTION",
       "src": "review_search",
-      "url": "https://blog.naver.com/llemona_/223627961735",
-      "at": "2024-10-21",
-      "quote": "퇴실 11:00 옴니버스 캠핑장 경기도 연천군 장남면 장백로 391 연천에 레트로 컨셉의 이색적인 캠핑장이 있다고 해서 다녀와봤어요!"
+      "url": "https://blog.naver.com/kyuriiim23/223702374189",
+      "at": "2024-12-22",
+      "quote": "캠핑장 연천 옴니버스 캠핑장을 포스팅 해볼게요 체크인 15:00 체크아웃 11:00 매너타임 22:00 - 07:00 *기타사항* 캠핑카 옆 주차O 캠핑카 內 화장실/샤워실O 강아지 놀이터/캠핑의자O * 참고사항 * 강아지 울타리가..."
      }
     ]
    },
@@ -675,8 +675,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -690,8 +690,57 @@
    }
   },
   {
+   "cid": "100013",
+   "name": "약수동산",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "ALLOWED",
+    "confidence": 0.903,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping_intro",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100013",
+      "at": "2026-11-13T00:00:00+09:00",
+      "quote": "좌청룡 존 7개는 지대가 높아 시야가 트여 있으며, 노을 존 4개는 낮은 지대에 있고, 애견 동반이 가능하다."
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blogsailing.com/7969",
+      "at": "2026-10-29",
+      "quote": "좌청룡 존 7개는 지대가 높아 시야가 트여 있으며, 노을 존 4개는 낮은 지대에 있고, 애견 동반이 가능하다."
+     }
+    ]
+   },
+   "rival": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.903,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blogsailing.com/7969",
+      "at": "2026-10-29",
+      "quote": "반려동물 동반 불가"
+     }
+    ]
+   }
+  },
+  {
    "cid": "29",
-   "name": "80 SS 오토캠핑장",
+   "name": "80포레스트카라반캠프((주)포레스트카라반 대구점)",
    "attr": "PET_POLICY",
    "label": "반려견 동반",
    "ui": true,
@@ -865,7 +914,7 @@
    "ui": true,
    "top": {
     "value": "ALLOWED",
-    "confidence": 0.91,
+    "confidence": 0.903,
     "sources": 2,
     "evidence": [
      {
@@ -1277,8 +1326,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -1299,7 +1348,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261114",
-      "at": "2026-11-09",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -1340,8 +1389,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -1397,7 +1446,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261114",
-      "at": "2026-11-09",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -1698,7 +1747,7 @@
    "ui": true,
    "top": {
     "value": "14:00",
-    "confidence": 0.945,
+    "confidence": 0.94,
     "sources": 2,
     "evidence": [
      {
@@ -1886,8 +1935,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -2188,7 +2237,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261114",
-      "at": "2026-11-09",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -2769,7 +2818,7 @@
    "ui": true,
    "top": {
     "value": "ALLOWED",
-    "confidence": 0.925,
+    "confidence": 0.918,
     "sources": 2,
     "evidence": [
      {
@@ -2785,41 +2834,6 @@
       "url": "https://blog.naver.com/jihye7531/224294686270",
       "at": "2026-05-23",
       "quote": "가평수영장카라반 애견 키즈 모두 가능한 곳!."
-     }
-    ]
-   },
-   "rival": {
-    "value": "NOT_ALLOWED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "불가능"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "100013",
-   "name": "약수동산",
-   "attr": "PET_POLICY",
-   "label": "반려견 동반",
-   "ui": true,
-   "top": {
-    "value": "ALLOWED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping_intro",
-      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100013",
-      "at": "2026-10-28T00:00:00+09:00",
-      "quote": "좌청룡 존 7개는 지대가 높아 시야가 트여 있으며, 노을 존 4개는 낮은 지대에 있고, 애견 동반이 가능하다."
      }
     ]
    },
@@ -3112,8 +3126,8 @@
    "ui": true,
    "top": {
     "value": "ZONE_ONLY",
-    "confidence": 0.935,
-    "sources": 2,
+    "confidence": 0.9,
+    "sources": 1,
     "evidence": [
      {
       "grade": "OPERATOR",
@@ -3121,13 +3135,6 @@
       "url": "http://campian.co.kr/reserve",
       "at": "2026-10-20T01:27:57.925Z",
       "quote": "애견동 1~4 숯그릴 or 가스그릴 선택 가능"
-     },
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/ssseol_a91/224414054552",
-      "at": "2026-09-16",
-      "quote": "경주 캠피언 카라반 수영장 바베큐 애견동반 가능 글램핑장 추천."
      }
     ]
    },
@@ -3184,6 +3191,41 @@
       "url": null,
       "at": null,
       "quote": "불가능"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "101871",
+   "name": "하우스플레이랩",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "https://campingdogam.com/camp/101871/",
+      "at": "2026-10-20T00:50:02.118Z",
+      "quote": "반려동물 불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "가능"
      }
     ]
    }
@@ -3287,7 +3329,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.843,
+    "confidence": 0.839,
     "sources": 2,
     "evidence": [
      {
@@ -3329,7 +3371,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.831,
+    "confidence": 0.827,
     "sources": 2,
     "evidence": [
      {
@@ -3345,48 +3387,6 @@
       "url": "https://blogsailing.com/13940",
       "at": "2026-03-26",
       "quote": "반려견 동반 입장이 가능하며, 이 경우 목줄 착용…"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "101126",
-   "name": "만월글램핑",
-   "attr": "PET_POLICY",
-   "label": "반려견 동반",
-   "ui": true,
-   "top": {
-    "value": "NOT_ALLOWED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "불가능"
-     }
-    ]
-   },
-   "rival": {
-    "value": "ALLOWED",
-    "confidence": 0.818,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping_intro",
-      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101126",
-      "at": "2024-12-24T00:00:00+09:00",
-      "quote": "애견동반 가능한 글램핑과 카라반으로, 대병 수영장을 가춘 풀빌라 형태다."
-     },
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/0rhyeon_/223732955788",
-      "at": "2025-01-21",
-      "quote": "아언입니당 애견동반숙소이면서 불멍🔥가능하고 수영장🏊‍♂️까지 이용 가능한 100점짜리 숙소 소개해드릴게요 만월 글램핑 가평 입실시간 15:00 퇴실시간 11:00 현재 네이버예약에서 얼리 체크인 쿠폰 사용가능하니 꼭 적용해서 이용하시길 바라요!"
      }
     ]
    }
@@ -3413,7 +3413,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.816,
+    "confidence": 0.813,
     "sources": 2,
     "evidence": [
      {
@@ -3429,6 +3429,48 @@
       "url": "https://blog.naver.com/yusola033/224117609378",
       "at": "2025-12-21",
       "quote": "🎀횡성 보리캠핑장 정보🎀 : 15시 입실 … 11시 퇴실 : 애견동반가능 : 이용요금:) 사용하는 동마다 다름 보리캠핑장 강원특별자치도 횡성군 둔내면…"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "101126",
+   "name": "만월글램핑",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.813,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping_intro",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101126",
+      "at": "2024-12-24T00:00:00+09:00",
+      "quote": "애견동반 가능한 글램핑과 카라반으로, 대병 수영장을 가춘 풀빌라 형태다."
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/0rhyeon_/223732955788",
+      "at": "2025-01-21",
+      "quote": "아언입니당 애견동반숙소이면서 불멍🔥가능하고 수영장🏊‍♂️까지 이용 가능한 100점짜리 숙소 소개해드릴게요 만월 글램핑 가평 입실시간 15:00 퇴실시간 11:00 현재 네이버예약에서 얼리 체크인 쿠폰 사용가능하니 꼭 적용해서 이용하시길 바라요!"
      }
     ]
    }
@@ -3455,7 +3497,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.816,
+    "confidence": 0.813,
     "sources": 2,
     "evidence": [
      {
@@ -3497,7 +3539,7 @@
    },
    "rival": {
     "value": "ZONE_ONLY",
-    "confidence": 0.785,
+    "confidence": 0.78,
     "sources": 2,
     "evidence": [
      {
@@ -3539,7 +3581,7 @@
    },
    "rival": {
     "value": "SMALL_ONLY",
-    "confidence": 0.77,
+    "confidence": 0.764,
     "sources": 1,
     "evidence": [
      {
@@ -3574,7 +3616,7 @@
    },
    "rival": {
     "value": "ZONE_ONLY",
-    "confidence": 0.752,
+    "confidence": 0.746,
     "sources": 1,
     "evidence": [
      {
@@ -3609,7 +3651,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.723,
+    "confidence": 0.72,
     "sources": 2,
     "evidence": [
      {
@@ -3651,7 +3693,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.703,
+    "confidence": 0.698,
     "sources": 1,
     "evidence": [
      {
@@ -3695,41 +3737,6 @@
       "url": "https://blog.naver.com/goguma4354/224273362075",
       "at": "2026-05-03",
       "quote": "애견동반 가능(단, 본인 사이트내) [아름다운 풍경과 로맨틱...확인"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "398",
-   "name": "국립천관산자연휴양림",
-   "attr": "PET_POLICY",
-   "label": "반려견 동반",
-   "ui": true,
-   "top": {
-    "value": "NOT_ALLOWED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "불가능"
-     }
-    ]
-   },
-   "rival": {
-    "value": "ALLOWED",
-    "confidence": 0.6,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/going_lab/224436186150",
-      "at": "2026-10-14",
-      "quote": "자연휴양림 반려견 동반 2026 가능한 곳·입장 기준·서류 정리."
      }
     ]
    }
@@ -3917,7 +3924,7 @@
    "ui": true,
    "top": {
     "value": "NOT_ALLOWED",
-    "confidence": 0.91,
+    "confidence": 0.903,
     "sources": 2,
     "evidence": [
      {
@@ -3930,9 +3937,9 @@
      {
       "grade": "MENTION",
       "src": "review_search",
-      "url": "https://blog.naver.com/opqr1174/224442795947",
-      "at": "2026-10-15",
-      "quote": "글램코티지 영천 A동 : 애견동반 불가 B동 : 7kg 미만 애견동반 가능 애견동반 추가 비용 없음 형아 덕에..."
+      "url": "https://blog.naver.com/da_sollll/224412409395",
+      "at": "2026-09-15",
+      "quote": "✔️A동 : 반려견 동반 불가"
      }
     ]
    },
@@ -3944,9 +3951,9 @@
      {
       "grade": "MENTION",
       "src": "review_search",
-      "url": "https://blog.naver.com/daisysole/224163027366",
-      "at": "2026-01-28",
-      "quote": "대구 근교 영천 애견동반 가능한 글램핑 글램코티지."
+      "url": "https://blog.naver.com/opqr1174/224442795947",
+      "at": "2026-10-15",
+      "quote": "대구 근교 글램핑 추천｜애견동반 가능한 영천 글램코티지, 낚시터까지!."
      }
     ]
    }
@@ -4022,6 +4029,41 @@
    }
   },
   {
+   "cid": "100387",
+   "name": "헤이캠프클럽",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/dmsdk3614/224463963775",
+      "at": "2026-11-03",
+      "quote": "(울산)헤이캠프클럽 할로윈 캠핑 후기, 애견동반 가능한 오션뷰 캠핑장."
+     }
+    ]
+   }
+  },
+  {
    "cid": "100538",
    "name": "남해 포레스 오토캠핑장",
    "attr": "PET_POLICY",
@@ -4086,7 +4128,7 @@
       "src": "review_search",
       "url": "https://blog.naver.com/ho9camping/224447465499",
       "at": "2026-10-20",
-      "quote": "횡성 애견동반 캠핑장 자작자작캠핑장｜대형견 가능, 개별 울타리....."
+      "quote": "횡성 애견동반 캠핑장 자작자작캠핑장｜대형견 가능, 개별 울타리와 강아지 운동장이 있는 숲속 캠핑장...."
      }
     ]
    }
@@ -4259,16 +4301,16 @@
     ]
    },
    "rival": {
-    "value": "SMALL_ONLY",
+    "value": "ALLOWED",
     "confidence": 0.6,
     "sources": 1,
     "evidence": [
      {
       "grade": "MENTION",
       "src": "review_search",
-      "url": "https://blog.naver.com/chickenwithpotato/224297306314",
-      "at": "2026-05-26",
-      "quote": "기준2인 최대4인: 추가인원 현장 결제 -1인당 추가 비용 성인 20,000원(36개월이상) -반려견(7kg 이하만 가능, 견종 제한) 1마리 20,000원의 추가비용 발생(현장 결제) 매년 …"
+      "url": "https://blog.naver.com/oneulmusic2024/224451453017",
+      "at": "2026-10-23",
+      "quote": "청주캠핑장 초정힐링캠핑장 ｜ 초정약수,초정행궁 겨울 여행 후기 (반려동물 동반가능)."
      }
     ]
    }
@@ -4301,9 +4343,9 @@
      {
       "grade": "MENTION",
       "src": "review_search",
-      "url": "https://blog.naver.com/gimhaeajum/224423388211",
-      "at": "2026-09-26",
-      "quote": "광주 근교 바베큐 더숲 캠핑글램핑 반려견 가능 첨단수완 25분거리."
+      "url": "https://blog.naver.com/jj_tasty/224474885193",
+      "at": "2026-11-12",
+      "quote": "광주 근교 글램핑 식당 추천 더숲 캠핑&글램핑 반려견 동반 가능한 가족 글램핑장."
      }
     ]
    }
@@ -4357,8 +4399,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -4427,8 +4469,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14862&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14862&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -4469,8 +4511,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -4504,8 +4546,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15505&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15505&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -4561,48 +4603,6 @@
    }
   },
   {
-   "cid": "100013",
-   "name": "약수동산",
-   "attr": "CHECKOUT_TIME",
-   "label": "퇴실 시각",
-   "ui": true,
-   "top": {
-    "value": "11:00",
-    "confidence": 0.935,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261114",
-      "at": "2026-11-09",
-      "quote": ""
-     },
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/lets_bmarket/224140787216",
-      "at": "2026-01-09",
-      "quote": "바라겠습니다 ^^ 입실 15:00 ~ 퇴실 11:00 입니다 !"
-     }
-    ]
-   },
-   "rival": {
-    "value": "12:00",
-    "confidence": 0.6,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/cgs9552/224281002706",
-      "at": "2026-05-10",
-      "quote": "자랑스러운 후배 키움히어로즈 선수가 추천해준 캠핑장이에요 벼루고 있다가 예약했습니다 ^_^ 입실 1시 퇴실 12시 캠핑장 옆 냉면집이 있어서 포장해서 점심 먹었어…"
-     }
-    ]
-   }
-  },
-  {
    "cid": "100629",
    "name": "위드힐링 캠핑장",
    "attr": "CHECKIN_TIME",
@@ -4610,14 +4610,14 @@
    "ui": true,
    "top": {
     "value": "14:00",
-    "confidence": 0.958,
+    "confidence": 0.957,
     "sources": 2,
     "evidence": [
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      },
      {
@@ -4700,8 +4700,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -4717,6 +4717,48 @@
       "url": "https://blog.naver.com/c_wonny/224426287005",
       "at": "2026-09-29",
       "quote": "사이트 정보 입실 13:00"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "101282",
+   "name": "잉글랜드 캠핑장",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "13:00",
+    "confidence": 0.935,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261121",
+      "at": "2026-11-16",
+      "quote": ""
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/july2850/224037149192",
+      "at": "2025-10-10",
+      "quote": "가평 잉글랜드 캠핑장 입실 13시, 퇴실 12시"
+     }
+    ]
+   },
+   "rival": {
+    "value": "14:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/loyya30/224039969670",
+      "at": "2025-10-14",
+      "quote": "입실은 14시, 퇴실은 12시이며, 매너타임은 22시 30분부터 07시까지에요."
      }
     ]
    }
@@ -4819,8 +4861,8 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17290&res_dt=20261114",
-      "at": "2026-11-09",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17290&res_dt=20261121",
+      "at": "2026-11-16",
       "quote": ""
      }
     ]
@@ -4836,41 +4878,6 @@
       "url": "https://blog.naver.com/naehaseugem/224440241468",
       "at": "2026-10-13",
       "quote": "및 퇴실 캠핑 사이트 입실: 오후 1시 카라반 및 펜션동 입실: 오후 2시 퇴실: 오전 11시 관리실: 캠핑장 입구 앞 본관 건물"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "park-48820-00001-n71qm",
-   "name": "남산공원",
-   "attr": "CHECKIN_TIME",
-   "label": "입실 시각",
-   "ui": true,
-   "top": {
-    "value": "13:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261114",
-      "at": "2026-11-09",
-      "quote": ""
-     }
-    ]
-   },
-   "rival": {
-    "value": "14:00",
-    "confidence": 0.6,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/yukihiroxxx/224180450640",
-      "at": "2026-02-11",
-      "quote": "호의 퇴근이...힐링캠핑장 운영 시간 입실 시간: 14시 퇴실 시간: 12시 매너타임 23:00 ~ 07:00 공원 부지에 있는…"
      }
     ]
    }
