@@ -2668,8 +2668,8 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 38개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성 & 크기/갯수 대폭 확대)
-        const mistCount = 38;
+        // 56개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성 & 물안개 갯수 풍성하게 증량)
+        const mistCount = 56;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3; // 0: 원경 베이스, 1: 중경 호숫가, 2: 근경 가벼운 김
           const scaleBase = layer === 0 ? 0.48 : layer === 1 ? 0.38 : 0.28;
@@ -2723,27 +2723,27 @@ class HeroCanvasController {
         break;
 
       case "steam":
-        // 노천탕: 몽환적으로 피어오르는 온천 김(60개 다채로운 퍼프) + 밤하늘 영롱한 별빛 반짝임
-        for (let i = 0; i < 60; i++) this.particles.push(this.makeSteam(w, h, true));
+        // 노천탕: 몽환적으로 피어오르는 온천 김(95개 다채로운 퍼프) + 밤하늘 영롱한 별빛 반짝임
+        for (let i = 0; i < 95; i++) this.particles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < 42; i++) {
           this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         }
         break;
 
       case "warm-pool-snow":
-        // 사계절 온수풀: 눈발과 수면에서 모락모락 피어오르는 온수풀 증기 동시 표시
+        // 사계절 온수풀: 눈발과 수면에서 모락모락 피어오르는 온수풀 증기 동시 표시 (수증기 70개)
         for (let i = 0; i < 54; i++) {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
         }
-        for (let i = 0; i < 40; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 70; i++) this.steamParticles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < 32; i++) this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         break;
 
       case "bubbles":
-        // 스파: 반짝이며 떠오르는 물방울 + 자쿠지 온천 증기
+        // 스파: 반짝이며 떠오르는 물방울 + 자쿠지 온천 증기 (수증기 70개)
         for (let i = 0; i < 36; i++) this.particles.push(this.makeBubble(w, h, true));
-        for (let i = 0; i < 40; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 70; i++) this.steamParticles.push(this.makeSteam(w, h, true));
         break;
 
       case "rainbow":
