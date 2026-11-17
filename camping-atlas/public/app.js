@@ -2668,20 +2668,23 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 56개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성 & 물안개 갯수 풍성하게 증량)
-        const mistCount = 56;
+        // 80개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성 & 크기/갯수 대폭 확대, 양방향 다채로운 회전)
+        const mistCount = 80;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3; // 0: 원경 베이스, 1: 중경 호숫가, 2: 근경 가벼운 김
-          const scaleBase = layer === 0 ? 0.48 : layer === 1 ? 0.38 : 0.28;
-          const pw = Math.max(180, Math.min(w, h) * (scaleBase + Math.random() * 0.16));
+          const scaleBase = layer === 0 ? 0.62 : layer === 1 ? 0.48 : 0.36;
+          const pw = Math.max(240, Math.min(w, h) * (scaleBase + Math.random() * 0.22));
           const ph = pw * (Math.random() * 0.25 + 0.85);
+          const rotDir = Math.random() < 0.5 ? -1 : 1;
+          const rotSpeedRoll = Math.random();
+          const speedMag = rotSpeedRoll < 0.35 ? (Math.random() * 0.003 + 0.002) : rotSpeedRoll < 0.75 ? (Math.random() * 0.006 + 0.006) : (Math.random() * 0.010 + 0.014);
           this.mistParticles.push({
             baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.14),
             baseY: h * (0.42 + Math.random() * 0.15),
             w: pw,
             h: ph,
             rot: Math.random() * Math.PI * 2,
-            rotSpeed: (Math.random() - 0.5) * 0.005,
+            rotSpeed: rotDir * speedMag,
             swayAmp: Math.random() * 32 + 20,
             swaySpeed: Math.random() * 0.007 + 0.003,
             swayPhase: Math.random() * Math.PI * 2,
@@ -2723,27 +2726,27 @@ class HeroCanvasController {
         break;
 
       case "steam":
-        // 노천탕: 몽환적으로 피어오르는 온천 김(95개 다채로운 퍼프) + 밤하늘 영롱한 별빛 반짝임
-        for (let i = 0; i < 95; i++) this.particles.push(this.makeSteam(w, h, true));
+        // 노천탕: 몽환적으로 피어오르는 온천 김(140개 초대형/대형/중형 퍼프) + 밤하늘 영롱한 별빛 반짝임
+        for (let i = 0; i < 140; i++) this.particles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < 42; i++) {
           this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         }
         break;
 
       case "warm-pool-snow":
-        // 사계절 온수풀: 눈발과 수면에서 모락모락 피어오르는 온수풀 증기 동시 표시 (수증기 70개)
+        // 사계절 온수풀: 눈발과 수면에서 모락모락 피어오르는 온수풀 증기 동시 표시 (수증기 100개)
         for (let i = 0; i < 54; i++) {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
         }
-        for (let i = 0; i < 70; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 100; i++) this.steamParticles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < 32; i++) this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         break;
 
       case "bubbles":
-        // 스파: 반짝이며 떠오르는 물방울 + 자쿠지 온천 증기 (수증기 70개)
+        // 스파: 반짝이며 떠오르는 물방울 + 자쿠지 온천 증기 (수증기 100개)
         for (let i = 0; i < 36; i++) this.particles.push(this.makeBubble(w, h, true));
-        for (let i = 0; i < 70; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 100; i++) this.steamParticles.push(this.makeSteam(w, h, true));
         break;
 
       case "rainbow":
@@ -2845,23 +2848,39 @@ class HeroCanvasController {
   }
 
   makeSteam(w, h, initial = false) {
-    const startY = initial ? h * (0.50 + Math.random() * 0.45) : h * (0.68 + Math.random() * 0.28);
-    // 3단계 크기 분포: 소형 김줄기(22~40px), 중형 퍼프(45~77px), 대형 증기 구름(80~125px)
+    const startY = initial ? h * (0.46 + Math.random() * 0.48) : h * (0.66 + Math.random() * 0.28);
+    // 4단계 크기 분포: 소형 김줄기(35~65px), 중형 퍼프(75~130px), 대형 증기 구름(140~210px), 초대형 안개 돔(220~300px)
     const sizeRoll = Math.random();
-    const r = sizeRoll < 0.35 ? (Math.random() * 18 + 22) : sizeRoll < 0.75 ? (Math.random() * 32 + 45) : (Math.random() * 45 + 80);
+    const r = sizeRoll < 0.28
+      ? (Math.random() * 30 + 35)
+      : sizeRoll < 0.62
+        ? (Math.random() * 55 + 75)
+        : sizeRoll < 0.86
+          ? (Math.random() * 70 + 140)
+          : (Math.random() * 80 + 220);
+
+    // 회전 방향(시계/반시계) 및 다채로운 회전 속도 대역(완만/일반/역동)
+    const rotDir = Math.random() < 0.5 ? -1 : 1;
+    const speedRoll = Math.random();
+    const speedMag = speedRoll < 0.35
+      ? (Math.random() * 0.005 + 0.003)    // 완만하게 감도는 잔잔한 증기 (0.003 ~ 0.008)
+      : speedRoll < 0.75
+        ? (Math.random() * 0.012 + 0.010)   // 생동감 있게 피어오르는 회전 (0.010 ~ 0.022)
+        : (Math.random() * 0.023 + 0.025);  // 빠르게 소용돌이치는 기류 회전 (0.025 ~ 0.048)
+
     return {
       x: Math.random() * w,
       y: startY,
       r,
-      rGrowth: Math.random() * 0.14 + 0.08,
-      vy: -(Math.random() * 0.65 + 0.30),
-      vx: (Math.random() - 0.5) * 0.35,
+      rGrowth: Math.random() * 0.16 + 0.10,
+      vy: -(Math.random() * 0.65 + 0.28),
+      vx: (Math.random() - 0.5) * 0.40,
       rot: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.014,
-      alphaMul: Math.random() * 0.24 + 0.16,
+      rotSpeed: rotDir * speedMag,
+      alphaMul: sizeRoll >= 0.86 ? (Math.random() * 0.08 + 0.10) : (Math.random() * 0.18 + 0.15),
       life: initial ? Math.random() * 0.8 + 0.2 : 1,
       sway: Math.random() * Math.PI * 2,
-      swaySpeed: Math.random() * 0.016 + 0.008
+      swaySpeed: Math.random() * 0.018 + 0.008
     };
   }
   makeConfetti(w, h, initial = false) {
