@@ -2689,30 +2689,30 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 다층 실사 수증기 김 텍스처 퍼프 (모바일 65개 / 데스크톱 120개, 양방향 다채로운 회전)
-        const mistCount = isMob ? 65 : 120;
+        // 다층 잔잔한 호수 물안개 퍼프 (모바일 110개 / 데스크톱 220개, 회전 극소화·소형 띠 형태·좌우 유영 및 페이드)
+        const mistCount = isMob ? 110 : 220;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3;
-          const scaleBase = isMob ? (layer === 0 ? 0.35 : layer === 1 ? 0.28 : 0.20) : (layer === 0 ? 0.62 : layer === 1 ? 0.48 : 0.36);
-          const pw = isMob ? Math.max(120, w * (scaleBase + Math.random() * 0.15)) : Math.max(240, Math.min(w, h) * (scaleBase + Math.random() * 0.22));
-          const ph = pw * (Math.random() * 0.25 + 0.85);
-          const rotDir = Math.random() < 0.5 ? -1 : 1;
-          const rotSpeedRoll = Math.random();
-          const speedMag = rotSpeedRoll < 0.35 ? (Math.random() * 0.0015 + 0.001) : rotSpeedRoll < 0.75 ? (Math.random() * 0.003 + 0.003) : (Math.random() * 0.005 + 0.007);
+          const pw = isMob
+            ? Math.max(48, w * (0.10 + Math.random() * 0.12))
+            : Math.max(80, Math.min(w, h) * (0.14 + Math.random() * 0.14));
+          const ph = pw * (Math.random() * 0.18 + 0.32);
+          const driftDir = Math.random() < 0.65 ? -1 : 1;
+          const driftMag = Math.random() * 0.20 + 0.08;
           this.mistParticles.push({
-            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.14),
-            baseY: h * (0.42 + Math.random() * 0.15),
+            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.18),
+            baseY: h * (0.44 + Math.random() * 0.18),
             w: pw,
             h: ph,
-            rot: Math.random() * Math.PI * 2,
-            rotSpeed: rotDir * speedMag,
-            swayAmp: Math.random() * 32 + 20,
-            swaySpeed: Math.random() * 0.007 + 0.003,
+            rot: (Math.random() - 0.5) * 0.06,
+            rotSpeed: (Math.random() - 0.5) * 0.00008,
+            swayAmp: Math.random() * 18 + 10,
+            swaySpeed: Math.random() * 0.005 + 0.002,
             swayPhase: Math.random() * Math.PI * 2,
-            driftVx: (Math.random() - 0.5) * 0.08,
-            alpha: (layer === 0 ? (Math.random() * 0.08 + 0.20) : layer === 1 ? (Math.random() * 0.10 + 0.24) : (Math.random() * 0.08 + 0.16)) * (isMob ? 0.85 : 1.0),
+            driftVx: driftDir * driftMag,
+            maxAlpha: (layer === 0 ? (Math.random() * 0.06 + 0.14) : layer === 1 ? (Math.random() * 0.07 + 0.16) : (Math.random() * 0.06 + 0.12)) * (isMob ? 0.85 : 1.0),
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.012 + 0.006
+            pulseSpeed: Math.random() * 0.008 + 0.004
           });
         }
         break;
@@ -3726,13 +3726,26 @@ class HeroCanvasController {
       m.baseX += m.driftVx;
 
       // 화면 좌우 완만한 순환
-      if (m.baseX < -m.w * 0.6) m.baseX = w + m.w * 0.6;
-      else if (m.baseX > w + m.w * 0.6) m.baseX = -m.w * 0.6;
+      if (m.baseX < -m.w) m.baseX = w + m.w * 0.4;
+      else if (m.baseX > w + m.w) m.baseX = -m.w * 0.4;
 
       const sway = Math.sin(this.time * m.swaySpeed + m.swayPhase) * m.swayAmp;
       const curX = m.baseX + sway;
-      const curY = m.baseY + Math.cos(this.time * (m.swaySpeed * 0.7) + m.swayPhase) * (m.swayAmp * 0.16);
-      const alpha = Math.max(0.04, m.alpha + Math.sin(m.pulse) * 0.05);
+      const curY = m.baseY + Math.cos(this.time * (m.swaySpeed * 0.6) + m.swayPhase) * (m.swayAmp * 0.08);
+
+      // 좌우 화면 경계 페이드인/페이드아웃 & 서서히 피어오르고 흩어지는 호흡 주기 페이드
+      const edgeMargin = Math.max(70, w * 0.16);
+      let edgeFade = 1;
+      if (curX < edgeMargin) {
+        edgeFade = Math.max(0, (curX + m.w * 0.4) / (edgeMargin + m.w * 0.4));
+      } else if (curX > w - edgeMargin) {
+        edgeFade = Math.max(0, (w - curX + m.w * 0.4) / (edgeMargin + m.w * 0.4));
+      }
+      const phase = (Math.sin(m.pulse) + 1) * 0.5;
+      const breathFade = Math.min(1, phase * 1.5);
+      const alpha = (m.maxAlpha || 0.16) * breathFade * edgeFade;
+
+      if (alpha <= 0.005) continue;
 
       ctx.save();
       ctx.translate(curX, curY);
