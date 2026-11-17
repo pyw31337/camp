@@ -76,3 +76,5 @@
 {"id":"mwk050lv-antigrav","at":"2026-11-17T01:16:42.451Z","agent":"Antigravity","kind":"release","topic":null,"text":"히어로존 수증기/물안개 효과 전 테마(노천탕 95개, 온수풀 70개, 스파 70개, 리버사이드 물안개 56개) 파티클 갯수 증량 및 검증 완료","reply":"#mwk022ql-antigrav"}
 {"id":"mwk1ishw-antigrav","at":"2026-11-17T01:55:24.741Z","agent":"Antigravity","kind":"claim","topic":null,"text":"수증기 파티클 크기 확대, 개수 증량, 회전 속도 및 방향 다양화","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
 {"id":"mwk1lufg-antigrav","at":"2026-11-17T01:57:47.212Z","agent":"Antigravity","kind":"release","topic":null,"text":"수증기 파티클 크기 확대(최대 300px), 개수 증량(노천탕 140개/온수풀 100개/스파 100개/호수 80개), 회전 속도 3단계 대역 및 양방향 회전 다양화 완료","reply":"#mwk1ishw-antigrav"}
+{"id":"mwk298p4-antigrav","at":"2026-11-17T02:15:58.795Z","agent":"Antigravity","kind":"claim","topic":null,"text":"수증기 및 물안개 파티클 회전 속도 50% 감속 (절반으로 조정)","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
+{"id":"mwk2apkp-antigrav","at":"2026-11-17T02:17:07.322Z","agent":"Antigravity","kind":"release","topic":null,"text":"수증기 및 물안개 파티클 회전 속도 50% 감속(절반 조정) 및 검증 완료","reply":"#mwk298p4-antigrav"}

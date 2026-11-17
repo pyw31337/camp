@@ -2677,7 +2677,7 @@ class HeroCanvasController {
           const ph = pw * (Math.random() * 0.25 + 0.85);
           const rotDir = Math.random() < 0.5 ? -1 : 1;
           const rotSpeedRoll = Math.random();
-          const speedMag = rotSpeedRoll < 0.35 ? (Math.random() * 0.003 + 0.002) : rotSpeedRoll < 0.75 ? (Math.random() * 0.006 + 0.006) : (Math.random() * 0.010 + 0.014);
+          const speedMag = rotSpeedRoll < 0.35 ? (Math.random() * 0.0015 + 0.001) : rotSpeedRoll < 0.75 ? (Math.random() * 0.003 + 0.003) : (Math.random() * 0.005 + 0.007);
           this.mistParticles.push({
             baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.14),
             baseY: h * (0.42 + Math.random() * 0.15),
@@ -2859,14 +2859,14 @@ class HeroCanvasController {
           ? (Math.random() * 70 + 140)
           : (Math.random() * 80 + 220);
 
-    // 회전 방향(시계/반시계) 및 다채로운 회전 속도 대역(완만/일반/역동)
+    // 회전 방향(시계/반시계) 및 절반으로 완화된 자연스러운 회전 속도 대역(완만/일반/역동)
     const rotDir = Math.random() < 0.5 ? -1 : 1;
     const speedRoll = Math.random();
     const speedMag = speedRoll < 0.35
-      ? (Math.random() * 0.005 + 0.003)    // 완만하게 감도는 잔잔한 증기 (0.003 ~ 0.008)
+      ? (Math.random() * 0.0025 + 0.0015)   // 완만하게 감도는 잔잔한 증기 (0.0015 ~ 0.004)
       : speedRoll < 0.75
-        ? (Math.random() * 0.012 + 0.010)   // 생동감 있게 피어오르는 회전 (0.010 ~ 0.022)
-        : (Math.random() * 0.023 + 0.025);  // 빠르게 소용돌이치는 기류 회전 (0.025 ~ 0.048)
+        ? (Math.random() * 0.006 + 0.005)   // 부드럽게 피어오르는 회전 (0.005 ~ 0.011)
+        : (Math.random() * 0.011 + 0.012);  // 기류 소용돌이 회전 (0.012 ~ 0.023)
 
     return {
       x: Math.random() * w,
