@@ -1,22 +1,12 @@
-// 렛츠 캠핑 리뉴얼 시안 (design/renewal → /camp/renewal/). 기획: docs/RENEWAL_PLAN.md
-// 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
-// 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
-
-// 주소(2026-10-21): 해시(#/) 없이 경로로 — /camp/, /camp/map, /camp/place/{id} … (History API).
-// APP_BASE = 앱 루트 경로(/camp/ · 로컬 미리보기는 /). 데이터·사진·링크는 모두 이 절대 경로를 쓴다(깊은 주소에서도 깨지지 않게).
+// 렛츠 캠핑 리뉴얼
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const APP_BASE = new URL(MOD_ROOT, import.meta.url).pathname;
 const ASSETS_BASE = APP_BASE;
 const DATA = `${APP_BASE}explore/data/`;
 const MEDIA = `${APP_BASE}media/`;
-// 사진 파일(webp)만 따로 둔 저장소(Cloudflare R2, 2026-10-30 소유자 결정 ⓒ)가 있으면 그 주소에서 받는다.
-// 배포가 index.html의 <meta name="media-base">에 공개 주소를 넣는다. 비어 있으면 지금처럼 Pages의 /media/.
-// 목록 파일(cards/index.json 등)은 늘 Pages에서 받는다(다른 출처 fetch에 CORS가 필요 없게).
 const MEDIA_FILES = (() => { try { const v = (document.querySelector('meta[name="media-base"]')?.content || "").trim(); return v ? (v.endsWith("/") ? v : `${v}/`) : MEDIA; } catch { return MEDIA; } })();
-// 화면 판단은 예전처럼 "#/경로?쿼리" 문자열로 한다(curHash). 주소창은 APP_BASE + 경로다(toPath).
 const curHash = () => { const p = location.pathname.startsWith(APP_BASE) ? location.pathname.slice(APP_BASE.length) : ""; return `#/${p.replace(/\/+$/, "")}${location.search}`; };
 const toPath = (h) => APP_BASE + String(h ?? "").replace(/^#?\/?/, "");
-// 옛 주소 보정: #/c/1 → place/1, #/openings → theme/OPEN 등(공유된 옛 링크 유지)
 const legacyRoute = (r) => String(r ?? "").replace(/^\/+/, "").replace(/index\.html$/, "").replace(/^(explore|renewal)\/(?=.)/, "").replace(/^c\//, "place/").replace(/^camp\//, "place/").replace(/^openings\/?$/, "theme/OPEN").replace(/^(guide|vision|explore|renewal)\/?$/, "").replace(/^passport\/?$/, "compare").replace(/^collections\/?$/, "themes");
 function nav(h, { replace = false } = {}) {
   const u = toPath(h);
@@ -251,13 +241,10 @@ function titleHtml(c) {
   if (w.length < 2) return `<b>${esc(name)}</b>`;
   return `<b>${esc(w.slice(0, -1).join(" "))}</b> <span>${esc(w.at(-1))}</span>`;
 }
-// 카드 지역은 ‘시도 시군구’. 등록값에 시군구가 빠졌으면 주소 문장에서 꺼낸다(소유자 2026-10-22: ‘강원’만 보이던 곳 → ‘강원 양양군’).
 const region = (c) => `${sidoShort(c.sido)} ${c.sigungu || (String(c.addr ?? "").trim().match(/^\S+\s+(\S+?(?:시|군|구))(?:\s|$)/)?.[1] ?? "")}`.trim();
 const typeLine = (c) => (c.pf?.s ?? "").split(" · ")[0] || (c.types ?? [])[0] || "";
 
-// ── 사실 해석(카드·상세·비교·지도 공통) ────
-// 등급: v=원문 대조(VERIFIED) · c=공식 등록·운영자 공개 · m=소개·후기 언급. 배지는 v·c만.
-// r = 법령·고시 기본값(업장이 공지하지 않음). 그 업장의 규정이 아니라 참고값이다(2026-10-19).
+// 사실 해석
 const GR = (s) => (s === "VERIFIED" ? "v" : s === "CONFIRMED" || s === "OPERATOR" ? "c" : s === "SURVEYED" || s === "MENTION" ? "m" : s === "REFERENCE" ? "r" : null);
 const GRADE_TXT = { v: "원문 대조", c: "공식 등록", m: "소개·후기 언급", r: "법정·조례 기준 참고(업장 미공지)" };
 const kw = (w) => `${fmt(w)}W`; // 소유자: ‘600W’처럼 W로 통일
@@ -265,7 +252,6 @@ const voltLimitText = (w) => (Number(w) > 0 ? `${kw(Number(w))} 제한` : "");
 const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", DECK: "데크", GRASS: "잔디", SAND: "모래", SOIL: "흙", CONCRETE: "콘크리트" };
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
 
-// 오토캠핑 개념 정의: 차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용할 수 있는 캠핑 형태
 const AUTOCAMP_INFO_HTML = `<strong>오토캠핑</strong><br>텐트 옆 주차 및 전기를 이용하는 캠핑장입니다.<br><small style="color:var(--text-3);display:block;margin-top:2px;">※ 일부는 짐 내린 후 공용주차장 이동(이동주차 배지).</small>`;
 
 const isAutoCamp = (c) => (c.types ?? []).includes("자동차야영장") || (c.st ?? []).some((t) => t[0] === "AUTO");
@@ -392,7 +378,7 @@ function campSearchText(c) {
   ];
   return (c._st = parts.join(" "));
 }
-// 동계 휴장 여부 (소유자 2026-11-09): c.win === 0 또는 불가 목록에 NO_WINTER가 있는 경우 (단, 난방기구 현장 대여 및 최근 가을·겨울 영업 흔적이 확인된 곳은 제외)
+// 동계 휴장 여부
 function winterClosedConflict(c) {
   return (c.win === 0 || noKeys(c).includes("NO_WINTER")) && Boolean(heaterRentalInfo(c) || (c.pf?.p?.a && String(c.pf.p.a) >= "2026-09" && c.pf.p.g === "OPERATOR") || (c.days?.includes("평일+주말") && (c.booking?.channels?.length || c.homepage)));
 }
@@ -406,7 +392,7 @@ function heaterRentalInfo(c) {
   if (match(/난방기구|난방기|온풍기|히터/i)) return { kind: "HEATER", label: "팬히터·난로", full: "겨울철 난방기기(팬히터·난로) 현장 대여 가능" };
   return null;
 }
-// 카드 썸네일 전용 배지 (소유자 2026-11-09): 긍정 요소들은 '특색 시설·요소'로 모두 이동하고, 썸네일에는 기상 예보([data-wx])와 빨간색 불가·제한 뱃지만 남긴다.
+// 카드 썸네일 전용 배지
 function cardPhotoBadges(c, maxNo = 2) {
   const wx = wxBadge(c);
   const pet = petAllowed(c);
@@ -510,9 +496,7 @@ const STAYS = [
 const STAY_KEYS = new Set(STAYS.map(([k]) => k));
 const stayKinds = (c) => (c._stay ??= STAYS.filter(([, , , t]) => t(c)).map(([k]) => k));
 const stayBadges = (c, max = 4) => STAYS.filter(([k]) => stayKinds(c).includes(k)).slice(0, max).map(([k, cls, icon, , label]) => `<span class="bdg bdg-stay bdg-${cls}" data-stay="${k}">${ic(icon)}${esc(label(c))}</span>`).join("");
-// ── 겨울(소유자 2026-10-21) ────
-// c.win(1 겨울 운영·0 겨울 휴장, 고캠핑 운영기간) · c.heat(["g","c"] 글램핑·카라반 내부시설 난방) — build-gocamping-detail.mjs
-// 눈·영하 예보: conditions/forecast.json(기상청 단기·중기, 하루 2회) 앞으로 7일. 영하는 최저 0°C 미만, 눈은 강수형태·하늘에 ‘눈’.
+// 겨울 기능
 const SNOW_IC = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 7l16 10M20 7 4 17M9 3.5l3 2 3-2M9 20.5l3-2 3 2"/></svg>';
 const heated = (c, k) => (c.heat ?? []).includes(k);
 const winterOpen = (c) => c.win === 1;
@@ -2530,6 +2514,28 @@ class HeroCanvasController {
       this.spawnRipple(x, y, { maxR: 140 + Math.random() * 90, alpha: 0.72, fade: 0.0035, speed: 0.58 });
     } else if (this.currentThemeId === "rainy-camp" && Math.random() < 0.3) {
       this.spawnRipple(x, y, { maxR: 70 + Math.random() * 45, alpha: 0.72, fade: 0.005, speed: 0.48, yScale: 0.34 });
+    } else if (this.currentThemeId === "uq-pool" || this.currentThemeId === "rainbow") {
+      const spd = Math.hypot(this.mouse.vx || 0, this.mouse.vy || 0);
+      if (spd > 0.5 || Math.random() < 0.32) {
+        if (Math.random() < 0.45) {
+          this.spawnRipple(x, y, { maxR: 60 + spd * 14 + Math.random() * 40, alpha: 0.78, fade: 0.006, speed: 0.55 + spd * 0.12, yScale: 0.36 });
+        }
+        const count = Math.min(8, Math.max(3, Math.floor(spd * 1.5) + 2));
+        for (let s = 0; s < count; s++) {
+          const ang = Math.random() * Math.PI * 2;
+          const dropSpd = Math.random() * 3.8 + 2.2 + spd * 0.4;
+          this.splashes.push({
+            x: x + (Math.random() - 0.5) * 16,
+            y: y + (Math.random() - 0.5) * 8,
+            vx: Math.cos(ang) * dropSpd + (this.mouse.vx || 0) * 0.25,
+            vy: -Math.abs(Math.sin(ang) * dropSpd) - (Math.random() * 2.8 + 2.0),
+            r: Math.random() * 2.8 + 2.2,
+            alpha: Math.random() * 0.25 + 0.75,
+            decay: Math.random() * 0.024 + 0.018,
+            sparkle: Math.random() < 0.5
+          });
+        }
+      }
     }
   }
 
@@ -2559,7 +2565,26 @@ class HeroCanvasController {
       for (let i = 0; i < 3; i++) {
         this.spawnRipple(x, y, { startR: i * 10, maxR: 150 + i * 24, alpha: 0.7 - i * 0.08, fade: 0.0035, speed: 0.58 });
       }
-    } else if (this.currentThemeId === "bubbles" || this.currentThemeId === "uq-spa" || this.currentThemeId === "uq-pool") {
+    } else if (this.currentThemeId === "uq-pool" || this.currentThemeId === "rainbow") {
+      // 수영장에 텀벙! 큰 물튀김과 3중 수면 파문
+      for (let i = 0; i < 3; i++) {
+        this.spawnRipple(x, y, { startR: i * 14, maxR: 130 + i * 36, alpha: 0.85 - i * 0.12, fade: 0.004, speed: 0.68, yScale: 0.36 });
+      }
+      for (let s = 0; s < 18; s++) {
+        const a = Math.random() * Math.PI * 2;
+        const spd = Math.random() * 5.5 + 3.0;
+        this.splashes.push({
+          x: x + (Math.random() - 0.5) * 20,
+          y: y + (Math.random() - 0.5) * 10,
+          vx: Math.cos(a) * spd,
+          vy: -Math.abs(Math.sin(a) * spd) - (Math.random() * 4.0 + 3.0),
+          r: Math.random() * 3.2 + 2.6,
+          alpha: 0.95,
+          decay: Math.random() * 0.020 + 0.015,
+          sparkle: true
+        });
+      }
+    } else if (this.currentThemeId === "bubbles" || this.currentThemeId === "uq-spa") {
       this.popBubblesNear(x, y, 48);
     }
   }
@@ -2980,15 +3005,6 @@ class HeroCanvasController {
       this.renderSteam(ctx, w, h, mx, my, hasMouse);
     }
 
-    // 수영장 테마는 마우스 상호작용에만 의존하지 않고 물결·물튀김을 주기적으로 만든다.
-    if (this.currentThemeId === "uq-pool" && Math.random() < 0.018) {
-      const x = w * (0.18 + Math.random() * 0.64), y = h * (0.58 + Math.random() * 0.18);
-      this.spawnRipple(x, y, { maxR: 90 + Math.random() * 50, alpha: 0.78, fade: 0.0045, speed: 0.62, yScale: 0.32 });
-      for (let k = 0; k < 5; k++) {
-        this.splashes.push({ x, y, vx: (Math.random() - 0.5) * 3.2, vy: -Math.random() * 3.4 - 1.4, alpha: 0.9 });
-      }
-    }
-
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       p.sway += p.swaySpeed || 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.38;
@@ -3021,28 +3037,6 @@ class HeroCanvasController {
         const ca = bp.alpha * bp.life;
         ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.size * (0.6 + bp.life * 0.4), 0, Math.PI * 2);
         ctx.fillStyle = `rgba(215, 245, 255, ${ca})`; ctx.fill();
-      }
-    }
-
-    if (this.currentThemeId === "uq-pool") {
-      for (let i = this.splashes.length - 1; i >= 0; i--) {
-        const sp = this.splashes[i];
-        sp.x += sp.vx; sp.y += sp.vy; sp.vy += 0.16; sp.vx *= 0.97; sp.alpha -= 0.035;
-        if (sp.alpha <= 0) { this.splashes.splice(i, 1); continue; }
-        ctx.fillStyle = `rgba(220, 250, 255, ${sp.alpha})`;
-        ctx.beginPath();
-        ctx.arc(sp.x, sp.y, 1.3, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      for (let i = this.ripples.length - 1; i >= 0; i--) {
-        const r = this.ripples[i];
-        r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55)); r.alpha -= r.fade || 0.004;
-        if (r.alpha <= 0) { this.ripples.splice(i, 1); continue; }
-        ctx.strokeStyle = `rgba(180, 245, 255, ${r.alpha * 0.75})`;
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.ellipse(r.x, r.y, r.r, r.r * (r.yScale || 0.32), 0, 0, Math.PI * 2);
-        ctx.stroke();
       }
     }
   }
@@ -4254,6 +4248,78 @@ class HeroCanvasController {
         ctx.stroke();
       }
     }
+
+    // 4. 수영장 자연 수면 물결 및 자동 물방울 튀김
+    if (Math.random() < 0.024) {
+      const sx = w * (0.16 + Math.random() * 0.68), sy = h * (0.52 + Math.random() * 0.36);
+      this.spawnRipple(sx, sy, { maxR: 70 + Math.random() * 45, alpha: 0.75, fade: 0.005, speed: 0.58, yScale: 0.35 });
+      const drops = Math.floor(Math.random() * 3) + 3;
+      for (let k = 0; k < drops; k++) {
+        const a = Math.random() * Math.PI * 2, spd = Math.random() * 3.2 + 2.0;
+        this.splashes.push({ x: sx, y: sy, vx: Math.cos(a) * spd, vy: -Math.abs(Math.sin(a) * spd) - (Math.random() * 2.6 + 2.0), r: Math.random() * 2.6 + 2.2, alpha: 0.92, decay: Math.random() * 0.022 + 0.016, sparkle: Math.random() < 0.45 });
+      }
+    }
+
+    // 5. 마우스 위치 물결 및 연속 물방울 튀김 (우중캠핑 대비 2~4배 크고 선명)
+    if (hasMouse && my > h * 0.25) {
+      const spd = Math.hypot(this.mouse.vx || 0, this.mouse.vy || 0);
+      if (spd > 0.4 || Math.random() < 0.28) {
+        if (Math.random() < 0.4) this.spawnRipple(mx, my, { maxR: 55 + spd * 14 + Math.random() * 35, alpha: 0.78, fade: 0.006, speed: 0.55 + spd * 0.12, yScale: 0.36 });
+        const count = spd > 1.2 ? Math.min(6, Math.floor(spd * 1.5) + 1) : 1;
+        for (let s = 0; s < count; s++) {
+          const ang = Math.random() * Math.PI * 2, dropSpd = Math.random() * 3.6 + 2.2 + spd * 0.35;
+          this.splashes.push({ x: mx + (Math.random() - 0.5) * 16, y: my + (Math.random() - 0.5) * 8, vx: Math.cos(ang) * dropSpd + (this.mouse.vx || 0) * 0.22, vy: -Math.abs(Math.sin(ang) * dropSpd) - (Math.random() * 2.8 + 2.2), r: Math.random() * 2.8 + 2.4, alpha: Math.random() * 0.25 + 0.75, decay: Math.random() * 0.022 + 0.018, sparkle: Math.random() < 0.5 });
+        }
+      }
+    }
+
+    // 6. 수면 파문
+    for (let i = this.ripples.length - 1; i >= 0; i--) {
+      const r = this.ripples[i];
+      r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55));
+      r.alpha -= r.fade || 0.004;
+      if (r.alpha <= 0) { this.ripples.splice(i, 1); continue; }
+      ctx.strokeStyle = `rgba(140, 235, 255, ${r.alpha * 0.85})`;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.ellipse(r.x, r.y, r.r, r.r * (r.yScale || 0.36), 0, 0, Math.PI * 2);
+      ctx.stroke();
+      if (r.r > 8) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.65})`;
+        ctx.lineWidth = 1.0;
+        ctx.beginPath();
+        ctx.ellipse(r.x, r.y, r.r * 0.62, r.r * (r.yScale || 0.36) * 0.60, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    // 7. 수영장 크고 선명한 물방울 스플래시 (물빛 하이라이트 & 햇살 반사광)
+    for (let i = this.splashes.length - 1; i >= 0; i--) {
+      const sp = this.splashes[i];
+      sp.x += sp.vx; sp.y += sp.vy; sp.vy += 0.22; sp.vx *= 0.98;
+      sp.alpha -= sp.decay || 0.020;
+      if (sp.alpha <= 0) { this.splashes.splice(i, 1); continue; }
+      const dropR = sp.r || 3.0;
+      const g = ctx.createRadialGradient(sp.x - dropR * 0.25, sp.y - dropR * 0.25, 0, sp.x, sp.y, dropR);
+      g.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, sp.alpha * 1.3)})`);
+      g.addColorStop(0.42, `rgba(180, 245, 255, ${sp.alpha * 0.95})`);
+      g.addColorStop(0.82, `rgba(70, 215, 255, ${sp.alpha * 0.85})`);
+      g.addColorStop(1, `rgba(30, 180, 240, ${sp.alpha * 0.25})`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, dropR, 0, Math.PI * 2);
+      ctx.fill();
+      if (sp.sparkle && sp.alpha > 0.45) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${sp.alpha * 0.9})`;
+        ctx.lineWidth = 1.0;
+        const fl = dropR * 1.8;
+        ctx.beginPath();
+        ctx.moveTo(sp.x - fl, sp.y); ctx.lineTo(sp.x + fl, sp.y);
+        ctx.moveTo(sp.x, sp.y - fl); ctx.lineTo(sp.x, sp.y + fl);
+        ctx.stroke();
+      }
+    }
+
     ctx.restore();
   }
 
