@@ -2492,6 +2492,12 @@ class HeroCanvasController {
     this.lensFlareLoaded = false;
     this.lensFlareImg.onload = () => { this.lensFlareLoaded = true; };
 
+    // 승마체험 노을 렌즈 플레어 스프라이트 프리로드
+    this.horseFlareImg = new Image();
+    this.horseFlareImg.src = `${APP_BASE}images/hero/horse-flare.webp`;
+    this.horseFlareLoaded = false;
+    this.horseFlareImg.onload = () => { this.horseFlareLoaded = true; };
+
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
     this.onPointerDown = this.handlePointerDown.bind(this);
@@ -4297,26 +4303,17 @@ class HeroCanvasController {
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
     ctx.save();
     const isMob = w < 640;
-    const p = (this.time * 0.128) % 1.0;
-    let beamAlpha = 0, beamScale = 1.0;
-    if (p < 0.32) {
-      const tin = p / 0.32;
-      beamAlpha = Math.sin(tin * (Math.PI / 2));
-      beamScale = 0.94 + tin * 0.10;
-    } else if (p < 0.92) {
-      const tout = (p - 0.32) / 0.60;
-      beamAlpha = Math.cos(tout * (Math.PI / 2));
-      beamScale = 1.04 + tout * 0.28;
-    } else {
-      beamAlpha = 0;
-      beamScale = 1.32;
-    }
+    // 자연스러운 대기 광학 굴절: 절대 깜빡이거나 꺼지지 않고, 잔잔한 미풍에 맺힌 미세 물안개처럼 우아하게 숨쉬는 앰비언트 브리딩
+    const breathe = Math.sin(this.time * 0.22);
+    const shimmer = Math.cos(this.time * 0.45) * 0.03;
+    const beamAlpha = (isMob ? 0.46 : 0.52) + breathe * 0.08 + shimmer;
+    const beamScale = 1.0 + breathe * 0.03;
 
     const rainbowReady = this.rainbowLoaded || (this.rainbowImg && this.rainbowImg.complete && this.rainbowImg.naturalWidth > 0);
-    if (rainbowReady && beamAlpha > 0.005) {
-      const cx = isMob ? w * 0.52 : w * 0.56;
-      const cy = isMob ? h * 0.38 : h * 0.36;
-      const baseW = isMob ? Math.max(w * 1.35, h * 0.95) : Math.max(w * 0.78, h * 1.45);
+    if (rainbowReady) {
+      const cx = isMob ? w * 0.52 : w * 0.55;
+      const cy = isMob ? h * 0.38 : h * 0.35;
+      const baseW = isMob ? Math.max(w * 1.35, h * 0.95) : Math.max(w * 0.80, h * 1.45);
       const baseH = baseW * (1024 / 675);
       const rot = isMob ? -0.04 : -0.05;
 
@@ -4325,14 +4322,9 @@ class HeroCanvasController {
       ctx.rotate(rot);
       ctx.scale(beamScale, beamScale);
 
-      // Pass 1: screen 블렌드 모드로 무지개 고유의 7색 스펙트럼 광선 렌더링
+      // screen 블렌드 모드로 맑고 투명하면서도 7색 스펙트럼이 은은하게 살아있는 햇살 프리즘 광선 렌더링
       ctx.globalCompositeOperation = "screen";
-      ctx.globalAlpha = Math.min(1, beamAlpha * (isMob ? 0.92 : 0.98));
-      ctx.drawImage(this.rainbowImg, -baseW / 2, -baseH / 2, baseW, baseH);
-
-      // Pass 2: lighter 모드로 중심부 영롱한 태양광 프리즘 글로우(Bloom) 추가
-      ctx.globalCompositeOperation = "lighter";
-      ctx.globalAlpha = Math.min(1, beamAlpha * (isMob ? 0.28 : 0.32));
+      ctx.globalAlpha = Math.max(0.35, Math.min(0.62, beamAlpha));
       ctx.drawImage(this.rainbowImg, -baseW / 2, -baseH / 2, baseW, baseH);
 
       ctx.restore();
@@ -4416,52 +4408,44 @@ class HeroCanvasController {
   }
 
   renderWindGrass(ctx, w, h, mx, my, hasMouse) {
-    // 승마: 노을 지는 목장 - 우측 상공 햇빛 대형 갓레이 & 볼류메트릭 틴들 광선 (회전·펄스·브리딩) + 잔디 풀잎
+    // 승마: 노을 지는 목장 - 우측 지평선 너머 석양의 웅장하고 부드러운 골든 아워 앰비언트 글로우 & 광학 플레어 + 흩날리는 잔디 풀잎
     ctx.save();
     const isMob = w < 640;
-    const ox = isMob ? w * 0.95 : w * 0.92;
-    const oy = isMob ? -h * 0.02 : -h * 0.02;
-    const rotOsc = Math.sin(this.time * 0.40) * 0.042 + Math.cos(this.time * 0.20) * 0.020;
-    const scalePulse = 1.05 + Math.sin(this.time * 0.48) * 0.11;
-    const alphaBreathe = 0.52 + Math.sin(this.time * 0.62) * 0.20 + Math.cos(this.time * 0.31) * 0.08;
+    // 배경 사진의 실제 노을 태양 광원 좌표 정밀 정렬 (데스크톱 0.91, 0.16 / 모바일 0.93, 0.12)
+    const ox = isMob ? w * 0.93 : w * 0.91;
+    const oy = isMob ? h * 0.12 : h * 0.16;
+    const breathe = Math.sin(this.time * 0.5) * 0.10;
+    const pulseScale = 1.0 + Math.sin(this.time * 0.35) * 0.05;
 
-    ctx.save();
-    const sunRayReady = this.sunRayLoaded || (this.sunRayImg && this.sunRayImg.complete && this.sunRayImg.naturalWidth > 0);
-    if (sunRayReady) {
-      ctx.globalCompositeOperation = "screen";
-      const targetW = (isMob ? Math.max(w * 1.55, 580) : Math.max(w * 1.65, h * 2.2)) * scalePulse;
-      const targetH = targetW * (604 / 650);
-      ctx.save();
-      ctx.translate(ox, oy);
-      ctx.rotate(rotOsc * 1.2);
-      ctx.globalAlpha = Math.min(1.0, isMob ? alphaBreathe * 0.65 : alphaBreathe * 0.55);
-      ctx.drawImage(this.sunRayImg, -targetW * (496 / 650), -targetH * (15 / 604), targetW, targetH);
-      ctx.restore();
-    }
-
-    ctx.globalCompositeOperation = "lighter";
-    const sunR = Math.min(w, h) * (isMob ? 0.65 : 0.82) * scalePulse;
+    // 1. 노을빛 웜톤 앰비언트 후광 (Sunset Horizon Bloom)
+    ctx.globalCompositeOperation = "screen";
+    const sunR = Math.max(w, h) * (isMob ? 0.65 : 0.80) * pulseScale;
     const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
-    sunGlow.addColorStop(0, `rgba(255, 248, 215, ${alphaBreathe * 0.38})`);
-    sunGlow.addColorStop(0.22, `rgba(255, 215, 120, ${alphaBreathe * 0.22})`);
-    sunGlow.addColorStop(0.55, `rgba(255, 170, 65, ${alphaBreathe * 0.08})`);
-    sunGlow.addColorStop(1, "rgba(255, 150, 50, 0)");
+    const auraAlpha = Math.max(0.25, 0.45 + breathe);
+    sunGlow.addColorStop(0, `rgba(255, 245, 215, ${auraAlpha * 0.90})`);
+    sunGlow.addColorStop(0.20, `rgba(255, 215, 120, ${auraAlpha * 0.55})`);
+    sunGlow.addColorStop(0.50, `rgba(255, 160, 65, ${auraAlpha * 0.22})`);
+    sunGlow.addColorStop(0.80, `rgba(240, 120, 50, ${auraAlpha * 0.06})`);
+    sunGlow.addColorStop(1, "rgba(240, 100, 40, 0)");
     ctx.fillStyle = sunGlow;
     ctx.beginPath();
     ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
     ctx.fill();
 
-    const baseLength = Math.max(w * 1.55, h * 2.2) * scalePulse;
-    const baseAngles = isMob ? [-0.82, -0.96, -1.10, -1.24] : [-0.78, -0.90, -1.02, -1.14, -1.26];
-    const beamColors = ["rgba(255, 240, 185", "rgba(255, 220, 135", "rgba(255, 205, 105", "rgba(255, 230, 155", "rgba(255, 215, 115"];
-    for (let b = 0; b < baseAngles.length; b++) {
-      const beamRot = baseAngles[b] + rotOsc + Math.sin(this.time * 0.35 + b * 1.1) * 0.022;
-      const beamAlpha = Math.max(0.06, (alphaBreathe * 0.62) + (b % 2 === 0 ? 0.03 : -0.02) + Math.sin(this.time * 0.5 + b) * 0.025);
-      const spread = (isMob ? 0.092 : 0.105) * (1.0 + Math.sin(this.time * 0.45 + b * 0.8) * 0.12);
-      this.renderVolumetricBeam(ctx, ox, oy, beamRot, baseLength * (1.0 + (b % 2) * 0.10), spread, beamColors[b % beamColors.length], beamAlpha);
+    // 2. 실사 광학 노을 렌즈 플레어 & 수평 광선 스프라이트 (모서리 잘림 없는 완전 페더링 텍스처)
+    const flareReady = this.horseFlareLoaded || (this.horseFlareImg && this.horseFlareImg.complete && this.horseFlareImg.naturalWidth > 0);
+    if (flareReady) {
+      const flareSize = Math.max(w, h) * (isMob ? 1.45 : 1.65) * pulseScale;
+      ctx.save();
+      ctx.translate(ox, oy);
+      ctx.rotate(Math.sin(this.time * 0.18) * 0.025);
+      ctx.globalAlpha = Math.max(0.35, Math.min(0.72, (isMob ? 0.62 : 0.54) + breathe));
+      ctx.drawImage(this.horseFlareImg, -flareSize / 2, -flareSize / 2, flareSize, flareSize);
+      ctx.restore();
     }
 
-    // 목장 부유 골든 스펙 먼지
+    // 3. 목장 대기 중을 유영하는 황금빛 꽃가루 & 햇살 스포어
+    ctx.globalCompositeOperation = "lighter";
     for (const po of this.particles) {
       po.pulse += po.pulseSpeed;
       po.x += po.vx;
