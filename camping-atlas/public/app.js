@@ -2486,6 +2486,12 @@ class HeroCanvasController {
     this.farmSunburstLoaded = false;
     this.farmSunburstImg.onload = () => { this.farmSunburstLoaded = true; };
 
+    // 렌즈 플레어 스프라이트 프리로드 (레포츠 햇살/광원)
+    this.lensFlareImg = new Image();
+    this.lensFlareImg.src = `${APP_BASE}images/hero/lens-flare.webp`;
+    this.lensFlareLoaded = false;
+    this.lensFlareImg.onload = () => { this.lensFlareLoaded = true; };
+
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
     this.onPointerDown = this.handlePointerDown.bind(this);
@@ -2668,17 +2674,17 @@ class HeroCanvasController {
         break;
 
       case "starry-dome":
-        // 이색숙소: 반짝이는 별 파티클 증량(모바일 65개/데스크톱 120개) + 크기 랜덤 + 페이드인/아웃 점점 커지며 사라짐(원형 코어 크기 불변)
-        const starCount = isMob ? 65 : 120;
+        // 이색숙소: 별 파티클은 밤하늘 영역(y < h * 0.40)에만 배치, 섬세한 십자 반짝임
+        const starCount = isMob ? 75 : 130;
         for (let i = 0; i < starCount; i++) {
           this.particles.push({
             x: Math.random() * w,
-            y: Math.random() * (h * 0.85),
-            baseR: Math.random() * 1.4 + 0.8,
-            maxSpike: Math.random() * 9 + 5.5,
-            spd: Math.random() * 0.018 + 0.010,
+            y: Math.random() * (h * 0.38) + (isMob ? 6 : 10),
+            baseR: Math.random() * 1.1 + 0.6,
+            maxSpike: Math.random() * 2.8 + 1.8,
+            spd: Math.random() * 0.016 + 0.008,
             phase: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.4 + 0.6
+            alpha: Math.random() * 0.35 + 0.65
           });
         }
         break;
@@ -2871,18 +2877,21 @@ class HeroCanvasController {
         break;
 
       case "golden-shine":
-        // 농촌체험: 태양 중심 갓레이 스케일 회전 + 몽환적인 황금빛 보케 원형 서클
-        const bokehCount = isMob ? 14 : 24;
+        // 농촌체험: 태양 중심 갓레이 스케일 회전 + 몽환적인 황금빛 Circle & Hexagon 보케
+        const bokehCount = isMob ? 16 : 28;
         for (let i = 0; i < bokehCount; i++) {
           this.bokehParticles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 26 + 14,
-            vx: (Math.random() - 0.5) * 0.14,
-            vy: -Math.random() * 0.35 - 0.12,
-            alpha: Math.random() * 0.18 + 0.10,
+            r: Math.random() * 24 + 14,
+            vx: (Math.random() - 0.5) * 0.08,
+            vy: -Math.random() * 0.07 - 0.03,
+            alpha: Math.random() * 0.22 + 0.12,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.02 + 0.01,
+            pulseSpeed: Math.random() * 0.012 + 0.006,
+            shape: i % 2 === 0 ? "circle" : "hexagon",
+            rot: Math.random() * Math.PI,
+            vRot: (Math.random() - 0.5) * 0.005,
             colorIdx: i % 3
           });
         }
@@ -2904,26 +2913,28 @@ class HeroCanvasController {
         break;
 
       case "flower-pop":
-        // 동물체험: 분홍, 노랑, 하양, 보라 등 다채로운 꽃 파티클 & 터치 시 색상 일치 꽃잎 비산
+        // 동물체험: 작고 앙증맞은 5엽 꽃 파티클 & 터치 시 색상 일치 꽃잎 비산
         const flowerCols = [
           { type: "pink", fill: "rgba(255, 145, 190, 0.95)", stroke: "#ff69b4", petalRgb: "255, 145, 190" },
           { type: "yellow", fill: "rgba(254, 215, 60, 0.95)", stroke: "#eab308", petalRgb: "254, 215, 60" },
           { type: "white", fill: "rgba(255, 255, 255, 0.95)", stroke: "#cbd5e1", petalRgb: "255, 255, 255" },
           { type: "purple", fill: "rgba(216, 180, 254, 0.95)", stroke: "#a855f7", petalRgb: "216, 180, 254" }
         ];
-        const flCount = isMob ? 18 : 28;
+        const flCount = isMob ? 20 : 32;
         for (let i = 0; i < flCount; i++) {
           const col = flowerCols[i % flowerCols.length];
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: (Math.random() * 6 + 11) * (isMob ? 0.8 : 1.0),
-            vx: (Math.random() - 0.5) * 0.25,
-            vy: -Math.random() * 0.45 - 0.20,
+            r: (Math.random() * 2.8 + 4.2) * (isMob ? 0.85 : 1.0),
+            vx: (Math.random() - 0.5) * 0.20,
+            vy: -Math.random() * 0.22 - 0.12,
             sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.02 + 0.01,
+            swaySpeed: Math.random() * 0.018 + 0.008,
             rot: Math.random() * Math.PI * 2,
             vRot: (Math.random() - 0.5) * 0.02,
+            tilt: Math.random() * Math.PI * 2,
+            vTilt: Math.random() * 0.02 + 0.01,
             col,
             petals: 5
           });
@@ -2937,7 +2948,7 @@ class HeroCanvasController {
         for (let i = 0; i < balCount; i++) {
           const imgIdx = i % 3;
           const hue = hues[i % hues.length];
-          const scale = (Math.random() * 0.30 + 0.52) * (isMob ? 0.80 : 1.0);
+          const scale = (Math.random() * 0.46 + 0.38) * (isMob ? 0.78 : 0.95);
           const bx = Math.random() * (w * 0.9) + w * 0.05;
           const by = Math.random() * (h + 120) + h * 0.1;
           const stringNodes = [];
@@ -2946,12 +2957,12 @@ class HeroCanvasController {
             x: bx,
             y: by,
             vx: 0,
-            vy: -Math.random() * 0.50 - 0.60,
+            vy: -Math.random() * 0.18 - 0.14,
             scale,
             imgIdx,
             hue,
             sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.022 + 0.012,
+            swaySpeed: Math.random() * 0.014 + 0.008,
             stringNodes
           });
         }
@@ -4517,102 +4528,114 @@ class HeroCanvasController {
     ctx.restore();
   }
 
-  triggerFlowerBurst(x, y, petalRgb, count = 14) {
+  triggerFlowerBurst(x, y, petalRgb, count = 15) {
     for (let k = 0; k < count; k++) {
       const a = (Math.PI * 2 * k) / count + (Math.random() - 0.5) * 0.35;
-      const sp = Math.random() * 2.8 + 1.6;
+      const sp = Math.random() * 2.6 + 1.2;
       this.flowerBursts.push({
         x,
         y,
         vx: Math.cos(a) * sp,
-        vy: Math.sin(a) * sp - 0.6,
-        w: Math.random() * 3 + 4,
-        h: Math.random() * 2 + 2.5,
+        vy: Math.sin(a) * sp - 0.5,
+        w: Math.random() * 1.8 + 2.4,
+        len: Math.random() * 3.5 + 4.5,
         rot: Math.random() * Math.PI * 2,
-        vRot: (Math.random() - 0.5) * 0.12,
+        vRot: (Math.random() - 0.5) * 0.14,
+        flip: Math.random() * Math.PI * 2,
+        vFlip: (Math.random() - 0.5) * 0.10,
+        sway: Math.random() * Math.PI * 2,
         alpha: 1.0,
-        decay: Math.random() * 0.022 + 0.018,
+        decay: Math.random() * 0.020 + 0.015,
         petalRgb
       });
     }
   }
 
-  popFlowersNear(x, y, radius = 42) {
+  popFlowersNear(x, y, radius = 35) {
     const w = this.width || 800, h = this.height || 500;
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       if (p.col && Math.hypot(p.x - x, p.y - y) < p.r + radius) {
-        this.triggerFlowerBurst(p.x, p.y, p.col.petalRgb, 14);
+        this.triggerFlowerBurst(p.x, p.y, p.col.petalRgb, 15);
         p.x = Math.random() * w;
         p.y = h + 25;
-        p.vx = (Math.random() - 0.5) * 0.25;
-        p.vy = -Math.random() * 0.45 - 0.20;
+        p.vx = (Math.random() - 0.5) * 0.20;
+        p.vy = -Math.random() * 0.28 - 0.14;
       }
     }
   }
 
   renderFlowerPop(ctx, w, h, mx, my, hasMouse) {
     ctx.save();
-    // 1. 부유하는 꽃송이 (터치 시 동일 색상 꽃잎 비산)
+    // 1. 섬세하고 사랑스러운 꽃송이 (터치 시 동일 색상 꽃잎 비산)
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       p.sway += p.swaySpeed || 0.015;
       p.rot += p.vRot || 0.01;
-      p.x += Math.sin(p.sway) * 0.45 + p.vx;
+      p.tilt += p.vTilt || 0.015;
+      p.x += Math.sin(p.sway) * 0.35 + p.vx;
       p.y += p.vy;
 
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 25) {
-        this.triggerFlowerBurst(p.x, p.y, p.col.petalRgb, 14);
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 20) {
+        this.triggerFlowerBurst(p.x, p.y, p.col.petalRgb, 15);
         p.x = Math.random() * w;
         p.y = h + 25;
         continue;
       }
 
-      if (p.y < -30) {
-        p.y = h + 30;
+      if (p.y < -25) {
+        p.y = h + 25;
         p.x = Math.random() * w;
       }
-      if (p.x < -30) p.x = w + 30;
-      else if (p.x > w + 30) p.x = -30;
+      if (p.x < -25) p.x = w + 25;
+      else if (p.x > w + 25) p.x = -25;
 
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rot);
+      ctx.scale(1, Math.cos(p.tilt) * 0.35 + 0.65);
 
-      const petR = p.r * 0.62;
-      const petDist = p.r * 0.52;
-      ctx.fillStyle = p.col.fill;
-      ctx.strokeStyle = p.col.stroke;
-      ctx.lineWidth = 0.8;
+      // 부드러운 5개 하트 곡선 꽃잎
+      const petR = p.r * 1.15;
+      const petW = p.r * 0.65;
       for (let k = 0; k < 5; k++) {
         const ang = (Math.PI * 2 * k) / 5;
-        const px = Math.cos(ang) * petDist;
-        const py = Math.sin(ang) * petDist;
+        ctx.save();
+        ctx.rotate(ang);
+        ctx.fillStyle = p.col.fill;
         ctx.beginPath();
-        ctx.arc(px, py, petR, 0, Math.PI * 2);
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-petW, petR * 0.4, -petW * 0.8, petR, 0, petR * 0.9);
+        ctx.bezierCurveTo(petW * 0.8, petR, petW, petR * 0.4, 0, 0);
         ctx.fill();
+        ctx.strokeStyle = p.col.stroke;
+        ctx.lineWidth = 0.5;
         ctx.stroke();
+        ctx.restore();
       }
-      // 중앙 수술
+
+      // 중앙의 아기자기한 수술 코어
       ctx.fillStyle = "#fef08a";
-      ctx.strokeStyle = "#eab308";
-      ctx.lineWidth = 0.8;
       ctx.beginPath();
-      ctx.arc(0, 0, p.r * 0.38, 0, Math.PI * 2);
+      ctx.arc(0, 0, p.r * 0.32, 0, Math.PI * 2);
       ctx.fill();
+      ctx.strokeStyle = "#eab308";
+      ctx.lineWidth = 0.4;
       ctx.stroke();
 
       ctx.restore();
     }
 
-    // 2. 터치 팝된 꽃잎 비산 (동일 색상 일치 엄격 보장)
+    // 2. 터치/클릭 시 입체 3D 텀블링 꽃잎 비산 (색상 100% 일치)
     for (let i = this.flowerBursts.length - 1; i >= 0; i--) {
       const b = this.flowerBursts[i];
-      b.x += b.vx;
+      b.x += b.vx + Math.sin(b.sway) * 0.35;
       b.y += b.vy;
-      b.vy += 0.045;
-      b.vx *= 0.98;
+      b.vy += 0.038;
+      b.vx *= 0.97;
       b.rot += b.vRot;
+      b.flip += b.vFlip;
+      b.sway += 0.06;
       b.alpha -= b.decay;
       if (b.alpha <= 0) {
         this.flowerBursts.splice(i, 1);
@@ -4622,9 +4645,13 @@ class HeroCanvasController {
       ctx.save();
       ctx.translate(b.x, b.y);
       ctx.rotate(b.rot);
+      ctx.scale(Math.cos(b.flip), 1);
       ctx.fillStyle = `rgba(${b.petalRgb}, ${b.alpha})`;
       ctx.beginPath();
-      ctx.ellipse(0, 0, b.w, b.h, 0, 0, Math.PI * 2);
+      ctx.moveTo(0, -b.len * 0.5);
+      ctx.bezierCurveTo(b.w, -b.len * 0.3, b.w, b.len * 0.35, 0, b.len * 0.5);
+      ctx.bezierCurveTo(-b.w, b.len * 0.35, -b.w, -b.len * 0.3, 0, -b.len * 0.5);
+      ctx.closePath();
       ctx.fill();
       ctx.restore();
     }
@@ -4637,9 +4664,9 @@ class HeroCanvasController {
       const dy = b.y - y;
       const dist = Math.hypot(dx, dy);
       if (dist < radius + 40 && dist > 0) {
-        const force = (1 - dist / (radius + 40)) * 4.2;
+        const force = (1 - dist / (radius + 40)) * 2.2;
         b.vx += (dx / dist) * force;
-        b.vy += (dy / dist) * force - 0.4;
+        b.vy += (dy / dist) * force - 0.2;
       }
     }
   }
@@ -4648,15 +4675,15 @@ class HeroCanvasController {
     ctx.save();
     for (const b of this.balloons) {
       b.sway += b.swaySpeed;
-      b.x += b.vx + Math.sin(b.sway) * 0.45;
+      b.x += b.vx + Math.sin(b.sway) * 0.30;
       b.y += b.vy;
-      b.vx *= 0.96;
+      b.vx *= 0.97;
 
       if (hasMouse) {
         const dx = b.x - mx, dy = b.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 85 && dist > 0) {
-          const force = (1 - dist / 85) * 0.28;
+        if (dist < 90 && dist > 0) {
+          const force = (1 - dist / 90) * 0.14;
           b.vx += (dx / dist) * force;
           b.vy += (dy / dist) * force;
         }
@@ -4686,23 +4713,23 @@ class HeroCanvasController {
       let prevX = knotX, prevY = knotY;
       for (let s = 0; s < b.stringNodes.length; s++) {
         const node = b.stringNodes[s];
-        const targetX = prevX + Math.sin(b.sway + s * 0.5) * 2.8;
+        const targetX = prevX + Math.sin(b.sway + s * 0.4) * 2.2;
         const targetY = prevY + 13 * b.scale;
-        node.x += (targetX - node.x) * 0.32;
-        node.y += (targetY - node.y) * 0.32;
+        node.x += (targetX - node.x) * 0.28;
+        node.y += (targetY - node.y) * 0.28;
         ctx.lineTo(node.x, node.y);
         prevX = node.x;
         prevY = node.y;
       }
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
-      ctx.lineWidth = 1.0;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.40)";
+      ctx.lineWidth = 0.9;
       ctx.stroke();
 
       // 다채로운 hue 회전 풍선 스프라이트
       if (img && img.complete && img.naturalWidth > 0) {
         ctx.save();
         ctx.translate(b.x, b.y);
-        ctx.rotate(Math.sin(b.sway) * 0.08);
+        ctx.rotate(Math.sin(b.sway) * 0.06);
         if (b.hue !== 0) ctx.filter = `hue-rotate(${b.hue}deg)`;
         ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
         ctx.restore();
@@ -4714,46 +4741,50 @@ class HeroCanvasController {
   renderTreehouseSun(ctx, w, h, mx, my, hasMouse) {
     ctx.save();
     const isMob = w < 640;
-    const ox = isMob ? -w * 0.05 : -w * 0.02;
-    const oy = -h * 0.04;
-    const breathe = Math.sin(this.time * 0.7) * 0.10;
+    const ox = isMob ? -w * 0.05 : 0;
+    const oy = isMob ? -h * 0.05 : 0;
+    const breathe = Math.sin(this.time * 0.7) * 0.16;
 
     ctx.globalCompositeOperation = "screen";
 
-    // 1. 좌측 상공 대형 햇살 아우라
+    // 1. 좌측 상단 실사 골든레이 광선 스프라이트 (첨부 골든레이 이미지 기반, 스케일 확대 및 부드러운 밝기 브리딩)
+    const burstReady = this.farmSunburstLoaded || (this.farmSunburstImg && this.farmSunburstImg.complete && this.farmSunburstImg.naturalWidth > 0);
+    if (burstReady) {
+      const burstScale = 1.0 + Math.sin(this.time * 0.35) * 0.08;
+      const burstSize = Math.max(w, h) * (isMob ? 1.75 : 1.95) * burstScale;
+      ctx.save();
+      ctx.translate(ox, oy);
+      ctx.rotate(this.time * 0.02);
+      ctx.globalAlpha = Math.max(0.25, (isMob ? 0.62 : 0.54) + breathe);
+      ctx.drawImage(this.farmSunburstImg, -burstSize / 2, -burstSize / 2, burstSize, burstSize);
+      ctx.restore();
+    }
+
+    // 2. 좌측 상공 태양 온화한 웜톤 후광
     const auraR = Math.max(w, h) * (isMob ? 0.65 : 0.75);
-    const aura = ctx.createRadialGradient(ox, oy, 10, ox, oy, auraR);
-    const auraAlpha = 0.75 + breathe;
-    aura.addColorStop(0, `rgba(255, 252, 220, ${auraAlpha * 0.9})`);
-    aura.addColorStop(0.35, `rgba(255, 240, 160, ${auraAlpha * 0.45})`);
-    aura.addColorStop(0.70, `rgba(180, 255, 190, ${auraAlpha * 0.15})`);
+    const aura = ctx.createRadialGradient(ox, oy, 15, ox, oy, auraR);
+    const auraAlpha = Math.max(0.20, 0.42 + breathe);
+    aura.addColorStop(0, `rgba(255, 252, 220, ${auraAlpha * 0.95})`);
+    aura.addColorStop(0.35, `rgba(255, 240, 160, ${auraAlpha * 0.50})`);
+    aura.addColorStop(0.70, `rgba(200, 255, 190, ${auraAlpha * 0.15})`);
     aura.addColorStop(1, "rgba(180, 255, 190, 0)");
     ctx.fillStyle = aura;
     ctx.beginPath();
     ctx.arc(ox, oy, auraR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. 5줄기 은은한 볼류메트릭 갓레이
-    const angles = [-0.38, -0.52, -0.66, -0.80, -0.94];
-    const beamLen = Math.max(w, h) * 1.6;
-    for (let b = 0; b < 5; b++) {
-      const beamAlpha = (isMob ? 0.65 : 0.55) + breathe + (b % 2) * 0.08;
-      const col = b % 2 === 0 ? "rgba(255, 248, 190" : "rgba(220, 255, 180";
-      this.renderSoftVolumetricBeam(ctx, ox, oy, angles[b], beamLen, isMob ? 0.11 : 0.13, col, beamAlpha);
-    }
-
     // 3. 숲속 피톤치드 부유 빛가루
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const alpha = Math.max(0.12, p.alpha + Math.sin(p.pulse) * 0.25);
+      const alpha = Math.max(0.10, p.alpha + Math.sin(p.pulse) * 0.22);
       if (hasMouse) {
         const dx = mx - p.x, dy = my - p.y, dist = Math.hypot(dx, dy);
-        if (dist < 110 && dist > 0) {
-          p.vx += (dx / dist) * 0.12;
-          p.vy += (dy / dist) * 0.12;
+        if (dist < 100 && dist > 0) {
+          p.vx += (dx / dist) * 0.08;
+          p.vy += (dy / dist) * 0.08;
         }
       }
-      p.x += p.vx + Math.sin(p.pulse) * 0.25;
+      p.x += p.vx + Math.sin(p.pulse) * 0.22;
       p.y += p.vy;
       p.vx *= 0.97;
       p.vy *= 0.97;
@@ -4762,13 +4793,13 @@ class HeroCanvasController {
       if (p.x < -20) p.x = w + 20;
       else if (p.x > w + 20) p.x = -20;
 
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.8);
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
       g.addColorStop(0, `${p.color} ${alpha})`);
       g.addColorStop(0.5, `${p.color} ${alpha * 0.5})`);
       g.addColorStop(1, `${p.color} 0)`);
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 2.8, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
@@ -4782,7 +4813,7 @@ class HeroCanvasController {
     if (Math.random() < 0.010 && this.shootingStars.length < 2) {
       this.shootingStars.push({
         x: Math.random() * (w * 0.75) + w * 0.1,
-        y: Math.random() * (h * 0.25) + 10,
+        y: Math.random() * (h * 0.22) + 10,
         len: 160 + Math.random() * 90,
         speed: 7 + Math.random() * 4,
         angle: Math.PI / 4.6 + (Math.random() - 0.5) * 0.12,
@@ -4810,23 +4841,23 @@ class HeroCanvasController {
       if (s.alpha <= 0) this.shootingStars.splice(i, 1);
     }
 
-    // 반짝이는 별 (부드러운 페이드인/아웃 + 스파이크 외곽 확장 + 코어 원형 크기 불변)
+    // 밤하늘 별 (하늘 영역에만 제한, 과도하지 않은 섬세한 반짝임)
     for (const p of this.particles) {
       p.phase += p.spd;
       const cycle = (Math.sin(p.phase) + 1) * 0.5;
-      const alpha = Math.pow(cycle, 1.6) * p.alpha;
+      const alpha = Math.pow(cycle, 1.8) * p.alpha;
       if (alpha <= 0.01) continue;
 
-      // 중앙 고정 원형 코어
+      // 중앙 고정 원형 코어 (크기 불변)
       ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.95})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.baseR, 0, Math.PI * 2);
       ctx.fill();
 
-      // 4방향 스파이크 (페이드와 함께 외곽으로 확장)
-      const spikeLen = p.maxSpike * (0.35 + 0.65 * cycle);
-      ctx.strokeStyle = `rgba(220, 245, 255, ${alpha * 0.85})`;
-      ctx.lineWidth = Math.max(0.6, p.baseR * 0.5);
+      // 섬세하고 짧은 4방향 십자 스파이크
+      const spikeLen = p.maxSpike * (0.40 + 0.60 * cycle);
+      ctx.strokeStyle = `rgba(220, 245, 255, ${alpha * 0.80})`;
+      ctx.lineWidth = Math.max(0.5, p.baseR * 0.45);
       ctx.beginPath();
       ctx.moveTo(p.x - spikeLen, p.y);
       ctx.lineTo(p.x + spikeLen, p.y);
@@ -4834,10 +4865,10 @@ class HeroCanvasController {
       ctx.lineTo(p.x, p.y + spikeLen);
       ctx.stroke();
 
-      // 중앙 다이아몬드 플레어
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.45})`;
+      // 중앙 다이아몬드 미세 글린트
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.40})`;
       ctx.beginPath();
-      const dSize = spikeLen * 0.28;
+      const dSize = spikeLen * 0.22;
       ctx.moveTo(p.x, p.y - dSize);
       ctx.lineTo(p.x + dSize, p.y);
       ctx.lineTo(p.x, p.y + dSize);
@@ -4860,7 +4891,21 @@ class HeroCanvasController {
       return { x, y };
     };
 
-    // 강철 짚라인 와이어
+    // 1. 산봉우리 상공 햇빛 렌즈 플레어 (자연스러운 햇살 반짝임)
+    const flareReady = this.lensFlareLoaded || (this.lensFlareImg && this.lensFlareImg.complete && this.lensFlareImg.naturalWidth > 0);
+    if (flareReady) {
+      ctx.save();
+      ctx.globalCompositeOperation = "screen";
+      const fx = isMob ? w * 0.82 : w * 0.72;
+      const fy = isMob ? h * 0.05 : h * 0.07;
+      const fScale = 1.0 + Math.sin(this.time * 0.5) * 0.08;
+      const fSize = Math.max(w, h) * (isMob ? 0.65 : 0.52) * fScale;
+      ctx.globalAlpha = 0.55 + Math.sin(this.time * 0.7) * 0.12;
+      ctx.drawImage(this.lensFlareImg, fx - fSize / 2, fy - fSize / 2, fSize, fSize);
+      ctx.restore();
+    }
+
+    // 2. 강철 짚라인 와이어
     ctx.strokeStyle = "rgba(220, 240, 255, 0.40)";
     ctx.lineWidth = Math.max(1.4, w * 0.0016);
     ctx.beginPath();
@@ -4961,82 +5006,47 @@ class HeroCanvasController {
     ctx.restore();
   }
 
-  renderSoftVolumetricBeam(ctx, ox, oy, angle, length, spreadAngle, colorRgb, baseAlpha) {
-    ctx.save();
-    ctx.translate(ox, oy);
-    ctx.rotate(angle);
-
-    const maxHalfW = Math.tan(spreadAngle) * length;
-    const clipW = maxHalfW * 1.45;
-
-    const hGrad = ctx.createLinearGradient(-clipW, 0, clipW, 0);
-    hGrad.addColorStop(0.00, `${colorRgb}, 0)`);
-    hGrad.addColorStop(0.18, `${colorRgb}, ${baseAlpha * 0.14})`);
-    hGrad.addColorStop(0.36, `${colorRgb}, ${baseAlpha * 0.45})`);
-    hGrad.addColorStop(0.50, `${colorRgb}, ${baseAlpha * 0.70})`);
-    hGrad.addColorStop(0.64, `${colorRgb}, ${baseAlpha * 0.45})`);
-    hGrad.addColorStop(0.82, `${colorRgb}, ${baseAlpha * 0.14})`);
-    hGrad.addColorStop(1.00, `${colorRgb}, 0)`);
-
-    ctx.fillStyle = hGrad;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(clipW, length);
-    ctx.lineTo(-clipW, length);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.restore();
-  }
-
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
     ctx.save();
     const isMob = w < 640;
-    const ox = w * 0.75;
-    const oy = h * 0.03;
-    const angle = this.time * 0.06;
-    const scale = 1.0 + Math.sin(this.time * 0.5) * 0.12;
+    // 실제 배경 이미지의 태양 위치와 100% 정밀 정렬 (데스크톱 0.90, 모바일 0.94)
+    const ox = isMob ? w * 0.94 : w * 0.90;
+    const oy = isMob ? h * 0.03 : h * 0.05;
+    const angle = this.time * 0.04;
+    const scale = 1.0 + Math.sin(this.time * 0.35) * 0.08;
     const burstReady = this.farmSunburstLoaded || (this.farmSunburstImg && this.farmSunburstImg.complete && this.farmSunburstImg.naturalWidth > 0);
 
     ctx.globalCompositeOperation = "screen";
 
+    // 1. 태양 중심점 정밀 일치 회전 갓레이 스프라이트
     if (burstReady) {
-      const burstSize = Math.max(w, h) * (isMob ? 1.55 : 1.75) * scale;
+      const burstSize = Math.max(w, h) * (isMob ? 1.45 : 1.65) * scale;
       ctx.save();
       ctx.translate(ox, oy);
       ctx.rotate(angle);
-      ctx.globalAlpha = isMob ? 0.65 : 0.52;
+      ctx.globalAlpha = (isMob ? 0.62 : 0.50) + Math.sin(this.time * 0.5) * 0.08;
       ctx.drawImage(this.farmSunburstImg, -burstSize / 2, -burstSize / 2, burstSize, burstSize);
       ctx.restore();
-    } else {
-      const sunR = Math.min(w, h) * (isMob ? 0.45 : 0.55);
-      const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
-      sunGlow.addColorStop(0, "rgba(255, 245, 205, 0.35)");
-      sunGlow.addColorStop(0.35, "rgba(255, 220, 130, 0.18)");
-      sunGlow.addColorStop(0.70, "rgba(255, 190, 75, 0.05)");
-      sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
-      ctx.fillStyle = sunGlow;
-      ctx.beginPath();
-      ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
-      ctx.fill();
     }
 
-    // 몽환적인 황금빛 보케 원형 서클
+    // 2. 다채로운 Circle & Hexagon 황금빛 보케 (느리고 우아한 반짝임)
     const bokehCols = [
       "rgba(255, 235, 140,",
       "rgba(254, 215, 75,",
-      "rgba(255, 248, 200,"
+      "rgba(255, 248, 200,",
+      "rgba(255, 195, 90,"
     ];
     for (const p of this.bokehParticles) {
       p.pulse += p.pulseSpeed;
       p.x += p.vx;
       p.y += p.vy;
+      p.rot += p.vRot;
 
       if (hasMouse) {
         const dx = mx - p.x, dy = my - p.y, dist = Math.hypot(dx, dy);
         if (dist < 100 && dist > 0) {
-          p.vx += (dx / dist) * 0.10;
-          p.vy += (dy / dist) * 0.10;
+          p.vx += (dx / dist) * 0.08;
+          p.vy += (dy / dist) * 0.08;
         }
       }
       p.vx *= 0.98;
@@ -5048,16 +5058,59 @@ class HeroCanvasController {
       if (p.x < -p.r - 20) p.x = w + p.r + 20;
       else if (p.x > w + p.r + 20) p.x = -p.r - 20;
 
-      const alpha = Math.max(0.04, p.alpha + Math.sin(p.pulse) * 0.08);
+      const alpha = Math.max(0.04, p.alpha + Math.sin(p.pulse) * 0.10);
       const colPrefix = bokehCols[p.colorIdx] || bokehCols[0];
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      g.addColorStop(0, `${colPrefix} ${alpha * 0.85})`);
-      g.addColorStop(0.65, `${colPrefix} ${alpha * 0.40})`);
-      g.addColorStop(1, `${colPrefix} 0)`);
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+
+      if (p.shape === "hexagon") {
+        // 6각형 조리개 보케
+        ctx.beginPath();
+        for (let k = 0; k < 6; k++) {
+          const a = (Math.PI / 3) * k;
+          const hx = Math.cos(a) * p.r;
+          const hy = Math.sin(a) * p.r;
+          if (k === 0) ctx.moveTo(hx, hy);
+          else ctx.lineTo(hx, hy);
+        }
+        ctx.closePath();
+        ctx.fillStyle = `${colPrefix} ${alpha * 0.55})`;
+        ctx.fill();
+        ctx.strokeStyle = `${colPrefix} ${alpha * 0.85})`;
+        ctx.lineWidth = 1.0;
+        ctx.stroke();
+
+        // 중앙 광택 하이라이트
+        ctx.beginPath();
+        for (let k = 0; k < 6; k++) {
+          const a = (Math.PI / 3) * k;
+          const hx = Math.cos(a) * (p.r * 0.35);
+          const hy = Math.sin(a) * (p.r * 0.35);
+          if (k === 0) ctx.moveTo(hx, hy);
+          else ctx.lineTo(hx, hy);
+        }
+        ctx.closePath();
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.70})`;
+        ctx.fill();
+      } else {
+        // 원형 서클 보케 (발광 림 + 코어)
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r);
+        g.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.75})`);
+        g.addColorStop(0.35, `${colPrefix} ${alpha * 0.55})`);
+        g.addColorStop(0.80, `${colPrefix} ${alpha * 0.35})`);
+        g.addColorStop(1, `${colPrefix} ${alpha * 0.70})`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = `${colPrefix} ${alpha * 0.50})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+      ctx.restore();
     }
     ctx.restore();
   }
