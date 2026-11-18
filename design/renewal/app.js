@@ -2394,10 +2394,10 @@ const HERO_THEMES = [
   { id: "uq-warmpool", emoji: "🌡️", shortName: "사계절온수풀", badge: "겨울에도 따뜻한 물놀이", moodDescription: "사계절 온수풀 & 설경 물안개", image: "hero-warmpool.webp", titleA: "눈 내리는 날에도 첨벙", titleB: "사계절 온수풀 캠핑", summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이", effect: "warm-pool-snow" },
   { id: "uq-pool", emoji: "🏊", shortName: "수영장", badge: "햇살 가득 수영장", moodDescription: "파란 수영장 & 여름 물놀이", image: "hero-pool.webp", titleA: "반짝이는 물빛 속으로", titleB: "수영장 캠핑", summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙", effect: "rainbow" },
   { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "wind-grass" },
-  { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "lush-forest" },
+  { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "flower-pop" },
   { id: "uq-kidscafe", emoji: "🧸", shortName: "키즈카페", badge: "아이가 먼저 웃는 곳", moodDescription: "볼풀·미끄럼틀 키즈카페", image: "hero-kidscafe.webp", titleA: "아이들의 웃음이 가득", titleB: "키즈카페 캠핑", summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게", effect: "confetti" },
-  { id: "uq-indoorplay", emoji: "🎲", shortName: "실내놀이", badge: "비 와도 걱정 없는", moodDescription: "트램펄린·보드게임 실내놀이", image: "hero-indoorplay.webp", titleA: "비가 와도 신나는 하루", titleB: "실내놀이 캠핑", summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간", effect: "confetti" },
-  { id: "uq-treehouse", emoji: "🌳", shortName: "트리하우스", badge: "숲속 나무 위 하룻밤", moodDescription: "소나무 숲 트리하우스", image: "hero-treehouse.webp", titleA: "나무 위 작은 오두막", titleB: "트리하우스 캠핑", summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살", effect: "lush-forest" },
+  { id: "uq-indoorplay", emoji: "🎲", shortName: "실내놀이", badge: "비 와도 걱정 없는", moodDescription: "트램펄린·보드게임 실내놀이", image: "hero-indoorplay.webp", titleA: "비가 와도 신나는 하루", titleB: "실내놀이 캠핑", summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간", effect: "balloon-float" },
+  { id: "uq-treehouse", emoji: "🌳", shortName: "트리하우스", badge: "숲속 나무 위 하룻밤", moodDescription: "소나무 숲 트리하우스", image: "hero-treehouse.webp", titleA: "나무 위 작은 오두막", titleB: "트리하우스 캠핑", summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살", effect: "treehouse-sun" },
   { id: "uq-stay", emoji: "🫧", shortName: "이색숙소", badge: "별을 품은 버블돔", moodDescription: "버블 텐트 & 돔 하우스", image: "hero-uniquestay.webp", titleA: "투명 돔 안에서 별 보기", titleB: "이색 숙소 캠핑", summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소", effect: "starry-dome" },
   { id: "uq-leisure", emoji: "🪂", shortName: "레포츠", badge: "짜릿한 하루 레포츠", moodDescription: "짚라인 & 카약 레포츠", image: "hero-leisure.webp", titleA: "강 위를 가르는 짜릿함", titleB: "레포츠 캠핑", summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루", effect: "zipline" },
   { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "golden-shine" }
@@ -2450,6 +2450,9 @@ class HeroCanvasController {
     this.ripples = [];
     this.shootingStars = [];
     this.bubblePops = [];
+    this.flowerBursts = [];
+    this.balloons = [];
+    this.bokehParticles = [];
     this.currentThemeId = "night-sky";
     this.time = 0;
 
@@ -2470,6 +2473,18 @@ class HeroCanvasController {
     this.rainbowImg.src = `${APP_BASE}images/hero/rainbow-beam.png`;
     this.rainbowLoaded = false;
     this.rainbowImg.onload = () => { this.rainbowLoaded = true; };
+
+    // 풍선 스프라이트 3종 프리로드 (실내놀이)
+    this.balloonImgs = [1, 2, 3].map((n) => { const img = new Image(); img.src = `${APP_BASE}images/hero/balloon-${n}.webp`; return img; });
+
+    // 짚라인 실사 라이더 3종 프리로드 (레포츠)
+    this.ziplineRiders = [1, 2, 3].map((n) => { const img = new Image(); img.src = `${APP_BASE}images/hero/zipline-rider-${n}.webp`; return img; });
+
+    // 농촌체험 태양 갓레이 스프라이트 프리로드
+    this.farmSunburstImg = new Image();
+    this.farmSunburstImg.src = `${APP_BASE}images/hero/farm-sunburst.webp`;
+    this.farmSunburstLoaded = false;
+    this.farmSunburstImg.onload = () => { this.farmSunburstLoaded = true; };
 
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
@@ -2566,6 +2581,10 @@ class HeroCanvasController {
       this.spawnWaterSplash(x, y, { count: (this.width || 800) < 640 ? 10 : 14, speedMul: 1.35, isBurst: true });
     } else if (this.currentThemeId === "bubbles" || this.currentThemeId === "uq-spa") {
       this.popBubblesNear(x, y, 48);
+    } else if (this.currentThemeId === "flower-pop") {
+      this.popFlowersNear(x, y, 40);
+    } else if (this.currentThemeId === "balloon-float") {
+      this.pushBalloonsNear(x, y, 60);
     }
   }
 
@@ -2600,6 +2619,9 @@ class HeroCanvasController {
     this.splashes = [];
     this.pollen = [];
     this.bubblePops = [];
+    this.flowerBursts = [];
+    this.balloons = [];
+    this.bokehParticles = [];
     this.mistParticles = [];
     this.grassBlades = [];
     this.zipline = null;
@@ -2646,9 +2668,18 @@ class HeroCanvasController {
         break;
 
       case "starry-dome":
-        // 돔 숙소는 반딧불 없이 정적인 별빛과 유성우만 사용한다.
-        for (let i = 0; i < (isMob ? 22 : 34); i++) {
-          this.particles.push({ x: Math.random() * w, y: Math.random() * h * 0.72, vx: 0, vy: 0, size: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.022 + 0.008, glow: Math.random() * 7 + 4 });
+        // 이색숙소: 반짝이는 별 파티클 증량(모바일 65개/데스크톱 120개) + 크기 랜덤 + 페이드인/아웃 점점 커지며 사라짐(원형 코어 크기 불변)
+        const starCount = isMob ? 65 : 120;
+        for (let i = 0; i < starCount; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * (h * 0.85),
+            baseR: Math.random() * 1.4 + 0.8,
+            maxSpike: Math.random() * 9 + 5.5,
+            spd: Math.random() * 0.018 + 0.010,
+            phase: Math.random() * Math.PI * 2,
+            alpha: Math.random() * 0.4 + 0.6
+          });
         }
         break;
 
@@ -2828,31 +2859,31 @@ class HeroCanvasController {
         break;
 
       case "zipline":
-        // 레포츠: 이미지 내 강철 짚라인 와이어를 따라 사람이 슬라이딩 활강하는 궤적 애니메이션
-        const charTypes = ["man", "woman", "child"];
+        // 레포츠: 실사 탑승자 3종이 와이어와 도르레에 100% 밀착되어 활강
         this.zipline = {
           t: 0,
           speed: isMob ? 0.0042 : 0.0034,
           state: "gliding",
           pauseTimer: 0,
           trail: [],
-          character: charTypes[Math.floor(Math.random() * charTypes.length)]
+          riderIdx: Math.floor(Math.random() * 3)
         };
         break;
 
       case "golden-shine":
-        // 농촌체험: 황금빛 태양 광선 틴들 샤인 + 따스하게 춤추는 골든 스펙 먼지
-        for (let i = 0; i < (isMob ? 24 : 40); i++) {
-          this.particles.push({
+        // 농촌체험: 태양 중심 갓레이 스케일 회전 + 몽환적인 황금빛 보케 원형 서클
+        const bokehCount = isMob ? 14 : 24;
+        for (let i = 0; i < bokehCount; i++) {
+          this.bokehParticles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 2.2 + 1.2,
-            vy: -Math.random() * 0.18 - 0.06,
-            vx: (Math.random() - 0.5) * 0.16 + 0.08,
-            alpha: Math.random() * 0.45 + 0.3,
+            r: Math.random() * 26 + 14,
+            vx: (Math.random() - 0.5) * 0.14,
+            vy: -Math.random() * 0.35 - 0.12,
+            alpha: Math.random() * 0.18 + 0.10,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.03 + 0.015,
-            color: Math.random() < 0.6 ? "rgba(255, 220, 110," : "rgba(255, 245, 175,"
+            pulseSpeed: Math.random() * 0.02 + 0.01,
+            colorIdx: i % 3
           });
         }
         break;
@@ -2869,6 +2900,77 @@ class HeroCanvasController {
         }
         for (let i = 0; i < (isMob ? 18 : 32); i++) {
           this.pollen.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.0 + 1.0, vx: -Math.random() * 0.22 - 0.08, vy: -Math.random() * 0.12 - 0.02, alpha: Math.random() * 0.5 + 0.35, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.03 + 0.015 });
+        }
+        break;
+
+      case "flower-pop":
+        // 동물체험: 분홍, 노랑, 하양, 보라 등 다채로운 꽃 파티클 & 터치 시 색상 일치 꽃잎 비산
+        const flowerCols = [
+          { type: "pink", fill: "rgba(255, 145, 190, 0.95)", stroke: "#ff69b4", petalRgb: "255, 145, 190" },
+          { type: "yellow", fill: "rgba(254, 215, 60, 0.95)", stroke: "#eab308", petalRgb: "254, 215, 60" },
+          { type: "white", fill: "rgba(255, 255, 255, 0.95)", stroke: "#cbd5e1", petalRgb: "255, 255, 255" },
+          { type: "purple", fill: "rgba(216, 180, 254, 0.95)", stroke: "#a855f7", petalRgb: "216, 180, 254" }
+        ];
+        const flCount = isMob ? 18 : 28;
+        for (let i = 0; i < flCount; i++) {
+          const col = flowerCols[i % flowerCols.length];
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: (Math.random() * 6 + 11) * (isMob ? 0.8 : 1.0),
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: -Math.random() * 0.45 - 0.20,
+            sway: Math.random() * Math.PI * 2,
+            swaySpeed: Math.random() * 0.02 + 0.01,
+            rot: Math.random() * Math.PI * 2,
+            vRot: (Math.random() - 0.5) * 0.02,
+            col,
+            petals: 5
+          });
+        }
+        break;
+
+      case "balloon-float":
+        // 실내놀이: 투명 webp 풍선 3종 + 다채로운 hue 회전 + 찰랑이는 실 + 마우스 튕김 물리
+        const balCount = isMob ? 10 : 16;
+        const hues = [0, 40, 95, 155, 210, 280];
+        for (let i = 0; i < balCount; i++) {
+          const imgIdx = i % 3;
+          const hue = hues[i % hues.length];
+          const scale = (Math.random() * 0.30 + 0.52) * (isMob ? 0.80 : 1.0);
+          const bx = Math.random() * (w * 0.9) + w * 0.05;
+          const by = Math.random() * (h + 120) + h * 0.1;
+          const stringNodes = [];
+          for (let s = 0; s < 5; s++) stringNodes.push({ x: bx, y: by + s * 14 * scale });
+          this.balloons.push({
+            x: bx,
+            y: by,
+            vx: 0,
+            vy: -Math.random() * 0.50 - 0.60,
+            scale,
+            imgIdx,
+            hue,
+            sway: Math.random() * Math.PI * 2,
+            swaySpeed: Math.random() * 0.022 + 0.012,
+            stringNodes
+          });
+        }
+        break;
+
+      case "treehouse-sun":
+        // 트리하우스: 좌측 상공 찬란한 대형 햇살(스케일 확대·호흡 브리딩) + 숲속 피톤치드 요정 빛가루
+        for (let i = 0; i < (isMob ? 32 : 55); i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.5 + 1.2,
+            vy: -Math.random() * 0.18 - 0.06,
+            vx: Math.random() * 0.22 + 0.06,
+            alpha: Math.random() * 0.45 + 0.25,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.03 + 0.015,
+            color: Math.random() < 0.6 ? "rgba(250, 255, 195," : "rgba(165, 255, 190,"
+          });
         }
         break;
     }
@@ -3132,7 +3234,16 @@ class HeroCanvasController {
         this.renderNightSky(ctx, w, h, mx, my, hasMouse);
         break;
       case "starry-dome":
-        this.renderNightSky(ctx, w, h, mx, my, hasMouse);
+        this.renderStarryDome(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "flower-pop":
+        this.renderFlowerPop(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "balloon-float":
+        this.renderBalloonFloat(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "treehouse-sun":
+        this.renderTreehouseSun(ctx, w, h, mx, my, hasMouse);
         break;
       case "autumn-maple":
         this.renderAutumnMaple(ctx, w, h, mx, my, hasMouse);
@@ -3246,23 +3357,7 @@ class HeroCanvasController {
       p.pulse += p.pulseSpeed;
       const glowAlpha = Math.max(0.20, (Math.sin(p.pulse) + 1) * 0.5);
 
-      if (this.currentThemeId === "starry-dome") {
-        const starAlpha = 0.28 + glowAlpha * 0.72;
-        ctx.fillStyle = `rgba(220, 240, 255, ${starAlpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        if (glowAlpha > 0.76) {
-          const sp = p.size * 2.8;
-          ctx.strokeStyle = `rgba(255, 255, 255, ${starAlpha * 0.9})`;
-          ctx.lineWidth = 0.7;
-          ctx.beginPath();
-          ctx.moveTo(p.x - sp, p.y); ctx.lineTo(p.x + sp, p.y);
-          ctx.moveTo(p.x, p.y - sp); ctx.lineTo(p.x, p.y + sp);
-          ctx.stroke();
-        }
-        continue;
-      }
+
 
       if (hasMouse) {
         const dx = p.x - mx;
@@ -4422,10 +4517,340 @@ class HeroCanvasController {
     ctx.restore();
   }
 
-  renderZipline(ctx, w, h, mx, my, hasMouse) {
-    // 레포츠: 이미지 강철 짚라인 와이어를 따라 하강 활강하는 라이더 (물리 가속·진자 스윙·자연스러운 움직임)
-    ctx.save();
+  triggerFlowerBurst(x, y, petalRgb, count = 14) {
+    for (let k = 0; k < count; k++) {
+      const a = (Math.PI * 2 * k) / count + (Math.random() - 0.5) * 0.35;
+      const sp = Math.random() * 2.8 + 1.6;
+      this.flowerBursts.push({
+        x,
+        y,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp - 0.6,
+        w: Math.random() * 3 + 4,
+        h: Math.random() * 2 + 2.5,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.12,
+        alpha: 1.0,
+        decay: Math.random() * 0.022 + 0.018,
+        petalRgb
+      });
+    }
+  }
 
+  popFlowersNear(x, y, radius = 42) {
+    const w = this.width || 800, h = this.height || 500;
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      if (p.col && Math.hypot(p.x - x, p.y - y) < p.r + radius) {
+        this.triggerFlowerBurst(p.x, p.y, p.col.petalRgb, 14);
+        p.x = Math.random() * w;
+        p.y = h + 25;
+        p.vx = (Math.random() - 0.5) * 0.25;
+        p.vy = -Math.random() * 0.45 - 0.20;
+      }
+    }
+  }
+
+  renderFlowerPop(ctx, w, h, mx, my, hasMouse) {
+    ctx.save();
+    // 1. 부유하는 꽃송이 (터치 시 동일 색상 꽃잎 비산)
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += p.swaySpeed || 0.015;
+      p.rot += p.vRot || 0.01;
+      p.x += Math.sin(p.sway) * 0.45 + p.vx;
+      p.y += p.vy;
+
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 25) {
+        this.triggerFlowerBurst(p.x, p.y, p.col.petalRgb, 14);
+        p.x = Math.random() * w;
+        p.y = h + 25;
+        continue;
+      }
+
+      if (p.y < -30) {
+        p.y = h + 30;
+        p.x = Math.random() * w;
+      }
+      if (p.x < -30) p.x = w + 30;
+      else if (p.x > w + 30) p.x = -30;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+
+      const petR = p.r * 0.62;
+      const petDist = p.r * 0.52;
+      ctx.fillStyle = p.col.fill;
+      ctx.strokeStyle = p.col.stroke;
+      ctx.lineWidth = 0.8;
+      for (let k = 0; k < 5; k++) {
+        const ang = (Math.PI * 2 * k) / 5;
+        const px = Math.cos(ang) * petDist;
+        const py = Math.sin(ang) * petDist;
+        ctx.beginPath();
+        ctx.arc(px, py, petR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+      // 중앙 수술
+      ctx.fillStyle = "#fef08a";
+      ctx.strokeStyle = "#eab308";
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.arc(0, 0, p.r * 0.38, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // 2. 터치 팝된 꽃잎 비산 (동일 색상 일치 엄격 보장)
+    for (let i = this.flowerBursts.length - 1; i >= 0; i--) {
+      const b = this.flowerBursts[i];
+      b.x += b.vx;
+      b.y += b.vy;
+      b.vy += 0.045;
+      b.vx *= 0.98;
+      b.rot += b.vRot;
+      b.alpha -= b.decay;
+      if (b.alpha <= 0) {
+        this.flowerBursts.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rot);
+      ctx.fillStyle = `rgba(${b.petalRgb}, ${b.alpha})`;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, b.w, b.h, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  pushBalloonsNear(x, y, radius = 70) {
+    for (const b of this.balloons) {
+      const dx = b.x - x;
+      const dy = b.y - y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < radius + 40 && dist > 0) {
+        const force = (1 - dist / (radius + 40)) * 4.2;
+        b.vx += (dx / dist) * force;
+        b.vy += (dy / dist) * force - 0.4;
+      }
+    }
+  }
+
+  renderBalloonFloat(ctx, w, h, mx, my, hasMouse) {
+    ctx.save();
+    for (const b of this.balloons) {
+      b.sway += b.swaySpeed;
+      b.x += b.vx + Math.sin(b.sway) * 0.45;
+      b.y += b.vy;
+      b.vx *= 0.96;
+
+      if (hasMouse) {
+        const dx = b.x - mx, dy = b.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 85 && dist > 0) {
+          const force = (1 - dist / 85) * 0.28;
+          b.vx += (dx / dist) * force;
+          b.vy += (dy / dist) * force;
+        }
+      }
+
+      const img = this.balloonImgs[b.imgIdx];
+      const nw = img && img.naturalWidth > 0 ? img.naturalWidth : 180;
+      const nh = img && img.naturalHeight > 0 ? img.naturalHeight : 220;
+      const drawW = nw * 0.48 * b.scale;
+      const drawH = nh * 0.48 * b.scale;
+
+      if (b.y < -drawH - 60) {
+        b.y = h + drawH + Math.random() * 40;
+        b.x = Math.random() * (w * 0.9) + w * 0.05;
+        b.vx = 0;
+        for (let s = 0; s < b.stringNodes.length; s++) {
+          b.stringNodes[s].x = b.x;
+          b.stringNodes[s].y = b.y + s * 14 * b.scale;
+        }
+      }
+
+      // 풍선 매듭 뒤를 자연스럽게 찰랑이며 뒤따르는 물리 실
+      const knotX = b.x;
+      const knotY = b.y + drawH * 0.48;
+      ctx.beginPath();
+      ctx.moveTo(knotX, knotY);
+      let prevX = knotX, prevY = knotY;
+      for (let s = 0; s < b.stringNodes.length; s++) {
+        const node = b.stringNodes[s];
+        const targetX = prevX + Math.sin(b.sway + s * 0.5) * 2.8;
+        const targetY = prevY + 13 * b.scale;
+        node.x += (targetX - node.x) * 0.32;
+        node.y += (targetY - node.y) * 0.32;
+        ctx.lineTo(node.x, node.y);
+        prevX = node.x;
+        prevY = node.y;
+      }
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+      ctx.lineWidth = 1.0;
+      ctx.stroke();
+
+      // 다채로운 hue 회전 풍선 스프라이트
+      if (img && img.complete && img.naturalWidth > 0) {
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(Math.sin(b.sway) * 0.08);
+        if (b.hue !== 0) ctx.filter = `hue-rotate(${b.hue}deg)`;
+        ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+        ctx.restore();
+      }
+    }
+    ctx.restore();
+  }
+
+  renderTreehouseSun(ctx, w, h, mx, my, hasMouse) {
+    ctx.save();
+    const isMob = w < 640;
+    const ox = isMob ? -w * 0.05 : -w * 0.02;
+    const oy = -h * 0.04;
+    const breathe = Math.sin(this.time * 0.7) * 0.10;
+
+    ctx.globalCompositeOperation = "screen";
+
+    // 1. 좌측 상공 대형 햇살 아우라
+    const auraR = Math.max(w, h) * (isMob ? 0.65 : 0.75);
+    const aura = ctx.createRadialGradient(ox, oy, 10, ox, oy, auraR);
+    const auraAlpha = 0.75 + breathe;
+    aura.addColorStop(0, `rgba(255, 252, 220, ${auraAlpha * 0.9})`);
+    aura.addColorStop(0.35, `rgba(255, 240, 160, ${auraAlpha * 0.45})`);
+    aura.addColorStop(0.70, `rgba(180, 255, 190, ${auraAlpha * 0.15})`);
+    aura.addColorStop(1, "rgba(180, 255, 190, 0)");
+    ctx.fillStyle = aura;
+    ctx.beginPath();
+    ctx.arc(ox, oy, auraR, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 2. 5줄기 은은한 볼류메트릭 갓레이
+    const angles = [-0.38, -0.52, -0.66, -0.80, -0.94];
+    const beamLen = Math.max(w, h) * 1.6;
+    for (let b = 0; b < 5; b++) {
+      const beamAlpha = (isMob ? 0.65 : 0.55) + breathe + (b % 2) * 0.08;
+      const col = b % 2 === 0 ? "rgba(255, 248, 190" : "rgba(220, 255, 180";
+      this.renderSoftVolumetricBeam(ctx, ox, oy, angles[b], beamLen, isMob ? 0.11 : 0.13, col, beamAlpha);
+    }
+
+    // 3. 숲속 피톤치드 부유 빛가루
+    for (const p of this.particles) {
+      p.pulse += p.pulseSpeed;
+      const alpha = Math.max(0.12, p.alpha + Math.sin(p.pulse) * 0.25);
+      if (hasMouse) {
+        const dx = mx - p.x, dy = my - p.y, dist = Math.hypot(dx, dy);
+        if (dist < 110 && dist > 0) {
+          p.vx += (dx / dist) * 0.12;
+          p.vy += (dy / dist) * 0.12;
+        }
+      }
+      p.x += p.vx + Math.sin(p.pulse) * 0.25;
+      p.y += p.vy;
+      p.vx *= 0.97;
+      p.vy *= 0.97;
+
+      if (p.y < -20) p.y = h + 20;
+      if (p.x < -20) p.x = w + 20;
+      else if (p.x > w + 20) p.x = -20;
+
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.8);
+      g.addColorStop(0, `${p.color} ${alpha})`);
+      g.addColorStop(0.5, `${p.color} ${alpha * 0.5})`);
+      g.addColorStop(1, `${p.color} 0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 2.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  renderStarryDome(ctx, w, h, mx, my, hasMouse) {
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+
+    // 유성우
+    if (Math.random() < 0.010 && this.shootingStars.length < 2) {
+      this.shootingStars.push({
+        x: Math.random() * (w * 0.75) + w * 0.1,
+        y: Math.random() * (h * 0.25) + 10,
+        len: 160 + Math.random() * 90,
+        speed: 7 + Math.random() * 4,
+        angle: Math.PI / 4.6 + (Math.random() - 0.5) * 0.12,
+        alpha: 1
+      });
+    }
+    for (let i = this.shootingStars.length - 1; i >= 0; i--) {
+      const s = this.shootingStars[i];
+      const dx = Math.cos(s.angle) * s.len;
+      const dy = Math.sin(s.angle) * s.len;
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - dx, s.y - dy);
+      grad.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+      grad.addColorStop(0.3, `rgba(180, 230, 255, ${s.alpha * 0.7})`);
+      grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - dx, s.y - dy);
+      ctx.stroke();
+
+      s.x += Math.cos(s.angle) * s.speed;
+      s.y += Math.sin(s.angle) * s.speed;
+      s.alpha -= 0.016;
+      if (s.alpha <= 0) this.shootingStars.splice(i, 1);
+    }
+
+    // 반짝이는 별 (부드러운 페이드인/아웃 + 스파이크 외곽 확장 + 코어 원형 크기 불변)
+    for (const p of this.particles) {
+      p.phase += p.spd;
+      const cycle = (Math.sin(p.phase) + 1) * 0.5;
+      const alpha = Math.pow(cycle, 1.6) * p.alpha;
+      if (alpha <= 0.01) continue;
+
+      // 중앙 고정 원형 코어
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.95})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.baseR, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 4방향 스파이크 (페이드와 함께 외곽으로 확장)
+      const spikeLen = p.maxSpike * (0.35 + 0.65 * cycle);
+      ctx.strokeStyle = `rgba(220, 245, 255, ${alpha * 0.85})`;
+      ctx.lineWidth = Math.max(0.6, p.baseR * 0.5);
+      ctx.beginPath();
+      ctx.moveTo(p.x - spikeLen, p.y);
+      ctx.lineTo(p.x + spikeLen, p.y);
+      ctx.moveTo(p.x, p.y - spikeLen);
+      ctx.lineTo(p.x, p.y + spikeLen);
+      ctx.stroke();
+
+      // 중앙 다이아몬드 플레어
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.45})`;
+      ctx.beginPath();
+      const dSize = spikeLen * 0.28;
+      ctx.moveTo(p.x, p.y - dSize);
+      ctx.lineTo(p.x + dSize, p.y);
+      ctx.lineTo(p.x, p.y + dSize);
+      ctx.lineTo(p.x - dSize, p.y);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  renderZipline(ctx, w, h, mx, my, hasMouse) {
+    ctx.save();
+    const isMob = w < 640;
     const y1 = h * 0.225;
     const y2 = h * 0.485;
     const getPos = (t) => {
@@ -4435,9 +4860,9 @@ class HeroCanvasController {
       return { x, y };
     };
 
-    // 와이어 라인
-    ctx.strokeStyle = "rgba(220, 240, 255, 0.35)";
-    ctx.lineWidth = Math.max(1.2, w * 0.0014);
+    // 강철 짚라인 와이어
+    ctx.strokeStyle = "rgba(220, 240, 255, 0.40)";
+    ctx.lineWidth = Math.max(1.4, w * 0.0016);
     ctx.beginPath();
     for (let s = 0; s <= 20; s++) {
       const pt = getPos(s / 20);
@@ -4446,323 +4871,91 @@ class HeroCanvasController {
     }
     ctx.stroke();
 
-    if (!this.zipline) this.zipline = { t: 0, speed: 0.0034, state: "gliding", pauseTimer: 0, trail: [], character: "man" };
+    if (!this.zipline) this.zipline = { t: 0, speed: 0.0034, state: "gliding", pauseTimer: 0, trail: [], riderIdx: 0 };
     const zl = this.zipline;
-    if (!zl.character) zl.character = "man";
+    if (!zl.trail) zl.trail = [];
+    if (typeof zl.riderIdx !== "number") zl.riderIdx = 0;
 
     if (zl.state === "gliding") {
-      // 물리 가속: 출발 직후 서서히 시작하여 경사 급변 구간에서 최고속도 도달
       const accel = Math.sin(Math.max(0, Math.min(1, zl.t)) * Math.PI);
-      let currentSpeed = 0.0022 + accel * 0.0034;
+      let currentSpeed = (isMob ? 0.0036 : 0.0028) + accel * 0.0036;
       if (hasMouse) {
         const cur = getPos(zl.t);
         if (Math.hypot(cur.x - mx, cur.y - my) < 100) currentSpeed *= 1.35;
       }
       zl.t += currentSpeed;
 
-      if (Math.random() < 0.8) {
+      if (Math.random() < 0.75) {
         const cur = getPos(zl.t);
-        zl.trail.push({ x: cur.x, y: cur.y, alpha: 0.85, len: Math.random() * 34 + 20 });
+        zl.trail.push({ x: cur.x, y: cur.y, alpha: 0.85, len: Math.random() * 30 + 18 });
       }
 
-      if (zl.t >= 1.04) {
+      if (zl.t >= 1.05) {
         zl.state = "paused";
-        zl.pauseTimer = 90;
+        zl.pauseTimer = 85;
       }
     } else if (zl.state === "paused") {
       zl.pauseTimer--;
       if (zl.pauseTimer <= 0) {
-        zl.t = -0.04;
+        zl.t = -0.05;
         zl.state = "gliding";
-        const charTypes = ["man", "woman", "child"];
-        zl.character = charTypes[Math.floor(Math.random() * charTypes.length)];
+        zl.riderIdx = (zl.riderIdx + 1) % 3;
       }
     }
 
-    // 바람 스피드 라인
+    // 스피드 트레일
     for (let i = zl.trail.length - 1; i >= 0; i--) {
       const tr = zl.trail[i];
       tr.alpha -= 0.045;
-      tr.x -= 2.4;
-      tr.y -= 0.8;
+      tr.x -= 2.2;
+      tr.y -= 0.7;
       if (tr.alpha <= 0) { zl.trail.splice(i, 1); continue; }
-      ctx.strokeStyle = `rgba(255, 255, 255, ${tr.alpha * 0.7})`;
-      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${tr.alpha * 0.65})`;
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
       ctx.moveTo(tr.x, tr.y);
-      ctx.lineTo(tr.x - tr.len, tr.y - tr.len * 0.28);
+      ctx.lineTo(tr.x - tr.len, tr.y - tr.len * 0.26);
       ctx.stroke();
     }
 
-    // 짚라인 라이더 (대폭 확대된 크기·남/여/아이 랜덤 탑승자·밝은 아시안/백인 스킨톤·정교한 장비)
-    if (zl.t >= -0.02 && zl.t <= 1.02) {
+    // 도르레와 와이어 100% 밀착 실사 탑승자 렌더링
+    if (zl.t >= -0.04 && zl.t <= 1.04) {
       const pos = getPos(zl.t);
-      const isChild = zl.character === "child";
-      const isWoman = zl.character === "woman";
-      const baseScale = isChild ? 2.1 : 2.7;
-      const minScale = isChild ? 1.05 : 1.35;
-      const scale = Math.max(minScale, baseScale - zl.t * (isChild ? 0.95 : 1.25));
+      const anchors = [
+        { ax: 0.821, ay: 0.008 },
+        { ax: 0.543, ay: 0.000 },
+        { ax: 0.261, ay: 0.000 }
+      ];
+      const anchor = anchors[zl.riderIdx] || anchors[0];
+      const img = this.ziplineRiders[zl.riderIdx];
 
-      // 와이어 기울기 각도 계산
-      const t1 = Math.max(0, zl.t - 0.01), t2 = Math.min(1, zl.t + 0.01);
-      const p1 = getPos(t1), p2 = getPos(t2);
-      const cableSlope = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-
-      // 케이블 미세 진동
-      const cableBounce = Math.sin(this.time * 26) * 0.6;
+      const dt = 0.02;
+      const pNext = getPos(Math.min(1.0, zl.t + dt));
+      const cableAngle = Math.atan2(pNext.y - pos.y, pNext.x - pos.x);
+      const sway = Math.sin(this.time * 6.0) * 0.05;
 
       ctx.save();
-      ctx.translate(pos.x, pos.y + cableBounce);
-      ctx.scale(scale, scale);
+      ctx.translate(pos.x, pos.y);
+      ctx.rotate(cableAngle * 0.35 + sway);
 
-      // 1. 강철 듀얼 도르래(Trolley) - 와이어 각도에 맞춤
-      ctx.save();
-      ctx.rotate(cableSlope);
-      ctx.fillStyle = "#1e293b";
-      ctx.fillRect(-10, -11, 20, 8);
-      // 롤러 2개
-      ctx.beginPath();
-      ctx.arc(-5, -7, 4.5, 0, Math.PI * 2);
-      ctx.arc(5, -7, 4.5, 0, Math.PI * 2);
-      ctx.fillStyle = "#94a3b8";
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(-5, -7, 2, 0, Math.PI * 2);
-      ctx.arc(5, -7, 2, 0, Math.PI * 2);
-      ctx.fillStyle = "#1e293b";
-      ctx.fill();
-      ctx.restore();
+      const targetH = isMob ? 95 : 140;
+      const nw = img && img.naturalWidth > 0 ? img.naturalWidth : 280;
+      const nh = img && img.naturalHeight > 0 ? img.naturalHeight : 360;
+      const targetW = targetH * (nw / nh);
 
-      // 2. 카라비너 연결구 & 핸들 바
-      ctx.strokeStyle = "#475569";
-      ctx.lineWidth = 2.2;
-      ctx.beginPath();
-      ctx.moveTo(0, -3);
-      ctx.lineTo(0, 11);
-      ctx.stroke();
-
-      // 손잡이 그립 바
-      ctx.fillStyle = "#0f172a";
-      ctx.fillRect(-11, 10, 22, 3.5);
-
-      // 3. 라이더 탑승자 본체 (3인 3색: 피부색·머리길이·의상·자세·모션 완전 차별화)
-      ctx.save();
-      const accel = Math.sin(Math.max(0, Math.min(1, zl.t)) * Math.PI);
-
-      if (zl.character === "woman") {
-        // [여성 라이더] 우아하고 유연한 플라잉 활강 (슬림 체형·긴 웨이브 포니테일·민트&코랄·한 손 펼침 자세)
-        const pendulumSway = Math.sin(this.time * 6.5) * 0.10 + Math.cos(this.time * 3.2) * 0.05;
-        ctx.rotate(0.18 + accel * 0.06 + pendulumSway);
-
-        // 바람에 시원하게 휘날리는 긴 롱 웨이브 포니테일 머리 (이중 베지어 바람 시뮬레이션)
-        ctx.strokeStyle = "#92400e";
-        ctx.lineWidth = 3.6;
-        ctx.beginPath();
-        const hr1 = Math.sin(this.time * 16) * 4.5;
-        const hr2 = Math.cos(this.time * 14) * 4.0;
-        ctx.moveTo(-1, 16);
-        ctx.bezierCurveTo(-10, 15 + hr1, -20, 18 + hr2, -28, 20 + hr1 * 1.5);
-        ctx.stroke();
-
-        // 핑크 헬멧 & 화이트 바이저
-        ctx.beginPath();
-        ctx.arc(2, 16, 5.8, 0, Math.PI * 2);
-        ctx.fillStyle = "#f43f5e";
-        ctx.fill();
-        ctx.fillStyle = "#e11d48";
-        ctx.fillRect(4, 15, 5, 2.5);
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(4, 17, 3, 1.5);
-
-        // 뽀얗고 맑은 라이트 피치 피부톤 (턱과 목선)
-        ctx.fillStyle = "#ffedd5";
-        ctx.beginPath();
-        ctx.arc(2, 20.5, 3.0, 0, Math.PI);
-        ctx.fill();
-
-        // 민트 터콰이즈 윈드재킷 & 라임 하네스
-        ctx.fillStyle = "#06b6d4";
-        ctx.beginPath();
-        ctx.roundRect(-4, 21, 9.5, 15, 2.5);
-        ctx.fill();
-        ctx.strokeStyle = "#84cc16";
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.moveTo(-3, 22); ctx.lineTo(4, 33);
-        ctx.moveTo(4, 22); ctx.lineTo(-3, 33);
-        ctx.stroke();
-
-        // 자세: 한 손은 손잡이 중앙을 잡고, 다른 한 손은 바람을 타듯 살짝 옆으로 펼침
-        ctx.strokeStyle = "#06b6d4";
-        ctx.lineWidth = 3.0;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(1, 23); ctx.lineTo(-2, 11); // 왼손 그립
-        ctx.moveTo(3, 23); ctx.lineTo(12, 18);  // 오른손 펼침
-        ctx.stroke();
-        ctx.fillStyle = "#ffedd5";
-        ctx.beginPath();
-        ctx.arc(13, 18, 1.8, 0, Math.PI * 2); // 오른손 끝
-        ctx.fill();
-
-        // 다리: 사뿐히 모아 살짝 구부린 우아한 자세 & 부드러운 스윙
-        const legSway = Math.sin(this.time * 6.8) * 0.12;
-        ctx.strokeStyle = "#0f172a";
-        ctx.lineWidth = 3.2;
-        ctx.beginPath();
-        ctx.moveTo(0, 35);
-        ctx.lineTo(8 + Math.cos(legSway) * 2, 43 + Math.sin(legSway) * 2);
-        ctx.lineTo(16 + Math.cos(legSway) * 1.5, 41 + Math.sin(legSway) * 2);
-        ctx.moveTo(-2, 35);
-        ctx.lineTo(6 + Math.cos(legSway) * 2, 45 + Math.sin(legSway) * 2);
-        ctx.lineTo(14 + Math.cos(legSway) * 1.5, 43 + Math.sin(legSway) * 2);
-        ctx.stroke();
-
-        ctx.fillStyle = "#f43f5e";
-        ctx.fillRect(15, 39, 4, 3);
-        ctx.fillRect(13, 41, 4, 3);
-
-      } else if (zl.character === "child") {
-        // [어린이 라이더] 신나는 꼬마 활강 (작은 체구·귀여운 앞머리·오렌지베스트·신나는 동동 발차기)
-        const pendulumSway = Math.sin(this.time * 8.2) * 0.13 + Math.cos(this.time * 4.0) * 0.06;
-        ctx.rotate(0.14 + accel * 0.05 + pendulumSway);
-
-        // 귀여운 레몬 헬멧 & 스마일
-        ctx.beginPath();
-        ctx.arc(2, 16, 5.2, 0, Math.PI * 2);
-        ctx.fillStyle = "#eab308";
-        ctx.fill();
-        ctx.fillStyle = "#ca8a04";
-        ctx.fillRect(4, 15, 4.2, 2.2);
-
-        // 헬멧 앞 삐져나온 귀여운 앞머리
-        ctx.fillStyle = "#b45309";
-        ctx.beginPath();
-        ctx.arc(3.5, 17.5, 1.6, 0, Math.PI * 2);
-        ctx.fill();
-
-        // 발그레한 뽀얀 베이비 피치 피부톤
-        ctx.fillStyle = "#fee2e2";
-        ctx.beginPath();
-        ctx.arc(2, 20.2, 2.7, 0, Math.PI);
-        ctx.fill();
-
-        // 비비드 오렌지 패딩 베스트 & 옐로우 하네스
-        ctx.fillStyle = "#f97316";
-        ctx.beginPath();
-        ctx.roundRect(-4, 21, 8.5, 12.5, 2.2);
-        ctx.fill();
-        ctx.strokeStyle = "#fde047";
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.moveTo(-3, 22); ctx.lineTo(3, 31);
-        ctx.moveTo(3, 22); ctx.lineTo(-3, 31);
-        ctx.stroke();
-
-        // 자세: 바에 양손을 바짝 모아 찰싹 매달려 신나서 매달린 자세
-        ctx.strokeStyle = "#ea580c";
-        ctx.lineWidth = 2.8;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(0, 23); ctx.lineTo(-2, 11);
-        ctx.moveTo(2, 23); ctx.lineTo(1, 11);
-        ctx.stroke();
-
-        // 모션: 신나서 허공을 빠르게 파닥파닥 동동 차는(pedaling) 고주파 발차기
-        const kick1 = Math.sin(this.time * 12.0) * 0.28;
-        const kick2 = Math.sin(this.time * 12.0 + Math.PI) * 0.28;
-        ctx.strokeStyle = "#3b82f6";
-        ctx.lineWidth = 3.0;
-        ctx.beginPath();
-        // 왼쪽 발차기
-        const kx1 = 9 + Math.cos(kick1) * 3, ky1 = 36 + Math.sin(kick1) * 4;
-        const fx1 = kx1 + 6 + Math.cos(kick1) * 2, fy1 = ky1 + Math.sin(kick1) * 3;
-        ctx.moveTo(1, 31); ctx.lineTo(kx1, ky1); ctx.lineTo(fx1, fy1);
-        // 오른쪽 발차기
-        const kx2 = 7 + Math.cos(kick2) * 3, ky2 = 38 + Math.sin(kick2) * 4;
-        const fx2 = kx2 + 5 + Math.cos(kick2) * 2, fy2 = ky2 + Math.sin(kick2) * 3;
-        ctx.moveTo(-1, 31); ctx.lineTo(kx2, ky2); ctx.lineTo(fx2, fy2);
-        ctx.stroke();
-
-        ctx.fillStyle = "#eab308";
-        ctx.fillRect(fx1 - 1, fy1 - 2, 3.5, 2.5);
-        ctx.fillRect(fx2 - 1, fy2 - 2, 3.5, 2.5);
-
-      } else {
-        // [남성 라이더] 파워풀 스피드 활강 (탄탄한 체형·스포티 숏컷·로열블루·두 손 와이드 그립·앞으로 뻗은 다리)
-        const pendulumSway = Math.sin(this.time * 4.6) * 0.08 + Math.cos(this.time * 2.5) * 0.04;
-        ctx.rotate(0.26 + accel * 0.07 + pendulumSway);
-
-        // 헬멧 뒤 삐져나온 깔끔한 흑갈색 스포티 쇼트 헤어
-        ctx.fillStyle = "#1c1917";
-        ctx.beginPath();
-        ctx.arc(-1, 18, 3.0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // 코발트 블루 레이싱 헬멧 & 바이저
-        ctx.beginPath();
-        ctx.arc(2, 16, 6.2, 0, Math.PI * 2);
-        ctx.fillStyle = "#1d4ed8";
-        ctx.fill();
-        ctx.fillStyle = "#1e40af";
-        ctx.fillRect(4, 15, 5.2, 2.5);
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(4, 17, 3, 1.5);
-
-        // 펄럭이는 스포티 라임 윈드 리본
-        ctx.strokeStyle = "#84cc16";
-        ctx.lineWidth = 1.3;
-        ctx.beginPath();
-        const r1 = Math.sin(this.time * 22) * 3.5;
-        ctx.moveTo(0, 16); ctx.quadraticCurveTo(-6, 16 + r1, -14, 15 + r1 * 1.5);
-        ctx.stroke();
-
-        // 건강한 웜 탠 아시안/백인 스킨톤
-        ctx.fillStyle = "#fed7aa";
-        ctx.beginPath();
-        ctx.arc(2, 20.5, 3.2, 0, Math.PI);
-        ctx.fill();
-
-        // 로열 블루 아웃도어 쉘 & 오렌지 하네스
-        ctx.fillStyle = "#2563eb";
-        ctx.beginPath();
-        ctx.roundRect(-4, 21, 10.5, 16, 2.5);
-        ctx.fill();
-        ctx.strokeStyle = "#ea580c";
-        ctx.lineWidth = 1.6;
-        ctx.beginPath();
-        ctx.moveTo(-3, 22); ctx.lineTo(5, 34);
-        ctx.moveTo(5, 22); ctx.lineTo(-3, 34);
-        ctx.stroke();
-
-        // 자세: 두 손으로 손잡이를 넓게 꽉 잡고 파워풀하게 버티는 자세
-        ctx.strokeStyle = "#2563eb";
-        ctx.lineWidth = 3.4;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(1, 23); ctx.lineTo(-6, 11);
-        ctx.moveTo(4, 23); ctx.lineTo(6, 11);
-        ctx.stroke();
-
-        // 다리: 앞으로 힘차게 뻗어 스피드를 가르는 안정적인 활강 포즈
-        const legSway = Math.sin(this.time * 5.0) * 0.12;
-        ctx.strokeStyle = "#1e293b";
-        ctx.lineWidth = 3.6;
-        ctx.beginPath();
-        const kx1 = 14 + Math.cos(legSway) * 2, ky1 = 40 + Math.sin(legSway) * 3;
-        const fx1 = kx1 + 10 + Math.cos(legSway) * 1.5, fy1 = ky1 - 2 + Math.sin(legSway) * 2;
-        ctx.moveTo(1, 35); ctx.lineTo(kx1, ky1); ctx.lineTo(fx1, fy1);
-        const kx2 = 10 + Math.cos(legSway) * 2, ky2 = 44 + Math.sin(legSway) * 3;
-        const fx2 = kx2 + 9 + Math.cos(legSway) * 1.5, fy2 = ky2 + 1 + Math.sin(legSway) * 2;
-        ctx.moveTo(-1, 35); ctx.lineTo(kx2, ky2); ctx.lineTo(fx2, fy2);
-        ctx.stroke();
-
-        ctx.fillStyle = "#ea580c";
-        ctx.fillRect(fx1 - 1, fy1 - 2, 4.5, 3.2);
-        ctx.fillRect(fx2 - 1, fy2 - 2, 4.5, 3.2);
+      if (img && img.complete && img.naturalWidth > 0) {
+        ctx.drawImage(img, -targetW * anchor.ax, -targetH * anchor.ay, targetW, targetH);
       }
 
-      ctx.restore();
+      // 와이어에 고정된 도르레 휠
+      ctx.fillStyle = "#e2e8f0";
+      ctx.beginPath();
+      ctx.arc(0, 0, Math.max(2.5, targetH * 0.025), 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#475569";
+      ctx.lineWidth = 1.0;
+      ctx.stroke();
+
       ctx.restore();
     }
     ctx.restore();
@@ -4776,7 +4969,6 @@ class HeroCanvasController {
     const maxHalfW = Math.tan(spreadAngle) * length;
     const clipW = maxHalfW * 1.45;
 
-    // 가로 횡단면 완만하고 몽환적인 가우시안 소프트 그라데이션 (경계가 100% 안개처럼 블러링)
     const hGrad = ctx.createLinearGradient(-clipW, 0, clipW, 0);
     hGrad.addColorStop(0.00, `${colorRgb}, 0)`);
     hGrad.addColorStop(0.18, `${colorRgb}, ${baseAlpha * 0.14})`);
@@ -4786,7 +4978,6 @@ class HeroCanvasController {
     hGrad.addColorStop(0.82, `${colorRgb}, ${baseAlpha * 0.14})`);
     hGrad.addColorStop(1.00, `${colorRgb}, 0)`);
 
-    // 부채꼴 콘 외곽선 채우기 - 클리핑 모서리는 알파 0 바깥에 위치하므로 경계선이 전혀 보이지 않음
     ctx.fillStyle = hGrad;
     ctx.beginPath();
     ctx.moveTo(0, 0);
@@ -4799,91 +4990,73 @@ class HeroCanvasController {
   }
 
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
-    // 농촌체험: 우측 상공 1시 방향에서 7시 방향으로 부드럽게 쏟아져 내리는 은은한 볼류메트릭 갓레이(Light Ray) & 부유 스펙 먼지
     ctx.save();
-
     const isMob = w < 640;
-    // 1. 우측 상공 1시 방향 광원 원점 (모바일에서는 화면 우측 상단 모서리에 정확히 맞춤)
-    const ox = isMob ? w * 0.95 : w * 0.88;
-    const oy = isMob ? -h * 0.02 : -h * 0.04;
-    const breathe = Math.sin(this.time * 0.4) * 0.04;
-    const sunRayReady = this.sunRayLoaded || (this.sunRayImg && this.sunRayImg.complete && this.sunRayImg.naturalWidth > 0);
+    const ox = w * 0.75;
+    const oy = h * 0.03;
+    const angle = this.time * 0.06;
+    const scale = 1.0 + Math.sin(this.time * 0.5) * 0.12;
+    const burstReady = this.farmSunburstLoaded || (this.farmSunburstImg && this.farmSunburstImg.complete && this.farmSunburstImg.naturalWidth > 0);
 
-    if (sunRayReady) {
-      // 실사 갓레이 텍스처를 스크린 블렌드 모드로 부드럽고 자연스럽게 합성
-      ctx.globalCompositeOperation = "screen";
-      // sun-ray.png의 실제 광원 중심점 (496 / 650, 15 / 604)
-      const imgApexX = 496 / 650;
-      const imgApexY = 15 / 604;
-      // 모바일에서는 광선의 결(Streaks)이 뚜렷하게 보이도록 크기와 위치를 정밀 스케일링
-      const targetW = isMob ? Math.max(w * 1.15, 460) : Math.max(w * 1.25, h * 1.5);
-      const targetH = targetW * (604 / 650);
-      const drawX = ox - targetW * imgApexX;
-      const drawY = oy - targetH * imgApexY;
+    ctx.globalCompositeOperation = "screen";
 
+    if (burstReady) {
+      const burstSize = Math.max(w, h) * (isMob ? 1.55 : 1.75) * scale;
       ctx.save();
-      ctx.globalAlpha = isMob ? Math.max(0.30, 0.54 + breathe) : Math.max(0.18, 0.38 + breathe);
-      ctx.drawImage(this.sunRayImg, drawX, drawY, targetW, targetH);
+      ctx.translate(ox, oy);
+      ctx.rotate(angle);
+      ctx.globalAlpha = isMob ? 0.65 : 0.52;
+      ctx.drawImage(this.farmSunburstImg, -burstSize / 2, -burstSize / 2, burstSize, burstSize);
       ctx.restore();
     } else {
-      ctx.globalCompositeOperation = "lighter";
-      // 태양 볼류메트릭 아우라 (빛 강도를 줄이고 부드럽게 감쇄)
       const sunR = Math.min(w, h) * (isMob ? 0.45 : 0.55);
       const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
-      sunGlow.addColorStop(0, "rgba(255, 245, 205, 0.24)");
-      sunGlow.addColorStop(0.35, "rgba(255, 220, 130, 0.11)");
-      sunGlow.addColorStop(0.70, "rgba(255, 190, 75, 0.03)");
+      sunGlow.addColorStop(0, "rgba(255, 245, 205, 0.35)");
+      sunGlow.addColorStop(0.35, "rgba(255, 220, 130, 0.18)");
+      sunGlow.addColorStop(0.70, "rgba(255, 190, 75, 0.05)");
       sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
       ctx.fillStyle = sunGlow;
       ctx.beginPath();
       ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
       ctx.fill();
-
-      // 1시에서 7시 방향으로 쏟아지는 5줄기 은은하고 블러리한 광선
-      const angles = [0.38, 0.45, 0.52, 0.59, 0.66];
-      const beamLen = Math.max(w, h) * 1.5;
-      for (let b = 0; b < 5; b++) {
-        const alpha = 0.16 + breathe + (b % 2) * 0.03;
-        const col = b % 2 === 0 ? "rgba(255, 235, 150" : "rgba(255, 215, 110";
-        this.renderSoftVolumetricBeam(ctx, ox, oy, angles[b], beamLen, isMob ? 0.095 : 0.115, col, alpha);
-      }
     }
 
-    // 2. 부유 먼지 입자 (광선 안을 지나갈 때 발광 증폭)
-    ctx.globalCompositeOperation = "lighter";
-    for (const p of this.particles) {
+    // 몽환적인 황금빛 보케 원형 서클
+    const bokehCols = [
+      "rgba(255, 235, 140,",
+      "rgba(254, 215, 75,",
+      "rgba(255, 248, 200,"
+    ];
+    for (const p of this.bokehParticles) {
       p.pulse += p.pulseSpeed;
-      const alpha = Math.max(0.12, p.alpha + Math.sin(p.pulse) * 0.22);
+      p.x += p.vx;
+      p.y += p.vy;
 
       if (hasMouse) {
         const dx = mx - p.x, dy = my - p.y, dist = Math.hypot(dx, dy);
-        if (dist < 130 && dist > 0) {
-          p.vx += (dx / dist) * 0.14;
-          p.vy += (dy / dist) * 0.14;
+        if (dist < 100 && dist > 0) {
+          p.vx += (dx / dist) * 0.10;
+          p.vy += (dy / dist) * 0.10;
         }
       }
+      p.vx *= 0.98;
 
-      p.x += p.vx + Math.sin(p.pulse) * 0.30;
-      p.y += p.vy;
-      p.vx *= 0.96;
-      p.vy *= 0.96;
+      if (p.y < -p.r - 20) {
+        p.y = h + p.r + 20;
+        p.x = Math.random() * w;
+      }
+      if (p.x < -p.r - 20) p.x = w + p.r + 20;
+      else if (p.x > w + p.r + 20) p.x = -p.r - 20;
 
-      if (p.y < -20) p.y = h + 20;
-      if (p.x < -20) p.x = w + 20;
-      else if (p.x > w + 20) p.x = -20;
-
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.2);
-      g.addColorStop(0, `${p.color} ${alpha})`);
-      g.addColorStop(0.4, `${p.color} ${alpha * 0.6})`);
-      g.addColorStop(1, `${p.color} 0)`);
+      const alpha = Math.max(0.04, p.alpha + Math.sin(p.pulse) * 0.08);
+      const colPrefix = bokehCols[p.colorIdx] || bokehCols[0];
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, `${colPrefix} ${alpha * 0.85})`);
+      g.addColorStop(0.65, `${colPrefix} ${alpha * 0.40})`);
+      g.addColorStop(1, `${colPrefix} 0)`);
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 3.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha + 0.35)})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 0.65, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
