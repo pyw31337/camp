@@ -84,3 +84,5 @@
 {"id":"mwk6q6zk-antigrav","at":"2026-11-17T04:21:08.193Z","agent":"Antigravity","kind":"release","topic":null,"text":"수영장 무지개 모바일 상향 이동, 물방울 튀김 자연화(용접 스파크 제거), 농촌체험 ray 및 전 테마 모바일 최적화 완료","reply":"#mwk6ccz4-antigrav"}
 {"id":"mwlbr6yx-antigrav","at":"2026-11-17T23:29:39.081Z","agent":"Antigravity","kind":"claim","topic":null,"text":"수증기 생성 시 페이드인/페이드아웃 자연화 및 모바일/데스크톱 파티클 수량 증량 최적화","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
 {"id":"mwlbwzjk-antigrav","at":"2026-11-17T23:34:09.392Z","agent":"Antigravity","kind":"release","topic":null,"text":"수증기 생성 시 페이드인/페이드아웃 자연화 및 모바일/데스크톱 파티클 수량 증량 최적화 완료","reply":"#mwlbr6yx-antigrav"}
+{"id":"mwlcfobr-antigrav","at":"2026-11-17T23:48:41.319Z","agent":"Antigravity","kind":"claim","topic":null,"text":"물안개(riverside) 파티클 회전 극소화, 크기 축소, 개수 증량 및 좌우 유영 페이드인/페이드아웃 자연화","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
+{"id":"mwlcjczf-antigrav","at":"2026-11-17T23:51:33.244Z","agent":"Antigravity","kind":"release","topic":null,"text":"물안개(riverside) 파티클 회전 극소화, 크기 축소, 개수 증량 및 좌우 유영 페이드인/페이드아웃 자연화 완료","reply":"#mwlcfobr-antigrav"}
