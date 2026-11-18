@@ -2465,6 +2465,12 @@ class HeroCanvasController {
     this.sunRayLoaded = false;
     this.sunRayImg.onload = () => { this.sunRayLoaded = true; };
 
+    // 실사 프리즘 무지개 광선 스프라이트 프리로드
+    this.rainbowImg = new Image();
+    this.rainbowImg.src = `${APP_BASE}images/hero/rainbow-beam.png`;
+    this.rainbowLoaded = false;
+    this.rainbowImg.onload = () => { this.rainbowLoaded = true; };
+
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
     this.onPointerDown = this.handlePointerDown.bind(this);
@@ -4183,56 +4189,51 @@ class HeroCanvasController {
   }
 
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
-    // 수영장: 실제 광원처럼 경계가 완전히 블러링된 7색 연속 스펙트럼 무지개 & 맑은 물방울 스플래시
+    // 수영장: 실사 프리즘 무지개 광선(페이드인 -> 스케일 확장 페이드아웃 반복) & 맑은 물방울 스플래시
     ctx.save();
-    ctx.globalCompositeOperation = "lighter";
 
     const isMob = w < 640;
-    const breathe = Math.sin(this.time * 0.7) * 0.16 + Math.cos(this.time * 0.35) * 0.08;
-    const baseAlpha = 0.44 + breathe;
+    // 무지개 페이드인 -> 스케일 확장 페이드아웃 반복 주기 (약 6.5초)
+    const p = (this.time * 0.128) % 1.0;
+    let beamAlpha = 0;
+    let beamScale = 1.0;
 
-    // 모바일에서는 무지개 중심을 올려 하늘 상공에 시원하고 웅장하게 걸치도록 조정
-    const cx = isMob ? w * 0.48 : w * 0.46;
-    const cy = isMob ? h * 0.74 : h * 0.96;
-    const baseR = isMob ? Math.max(w * 0.86, h * 0.60) : Math.min(w, h) * 0.88;
-    const archW = isMob ? Math.max(65, w * 0.22) : Math.max(90, Math.min(w, h) * 0.24);
-    const rIn = baseR - archW * 0.52;
-    const rOut = baseR + archW * 0.52;
+    if (p < 0.32) {
+      const tin = p / 0.32;
+      beamAlpha = Math.sin(tin * (Math.PI / 2));
+      beamScale = 0.94 + tin * 0.10; // 0.94 -> 1.04
+    } else if (p < 0.92) {
+      const tout = (p - 0.32) / 0.60;
+      beamAlpha = Math.cos(tout * (Math.PI / 2));
+      beamScale = 1.04 + tout * 0.28; // 1.04 -> 1.32
+    } else {
+      beamAlpha = 0;
+      beamScale = 1.32;
+    }
 
-    // 1. 방사형 연속 스펙트럼 그라데이션
-    const specGrad = ctx.createRadialGradient(cx, cy, rOut, cx, cy, rIn);
-    specGrad.addColorStop(0.00, "rgba(255, 60, 60, 0)");
-    specGrad.addColorStop(0.12, `rgba(255, 60, 60, ${baseAlpha * 0.48})`);
-    specGrad.addColorStop(0.26, `rgba(255, 140, 30, ${baseAlpha * 0.55})`);
-    specGrad.addColorStop(0.40, `rgba(255, 230, 40, ${baseAlpha * 0.60})`);
-    specGrad.addColorStop(0.54, `rgba(50, 230, 100, ${baseAlpha * 0.52})`);
-    specGrad.addColorStop(0.68, `rgba(40, 225, 255, ${baseAlpha * 0.55})`);
-    specGrad.addColorStop(0.82, `rgba(65, 125, 255, ${baseAlpha * 0.48})`);
-    specGrad.addColorStop(0.92, `rgba(185, 75, 255, ${baseAlpha * 0.38})`);
-    specGrad.addColorStop(1.00, "rgba(185, 75, 255, 0)");
-
-    // 2. 300도에서 135도까지 시계방향 아치 (부드러운 페이드인/아웃)
-    const startAng = (210 / 180) * Math.PI;
-    const totalSpan = ((360 - 210 + 45) / 180) * Math.PI;
-    const slices = isMob ? 24 : 32;
-    const dAng = totalSpan / slices;
-
-    for (let s = 0; s < slices; s++) {
-      const a0 = startAng + s * dAng;
-      const a1 = a0 + dAng + 0.006;
-      const t = s / slices;
-      let edgeFade = 1.0;
-      if (t < 0.16) edgeFade = t / 0.16;
-      else if (t > 0.84) edgeFade = (1 - t) / 0.16;
+    const rainbowReady = this.rainbowLoaded || (this.rainbowImg && this.rainbowImg.complete && this.rainbowImg.naturalWidth > 0);
+    if (rainbowReady && beamAlpha > 0.005) {
+      const cx = isMob ? w * 0.52 : w * 0.56;
+      const cy = isMob ? h * 0.38 : h * 0.36;
+      const baseW = isMob ? Math.max(w * 1.35, h * 0.95) : Math.max(w * 0.78, h * 1.45);
+      const baseH = baseW * (1024 / 675);
+      const rot = isMob ? -0.04 : -0.05;
 
       ctx.save();
-      ctx.globalAlpha = edgeFade;
-      ctx.fillStyle = specGrad;
-      ctx.beginPath();
-      ctx.arc(cx, cy, rOut + archW * 0.15, a0, a1, false);
-      ctx.arc(cx, cy, rIn - archW * 0.15, a1, a0, true);
-      ctx.closePath();
-      ctx.fill();
+      ctx.translate(cx, cy);
+      ctx.rotate(rot);
+      ctx.scale(beamScale, beamScale);
+
+      // Pass 1: screen 블렌드 모드로 무지개 고유의 7색 스펙트럼 광선 렌더링
+      ctx.globalCompositeOperation = "screen";
+      ctx.globalAlpha = Math.min(1, beamAlpha * (isMob ? 0.92 : 0.98));
+      ctx.drawImage(this.rainbowImg, -baseW / 2, -baseH / 2, baseW, baseH);
+
+      // Pass 2: lighter 모드로 중심부 영롱한 태양광 프리즘 글로우(Bloom) 추가
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = Math.min(1, beamAlpha * (isMob ? 0.28 : 0.32));
+      ctx.drawImage(this.rainbowImg, -baseW / 2, -baseH / 2, baseW, baseH);
+
       ctx.restore();
     }
 
