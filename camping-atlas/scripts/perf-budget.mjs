@@ -14,7 +14,8 @@ const KB = (n) => Math.round(n / 1024);
 // 2026-11-12: 히어로 22개 매핑 가드·사진 식별 방어를 정식 반영한 실제 크기(약 651KB)에
 // 1% 미만의 여유를 둔다. 크기 증가를 무제한 허용하지 않고 JS 660KB·CSS 285KB에서 다시 차단한다.
 // 2026-11-16: 히어로 테마 7종 전용 캔버스 애니메이션(광원 무지개 300°~135°·짚라인 3종 캐릭터(남/여/아이 세부 의상/모션 완전 차별화)·우측 스포트라이트 볼륨·터뷸런트 수증기 김 덩어리) 탑재로 app.js 예산 +10KB (695KB).
-const BUDGET = { appJs: 695, css: 285, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
+// 2026-11-18: 히어로 테마 6종 전용 인터랙티브 효과(동물체험 꽃잎 터치비산·실내놀이 풍선/물리실·트리하우스 대형햇살·이색숙소 별빛스파이크·레포츠 실사 짚라인·농촌체험 태양회전/골든보케) 탑재로 app.js 예산 +10KB (705KB).
+const BUDGET = { appJs: 705, css: 285, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
 const app = statSync(`${root}design/renewal/app.js`).size, css = statSync(`${root}design/renewal/style.css`).size;
 import { existsSync } from "node:fs";
 const liteP = existsSync(`${root}camping-atlas/public/explore/data/campgrounds.lite.json`) ? "camping-atlas/public/explore/data/campgrounds.lite.json" : null;
