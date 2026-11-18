@@ -4189,23 +4189,18 @@ class HeroCanvasController {
   }
 
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
-    // 수영장: 실사 프리즘 무지개 광선(페이드인 -> 스케일 확장 페이드아웃 반복) & 맑은 물방울 스플래시
     ctx.save();
-
     const isMob = w < 640;
-    // 무지개 페이드인 -> 스케일 확장 페이드아웃 반복 주기 (약 6.5초)
     const p = (this.time * 0.128) % 1.0;
-    let beamAlpha = 0;
-    let beamScale = 1.0;
-
+    let beamAlpha = 0, beamScale = 1.0;
     if (p < 0.32) {
       const tin = p / 0.32;
       beamAlpha = Math.sin(tin * (Math.PI / 2));
-      beamScale = 0.94 + tin * 0.10; // 0.94 -> 1.04
+      beamScale = 0.94 + tin * 0.10;
     } else if (p < 0.92) {
       const tout = (p - 0.32) / 0.60;
       beamAlpha = Math.cos(tout * (Math.PI / 2));
-      beamScale = 1.04 + tout * 0.28; // 1.04 -> 1.32
+      beamScale = 1.04 + tout * 0.28;
     } else {
       beamAlpha = 0;
       beamScale = 1.32;
@@ -4315,18 +4310,49 @@ class HeroCanvasController {
   }
 
   renderWindGrass(ctx, w, h, mx, my, hasMouse) {
-    // 승마: 노을 지는 목장 - 부드러운 골든 볼류메트릭 광선 + 바람에 흩날리는 크고 싱그러운 잔디 풀잎 파티클
+    // 승마: 노을 지는 목장 - 우측 상공 햇빛 대형 갓레이 & 볼류메트릭 틴들 광선 (회전·펄스·브리딩) + 잔디 풀잎
     ctx.save();
+    const isMob = w < 640;
+    const ox = isMob ? w * 0.95 : w * 0.92;
+    const oy = isMob ? -h * 0.02 : -h * 0.02;
+    const rotOsc = Math.sin(this.time * 0.40) * 0.042 + Math.cos(this.time * 0.20) * 0.020;
+    const scalePulse = 1.05 + Math.sin(this.time * 0.48) * 0.11;
+    const alphaBreathe = 0.52 + Math.sin(this.time * 0.62) * 0.20 + Math.cos(this.time * 0.31) * 0.08;
 
-    // 1. 목장 위로 쏟아지는 골든 볼류메트릭 틴들 광선
     ctx.save();
+    const sunRayReady = this.sunRayLoaded || (this.sunRayImg && this.sunRayImg.complete && this.sunRayImg.naturalWidth > 0);
+    if (sunRayReady) {
+      ctx.globalCompositeOperation = "screen";
+      const targetW = (isMob ? Math.max(w * 1.55, 580) : Math.max(w * 1.65, h * 2.2)) * scalePulse;
+      const targetH = targetW * (604 / 650);
+      ctx.save();
+      ctx.translate(ox, oy);
+      ctx.rotate(rotOsc * 1.2);
+      ctx.globalAlpha = Math.min(1.0, isMob ? alphaBreathe * 0.65 : alphaBreathe * 0.55);
+      ctx.drawImage(this.sunRayImg, -targetW * (496 / 650), -targetH * (15 / 604), targetW, targetH);
+      ctx.restore();
+    }
+
     ctx.globalCompositeOperation = "lighter";
-    const ox = w * 0.15, oy = -h * 0.10;
-    const beamPhase = Math.sin(this.time * 0.35) * 0.035;
-    const angles = [0.34, 0.44, 0.54];
-    for (let b = 0; b < 3; b++) {
-      const alpha = 0.22 + beamPhase + b * 0.02;
-      this.renderVolumetricBeam(ctx, ox, oy, angles[b], h * 1.25, 0.082, "rgba(255, 225, 125", alpha);
+    const sunR = Math.min(w, h) * (isMob ? 0.65 : 0.82) * scalePulse;
+    const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
+    sunGlow.addColorStop(0, `rgba(255, 248, 215, ${alphaBreathe * 0.38})`);
+    sunGlow.addColorStop(0.22, `rgba(255, 215, 120, ${alphaBreathe * 0.22})`);
+    sunGlow.addColorStop(0.55, `rgba(255, 170, 65, ${alphaBreathe * 0.08})`);
+    sunGlow.addColorStop(1, "rgba(255, 150, 50, 0)");
+    ctx.fillStyle = sunGlow;
+    ctx.beginPath();
+    ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
+    ctx.fill();
+
+    const baseLength = Math.max(w * 1.55, h * 2.2) * scalePulse;
+    const baseAngles = isMob ? [-0.82, -0.96, -1.10, -1.24] : [-0.78, -0.90, -1.02, -1.14, -1.26];
+    const beamColors = ["rgba(255, 240, 185", "rgba(255, 220, 135", "rgba(255, 205, 105", "rgba(255, 230, 155", "rgba(255, 215, 115"];
+    for (let b = 0; b < baseAngles.length; b++) {
+      const beamRot = baseAngles[b] + rotOsc + Math.sin(this.time * 0.35 + b * 1.1) * 0.022;
+      const beamAlpha = Math.max(0.06, (alphaBreathe * 0.62) + (b % 2 === 0 ? 0.03 : -0.02) + Math.sin(this.time * 0.5 + b) * 0.025);
+      const spread = (isMob ? 0.092 : 0.105) * (1.0 + Math.sin(this.time * 0.45 + b * 0.8) * 0.12);
+      this.renderVolumetricBeam(ctx, ox, oy, beamRot, baseLength * (1.0 + (b % 2) * 0.10), spread, beamColors[b % beamColors.length], beamAlpha);
     }
 
     // 목장 부유 골든 스펙 먼지
