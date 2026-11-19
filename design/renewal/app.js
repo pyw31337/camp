@@ -3751,17 +3751,17 @@ class HeroCanvasController {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    // 좌우반전: 좌측 상단으로 이동 & 상단 시작점을 화면 밖으로 올려 자연스러운 캐노피 광선 연출
-    const ox = w * 0.28, oy = -Math.max(70, h * 0.16);
+    // 1시(우측 상단)에서 7시(좌하단) 방향으로 흐르도록 태양 위치(ox ~ 0.74w) 및 화면 상단 외곽(oy) 배치
+    const ox = w * 0.74, oy = -Math.max(60, h * 0.16);
 
     const breatheMain = Math.sin(this.time * 1.1);
     const breatheSub = Math.sin(this.time * 2.1 + 0.9);
     const breathePulse = (breatheMain * 0.7 + breatheSub * 0.3); // -1.0 ~ 1.0
     const scalePulse = 1.0 + breathePulse * 0.12; // 0.88 ~ 1.12
-    const beamLength = h * (1.68 + breathePulse * 0.20);
-    const sunGlowR = Math.min(w, h) * (0.68 + breathePulse * 0.12);
+    const beamLength = h * (1.75 + breathePulse * 0.20);
+    const sunGlowR = Math.min(w, h) * (0.72 + breathePulse * 0.12);
 
-    // 1. 화면 상단 외곽에서 숲 전역으로 은은하게 쏟아지는 골드 샤이니 앰비언트 아우라
+    // 1. 우측 상단 1시 외곽에서 숲 전역으로 은은하게 쏟아지는 골드 샤이니 앰비언트 아우라
     const sunGrad = ctx.createRadialGradient(ox, oy, 20, ox, oy, sunGlowR);
     const coreAlpha = 0.42 + breathePulse * 0.18;
     sunGrad.addColorStop(0, `rgba(255, 255, 240, ${Math.min(1, coreAlpha * 1.35)})`);
@@ -3774,8 +3774,8 @@ class HeroCanvasController {
     ctx.arc(ox, oy, sunGlowR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. 좌우반전된 6갈래 골드 샤이니 틴들 광선 (숲 중앙과 우측 하단으로 자연스럽게 방사)
-    const baseAngles = [0.14, 0.27, 0.40, 0.54, 0.68, 0.82];
+    // 2. 1시에서 7시 방향(좌하단)으로 쏟아지는 6갈래 골드 샤이니 틴들 광선
+    const baseAngles = [-0.18, -0.30, -0.43, -0.56, -0.69, -0.82];
     const beamColors = [
       "rgba(255, 230, 120",
       "rgba(255, 245, 170",
