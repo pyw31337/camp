@@ -2469,6 +2469,11 @@ class HeroCanvasController {
     this.rainbowLoaded = false;
     this.rainbowImg.onload = () => { this.rainbowLoaded = true; };
 
+    this.bonfireGlowImg = new Image();
+    this.bonfireGlowImg.src = `${APP_BASE}images/hero/bonfire-glow.webp`;
+    this.bonfireGlowLoaded = false;
+    this.bonfireGlowImg.onload = () => { this.bonfireGlowLoaded = true; };
+
     this.balloonImgs = [1, 2, 3].map((n) => { const img = new Image(); img.src = `${APP_BASE}images/hero/balloon-${n}.webp`; return img; });
 
     this.ziplineRiders = [1, 2, 3].map((n) => { const img = new Image(); img.src = `${APP_BASE}images/hero/zipline-rider-${n}.webp`; return img; });
@@ -2728,29 +2733,28 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        const mistCount = isMob ? 180 : 360;
+        const mistCount = isMob ? 45 : 80;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3;
-          const pw = isMob
-            ? Math.max(60, w * (0.13 + Math.random() * 0.15))
-            : Math.max(95, Math.min(w, h) * (0.16 + Math.random() * 0.16));
-          const ph = pw * (Math.random() * 0.20 + 0.35);
+          const psize = isMob
+            ? Math.max(140, w * (0.32 + Math.random() * 0.22))
+            : Math.max(220, Math.min(w, h) * (0.36 + Math.random() * 0.26));
           const driftDir = Math.random() < 0.65 ? -1 : 1;
-          const driftMag = Math.random() * 0.22 + 0.08;
+          const driftMag = Math.random() * 0.18 + 0.06;
           this.mistParticles.push({
-            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.20),
-            baseY: h * (0.42 + Math.random() * 0.20),
-            w: pw,
-            h: ph,
+            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.25),
+            baseY: h * (0.38 + Math.random() * 0.24),
+            w: psize,
+            h: psize,
             rot: (Math.random() - 0.5) * 0.06,
-            rotSpeed: (Math.random() - 0.5) * 0.00008,
-            swayAmp: Math.random() * 20 + 10,
-            swaySpeed: Math.random() * 0.005 + 0.002,
+            rotSpeed: (Math.random() - 0.5) * 0.00006,
+            swayAmp: Math.random() * 22 + 10,
+            swaySpeed: Math.random() * 0.004 + 0.0018,
             swayPhase: Math.random() * Math.PI * 2,
             driftVx: driftDir * driftMag,
-            maxAlpha: (layer === 0 ? (Math.random() * 0.10 + 0.35) : layer === 1 ? (Math.random() * 0.12 + 0.42) : (Math.random() * 0.10 + 0.30)) * (isMob ? 0.90 : 1.0),
+            maxAlpha: (layer === 0 ? (Math.random() * 0.08 + 0.26) : layer === 1 ? (Math.random() * 0.10 + 0.34) : (Math.random() * 0.08 + 0.22)) * (isMob ? 0.90 : 1.0),
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.008 + 0.004
+            pulseSpeed: Math.random() * 0.007 + 0.003
           });
         }
         break;
@@ -3747,49 +3751,31 @@ class HeroCanvasController {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const ox = w * 0.72, oy = h * 0.03;
+    // 좌우반전: 좌측 상단으로 이동 & 상단 시작점을 화면 밖으로 올려 자연스러운 캐노피 광선 연출
+    const ox = w * 0.28, oy = -Math.max(70, h * 0.16);
 
     const breatheMain = Math.sin(this.time * 1.1);
     const breatheSub = Math.sin(this.time * 2.1 + 0.9);
     const breathePulse = (breatheMain * 0.7 + breatheSub * 0.3); // -1.0 ~ 1.0
     const scalePulse = 1.0 + breathePulse * 0.12; // 0.88 ~ 1.12
-    const beamLength = h * (1.25 + breathePulse * 0.15);
-    const sunGlowR = Math.min(w, h) * (0.36 + breathePulse * 0.07);
+    const beamLength = h * (1.68 + breathePulse * 0.20);
+    const sunGlowR = Math.min(w, h) * (0.68 + breathePulse * 0.12);
 
-    const sunGrad = ctx.createRadialGradient(ox, oy, 10, ox, oy, sunGlowR);
-    const coreAlpha = 0.38 + breathePulse * 0.16;
+    // 1. 화면 상단 외곽에서 숲 전역으로 은은하게 쏟아지는 골드 샤이니 앰비언트 아우라
+    const sunGrad = ctx.createRadialGradient(ox, oy, 20, ox, oy, sunGlowR);
+    const coreAlpha = 0.42 + breathePulse * 0.18;
     sunGrad.addColorStop(0, `rgba(255, 255, 240, ${Math.min(1, coreAlpha * 1.35)})`);
-    sunGrad.addColorStop(0.18, `rgba(255, 225, 120, ${coreAlpha * 0.85})`);
-    sunGrad.addColorStop(0.42, `rgba(255, 195, 60, ${coreAlpha * 0.45})`);
-    sunGrad.addColorStop(0.75, `rgba(255, 160, 30, ${coreAlpha * 0.15})`);
+    sunGrad.addColorStop(0.22, `rgba(255, 225, 120, ${coreAlpha * 0.85})`);
+    sunGrad.addColorStop(0.50, `rgba(255, 195, 60, ${coreAlpha * 0.45})`);
+    sunGrad.addColorStop(0.80, `rgba(255, 160, 30, ${coreAlpha * 0.15})`);
     sunGrad.addColorStop(1, "rgba(255, 140, 20, 0)");
     ctx.fillStyle = sunGrad;
     ctx.beginPath();
     ctx.arc(ox, oy, sunGlowR, 0, Math.PI * 2);
     ctx.fill();
 
-    const glintLen = Math.min(w, h) * (0.16 + breathePulse * 0.03);
-    const glintRot = this.time * 0.07;
-    ctx.save();
-    ctx.translate(ox, oy);
-    ctx.rotate(glintRot);
-    const glintAlpha = 0.32 + breathePulse * 0.14;
-    const glintGrad = ctx.createLinearGradient(-glintLen, 0, glintLen, 0);
-    glintGrad.addColorStop(0, "rgba(255, 220, 100, 0)");
-    glintGrad.addColorStop(0.3, `rgba(255, 240, 180, ${glintAlpha * 0.6})`);
-    glintGrad.addColorStop(0.5, `rgba(255, 255, 255, ${Math.min(1, glintAlpha * 1.2)})`);
-    glintGrad.addColorStop(0.7, `rgba(255, 240, 180, ${glintAlpha * 0.6})`);
-    glintGrad.addColorStop(1, "rgba(255, 220, 100, 0)");
-    ctx.fillStyle = glintGrad;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, glintLen, 2.5 * scalePulse, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(0, 0, 2.5 * scalePulse, glintLen * 0.75, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-
-    const baseAngles = [-0.14, -0.27, -0.40, -0.54, -0.68, -0.82];
+    // 2. 좌우반전된 6갈래 골드 샤이니 틴들 광선 (숲 중앙과 우측 하단으로 자연스럽게 방사)
+    const baseAngles = [0.14, 0.27, 0.40, 0.54, 0.68, 0.82];
     const beamColors = [
       "rgba(255, 230, 120",
       "rgba(255, 245, 170",
@@ -3801,7 +3787,7 @@ class HeroCanvasController {
     for (let b = 0; b < baseAngles.length; b++) {
       const sway = Math.sin(this.time * 0.55 + b * 1.15) * 0.022;
       const alpha = (0.24 + (b % 2 === 0 ? 0.05 : 0.02) + breathePulse * 0.09) * scalePulse;
-      this.renderVolumetricBeam(ctx, ox, oy, baseAngles[b] + sway, beamLength, 0.072 * scalePulse, beamColors[b], alpha);
+      this.renderVolumetricBeam(ctx, ox, oy, baseAngles[b] + sway, beamLength, 0.085 * scalePulse, beamColors[b], alpha);
     }
 
     for (const p of this.particles) {
@@ -3880,15 +3866,16 @@ class HeroCanvasController {
       ctx.globalAlpha = alpha;
 
       if (puffReady) {
-        ctx.drawImage(this.steamPuffImg, -m.w / 2, -m.h / 2, m.w, m.h);
+        ctx.drawImage(this.steamPuffImg, -m.w / 2, -m.w / 2, m.w, m.w);
       } else {
         const g = ctx.createRadialGradient(0, 0, 0, 0, 0, m.w / 2);
-        g.addColorStop(0, "rgba(245, 250, 255, 0.85)");
-        g.addColorStop(0.42, "rgba(235, 245, 255, 0.45)");
+        g.addColorStop(0, "rgba(245, 250, 255, 0.70)");
+        g.addColorStop(0.38, "rgba(235, 245, 255, 0.35)");
+        g.addColorStop(0.72, "rgba(235, 245, 255, 0.10)");
         g.addColorStop(1, "rgba(235, 245, 255, 0)");
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.ellipse(0, 0, m.w / 2, m.h / 2, 0, 0, Math.PI * 2);
+        ctx.arc(0, 0, m.w / 2, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
@@ -3951,58 +3938,46 @@ class HeroCanvasController {
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
+    // 1. 하단 모닥불 발광 이미지 블렌드모드 합성 & 스케일/밝기 호흡 애니메이션
+    const cx = w * 0.52;
+    const cy = h * 0.92;
+    const isMob = w < 640;
+    const baseSize = Math.max(w * 0.95, h * 0.90, isMob ? 460 : 720);
+
+    const breathe1 = Math.sin(this.time * 2.2);
+    const breathe2 = Math.sin(this.time * 4.5 + 1.1);
+    const flicker = Math.sin(this.time * 17.3) * Math.cos(this.time * 29.1);
+    const firePulse = breathe1 * 0.65 + breathe2 * 0.25 + flicker * 0.10;
+
+    const scale = 1.0 + firePulse * 0.14;
+    const drawW = baseSize * scale;
+    const drawH = baseSize * scale;
+    const alpha = Math.max(0.40, Math.min(1.0, 0.72 + firePulse * 0.28));
+
     ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 화염 발광
+    ctx.globalCompositeOperation = "screen"; // 블렌드모드로 합성 (검은 배경 투명화 및 발광 합성)
+    ctx.globalAlpha = alpha;
 
-    const bx = w * 0.52;
-    const by = h * 0.82;
-
-    const baseBreath = Math.sin(this.time * 2.4) * 0.16 + Math.cos(this.time * 4.1) * 0.09;
-    const crackleFast = Math.sin(this.time * 18.7) * Math.cos(this.time * 31.3);
-    const snapSpike = (Math.sin(this.time * 13.1) > 0.84 ? 0.22 : 0) + (Math.cos(this.time * 21.7) > 0.86 ? 0.18 : 0);
-    const flameFactor = Math.max(0.25, Math.min(1.25, 0.62 + baseBreath + crackleFast * 0.14 + snapSpike));
-
-    const ambientR = Math.min(w, h) * (0.46 + flameFactor * 0.12);
-    const ambientGrad = ctx.createRadialGradient(bx, by, 15, bx, by, ambientR);
-    ambientGrad.addColorStop(0, `rgba(255, 120, 25, ${0.28 + flameFactor * 0.18})`);
-    ambientGrad.addColorStop(0.35, `rgba(255, 65, 10, ${0.14 + flameFactor * 0.10})`);
-    ambientGrad.addColorStop(0.70, `rgba(200, 30, 0, ${0.05 + flameFactor * 0.04})`);
-    ambientGrad.addColorStop(1, "rgba(180, 20, 0, 0)");
-    ctx.fillStyle = ambientGrad;
-    ctx.fillRect(0, h * 0.35, w, h * 0.65);
-
-    const coreR = Math.min(w, h) * (0.11 + flameFactor * 0.07);
-    const coreGrad = ctx.createRadialGradient(bx, by, 0, bx, by, coreR);
-    coreGrad.addColorStop(0, `rgba(255, 255, 235, ${Math.min(1, 0.65 + flameFactor * 0.35)})`);
-    coreGrad.addColorStop(0.28, `rgba(255, 215, 70, ${0.52 + flameFactor * 0.28})`);
-    coreGrad.addColorStop(0.65, `rgba(255, 110, 15, ${0.32 + flameFactor * 0.20})`);
-    coreGrad.addColorStop(1, "rgba(255, 50, 0, 0)");
-    ctx.fillStyle = coreGrad;
-    ctx.beginPath();
-    ctx.ellipse(bx, by, coreR, coreR * 0.72, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    for (let f = 0; f < 3; f++) {
-      const fAngle = (f - 1) * 0.15 + Math.sin(this.time * 6.5 + f * 2.2) * 0.08;
-      const fH = coreR * (1.15 + Math.sin(this.time * 12.0 + f * 3.4) * 0.40 * flameFactor);
-      const fW = coreR * (0.36 + Math.cos(this.time * 9.5 + f * 1.7) * 0.10);
-      const fx = bx + (f - 1) * (coreR * 0.35) + Math.sin(this.time * 8.2 + f) * 5;
-
-      const fGrad = ctx.createLinearGradient(0, 0, 0, -fH);
-      fGrad.addColorStop(0, `rgba(255, 245, 180, ${0.60 + flameFactor * 0.35})`);
-      fGrad.addColorStop(0.4, `rgba(255, 160, 30, ${0.45 + flameFactor * 0.25})`);
-      fGrad.addColorStop(0.85, `rgba(255, 60, 5, ${0.20 + flameFactor * 0.15})`);
-      fGrad.addColorStop(1, "rgba(255, 30, 0, 0)");
-
-      ctx.save();
-      ctx.translate(fx, by);
-      ctx.rotate(fAngle);
-      ctx.fillStyle = fGrad;
+    const glowReady = this.bonfireGlowLoaded || (this.bonfireGlowImg && this.bonfireGlowImg.complete && this.bonfireGlowImg.naturalWidth > 0);
+    if (glowReady) {
+      ctx.drawImage(this.bonfireGlowImg, cx - drawW / 2, cy - drawH / 2, drawW, drawH);
+    } else {
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, drawW / 2);
+      g.addColorStop(0, "rgba(255, 255, 235, 1.0)");
+      g.addColorStop(0.18, "rgba(255, 185, 45, 0.85)");
+      g.addColorStop(0.42, "rgba(220, 90, 15, 0.50)");
+      g.addColorStop(0.72, "rgba(140, 35, 0, 0.18)");
+      g.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.ellipse(0, -fH * 0.5, fW, fH * 0.5, 0, 0, Math.PI * 2);
+      ctx.arc(cx, cy, drawW / 2, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
     }
+    ctx.restore();
+
+    // 2. 고온 불티 파티클 렌더링
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
 
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
