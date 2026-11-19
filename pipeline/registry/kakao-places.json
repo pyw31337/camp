@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-18T19:53:17.325Z",
+ "generated_at": "2026-11-19T19:59:26.675Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -3524,7 +3524,7 @@
    "homepage": null
   },
   "441": {
-   "checked_at": "2026-11-18T19:53:14.570Z",
+   "checked_at": "2026-11-19T19:59:22.688Z",
    "place": {
     "id": "24943507",
     "name": "글램비글램핑",
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-18T19:53:14.600Z",
+   "checked_at": "2026-11-19T19:59:22.721Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8547,7 +8547,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-18T19:53:14.602Z",
+   "checked_at": "2026-11-19T19:59:22.723Z",
    "place": null,
    "candidates": [
     {
@@ -17856,7 +17856,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-18T19:53:16.811Z",
+   "checked_at": "2026-11-19T19:59:25.886Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46400,7 +46400,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-18T19:53:16.055Z",
+   "checked_at": "2026-11-19T19:59:25.076Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49716,7 +49716,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-18T19:53:15.729Z",
+   "checked_at": "2026-11-19T19:59:24.561Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59858,7 +59858,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-18T19:53:16.262Z",
+   "checked_at": "2026-11-19T19:59:25.103Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63119,7 +63119,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-18T19:53:16.400Z",
+   "checked_at": "2026-11-19T19:59:25.367Z",
    "place": null,
    "candidates": [
     {
@@ -64716,7 +64716,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-18T19:53:15.865Z",
+   "checked_at": "2026-11-19T19:59:24.601Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76891,7 +76891,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-18T19:53:16.877Z",
+   "checked_at": "2026-11-19T19:59:26.112Z",
    "place": null,
    "candidates": [
     {
@@ -81202,7 +81202,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-18T19:53:14.603Z",
+   "checked_at": "2026-11-19T19:59:22.724Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83169,7 +83169,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-18T19:53:15.986Z",
+   "checked_at": "2026-11-19T19:59:24.846Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88503,7 +88503,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-18T19:53:15.635Z",
+   "checked_at": "2026-11-19T19:59:24.561Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -88547,18 +88547,6 @@
      ]
     },
     {
-     "host": "dinnerqueen.net",
-     "url": "https://dinnerqueen.net/taste/596254",
-     "score": 10,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "[충남 홍성][릴스] 내포캠핑스퀘어",
-       "url": "https://dinnerqueen.net/taste/596254"
-      }
-     ]
-    },
-    {
      "host": "diningcode.com",
      "url": "https://www.diningcode.com/profile.php?rid=1MxlOUvOXnt7",
      "score": 4,
@@ -88579,6 +88567,18 @@
       {
        "title": "충청남도 홍성군 캠핑 글램핑 상가 목록",
        "url": "https://dokdokplace.kr/stores/i1/i101/i10104/chungcheongnam-do/hongseong-gun/"
+      }
+     ]
+    },
+    {
+     "host": "starscore.kr",
+     "url": "https://www.starscore.kr/places/chungnam/284",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "홍성 용봉산 별보기 좋은 곳",
+       "url": "https://www.starscore.kr/places/chungnam/284"
       }
      ]
     }
@@ -95275,7 +95275,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-18T19:53:16.132Z",
+   "checked_at": "2026-11-19T19:59:25.086Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96204,7 +96204,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-18T19:53:15.459Z",
+   "checked_at": "2026-11-19T19:59:24.087Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114593,7 +114593,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-18T19:53:16.787Z",
+   "checked_at": "2026-11-19T19:59:25.879Z",
    "place": null,
    "candidates": [
     {
@@ -114742,7 +114742,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-18T19:53:16.540Z",
+   "checked_at": "2026-11-19T19:59:25.590Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115559,7 +115559,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-18T19:53:16.679Z",
+   "checked_at": "2026-11-19T19:59:25.632Z",
    "place": null,
    "candidates": [
     {
@@ -118554,7 +118554,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-18T19:53:16.468Z",
+   "checked_at": "2026-11-19T19:59:25.586Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
