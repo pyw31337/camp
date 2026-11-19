@@ -2403,8 +2403,6 @@ const HERO_THEMES = [
   { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "golden-shine" }
 ];
 
-// 히어로 테마는 홈을 새로 열거나 새로고침할 때마다 10개 중 1개를 다시 무작위로 고른다.
-// 브라우저 저장소에 선택값을 남기지 않아 한 테마가 고정되지 않는다. ?hero=<id>는 테스트용으로 유지한다.
 function getInitialHeroIndex() {
   const p = new URLSearchParams(location.search);
   const heroParam = p.get("hero");
@@ -2422,7 +2420,6 @@ function getInitialHeroIndex() {
   }
 }
 
-// Canvas 인터랙션 엔진
 class HeroCanvasController {
   constructor(canvas, container) {
     this.canvas = canvas;
@@ -2457,43 +2454,35 @@ class HeroCanvasController {
     this.currentThemeId = "night-sky";
     this.time = 0;
 
-    // 수증기·물안개 실사 텍스처 스프라이트 프리로드
     this.steamPuffImg = new Image();
     this.steamPuffImg.src = `${APP_BASE}images/hero/steam-puff.png`;
     this.steamPuffLoaded = false;
     this.steamPuffImg.onload = () => { this.steamPuffLoaded = true; };
 
-    // 황금빛 갓레이(Light Ray) 실사 광선 스프라이트 프리로드
     this.sunRayImg = new Image();
     this.sunRayImg.src = `${APP_BASE}images/hero/sun-ray.png`;
     this.sunRayLoaded = false;
     this.sunRayImg.onload = () => { this.sunRayLoaded = true; };
 
-    // 실사 프리즘 무지개 광선 스프라이트 프리로드
     this.rainbowImg = new Image();
     this.rainbowImg.src = `${APP_BASE}images/hero/rainbow-beam.png`;
     this.rainbowLoaded = false;
     this.rainbowImg.onload = () => { this.rainbowLoaded = true; };
 
-    // 풍선 스프라이트 3종 프리로드 (실내놀이)
     this.balloonImgs = [1, 2, 3].map((n) => { const img = new Image(); img.src = `${APP_BASE}images/hero/balloon-${n}.webp`; return img; });
 
-    // 짚라인 실사 라이더 3종 프리로드 (레포츠)
     this.ziplineRiders = [1, 2, 3].map((n) => { const img = new Image(); img.src = `${APP_BASE}images/hero/zipline-rider-${n}.webp`; return img; });
 
-    // 농촌체험 태양 갓레이 스프라이트 프리로드
     this.farmSunburstImg = new Image();
     this.farmSunburstImg.src = `${APP_BASE}images/hero/farm-sunburst.webp`;
     this.farmSunburstLoaded = false;
     this.farmSunburstImg.onload = () => { this.farmSunburstLoaded = true; };
 
-    // 샤이니 프리즘 렌즈 플레어 스프라이트 프리로드 (레포츠 산봉우리 광원)
     this.lensFlareImg = new Image();
     this.lensFlareImg.src = `${APP_BASE}images/hero/leisure-flare.webp`;
     this.lensFlareLoaded = false;
     this.lensFlareImg.onload = () => { this.lensFlareLoaded = true; };
 
-    // 승마체험 노을 렌즈 플레어 스프라이트 프리로드
     this.horseFlareImg = new Image();
     this.horseFlareImg.src = `${APP_BASE}images/hero/horse-flare.webp`;
     this.horseFlareLoaded = false;
@@ -2587,7 +2576,6 @@ class HeroCanvasController {
         this.spawnRipple(x, y, { startR: i * 10, maxR: 150 + i * 24, alpha: 0.7 - i * 0.08, fade: 0.0035, speed: 0.58 });
       }
     } else if (this.currentThemeId === "uq-pool" || this.currentThemeId === "rainbow") {
-      // 수영장에 텀벙! 맑고 자연스러운 물튀김과 3중 수면 파문
       for (let i = 0; i < 3; i++) {
         this.spawnRipple(x, y, { startR: i * 12, maxR: 110 + i * 30, alpha: 0.85 - i * 0.12, fade: 0.0045, speed: 0.65, yScale: 0.36 });
       }
@@ -2642,18 +2630,15 @@ class HeroCanvasController {
     this.initParticlesForTheme(themeId);
   }
 
-  // 모든 물 테마가 공유하는 느리고 넓은 파문 생성기.
   spawnRipple(x, y, { maxR = 150, alpha = 0.7, startR = 2, yScale = 0.28, fade = 0.004, speed = 0.55 } = {}) {
     this.ripples.push({ x, y, r: startR, maxR, alpha, yScale, fade, speed, age: 0 });
   }
 
-  // 수영장 자연스러운 물방울 튀김(상향 포물선 분수형 비말) 생성기
   spawnWaterSplash(x, y, { count = 3, speedMul = 1.0, isBurst = false } = {}) {
     const isMob = (this.width || 800) < 640;
     const rMin = isMob ? 1.5 : 2.0;
     const rMax = isMob ? 3.0 : 4.2;
     for (let s = 0; s < count; s++) {
-      // 위쪽 60~120도 부채꼴 각도로 자연스럽게 솟구침 (용접 스파크 같은 전방위 분산 방지)
       const ang = -Math.PI * (0.20 + Math.random() * 0.60);
       const spd = (Math.random() * 2.8 + 2.0) * speedMul;
       this.splashes.push({
@@ -2675,14 +2660,12 @@ class HeroCanvasController {
 
     switch (themeId) {
       case "night-sky":
-        // 48개 반딧불이 & 유성우 (고휘도 라임-골드 발광)
         for (let i = 0; i < (isMob ? 30 : 48); i++) {
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18, size: Math.random() * 2.6 + 1.4, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.018 + 0.009, glow: Math.random() * 16 + 10 });
         }
         break;
 
       case "starry-dome":
-        // 이색숙소: 별 파티클은 밤하늘 영역(y < h * 0.40)에만 배치, 섬세한 십자 반짝임
         const starCount = isMob ? 75 : 130;
         for (let i = 0; i < starCount; i++) {
           this.particles.push({
@@ -2698,7 +2681,6 @@ class HeroCanvasController {
         break;
 
       case "autumn-maple":
-        // 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링
         const mapleCount = isMob ? 18 : 30;
         for (let i = 0; i < mapleCount; i++) {
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.32, vy: Math.random() * 0.46 + 0.30, size: (Math.random() * 12 + 13) * (isMob ? 0.8 : 1.0), angle: Math.random() * Math.PI * 2, vAngle: (Math.random() - 0.5) * 0.016, flip: Math.random() * Math.PI * 2, vFlip: Math.random() * 0.018 + 0.009, roll: Math.random() * Math.PI * 2, vRoll: Math.random() * 0.02 + 0.01, isGinkgo: Math.random() < 0.38, colorIdx: Math.floor(Math.random() * 4) });
@@ -2706,14 +2688,12 @@ class HeroCanvasController {
         break;
 
       case "rainy-camp":
-        // 75개 고속 은빛 빗방울 샤워
         for (let i = 0; i < (isMob ? 45 : 75); i++) {
           this.particles.push({ x: Math.random() * (w + 140), y: Math.random() * h, speed: Math.random() * 9 + 16, len: Math.random() * 16 + 14, alpha: Math.random() * 0.4 + 0.45 });
         }
         break;
 
       case "snowy-winter":
-        // 68개 포근한 함박눈 (결정체 육각 눈꽃 + 몽환 보케 함박눈)
         for (let i = 0; i < (isMob ? 40 : 68); i++) {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
@@ -2721,14 +2701,22 @@ class HeroCanvasController {
         break;
 
       case "lush-forest":
-        // 65개 틴들 햇살 광선과 영롱한 피톤치드 요정 빛가루
         for (let i = 0; i < (isMob ? 38 : 65); i++) {
-          this.particles.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.4 + 1.2, vy: -Math.random() * 0.20 - 0.07, vx: (Math.random() - 0.5) * 0.16, alpha: Math.random() * 0.42 + 0.25, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.026 + 0.014, color: Math.random() < 0.5 ? "rgba(235, 255, 100," : Math.random() < 0.8 ? "rgba(255, 245, 180," : "rgba(130, 255, 190," });
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.4 + 1.2,
+            vy: -Math.random() * 0.20 - 0.07,
+            vx: (Math.random() - 0.5) * 0.16,
+            alpha: Math.random() * 0.45 + 0.30,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.026 + 0.014,
+            color: Math.random() < 0.45 ? "rgba(255, 225, 110," : Math.random() < 0.75 ? "rgba(255, 240, 160," : "rgba(140, 255, 180,"
+          });
         }
         break;
 
       case "riverside":
-        // 호숫가 카약: 산과 호수 경계 세로 중앙에 은은히 피어오르는 다층 수증기 김(Steam Puff) + 섬세한 윤슬 스파클
         for (let i = 0; i < (isMob ? 18 : 30); i++) {
           this.particles.push({
             x: Math.random() * w,
@@ -2740,28 +2728,27 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 다층 잔잔한 호수 물안개 퍼프 (모바일 110개 / 데스크톱 220개, 회전 극소화·소형 띠 형태·좌우 유영 및 페이드)
-        const mistCount = isMob ? 110 : 220;
+        const mistCount = isMob ? 180 : 360;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3;
           const pw = isMob
-            ? Math.max(48, w * (0.10 + Math.random() * 0.12))
-            : Math.max(80, Math.min(w, h) * (0.14 + Math.random() * 0.14));
-          const ph = pw * (Math.random() * 0.18 + 0.32);
+            ? Math.max(60, w * (0.13 + Math.random() * 0.15))
+            : Math.max(95, Math.min(w, h) * (0.16 + Math.random() * 0.16));
+          const ph = pw * (Math.random() * 0.20 + 0.35);
           const driftDir = Math.random() < 0.65 ? -1 : 1;
-          const driftMag = Math.random() * 0.20 + 0.08;
+          const driftMag = Math.random() * 0.22 + 0.08;
           this.mistParticles.push({
-            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.18),
-            baseY: h * (0.44 + Math.random() * 0.18),
+            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.20),
+            baseY: h * (0.42 + Math.random() * 0.20),
             w: pw,
             h: ph,
             rot: (Math.random() - 0.5) * 0.06,
             rotSpeed: (Math.random() - 0.5) * 0.00008,
-            swayAmp: Math.random() * 18 + 10,
+            swayAmp: Math.random() * 20 + 10,
             swaySpeed: Math.random() * 0.005 + 0.002,
             swayPhase: Math.random() * Math.PI * 2,
             driftVx: driftDir * driftMag,
-            maxAlpha: (layer === 0 ? (Math.random() * 0.06 + 0.14) : layer === 1 ? (Math.random() * 0.07 + 0.16) : (Math.random() * 0.06 + 0.12)) * (isMob ? 0.85 : 1.0),
+            maxAlpha: (layer === 0 ? (Math.random() * 0.10 + 0.35) : layer === 1 ? (Math.random() * 0.12 + 0.42) : (Math.random() * 0.10 + 0.30)) * (isMob ? 0.90 : 1.0),
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.008 + 0.004
           });
@@ -2769,14 +2756,12 @@ class HeroCanvasController {
         break;
 
       case "warm-bonfire":
-        // 75개 고온 불티·스파크·캡슐 불꽃
-        for (let i = 0; i < (isMob ? 45 : 75); i++) {
+        for (let i = 0; i < (isMob ? 50 : 80); i++) {
           this.particles.push(this.createEmbersParticle(w, h, true));
         }
         break;
 
       case "sunset-coast":
-        // 75개 황금빛 해수면 윤슬 + 36개 노을 미립자 + 6마리 편대 갈매기
         for (let i = 0; i < (isMob ? 45 : 75); i++) {
           const depth = Math.random();
           this.particles.push({ x: Math.random() * w, y: h * 0.42 + depth * (h * 0.48), vx: -0.15 - Math.random() * 0.26, len: (Math.random() * 32 + 18) * (0.65 + depth * 0.85), thick: (Math.random() * 2.0 + 1.4) * (0.7 + depth * 0.8), alpha: Math.random() * 0.7 + 0.3, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.035 + 0.018, depth });
@@ -2788,7 +2773,6 @@ class HeroCanvasController {
         break;
 
       case "cherry-blossom":
-        // 경량 벚꽃 샤워: 벚꽃잎 꽃비 + 봄빛 꽃가루
         for (let i = 0; i < (isMob ? 24 : 38); i++) {
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: -Math.random() * 0.30 - 0.12, vy: Math.random() * 0.38 + 0.26, size: Math.random() * 8 + 8, rot: Math.random() * Math.PI * 2, vRot: (Math.random() - 0.5) * 0.018, flip: Math.random() * Math.PI * 2, vFlip: Math.random() * 0.02 + 0.01, roll: Math.random() * Math.PI * 2, vRoll: Math.random() * 0.022 + 0.011, seed: Math.random() * 10, colorBase: Math.random() < 0.5 ? "255, 165, 195" : "255, 190, 215" });
         }
@@ -2798,7 +2782,6 @@ class HeroCanvasController {
         break;
 
       case "steam":
-        // 노천탕: 몽환적으로 피어오르는 온천 김(모바일 115개 / 데스크톱 220개)
         for (let i = 0; i < (isMob ? 115 : 220); i++) this.particles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < (isMob ? 24 : 42); i++) {
           this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
@@ -2806,7 +2789,6 @@ class HeroCanvasController {
         break;
 
       case "warm-pool-snow":
-        // 사계절 온수풀: 눈발과 온수풀 증기 (모바일 85개 / 데스크톱 160개)
         for (let i = 0; i < (isMob ? 32 : 54); i++) {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
@@ -2816,13 +2798,11 @@ class HeroCanvasController {
         break;
 
       case "bubbles":
-        // 스파: 물방울 + 자쿠지 온천 증기 (모바일 85개 / 데스크톱 160개)
         for (let i = 0; i < (isMob ? 22 : 36); i++) this.particles.push(this.makeBubble(w, h, true));
         for (let i = 0; i < (isMob ? 85 : 160); i++) this.steamParticles.push(this.makeSteam(w, h, true));
         break;
 
       case "rainbow":
-        // 수영장: 청량한 햇살 물빛에 굴절되는 무지개 프리즘 광선 + 반짝이는 수면 스파클
         for (let i = 0; i < 32; i++) {
           this.particles.push({
             x: Math.random() * w,
@@ -2837,7 +2817,6 @@ class HeroCanvasController {
         break;
 
       case "wind-grass":
-        // 승마: 바람에 흩날리는 싱그러운 잔디 풀잎 (모바일 38개 / 데스크톱 68개)
         const grassColors = ["rgba(95, 195, 75,", "rgba(135, 215, 90,", "rgba(165, 230, 110,", "rgba(80, 175, 65,", "rgba(185, 225, 95,"];
         for (let i = 0; i < (isMob ? 38 : 68); i++) {
           this.grassBlades.push({
@@ -2873,7 +2852,6 @@ class HeroCanvasController {
         break;
 
       case "zipline":
-        // 레포츠: 실사 탑승자 3종이 와이어와 도르레에 100% 밀착되어 활강
         this.zipline = {
           t: 0,
           speed: isMob ? 0.0042 : 0.0034,
@@ -2885,7 +2863,6 @@ class HeroCanvasController {
         break;
 
       case "golden-shine":
-        // 농촌체험: 태양 중심 갓레이 + 제자리에서 호흡하는 쨍한 Circle & Hexagon 광학 보케 (상승 제거, 자연법칙 반영)
         const bokehCount = isMob ? 16 : 28;
         for (let i = 0; i < bokehCount; i++) {
           this.bokehParticles.push({
@@ -2906,12 +2883,10 @@ class HeroCanvasController {
         break;
 
       case "confetti":
-        // 키즈카페·실내놀이: 색종이 (모바일 26개 / 데스크톱 46개)
         for (let i = 0; i < (isMob ? 26 : 46); i++) this.particles.push(this.makeConfetti(w, h, true));
         break;
 
       case "green-meadow":
-        // 대관령 초원: 3D 텀블링 민들레 홀씨 + 들판 황금 꽃가루
         for (let i = 0; i < (isMob ? 26 : 45); i++) {
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: -Math.random() * 0.28 - 0.14, vy: (Math.random() - 0.5) * 0.12, size: (Math.random() * 7 + 14) * (isMob ? 0.75 : 1.0), sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.014 + 0.009, alpha: Math.random() * 0.35 + 0.65, tilt: 0, tiltTarget: 0, roll: Math.random() * Math.PI * 2, vRoll: (Math.random() - 0.5) * 0.02 });
         }
@@ -2921,7 +2896,6 @@ class HeroCanvasController {
         break;
 
       case "flower-pop":
-        // 동물체험: 더 커지고 사랑스러운 5엽 꽃송이 & 터치 시 민들레 홀씨처럼 바람에 흩날리는 연출 (색상 100% 일치)
         const flowerCols = [
           { type: "pink", fill: "rgba(255, 145, 190, 0.95)", stroke: "#ff69b4", petalRgb: "255, 145, 190" },
           { type: "yellow", fill: "rgba(254, 215, 60, 0.95)", stroke: "#eab308", petalRgb: "254, 215, 60" },
@@ -2950,7 +2924,6 @@ class HeroCanvasController {
         break;
 
       case "balloon-float":
-        // 실내놀이: 투명 webp 풍선 3종 + 다채로운 hue + 입체 실키 리본 줄 + 탄성 고무 스쿼시/스핀 물리
         const balCount = isMob ? 10 : 16;
         const hues = [0, 40, 95, 155, 210, 280];
         for (let i = 0; i < balCount; i++) {
@@ -2982,7 +2955,6 @@ class HeroCanvasController {
         break;
 
       case "treehouse-sun":
-        // 트리하우스: 쨍하고 맑은 숲속 Crystalline Crepuscular Rays + 다이아몬드 이슬 글린트 (스모그/탁함 완전 제거)
         for (let i = 0; i < (isMob ? 32 : 55); i++) {
           this.particles.push({
             x: Math.random() * w,
@@ -3003,7 +2975,6 @@ class HeroCanvasController {
   makeSteam(w, h, initial = false) {
     const isMob = (this.width || 800) < 640;
     const startY = initial ? h * (0.46 + Math.random() * 0.48) : h * (0.66 + Math.random() * 0.28);
-    // 모바일에서는 화면 폭에 맞게 0.48배 스케일링하여 배경을 가리지 않는 은은한 김 형성
     const scale = isMob ? 0.48 : 1.0;
     const sizeRoll = Math.random();
     const r = (sizeRoll < 0.28
@@ -3132,7 +3103,6 @@ class HeroCanvasController {
   }
 
   renderBubbles(ctx, w, h, mx, my, hasMouse) {
-    // 프라이빗 스파: 자쿠지 온천 증기와 함께 영롱한 물방울이 솟아오른다.
     if (this.steamParticles.length) {
       this.renderSteam(ctx, w, h, mx, my, hasMouse);
     }
@@ -3184,13 +3154,27 @@ class HeroCanvasController {
   }
 
   createEmbersParticle(w, h, initial = false) {
-    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.52), typeRand = Math.random();
+    const originX = w * 0.52 + (Math.random() - 0.5) * (w * 0.34);
+    const originY = initial ? Math.random() * h : h * (0.80 + Math.random() * 0.12);
+    const typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
-    return { type, x: originX, y: initial ? Math.random() * h : h - Math.random() * 25, vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85), vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.2, size: type === "capsule" ? Math.random() * 2.6 + 1.6 : type === "spark" ? Math.random() * 1.8 + 1.1 : Math.random() * 2.2 + 1.3, len: type === "spark" ? Math.random() * 12 + 6 : type === "capsule" ? Math.random() * 6 + 4 : 3, angle: 0, life: initial ? Math.random() * 0.85 + 0.15 : 1, decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018, color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00", drift: Math.random() * Math.PI * 2 };
+    return {
+      type,
+      x: originX,
+      y: originY,
+      vx: (Math.random() - 0.5) * (type === "spark" ? 1.4 : 0.75),
+      vy: type === "spark" ? -Math.random() * 2.6 - 1.6 : -Math.random() * 1.6 - 1.0,
+      size: type === "capsule" ? Math.random() * 1.4 + 0.8 : type === "spark" ? Math.random() * 0.9 + 0.55 : Math.random() * 1.1 + 0.65,
+      len: type === "spark" ? Math.random() * 6.5 + 3.0 : type === "capsule" ? Math.random() * 3.5 + 2.0 : 2,
+      angle: 0,
+      life: initial ? Math.random() * 0.85 + 0.15 : 1,
+      decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018,
+      color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00",
+      drift: Math.random() * Math.PI * 2
+    };
   }
 
   splitEmberParticle(parent) {
-    // 마우스가 불씨에 닿으면 폭발하듯 튀지 않고, 작은 불씨로 분해되어 계속 위로 오른다.
     if (this.particles.length >= 118) return;
     const count = 3;
     for (let i = 0; i < count && this.particles.length < 118; i++) {
@@ -3328,7 +3312,6 @@ class HeroCanvasController {
   }
 
   renderNightSky(ctx, w, h, mx, my, hasMouse) {
-    // 유성우: 속도와 주기를 늘리고 화려한 2줄 트레일과 헤드 발광
     if (Math.random() < 0.012 && this.shootingStars.length < 2) {
       this.shootingStars.push({
         x: Math.random() * (w * 0.75) + w * 0.1,
@@ -3360,7 +3343,6 @@ class HeroCanvasController {
       ctx.lineTo(s.x - dx, s.y - dy);
       ctx.stroke();
 
-      // 유성 머리 찬란한 발광 코어
       const headG = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 8);
       headG.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
       headG.addColorStop(0.5, `rgba(200, 255, 0, ${s.alpha * 0.7})`);
@@ -3376,7 +3358,6 @@ class HeroCanvasController {
       if (s.alpha <= 0) this.shootingStars.splice(i, 1);
     }
 
-    // 반딧불이: add(lighter) 블렌드와 선명한 라임-골드 발광체
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       const glowAlpha = Math.max(0.20, (Math.sin(p.pulse) + 1) * 0.5);
@@ -3409,7 +3390,6 @@ class HeroCanvasController {
       if (p.y < -25) p.y = h + 25;
       else if (p.y > h + 25) p.y = -25;
 
-      // 큰 외부 광배 (Outer Halo)
       const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow * 1.3);
       g.addColorStop(0, `rgba(240, 255, 140, ${glowAlpha * 0.9})`);
       g.addColorStop(0.35, `rgba(200, 255, 0, ${glowAlpha * 0.55})`);
@@ -3419,13 +3399,11 @@ class HeroCanvasController {
       ctx.arc(p.x, p.y, p.glow * 1.3, 0, Math.PI * 2);
       ctx.fill();
 
-      // 선명하고 쨍한 중심 고밀도 핵
       ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, glowAlpha + 0.35)})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size * 0.65, 0, Math.PI * 2);
       ctx.fill();
 
-      // 최고 밝기일 때 미세 십자 반짝임 (Sparkle cross)
       if (glowAlpha > 0.68) {
         const sp = p.size * 1.8;
         ctx.strokeStyle = `rgba(255, 255, 230, ${glowAlpha * 0.75})`;
@@ -3442,7 +3420,6 @@ class HeroCanvasController {
   }
 
   renderAutumnMaple(ctx, w, h, mx, my, hasMouse) {
-    // 가을 단풍: 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링 낙하
     const MAPLE_COLORS = [
       { base: "#ff1744", dark: "#c62828", vein: "#ffcdd2", rim: "#ff8a80" },
       { base: "#ff6d00", dark: "#e65100", vein: "#ffe0b2", rim: "#ffd180" },
@@ -3484,15 +3461,12 @@ class HeroCanvasController {
       const sy = Math.cos(p.roll) * 0.35 + 0.65;
       ctx.scale(sx, sy);
 
-      // 오브젝트마다 그림자를 만들면 매 프레임 블러가 다시 계산되어 모바일 부하가 커진다.
-      // 캔버스 전체의 CSS 광원과 잎 테두리로 입체감을 유지한다.
       ctx.shadowColor = "transparent";
       ctx.shadowBlur = 0;
 
       const pal = MAPLE_COLORS[p.colorIdx % MAPLE_COLORS.length];
 
       if (p.isGinkgo) {
-        // 정밀 은행잎 (부채꼴 + 중심 V자 홈 + 부채살 결 + 줄기)
         const s = p.size * 0.95;
         ctx.fillStyle = "#ffd600";
         ctx.beginPath();
@@ -3525,7 +3499,6 @@ class HeroCanvasController {
         ctx.quadraticCurveTo(s * 0.08, s * 0.35, s * 0.05, s * 0.75);
         ctx.stroke();
       } else {
-        // 정밀 5갈래 단풍잎 (부드러운 베지어 곡선 + 주맥과 측맥)
         const s = p.size;
         ctx.fillStyle = pal.base;
         ctx.beginPath();
@@ -3568,7 +3541,6 @@ class HeroCanvasController {
   }
 
   renderRainyCamp(ctx, w, h, mx, my, hasMouse) {
-    // 우중 캠핑: 75개 고속 은빛 빗방울, 바닥 물방울 스플래시 & 동심원 수면 파문
     ctx.save();
     ctx.globalCompositeOperation = "screen";
 
@@ -3607,7 +3579,6 @@ class HeroCanvasController {
       ctx.stroke();
     }
 
-    // 빗방울 튐 스플래시
     for (let i = this.splashes.length - 1; i >= 0; i--) {
       const sp = this.splashes[i];
       sp.x += sp.vx;
@@ -3624,7 +3595,6 @@ class HeroCanvasController {
       ctx.fill();
     }
 
-    // 수면 파문 (Ripples)
     for (let i = this.ripples.length - 1; i >= 0; i--) {
       const r = this.ripples[i];
       r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55));
@@ -3650,7 +3620,6 @@ class HeroCanvasController {
   }
 
   renderSnowyWinter(ctx, w, h, mx, my, hasMouse) {
-    // 설경 윈터: 68개 포근한 함박눈 (정밀 6각 결정체 + 부드러운 보케 함박눈)
     ctx.save();
     ctx.globalCompositeOperation = "screen";
 
@@ -3679,7 +3648,6 @@ class HeroCanvasController {
       else if (p.x > w + 16) p.x = -16;
 
       if (p.flakeType === "crystal") {
-        // 정밀 6각 결정체 눈꽃
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.sway * 0.5);
@@ -3691,7 +3659,6 @@ class HeroCanvasController {
           ctx.moveTo(-cr, 0);
           ctx.lineTo(cr, 0);
           ctx.stroke();
-          // 가지치기
           ctx.beginPath();
           ctx.moveTo(cr * 0.6, -cr * 0.25);
           ctx.lineTo(cr * 0.4, 0);
@@ -3704,7 +3671,6 @@ class HeroCanvasController {
         }
         ctx.restore();
       } else if (p.flakeType === "fluffy") {
-        // 부드러운 몽환 보케 함박눈
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.2);
         g.addColorStop(0, `rgba(255, 255, 255, ${p.alpha})`);
         g.addColorStop(0.45, `rgba(220, 245, 255, ${p.alpha * 0.6})`);
@@ -3714,7 +3680,6 @@ class HeroCanvasController {
         ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        // 미세 눈가루
         ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -3733,7 +3698,6 @@ class HeroCanvasController {
     const dy = length / steps;
     const maxHalfW = Math.tan(spreadAngle) * length;
 
-    // 1. 외곽 소프트 앰비언트 글로우 (경계를 은은하게 감싸는 페더 레이어)
     const haloW = maxHalfW * 1.45;
     const haloGrad = ctx.createLinearGradient(0, 0, 0, length);
     haloGrad.addColorStop(0, `${colorRgb}, ${baseAlpha * 0.50})`);
@@ -3748,7 +3712,6 @@ class HeroCanvasController {
     ctx.closePath();
     ctx.fill();
 
-    // 2. 가로 횡단면 가우시안 소프트 블러 & 루미너스 코어 (사다리꼴 슬라이스로 모서리 클리핑 없는 볼류메트릭 콘)
     for (let i = 0; i < steps; i++) {
       const y0 = i * dy;
       const y1 = (i + 1) * dy;
@@ -3757,10 +3720,8 @@ class HeroCanvasController {
       const w1 = Math.max(8, Math.tan(spreadAngle) * y1);
       const maxW = Math.max(w0, w1);
 
-      // 종단면(거리별) 감쇄
       const segAlpha = baseAlpha * (1 - t0 * 0.68) * (t0 === 0 ? 1.4 : 1.0);
 
-      // 횡단면(가로축) 가우시안 소프트 감쇄 그라데이션 - 양 끝(-maxW, maxW)은 0으로 완벽 수렴하여 칼 같은 모서리 원천 차단
       const hGrad = ctx.createLinearGradient(-maxW, 0, maxW, 0);
       hGrad.addColorStop(0, `${colorRgb}, 0)`);
       hGrad.addColorStop(0.20, `${colorRgb}, ${segAlpha * 0.35})`);
@@ -3783,17 +3744,64 @@ class HeroCanvasController {
   }
 
   renderLushForest(ctx, w, h, mx, my, hasMouse) {
-    // 편백 숲: 숲 캐노피를 뚫고 쏟아지는 볼류메트릭 틴들 광선(Volumetric Sunbeams)과 65개 피톤치드 빛가루
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const ox = w * 0.22, oy = -h * 0.10;
-    const beamPhase = Math.sin(this.time * 0.4) * 0.04;
-    const angles = [-0.28, -0.37, -0.46, -0.55];
-    for (let b = 0; b < 4; b++) {
-      const alpha = 0.22 + beamPhase + (b % 2) * 0.04;
-      const col = b % 2 === 0 ? "rgba(250, 255, 215" : "rgba(225, 255, 185";
-      this.renderVolumetricBeam(ctx, ox, oy, angles[b], h * 1.25, 0.075, col, alpha);
+    const ox = w * 0.72, oy = h * 0.03;
+
+    const breatheMain = Math.sin(this.time * 1.1);
+    const breatheSub = Math.sin(this.time * 2.1 + 0.9);
+    const breathePulse = (breatheMain * 0.7 + breatheSub * 0.3); // -1.0 ~ 1.0
+    const scalePulse = 1.0 + breathePulse * 0.12; // 0.88 ~ 1.12
+    const beamLength = h * (1.25 + breathePulse * 0.15);
+    const sunGlowR = Math.min(w, h) * (0.36 + breathePulse * 0.07);
+
+    const sunGrad = ctx.createRadialGradient(ox, oy, 10, ox, oy, sunGlowR);
+    const coreAlpha = 0.38 + breathePulse * 0.16;
+    sunGrad.addColorStop(0, `rgba(255, 255, 240, ${Math.min(1, coreAlpha * 1.35)})`);
+    sunGrad.addColorStop(0.18, `rgba(255, 225, 120, ${coreAlpha * 0.85})`);
+    sunGrad.addColorStop(0.42, `rgba(255, 195, 60, ${coreAlpha * 0.45})`);
+    sunGrad.addColorStop(0.75, `rgba(255, 160, 30, ${coreAlpha * 0.15})`);
+    sunGrad.addColorStop(1, "rgba(255, 140, 20, 0)");
+    ctx.fillStyle = sunGrad;
+    ctx.beginPath();
+    ctx.arc(ox, oy, sunGlowR, 0, Math.PI * 2);
+    ctx.fill();
+
+    const glintLen = Math.min(w, h) * (0.16 + breathePulse * 0.03);
+    const glintRot = this.time * 0.07;
+    ctx.save();
+    ctx.translate(ox, oy);
+    ctx.rotate(glintRot);
+    const glintAlpha = 0.32 + breathePulse * 0.14;
+    const glintGrad = ctx.createLinearGradient(-glintLen, 0, glintLen, 0);
+    glintGrad.addColorStop(0, "rgba(255, 220, 100, 0)");
+    glintGrad.addColorStop(0.3, `rgba(255, 240, 180, ${glintAlpha * 0.6})`);
+    glintGrad.addColorStop(0.5, `rgba(255, 255, 255, ${Math.min(1, glintAlpha * 1.2)})`);
+    glintGrad.addColorStop(0.7, `rgba(255, 240, 180, ${glintAlpha * 0.6})`);
+    glintGrad.addColorStop(1, "rgba(255, 220, 100, 0)");
+    ctx.fillStyle = glintGrad;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, glintLen, 2.5 * scalePulse, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 2.5 * scalePulse, glintLen * 0.75, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    const baseAngles = [-0.14, -0.27, -0.40, -0.54, -0.68, -0.82];
+    const beamColors = [
+      "rgba(255, 230, 120",
+      "rgba(255, 245, 170",
+      "rgba(255, 210, 85",
+      "rgba(255, 235, 140",
+      "rgba(255, 195, 60",
+      "rgba(255, 240, 180"
+    ];
+    for (let b = 0; b < baseAngles.length; b++) {
+      const sway = Math.sin(this.time * 0.55 + b * 1.15) * 0.022;
+      const alpha = (0.24 + (b % 2 === 0 ? 0.05 : 0.02) + breathePulse * 0.09) * scalePulse;
+      this.renderVolumetricBeam(ctx, ox, oy, baseAngles[b] + sway, beamLength, 0.072 * scalePulse, beamColors[b], alpha);
     }
 
     for (const p of this.particles) {
@@ -3828,7 +3836,6 @@ class HeroCanvasController {
       ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // 밝고 영롱한 중심 코어
       ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha + 0.3)})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.6, 0, Math.PI * 2);
@@ -3838,10 +3845,8 @@ class HeroCanvasController {
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 호수와 산 경계 세로 중앙에 은은히 피어오르는 다층 수증기 김 텍스처(Steam Puff) 애니메이션 + 섬세한 윤슬 스파클
     ctx.save();
 
-    // 1. 호수와 산 경계(h * 0.44 ~ 0.58) 실사 수증기 김 텍스처 레이어 (여러 겹 회전 & 좌우 일렁임)
     ctx.globalCompositeOperation = "source-over";
     const puffReady = this.steamPuffLoaded || (this.steamPuffImg && this.steamPuffImg.complete && this.steamPuffImg.naturalWidth > 0);
 
@@ -3850,7 +3855,6 @@ class HeroCanvasController {
       m.rot += m.rotSpeed;
       m.baseX += m.driftVx;
 
-      // 화면 좌우 완만한 순환
       if (m.baseX < -m.w) m.baseX = w + m.w * 0.4;
       else if (m.baseX > w + m.w) m.baseX = -m.w * 0.4;
 
@@ -3858,7 +3862,6 @@ class HeroCanvasController {
       const curX = m.baseX + sway;
       const curY = m.baseY + Math.cos(this.time * (m.swaySpeed * 0.6) + m.swayPhase) * (m.swayAmp * 0.08);
 
-      // 좌우 화면 경계 페이드인/페이드아웃 & 서서히 피어오르고 흩어지는 호흡 주기 페이드
       const edgeMargin = Math.max(70, w * 0.16);
       let edgeFade = 1;
       if (curX < edgeMargin) {
@@ -3866,9 +3869,8 @@ class HeroCanvasController {
       } else if (curX > w - edgeMargin) {
         edgeFade = Math.max(0, (w - curX + m.w * 0.4) / (edgeMargin + m.w * 0.4));
       }
-      const phase = (Math.sin(m.pulse) + 1) * 0.5;
-      const breathFade = Math.min(1, phase * 1.5);
-      const alpha = (m.maxAlpha || 0.16) * breathFade * edgeFade;
+      const breathFade = 0.55 + ((Math.sin(m.pulse) + 1) * 0.5) * 0.45;
+      const alpha = (m.maxAlpha || 0.38) * breathFade * edgeFade;
 
       if (alpha <= 0.005) continue;
 
@@ -3880,10 +3882,9 @@ class HeroCanvasController {
       if (puffReady) {
         ctx.drawImage(this.steamPuffImg, -m.w / 2, -m.h / 2, m.w, m.h);
       } else {
-        // 이미지 로딩 전 부드러운 타원 방사형 그라데이션 폴백
         const g = ctx.createRadialGradient(0, 0, 0, 0, 0, m.w / 2);
-        g.addColorStop(0, "rgba(245, 250, 255, 0.7)");
-        g.addColorStop(0.4, "rgba(235, 245, 255, 0.3)");
+        g.addColorStop(0, "rgba(245, 250, 255, 0.85)");
+        g.addColorStop(0.42, "rgba(235, 245, 255, 0.45)");
         g.addColorStop(1, "rgba(235, 245, 255, 0)");
         ctx.fillStyle = g;
         ctx.beginPath();
@@ -3893,7 +3894,6 @@ class HeroCanvasController {
       ctx.restore();
     }
 
-    // 2. 섬세하고 부드러운 물빛 윤슬 스파클 (lighter 모드로 맑은 물빛 발광 극대화)
     ctx.globalCompositeOperation = "lighter";
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
@@ -3909,7 +3909,6 @@ class HeroCanvasController {
       if (alpha > 0.03) {
         const r = p.size * 2.8;
 
-        // 소프트 글로우 코어 (경계가 없는 부드러운 빛 구름)
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
         g.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, alpha * 1.15)})`);
         g.addColorStop(0.25, `rgba(230, 250, 255, ${alpha * 0.75})`);
@@ -3920,7 +3919,6 @@ class HeroCanvasController {
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        // 수평 소프트 렌즈 플레어
         const fl = p.flareLen || 12;
         const flareH = ctx.createLinearGradient(p.x - fl, p.y, p.x + fl, p.y);
         flareH.addColorStop(0, "rgba(100, 230, 255, 0)");
@@ -3935,7 +3933,6 @@ class HeroCanvasController {
       }
     }
 
-    // 3. 수면 동심원 리플 (잔잔한 물결 파문)
     for (let i = this.ripples.length - 1; i >= 0; i--) {
       const r = this.ripples[i];
       r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55));
@@ -3954,21 +3951,59 @@ class HeroCanvasController {
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 불멍 캠핑: 78개 불티, 하단 모닥불 발열 글로우(Hearth Glow), 고온 스파크 궤적
     ctx.save();
     ctx.globalCompositeOperation = "lighter"; // add 블렌드로 화염 발광
 
-    // 1. 하단 모닥불 발열 글로우 (Hearth Glow)
-    const glowCycle = (Math.sin(this.time * 2.2) + 1) * 0.5;
-    const hearthGrad = ctx.createRadialGradient(w * 0.54, h, 20, w * 0.54, h, w * 0.45);
-    hearthGrad.addColorStop(0, `rgba(255, 140, 30, ${0.22 + glowCycle * 0.08})`);
-    hearthGrad.addColorStop(0.35, `rgba(255, 75, 10, ${0.12 + glowCycle * 0.05})`);
-    hearthGrad.addColorStop(0.7, `rgba(220, 40, 0, ${0.05 + glowCycle * 0.02})`);
-    hearthGrad.addColorStop(1, "rgba(200, 20, 0, 0)");
-    ctx.fillStyle = hearthGrad;
+    const bx = w * 0.52;
+    const by = h * 0.82;
+
+    const baseBreath = Math.sin(this.time * 2.4) * 0.16 + Math.cos(this.time * 4.1) * 0.09;
+    const crackleFast = Math.sin(this.time * 18.7) * Math.cos(this.time * 31.3);
+    const snapSpike = (Math.sin(this.time * 13.1) > 0.84 ? 0.22 : 0) + (Math.cos(this.time * 21.7) > 0.86 ? 0.18 : 0);
+    const flameFactor = Math.max(0.25, Math.min(1.25, 0.62 + baseBreath + crackleFast * 0.14 + snapSpike));
+
+    const ambientR = Math.min(w, h) * (0.46 + flameFactor * 0.12);
+    const ambientGrad = ctx.createRadialGradient(bx, by, 15, bx, by, ambientR);
+    ambientGrad.addColorStop(0, `rgba(255, 120, 25, ${0.28 + flameFactor * 0.18})`);
+    ambientGrad.addColorStop(0.35, `rgba(255, 65, 10, ${0.14 + flameFactor * 0.10})`);
+    ambientGrad.addColorStop(0.70, `rgba(200, 30, 0, ${0.05 + flameFactor * 0.04})`);
+    ambientGrad.addColorStop(1, "rgba(180, 20, 0, 0)");
+    ctx.fillStyle = ambientGrad;
     ctx.fillRect(0, h * 0.35, w, h * 0.65);
 
-    // 2. 다변화 불티 입자 렌더링
+    const coreR = Math.min(w, h) * (0.11 + flameFactor * 0.07);
+    const coreGrad = ctx.createRadialGradient(bx, by, 0, bx, by, coreR);
+    coreGrad.addColorStop(0, `rgba(255, 255, 235, ${Math.min(1, 0.65 + flameFactor * 0.35)})`);
+    coreGrad.addColorStop(0.28, `rgba(255, 215, 70, ${0.52 + flameFactor * 0.28})`);
+    coreGrad.addColorStop(0.65, `rgba(255, 110, 15, ${0.32 + flameFactor * 0.20})`);
+    coreGrad.addColorStop(1, "rgba(255, 50, 0, 0)");
+    ctx.fillStyle = coreGrad;
+    ctx.beginPath();
+    ctx.ellipse(bx, by, coreR, coreR * 0.72, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    for (let f = 0; f < 3; f++) {
+      const fAngle = (f - 1) * 0.15 + Math.sin(this.time * 6.5 + f * 2.2) * 0.08;
+      const fH = coreR * (1.15 + Math.sin(this.time * 12.0 + f * 3.4) * 0.40 * flameFactor);
+      const fW = coreR * (0.36 + Math.cos(this.time * 9.5 + f * 1.7) * 0.10);
+      const fx = bx + (f - 1) * (coreR * 0.35) + Math.sin(this.time * 8.2 + f) * 5;
+
+      const fGrad = ctx.createLinearGradient(0, 0, 0, -fH);
+      fGrad.addColorStop(0, `rgba(255, 245, 180, ${0.60 + flameFactor * 0.35})`);
+      fGrad.addColorStop(0.4, `rgba(255, 160, 30, ${0.45 + flameFactor * 0.25})`);
+      fGrad.addColorStop(0.85, `rgba(255, 60, 5, ${0.20 + flameFactor * 0.15})`);
+      fGrad.addColorStop(1, "rgba(255, 30, 0, 0)");
+
+      ctx.save();
+      ctx.translate(fx, by);
+      ctx.rotate(fAngle);
+      ctx.fillStyle = fGrad;
+      ctx.beginPath();
+      ctx.ellipse(0, -fH * 0.5, fW, fH * 0.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
       if (p.splitCooldown > 0) p.splitCooldown -= 1;
@@ -4003,23 +4038,21 @@ class HeroCanvasController {
       ctx.globalAlpha = alpha;
 
       if (p.type === "spark") {
-        // 날렵한 네온 스파크 궤적 (외곽 글로우 + 코어 고온 라인)
         ctx.strokeStyle = p.color;
-        ctx.lineWidth = p.size * 1.8;
+        ctx.lineWidth = p.size * 1.2;
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.5);
+        ctx.lineTo(p.x - p.vx * 2.0, p.y - p.vy * 2.2);
         ctx.stroke();
 
         ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = Math.max(1, p.size * 0.7);
+        ctx.lineWidth = Math.max(0.6, p.size * 0.5);
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 1.8, p.y - p.vy * 2.0);
+        ctx.lineTo(p.x - p.vx * 1.6, p.y - p.vy * 1.8);
         ctx.stroke();
       } else if (p.type === "capsule") {
-        // 3D 회전 열기 캡슐
         ctx.save();
         ctx.translate(p.x, p.y);
         const heading = Math.atan2(p.vy, p.vx + Math.sin(this.time * 2.0 + p.drift) * 0.75);
@@ -4033,12 +4066,11 @@ class HeroCanvasController {
         ctx.fillStyle = g;
 
         ctx.beginPath();
-        ctx.ellipse(0, 0, p.size * 1.1, p.len, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, p.size * 0.85, p.len, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       } else {
-        // 부드러운 고온 화염 구체
-        const currentSize = Math.max(1.0, p.size * (0.5 + p.life * 0.65));
+        const currentSize = Math.max(0.6, p.size * (0.4 + p.life * 0.5));
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
         g.addColorStop(0, "#ffffff");
         g.addColorStop(0.4, p.color);
@@ -4053,7 +4085,6 @@ class HeroCanvasController {
   }
 
   renderSunsetCoast(ctx, w, h, mx, my, hasMouse) {
-    // 서해안 노을: 75개 황금빛 해수면 윤슬 + 3줄 노을 파도 밴드 + 36개 황혼 미립자 + 정밀 편대 갈매기
     ctx.save();
     ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 및 노을빛 극대화
 
@@ -4065,7 +4096,6 @@ class HeroCanvasController {
     ctx.fillStyle = sunsetGrad;
     ctx.fillRect(0, 0, w, h);
 
-    // 1. 수평선 부근 3줄 노을 파도 윤슬 밴드
     for (let b = 0; b < 3; b++) {
       const bandY = h * (0.45 + b * 0.10);
       const bandWave = Math.sin(this.time * 0.75 + b * 2.1) * 10;
@@ -4079,7 +4109,6 @@ class HeroCanvasController {
       ctx.fillRect(0, bandY + bandWave - 2.0, w, 4.0);
     }
 
-    // 2. 해수면 다채로운 렌즈형 황금 윤슬 (Water Shimmer)
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       p.x += p.vx;
@@ -4110,7 +4139,6 @@ class HeroCanvasController {
       }
     }
 
-    // 3. 노을 대기 미립자 (Golden Hour Dust)
     for (const d of this.duskParticles) {
       d.pulse += 0.024;
       d.x += d.vx;
