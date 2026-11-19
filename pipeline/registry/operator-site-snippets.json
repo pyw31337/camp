@@ -6118,7 +6118,7 @@
    "name": "글램비글램핑",
    "status": "FETCH_FAILED",
    "url": "https://www.glambcamp.com",
-   "checked_at": "2026-11-18T19:53:56.047Z",
+   "checked_at": "2026-11-19T20:00:01.401Z",
    "error": "403"
   },
   "448": {
@@ -10775,7 +10775,7 @@
    "name": "느티나무 캠핑장",
    "status": "NO_RELEVANT_TEXT",
    "url": "https://campblox.co.kr/home",
-   "checked_at": "2026-11-18T19:53:56.014Z",
+   "checked_at": "2026-11-19T20:00:01.359Z",
    "pages": [
     "https://campblox.co.kr/home"
    ],
@@ -39603,7 +39603,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-18T19:53:58.059Z",
+   "checked_at": "2026-11-19T20:00:03.576Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39937,10 +39937,10 @@
      }
     },
     {
-     "text": "25 얼리체크인/레이트 체크아웃 행사 기간안내 원주두리캠핑 2024-08-23 743",
+     "text": "25 얼리체크인/레이트 체크아웃 행사 기간안내 원주두리캠핑 2024-08-23 744",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "25 얼리체크인/레이트 체크아웃 행사 기간안내 원주두리캠핑 2024-08-23 743"
+      "text": "25 얼리체크인/레이트 체크아웃 행사 기간안내 원주두리캠핑 2024-08-23 744"
      }
     },
     {
@@ -39951,10 +39951,10 @@
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1221",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1223",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1221"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1223"
      }
     },
     {
@@ -110851,7 +110851,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-18T19:53:56.044Z",
+   "checked_at": "2026-11-19T20:00:01.399Z",
    "error": "404"
   },
   "100126": {
@@ -176990,7 +176990,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-18T19:54:00.649Z",
+   "checked_at": "2026-11-19T20:00:03.952Z",
    "error": "403"
   },
   "101270": {
@@ -225562,7 +225562,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "DISCOVERED_NOT_OPERATOR",
    "url": "https://campingfriend.co.kr/listing-camp-detail/9414",
-   "checked_at": "2026-11-18T19:53:57.772Z",
+   "checked_at": "2026-11-19T20:00:03.386Z",
    "discovered": true,
    "check": {
     "ok": false,
@@ -225957,7 +225957,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-18T19:53:56.046Z",
+    "at": "2026-11-19T20:00:01.400Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -263072,6 +263072,6 @@
    }
   }
  },
- "generated_at": "2026-11-18T19:54:31.254Z",
+ "generated_at": "2026-11-19T20:00:18.087Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
