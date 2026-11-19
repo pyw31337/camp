@@ -224,8 +224,6 @@ width: 100%;
 height: 100%;
 pointer-events: none;
 z-index: 1;
-/* 캔버스 자체의 발색과 광원을 선명하고 밝게 돋보이게 하는 필터 */
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
 }
 /* 딤처리: 효과(canvas) 위, 텍스트(hero-in) 아래에 배치하여 어두운 영역에서 효과가 튀지 않고 자연스럽게 스며듦 */
 .hero-dim {
