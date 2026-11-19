@@ -4310,19 +4310,20 @@ class HeroCanvasController {
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
     ctx.save();
     const isMob = w < 640;
-    // 무지개 살아있는 움직임: 밝아졌다 어두워졌다(Prismatic Breathing) + 회전 및 수면 유영(Sway & Drift)
-    const rainbowPulse = Math.sin(this.time * 0.7) * 0.5 + 0.5; // 0.0 ~ 1.0 뚜렷한 밝기 호흡
-    const beamAlpha = 0.26 + rainbowPulse * 0.50; // 0.26 ~ 0.76 (눈에 확실히 띄는 페이드인/페이드아웃)
-    const beamScale = 0.95 + rainbowPulse * 0.16; // 0.95 ~ 1.11 스케일 호흡
-    const rot = -0.05 + Math.sin(this.time * 0.45) * 0.12; // 수면 미풍에 의해 부드럽게 회전 및 흔들림 (-10도 ~ +4도)
-    const driftX = Math.sin(this.time * 0.38) * (w * 0.045); // 좌우 유영
-    const driftY = Math.cos(this.time * 0.30) * (h * 0.030); // 상하 유영
+    // 무지개 살아있는 움직임: 투명한 밝기 호흡 + 부드러운 스웨이 및 수면 유영 (뿌연 안개 완벽 제거)
+    const rainbowPulse = Math.sin(this.time * 0.65) * 0.5 + 0.5; // 0.0 ~ 1.0 밝기 호흡
+    const beamAlpha = 0.20 + rainbowPulse * 0.22; // 0.20 ~ 0.42 (뿌옇지 않고 선명하며 투명한 7색 프리즘 스펙트럼)
+    const beamScale = 0.96 + rainbowPulse * 0.08; // 0.96 ~ 1.04 스케일 호흡
+    const rot = -0.04 + Math.sin(this.time * 0.40) * 0.06; // 수면 미풍에 의해 부드럽게 흔들림
+    const driftX = Math.sin(this.time * 0.35) * (w * 0.030); // 좌우 유영
+    const driftY = Math.cos(this.time * 0.28) * (h * 0.018); // 상하 유영
 
     const rainbowReady = this.rainbowLoaded || (this.rainbowImg && this.rainbowImg.complete && this.rainbowImg.naturalWidth > 0);
     if (rainbowReady) {
+      // 수영장 상공 하늘에 자연스럽게 배치하여 하단 풀장과 인물을 가리지 않음
       const cx = (isMob ? w * 0.52 : w * 0.55) + driftX;
-      const cy = (isMob ? h * 0.38 : h * 0.35) + driftY;
-      const baseW = (isMob ? Math.min(w * 1.25, h * 1.15) : Math.min(w * 0.80, h * 1.35)) * beamScale;
+      const cy = (isMob ? h * 0.30 : h * 0.26) + driftY;
+      const baseW = (isMob ? Math.min(w * 0.95, h * 0.88) : Math.min(w * 0.60, h * 0.95)) * beamScale;
       const baseH = baseW * (1024 / 675);
 
       ctx.save();
@@ -4336,21 +4337,6 @@ class HeroCanvasController {
 
       ctx.restore();
     }
-
-    // 추가 프리즘 햇살 빔: 수영장 상공에서 무지개와 함께 회전하며 밝아졌다 어두워지는 맑은 광선
-    ctx.globalCompositeOperation = "screen";
-    const prismR = (isMob ? w * 0.75 : w * 0.55) * beamScale;
-    const prismCx = (isMob ? w * 0.52 : w * 0.55) + driftX * 0.6;
-    const prismCy = (isMob ? h * 0.38 : h * 0.35) + driftY * 0.6;
-    const prismGlow = ctx.createRadialGradient(prismCx, prismCy, 10, prismCx, prismCy, prismR);
-    prismGlow.addColorStop(0, `rgba(255, 255, 255, ${beamAlpha * 0.45})`);
-    prismGlow.addColorStop(0.35, `rgba(180, 240, 255, ${beamAlpha * 0.25})`);
-    prismGlow.addColorStop(0.70, `rgba(220, 200, 255, ${beamAlpha * 0.12})`);
-    prismGlow.addColorStop(1, "rgba(140, 220, 255, 0)");
-    ctx.fillStyle = prismGlow;
-    ctx.beginPath();
-    ctx.arc(prismCx, prismCy, prismR, 0, Math.PI * 2);
-    ctx.fill();
 
     // 3. 수면 맑은 물빛 스파클 & 프리즘 물방울
     for (const p of this.particles) {
@@ -4430,7 +4416,7 @@ class HeroCanvasController {
   }
 
   renderWindGrass(ctx, w, h, mx, my, hasMouse) {
-    // 승마: 노을 지는 목장 - 우측 지평선 너머 석양의 회전하는 갓레이 & 밝아졌다 어두워지는 살아있는 노을빛 + 흩날리는 잔디 풀잎
+    // 승마: 노을 지는 목장 - 우측 지평선 너머 석양의 회전하는 광학 플레어 & 밝아졌다 어두워지는 살아있는 노을빛 + 흩날리는 잔디 풀잎
     ctx.save();
     const isMob = w < 640;
     // 배경 사진의 실제 노을 태양 광원 좌표 (데스크톱 0.91, 0.16 / 모바일 0.93, 0.12)
@@ -4440,11 +4426,11 @@ class HeroCanvasController {
     // 살아 움직이는 다이내믹 호흡 & 연속 회전 (밝아졌다 어두워졌다 + 천천히 회전)
     const lightBreathe = Math.sin(this.time * 0.75) * 0.32; // 밝기 호흡 (-0.32 ~ +0.32)
     const pulseScale = 1.0 + Math.sin(this.time * 0.55) * 0.12; // 스케일 호흡 (0.88 ~ 1.12)
-    const sunRot = this.time * 0.16; // 지속적인 우아한 회전 (태양 광선 및 플레어)
+    const sunRot = this.time * 0.12; // 실사 광학 플레어의 부드러운 회전
 
     // 1. 노을빛 웜톤 태양 코어 후광 (밝아졌다 어두워졌다 호흡하는 태양)
     ctx.globalCompositeOperation = "screen";
-    const sunR = (isMob ? Math.min(w, h) * 0.65 : Math.min(w, h) * 0.55) * pulseScale;
+    const sunR = (isMob ? Math.min(w, h) * 0.55 : Math.min(w, h) * 0.45) * pulseScale;
     const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
     const coreAlpha = Math.max(0.35, Math.min(0.95, 0.65 + lightBreathe));
     sunGlow.addColorStop(0, `rgba(255, 255, 240, ${coreAlpha})`);
@@ -4457,42 +4443,13 @@ class HeroCanvasController {
     ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. 태양을 중심으로 회전하며 밝아졌다 어두워지는 방사형 갓레이 (8갈래 Crepuscular Sunbeams)
-    const rayCount = 8;
-    const baseRayLen = (isMob ? Math.max(w, h) * 0.95 : Math.max(w, h) * 0.85) * pulseScale;
-    for (let i = 0; i < rayCount; i++) {
-      const baseAng = (i / rayCount) * Math.PI * 2 + sunRot;
-      const rayLen = baseRayLen * (0.85 + Math.sin(this.time * 0.6 + i * 1.8) * 0.18);
-      const halfW = 0.07 + Math.cos(this.time * 0.5 + i) * 0.02;
-      const rayAlpha = Math.max(0.08, Math.min(0.38, (0.22 + Math.sin(this.time * 0.8 + i * 2.2) * 0.12) * (coreAlpha / 0.65)));
-
-      const rx1 = ox + Math.cos(baseAng - halfW) * rayLen;
-      const ry1 = oy + Math.sin(baseAng - halfW) * rayLen;
-      const rx2 = ox + Math.cos(baseAng + halfW) * rayLen;
-      const ry2 = oy + Math.sin(baseAng + halfW) * rayLen;
-
-      const rg = ctx.createRadialGradient(ox, oy, 20, ox, oy, rayLen);
-      rg.addColorStop(0, `rgba(255, 245, 210, ${rayAlpha * 1.4})`);
-      rg.addColorStop(0.25, `rgba(255, 200, 110, ${rayAlpha * 0.9})`);
-      rg.addColorStop(0.60, `rgba(255, 145, 55, ${rayAlpha * 0.4})`);
-      rg.addColorStop(1, "rgba(240, 100, 30, 0)");
-
-      ctx.fillStyle = rg;
-      ctx.beginPath();
-      ctx.moveTo(ox, oy);
-      ctx.lineTo(rx1, ry1);
-      ctx.lineTo(rx2, ry2);
-      ctx.closePath();
-      ctx.fill();
-    }
-
-    // 3. 광학 노을 렌즈 플레어 스프라이트 - 회전 및 밝기/스케일 다이내믹 호흡
+    // 2. 광학 노을 렌즈 플레어 스프라이트 - 회전 및 밝기/스케일 다이내믹 호흡 (인위적인 SVG 광선 제거 -> 실사 플레어 단일화)
     const flareReady = this.horseFlareLoaded || (this.horseFlareImg && this.horseFlareImg.complete && this.horseFlareImg.naturalWidth > 0);
     if (flareReady) {
       const flareSize = (isMob ? Math.max(w * 0.95, h * 1.05) : Math.max(w * 0.85, h * 1.15)) * pulseScale;
       ctx.save();
       ctx.translate(ox, oy);
-      ctx.rotate(sunRot * 0.7);
+      ctx.rotate(sunRot);
       ctx.globalAlpha = Math.max(0.35, Math.min(0.85, 0.60 + lightBreathe * 0.8));
       ctx.drawImage(this.horseFlareImg, -flareSize / 2, -flareSize / 2, flareSize, flareSize);
       ctx.restore();
