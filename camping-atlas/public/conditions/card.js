@@ -43,12 +43,13 @@ export function weatherIconSvg(sky, pty, size = 26) {
 }
 
 const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}.fc-strip::-webkit-scrollbar{display:none}
-.fc-day{flex:1 0 72px;display:flex;flex-direction:column;align-items:center;gap:4px;border:1px solid var(--line,#e5e7eb);border-radius:16px;padding:10px 6px;text-align:center;font-size:12px;line-height:1.3;background:var(--paper,#fff);color:inherit;cursor:pointer;transition:transform .15s ease, border-color .15s ease, background-color .15s ease}
+.fc-day{flex:1 0 72px;display:flex;flex-direction:column;align-items:center;gap:4px;border:1px solid var(--line,#e5e7eb);border-radius:16px;padding:10px 6px;text-align:center;font-size:12px;line-height:1.3;background:var(--paper,#fff);color:inherit;cursor:pointer;transition:transform .18s cubic-bezier(0.34, 1.56, 0.64, 1), border-color .18s ease, background-color .18s ease, box-shadow .18s ease}
 .fc-day:hover{border-color:var(--accent,#2f855a);transform:translateY(-2px)}
-.fc-day.is-today,.fc-day.we{background:var(--accent-soft,#eef7f0);border-color:var(--accent,#2f855a)}
+.fc-day.is-today{background:var(--accent-soft,#eef7f0);border-color:var(--accent,#2f855a)}
 .fc-day .ic{display:flex;align-items:center;justify-content:center;height:30px;margin:1px 0}
 .fc-day .t{font-weight:750;font-size:15px}
 .fc-day .lbl{display:block;font-size:12px;font-weight:800;color:var(--ink-2,#374151)}
+.fc-day .t-sub{display:block;font-size:11px;font-weight:700;color:var(--muted,#6b7280);margin-top:1px;white-space:nowrap}
 .fc-detail-meta{display:block;margin:4px 0 0;color:var(--muted,#6b7280);font-size:12px;font-weight:600;line-height:1.45}
 .fc-dt-sub{font-size:.82em;font-weight:600;color:var(--muted,#6b7280);margin-left:2px}
 .w-icon{display:inline-block;vertical-align:middle;flex:none;overflow:visible}
@@ -89,7 +90,137 @@ const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;
 @keyframes w-mist-drift{from{transform:translateX(-2px)}to{transform:translateX(2px)}}
 .fc-wind{font-weight:800}.fc-wind-high,.fc-wind-severe{color:#c0392b}
 .fc-extra{margin-top:8px;border-top:1px solid var(--line,#e5e7eb);padding-top:8px}.fc-extra>summary{display:flex;justify-content:space-between;align-items:center;min-height:40px;cursor:pointer;font-weight:800;color:var(--ink-2,#374151);list-style:none}.fc-extra>summary::-webkit-details-marker{display:none}.fc-extra-chevron{width:16px;height:16px;transform:rotate(180deg);transition:transform .2s}.fc-extra[open]>summary .fc-extra-chevron{transform:rotate(0deg)}
-@media (prefers-reduced-motion:reduce){.w-icon *{animation:none!important}}`;
+
+/* ── 주말 날씨 강조 애니메이션 & 인터랙션 ── */
+.fc-day.we {
+  position: relative;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+  border: 1.5px solid #10b981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.16);
+  overflow: hidden;
+  transform: translateZ(0);
+  animation: we-border-breathe 3.4s ease-in-out infinite;
+}
+.fc-day.we::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: skewX(-20deg);
+  animation: we-light-sweep 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+.fc-day.we:hover {
+  border-color: #059669;
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.28);
+  z-index: 2;
+}
+.fc-day.we:active, .fc-day.we.is-selected {
+  transform: translateY(-2px) scale(1.02);
+  border-color: #047857;
+  box-shadow: 0 0 0 2.5px rgba(16, 185, 129, 0.4), 0 8px 18px rgba(16, 185, 129, 0.2);
+  background: #e6f9ed;
+}
+.fc-day .we-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 850;
+  line-height: 1;
+  padding: 2.5px 7px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+  margin-bottom: 2px;
+  letter-spacing: -0.3px;
+  animation: we-tag-pulse 2.4s ease-in-out infinite;
+}
+.fc-day.we.we-next .we-tag {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+}
+.we-tag-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: inline-block;
+  animation: we-dot-blink 1.4s ease-in-out infinite;
+}
+.fc-day.is-sat .lbl { color: #2563eb; }
+.fc-day.is-sun .lbl { color: #e11d48; }
+
+@keyframes we-border-breathe {
+  0%, 100% { border-color: #10b981; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.16); }
+  50% { border-color: #34d399; box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3); }
+}
+@keyframes we-light-sweep {
+  0%, 70% { left: -120%; }
+  88%, 100% { left: 220%; }
+}
+@keyframes we-tag-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+@keyframes we-dot-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* ── 주말 캠핑 날씨 브리핑 바 ── */
+.we-highlight-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #e6f9ed 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-left: 4px solid #10b981;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.08);
+  transition: all .25s ease;
+}
+.we-highlight-banner:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.14);
+}
+.we-hb-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.we-hb-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 850; color: #065f46; }
+.we-hb-pulse { width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); animation: we-ping 1.8s infinite; }
+.we-hb-summary { font-size: 13.5px; font-weight: 750; color: var(--ink, #111827); line-height: 1.4; word-break: keep-all; margin: 0; }
+.we-hb-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: #ffffff;
+  color: #065f46;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color .15s, transform .15s;
+}
+.we-hb-toggle:hover { background: #dcfce7; transform: translateY(-1px); }
+.we-hb-toggle svg { width: 14px; height: 14px; transition: transform .2s ease; }
+.we-hb-toggle.is-open svg { transform: rotate(180deg); }
+@keyframes we-ping {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@media (prefers-reduced-motion:reduce){.w-icon *,.fc-day.we,.fc-day.we::after,.we-tag,.we-tag-dot,.we-hb-pulse{animation:none!important}}`;
 function injectStyle() { if (typeof document === "undefined" || document.getElementById("fc-style")) return; const s = document.createElement("style"); s.id = "fc-style"; s.textContent = STYLE; document.head.appendChild(s); }
 
 /** forecast.json + 캠핑장 id → 날짜순 [{d, sky, pty, tmin, tmax, pop, wsd, src}] */
@@ -140,21 +271,11 @@ export async function mount(el, camp) {
     if (diff === 2) return "모레";
     return `${md(ymd)} ${DOW[dow(ymd)]}`;
   };
-  const strip = days.map((x) => {
-    const lbl = weekendLabel(x.d, today);
-    const temp = x.tmax != null ? `${x.tmax}°` : (x.tmin != null ? `${x.tmin}°` : "–");
-    // 상세 팝업(app.js openWeatherModal)이 같은 기상청 값·아이콘으로 날짜 칸과 하루 요약을 그리도록 값을 함께 싣는다.
-    return `<button type="button" class="fc-day${lbl ? " we" : ""}${x.d === today ? " is-today" : ""}" data-fc-date="${esc(x.d)}" data-fc-rel="${esc(relOf(x.d))}" data-fc-sky="${esc(x.sky ?? "")}" data-fc-pty="${esc(x.pty ?? "")}" data-fc-desc="${esc(x.pty && x.pty !== "없음" ? x.pty : x.sky ?? "")}" data-fc-tmin="${esc(x.tmin ?? "")}" data-fc-tmax="${esc(x.tmax ?? "")}" data-fc-pop="${esc(x.pop ?? "")}" data-fc-src="${esc(x.src)}" title="${esc(x.d)} 날씨 상세">
-      <span class="lbl">${relOf(x.d)}</span>
-      <span class="ic" role="img" title="${esc(x.pty ?? x.sky ?? "")}">${weatherIconSvg(x.sky, x.pty, 26)}</span>
-      <span class="t">${esc(temp)}</span>
-    </button>`;
-  }).join("");
   // 보조 정보: 이번 주말(토) 일출·일몰·달, 지금 미세먼지, 특보
-  const t = dow(today), sat = addDays(today, t === 6 ? 0 : t === 0 ? -1 : 6 - t);
-  const sun = sunTimes(sat, camp.lat, camp.lng), moon = moonPhase(sat);
+  const t = dow(today), sat = addDays(today, t === 6 ? 0 : t === 0 ? -1 : 6 - t), sun = addDays(sat, 1);
+  const sunTimesSat = sunTimes(sat, camp.lat, camp.lng), moon = moonPhase(sat);
   const extra = [];
-  if (sun.sunrise) extra.push([`이번 주말 해`, `일출 ${sun.sunrise} · 일몰 ${sun.sunset} <span class="fc-detail-meta">${md(sat)} 토</span>`]);
+  if (sunTimesSat.sunrise) extra.push([`이번 주말 해`, `일출 ${sunTimesSat.sunrise} · 일몰 ${sunTimesSat.sunset} <span class="fc-detail-meta">${md(sat)} 토</span>`]);
   extra.push(["토요일 밤 달", `${esc(moon.label)} (밝기 ${Math.round(moon.illum * 100)}%)${moon.dark_sky ? " · 별 보기 좋은 밤" : ""}`]);
   const row = data?.camps?.[camp.id], air = row?.[3] ? data.air?.[row[3]] : null;
   if (air?.grade) extra.push(["미세먼지(지금)", `${AIR[air.grade]} <span class="muted">${row[3].startsWith("s:") ? `${esc(row[3].slice(2))} 측정소` : `${esc(row[3].slice(2))} 측정소 ${air.stations}곳 중앙값`} · PM10 ${air.pm10 ?? "–"} · PM2.5 ${air.pm25 ?? "–"}</span>`]);
@@ -162,19 +283,91 @@ export async function mount(el, camp) {
   if (td) {
     const dd = td.days?.[sat] ? sat : td.days?.[today] ? today : Object.keys(td.days ?? {}).sort()[0];
     const list = td.days?.[dd] ?? [];
-    if (list.length) extra.push([`물때 <span class="fc-dt-sub">${`${md(dd)} ${dd === sat ? "토" : dd === today ? "오늘" : ""}`.trim()}</span>`, `${list.map(([t, ty, h]) => `${esc(ty)} ${esc(t)}${h != null ? `(${esc(h)}cm)` : ""}`).join(" · ")} <span class="fc-detail-meta">${esc(td.name)} 예보지점${row[6] != null ? ` · ${esc(row[6])}km` : ""}</span>`]);
+    if (list.length) extra.push([`물때 <span class="fc-dt-sub">${`${md(dd)} ${dd === sat ? "토" : dd === today ? "오늘" : ""}`.trim()}</span>`, `${list.map(([timeStr, ty, h]) => `${esc(ty)} ${esc(timeStr)}${h != null ? `(${esc(h)}cm)` : ""}`).join(" · ")} <span class="fc-detail-meta">${esc(td.name)} 예보지점${row[6] != null ? ` · ${esc(row[6])}km` : ""}</span>`]);
   }
   const ls = data.landslide?.[String(camp?.id ?? "")];
   if (ls) extra.push(["산사태 예측", `${esc(ls[0])} · 산림청 ${esc(new Date(ls[1]).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }))} 분석. <a href="https://sansatai.forest.go.kr/" target="_blank" rel="noopener">산사태정보시스템</a>`]);
   const wt = windTip(days);
   if (wt) extra.push([`바람 안전`, `<span class="fc-wind fc-wind-${wt.level}">최대 ${esc(wt.w)} m/s</span> ${esc(wt.text)} <span class="fc-detail-meta">${esc(relOf(wt.d))} · 기상청 단기예보</span>`]);
   if (row?.[4]) extra.push(["기상특보", '이 지역에 특보가 발효 중이에요. <a href="https://www.weather.go.kr/" target="_blank" rel="noopener">기상청 확인</a>']);
+
+  // 이번 주말 예보 요약 및 주말 브리핑 배너
+  const satDay = days.find((x) => x.d === sat), sunDay = days.find((x) => x.d === sun);
+  let weBanner = "";
+  if (satDay || sunDay) {
+    const satSky = satDay?.pty && satDay.pty !== "없음" ? satDay.pty : satDay?.sky ?? "맑음";
+    const sunSky = sunDay?.pty && sunDay.pty !== "없음" ? sunDay.pty : sunDay?.sky ?? "맑음";
+    const satDesc = satDay ? `토 ${satSky}(${satDay.tmax ?? "–"}°/${satDay.tmin ?? "–"}°)` : "";
+    const sunDesc = sunDay ? `일 ${sunSky}(${sunDay.tmax ?? "–"}°/${sunDay.tmin ?? "–"}°)` : "";
+    const tipList = [];
+    if (moon.dark_sky) tipList.push("별 보기 좋은 밤 ✨");
+    if (wt?.level === "severe" || wt?.level === "high") tipList.push("바람 대비 필요 💨");
+    else tipList.push("캠핑 추천 ⛺");
+    const summaryText = `${[satDesc, sunDesc].filter(Boolean).join(" · ")}${tipList.length ? ` · ${tipList.join(" · ")}` : ""}`;
+
+    weBanner = `<div class="we-highlight-banner" data-we-banner>
+      <div class="we-hb-main">
+        <div class="we-hb-badge"><span class="we-hb-pulse" aria-hidden="true"></span><b>이번 주말 캠핑 날씨</b></div>
+        <p class="we-hb-summary" id="we-summary-text">${esc(summaryText)}</p>
+      </div>
+      <button type="button" class="we-hb-toggle" id="we-briefing-toggle" aria-label="주말 상세 펼치기">
+        <span>상세 보기</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>`;
+  }
+
+  const strip = days.map((x) => {
+    const lbl = weekendLabel(x.d, today);
+    const temp = x.tmax != null ? `${x.tmax}°` : (x.tmin != null ? `${x.tmin}°` : "–");
+    const isSat = dow(x.d) === 6, isSun = dow(x.d) === 0;
+    const isThisWeekend = lbl === "이번 주말";
+    const weCls = lbl ? ` we is-weekend ${isThisWeekend ? "we-this" : "we-next"}${isSat ? " is-sat" : isSun ? " is-sun" : ""}` : "";
+    // 상세 팝업(app.js openWeatherModal)이 같은 기상청 값·아이콘으로 날짜 칸과 하루 요약을 그리도록 값을 함께 싣는다.
+    return `<button type="button" class="fc-day${weCls}${x.d === today ? " is-today" : ""}" data-fc-date="${esc(x.d)}" data-fc-rel="${esc(relOf(x.d))}" data-fc-sky="${esc(x.sky ?? "")}" data-fc-pty="${esc(x.pty ?? "")}" data-fc-desc="${esc(x.pty && x.pty !== "없음" ? x.pty : x.sky ?? "")}" data-fc-tmin="${esc(x.tmin ?? "")}" data-fc-tmax="${esc(x.tmax ?? "")}" data-fc-pop="${esc(x.pop ?? "")}" data-fc-src="${esc(x.src)}" title="${esc(x.d)} ${lbl || ""} 날씨 상세">
+      ${lbl ? `<span class="we-tag"><span class="we-tag-dot" aria-hidden="true"></span>${esc(lbl)}</span>` : ""}
+      <span class="lbl">${relOf(x.d)}</span>
+      <span class="ic" role="img" title="${esc(x.pty ?? x.sky ?? "")}">${weatherIconSvg(x.sky, x.pty, 26)}</span>
+      <span class="t">${esc(temp)}</span>
+      ${x.tmin != null && x.tmax != null ? `<span class="t-sub">${x.tmin}° / ${x.tmax}°</span>` : ""}
+    </button>`;
+  }).join("");
+
   el.innerHTML = `<div class="sec-head"><div class="sec-title"><svg class="ic line"><use href="#i-weather"/></svg><h2>주간 날씨</h2></div></div>
+    ${weBanner}
     ${strip ? `<div class="fc-strip" role="list">${strip}</div>` : ""}
     <details class="fc-extra"><summary>날짜 상세 정보 <svg class="ic fc-extra-chevron" aria-hidden="true"><use href="#i-chevron-up"/></svg></summary><dl class="uses info">${extra.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl></details>`;
-  (el.querySelectorAll?.("[data-fc-date]") ?? []).forEach((day) => day.addEventListener("click", () => {
-    const details = el.querySelector(".fc-extra");
-    if (details) details.open = true;
-  }));
+
+  const summaryEl = el.querySelector?.("#we-summary-text");
+  const details = el.querySelector?.(".fc-extra");
+  const toggleBtn = el.querySelector?.("#we-briefing-toggle");
+
+  const selectDay = (dayBtn) => {
+    el.querySelectorAll?.(".fc-day")?.forEach((b) => b.classList.remove("is-selected"));
+    dayBtn.classList.add("is-selected");
+    const rel = dayBtn.dataset.fcRel;
+    const desc = dayBtn.dataset.fcDesc;
+    const tmax = dayBtn.dataset.fcTmax;
+    const tmin = dayBtn.dataset.fcTmin;
+    const pop = dayBtn.dataset.fcPop;
+    const isWe = dayBtn.classList.contains("we");
+    if (summaryEl && rel) {
+      const prefix = isWe ? "🏕️ 주말 날씨: " : "📅 날씨: ";
+      summaryEl.textContent = `${prefix}${rel} — ${desc || "맑음"}${tmax ? ` · 최고 ${tmax}°` : ""}${tmin ? ` / 최저 ${tmin}°` : ""}${pop ? ` · 강수확률 ${pop}%` : ""}`;
+    }
+    if (details) {
+      details.open = true;
+      if (toggleBtn) toggleBtn.classList.add("is-open");
+    }
+  };
+
+  (el.querySelectorAll?.("[data-fc-date]") ?? []).forEach((day) => day.addEventListener("click", () => selectDay(day)));
+
+  if (toggleBtn && details) {
+    toggleBtn.addEventListener("click", () => {
+      details.open = !details.open;
+      toggleBtn.classList.toggle("is-open", details.open);
+    });
+  }
   el.hidden = false;
 }
