@@ -3158,21 +3158,30 @@ class HeroCanvasController {
   }
 
   createEmbersParticle(w, h, initial = false) {
-    const originX = w * 0.52 + (Math.random() - 0.5) * (w * 0.34);
+    const originX = w * 0.52 + (Math.random() - 0.5) * (w * 0.32);
     const originY = initial ? Math.random() * h : h * (0.80 + Math.random() * 0.12);
     const typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
+
+    // 굵기를 기존 대비 훨씬 얇은 쪽으로 배리에이션 (초미세 0.22~0.40, 미세 0.40~0.60, 표준 0.60~0.82)
+    const thinVariance = Math.random();
+    const baseThick = thinVariance < 0.50
+      ? (Math.random() * 0.18 + 0.22)
+      : thinVariance < 0.85
+      ? (Math.random() * 0.20 + 0.40)
+      : (Math.random() * 0.22 + 0.60);
+
     return {
       type,
       x: originX,
       y: originY,
       vx: (Math.random() - 0.5) * (type === "spark" ? 1.4 : 0.75),
-      vy: type === "spark" ? -Math.random() * 2.6 - 1.6 : -Math.random() * 1.6 - 1.0,
-      size: type === "capsule" ? Math.random() * 1.4 + 0.8 : type === "spark" ? Math.random() * 0.9 + 0.55 : Math.random() * 1.1 + 0.65,
-      len: type === "spark" ? Math.random() * 6.5 + 3.0 : type === "capsule" ? Math.random() * 3.5 + 2.0 : 2,
+      vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.0,
+      size: baseThick,
+      len: type === "spark" ? Math.random() * 7.0 + 3.0 : type === "capsule" ? Math.random() * 4.0 + 2.0 : 2,
       angle: 0,
       life: initial ? Math.random() * 0.85 + 0.15 : 1,
-      decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018,
+      decay: type === "spark" ? Math.random() * 0.0065 + 0.0035 : Math.random() * 0.0034 + 0.0018,
       color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00",
       drift: Math.random() * Math.PI * 2
     };
@@ -3190,7 +3199,7 @@ class HeroCanvasController {
         y: parent.y + (Math.random() - 0.5) * 6,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 0.45,
-        size: Math.max(0.8, parent.size * (Math.random() * 0.28 + 0.28)),
+        size: Math.max(0.20, parent.size * (Math.random() * 0.25 + 0.25)),
         len: 2,
         angle: 0,
         life: Math.random() * 0.28 + 0.42,
@@ -3751,8 +3760,8 @@ class HeroCanvasController {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    // 1시(우측 상단)에서 7시(좌하단) 방향으로 흐르도록 태양 위치(ox ~ 0.74w) 및 화면 상단 외곽(oy) 배치
-    const ox = w * 0.74, oy = -Math.max(60, h * 0.16);
+    // 태양 x 좌표(우측 0.76w)는 유지하고, 빛 효과 진행 방향을 좌우반전하여 우측 태양에서 좌측(텐트·숲길)으로 쏟아지도록 양수 각도 적용
+    const ox = w * 0.76, oy = -Math.max(60, h * 0.16);
 
     const breatheMain = Math.sin(this.time * 1.1);
     const breatheSub = Math.sin(this.time * 2.1 + 0.9);
@@ -3761,7 +3770,7 @@ class HeroCanvasController {
     const beamLength = h * (1.75 + breathePulse * 0.20);
     const sunGlowR = Math.min(w, h) * (0.72 + breathePulse * 0.12);
 
-    // 1. 우측 상단 1시 외곽에서 숲 전역으로 은은하게 쏟아지는 골드 샤이니 앰비언트 아우라
+    // 1. 우측 상단 태양 외곽에서 숲 전역으로 은은하게 쏟아지는 골드 샤이니 앰비언트 아우라
     const sunGrad = ctx.createRadialGradient(ox, oy, 20, ox, oy, sunGlowR);
     const coreAlpha = 0.42 + breathePulse * 0.18;
     sunGrad.addColorStop(0, `rgba(255, 255, 240, ${Math.min(1, coreAlpha * 1.35)})`);
@@ -3774,8 +3783,8 @@ class HeroCanvasController {
     ctx.arc(ox, oy, sunGlowR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. 1시에서 7시 방향(좌하단)으로 쏟아지는 6갈래 골드 샤이니 틴들 광선
-    const baseAngles = [-0.18, -0.30, -0.43, -0.56, -0.69, -0.82];
+    // 2. 우측에서 좌측으로(우상단 태양 → 좌하단 텐트·숲길) 쏟아지도록 좌우반전된 6갈래 골드 샤이니 틴들 광선
+    const baseAngles = [0.22, 0.36, 0.50, 0.65, 0.78, 0.92];
     const beamColors = [
       "rgba(255, 230, 120",
       "rgba(255, 245, 170",
@@ -3938,10 +3947,12 @@ class HeroCanvasController {
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 1. 하단 모닥불 발광 이미지 블렌드모드 합성 & 스케일/밝기 호흡 애니메이션
-    const cx = w * 0.52;
-    const cy = h * 0.92;
+    // 1. 하단 모닥불 발광 이미지: 밝은 블렌드모드(lighter) 합성 및 생동감 있는 화염 일렁임 연출
     const isMob = w < 640;
+    const flameSway = Math.sin(this.time * 6.2) * (isMob ? 1.8 : 3.2) + Math.cos(this.time * 11.4) * 1.2;
+    const flameLift = Math.sin(this.time * 8.5) * (isMob ? 1.5 : 2.8);
+    const cx = w * 0.52 + flameSway;
+    const cy = h * 0.92 + flameLift;
     const baseSize = Math.max(w * 0.95, h * 0.90, isMob ? 460 : 720);
 
     const breathe1 = Math.sin(this.time * 2.2);
@@ -3952,10 +3963,11 @@ class HeroCanvasController {
     const scale = 1.0 + firePulse * 0.14;
     const drawW = baseSize * scale;
     const drawH = baseSize * scale;
-    const alpha = Math.max(0.40, Math.min(1.0, 0.72 + firePulse * 0.28));
+    const alpha = Math.max(0.38, Math.min(0.85, 0.58 + firePulse * 0.24));
 
     ctx.save();
-    ctx.globalCompositeOperation = "screen"; // 블렌드모드로 합성 (검은 배경 투명화 및 발광 합성)
+    // 밝은 블렌드모드(lighter)로 화사하고 눈부시게 합성
+    ctx.globalCompositeOperation = "lighter";
     ctx.globalAlpha = alpha;
 
     const glowReady = this.bonfireGlowLoaded || (this.bonfireGlowImg && this.bonfireGlowImg.complete && this.bonfireGlowImg.naturalWidth > 0);
@@ -3975,7 +3987,7 @@ class HeroCanvasController {
     }
     ctx.restore();
 
-    // 2. 고온 불티 파티클 렌더링
+    // 2. 고온 불티 파티클 렌더링 (얇은 두께 배리에이션 & 날렵하고 섬세한 광선)
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
@@ -4014,7 +4026,7 @@ class HeroCanvasController {
 
       if (p.type === "spark") {
         ctx.strokeStyle = p.color;
-        ctx.lineWidth = p.size * 1.2;
+        ctx.lineWidth = Math.max(0.35, p.size * 0.9);
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
@@ -4022,7 +4034,7 @@ class HeroCanvasController {
         ctx.stroke();
 
         ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = Math.max(0.6, p.size * 0.5);
+        ctx.lineWidth = Math.max(0.20, p.size * 0.4);
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(p.x - p.vx * 1.6, p.y - p.vy * 1.8);
@@ -4041,18 +4053,18 @@ class HeroCanvasController {
         ctx.fillStyle = g;
 
         ctx.beginPath();
-        ctx.ellipse(0, 0, p.size * 0.85, p.len, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, Math.max(0.28, p.size * 0.45), p.len, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       } else {
-        const currentSize = Math.max(0.6, p.size * (0.4 + p.life * 0.5));
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
+        const currentSize = Math.max(0.32, p.size * (0.35 + p.life * 0.45));
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 1.5);
         g.addColorStop(0, "#ffffff");
         g.addColorStop(0.4, p.color);
         g.addColorStop(1, "rgba(255, 60, 0, 0)");
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize * 2.5, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, currentSize * 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
     }
