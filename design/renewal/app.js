@@ -2760,7 +2760,7 @@ class HeroCanvasController {
         break;
 
       case "warm-bonfire":
-        for (let i = 0; i < (isMob ? 50 : 80); i++) {
+        for (let i = 0; i < (isMob ? 65 : 95); i++) {
           this.particles.push(this.createEmbersParticle(w, h, true));
         }
         break;
@@ -3163,26 +3163,26 @@ class HeroCanvasController {
     const typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
 
-    // 굵기를 기존 대비 훨씬 얇은 쪽으로 배리에이션 (초미세 0.22~0.40, 미세 0.40~0.60, 표준 0.60~0.82)
-    const thinVariance = Math.random();
-    const baseThick = thinVariance < 0.50
-      ? (Math.random() * 0.18 + 0.22)
-      : thinVariance < 0.85
-      ? (Math.random() * 0.20 + 0.40)
-      : (Math.random() * 0.22 + 0.60);
+    // 크기 랜덤 스펙트럼 확대 (소형 0.8~1.4, 중형 1.4~2.4, 대형 2.4~3.6)
+    const rSize = Math.random();
+    const baseThick = rSize < 0.45
+      ? (Math.random() * 0.6 + 0.8)
+      : rSize < 0.85
+      ? (Math.random() * 1.0 + 1.4)
+      : (Math.random() * 1.2 + 2.4);
 
     return {
       type,
       x: originX,
       y: originY,
-      vx: (Math.random() - 0.5) * (type === "spark" ? 1.4 : 0.75),
+      vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85),
       vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.0,
       size: baseThick,
-      len: type === "spark" ? Math.random() * 7.0 + 3.0 : type === "capsule" ? Math.random() * 4.0 + 2.0 : 2,
+      len: type === "spark" ? Math.random() * 9.0 + 4.0 : type === "capsule" ? Math.random() * 6.0 + 3.0 : 3,
       angle: 0,
       life: initial ? Math.random() * 0.85 + 0.15 : 1,
-      decay: type === "spark" ? Math.random() * 0.0065 + 0.0035 : Math.random() * 0.0034 + 0.0018,
-      color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00",
+      decay: type === "spark" ? Math.random() * 0.0055 + 0.0030 : Math.random() * 0.0030 + 0.0016,
+      color: Math.random() < 0.38 ? "#ffffff" : Math.random() < 0.72 ? "#ffe082" : Math.random() < 0.90 ? "#ff9800" : "#ff4500",
       drift: Math.random() * Math.PI * 2
     };
   }
@@ -3199,11 +3199,11 @@ class HeroCanvasController {
         y: parent.y + (Math.random() - 0.5) * 6,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 0.45,
-        size: Math.max(0.20, parent.size * (Math.random() * 0.25 + 0.25)),
-        len: 2,
+        size: Math.max(0.6, parent.size * (Math.random() * 0.35 + 0.35)),
+        len: 2.5,
         angle: 0,
-        life: Math.random() * 0.28 + 0.42,
-        decay: Math.random() * 0.009 + 0.007,
+        life: Math.random() * 0.35 + 0.55,
+        decay: Math.random() * 0.008 + 0.005,
         color: parent.color,
         drift: Math.random() * Math.PI * 2,
         splitCooldown: 16
@@ -3947,27 +3947,25 @@ class HeroCanvasController {
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 1. 하단 모닥불 발광 이미지: 밝은 블렌드모드(lighter) 합성 및 생동감 있는 화염 일렁임 연출
+    // 1. 하단 모닥불 발광 이미지: 화로 바닥 고정 & overlay 블렌드로 깊이 있는 자연스러운 합성
     const isMob = w < 640;
-    const flameSway = Math.sin(this.time * 6.2) * (isMob ? 1.8 : 3.2) + Math.cos(this.time * 11.4) * 1.2;
-    const flameLift = Math.sin(this.time * 8.5) * (isMob ? 1.5 : 2.8);
-    const cx = w * 0.52 + flameSway;
-    const cy = h * 0.92 + flameLift;
+    const cx = w * 0.52;
+    const cy = h * 0.92;
     const baseSize = Math.max(w * 0.95, h * 0.90, isMob ? 460 : 720);
 
-    const breathe1 = Math.sin(this.time * 2.2);
-    const breathe2 = Math.sin(this.time * 4.5 + 1.1);
-    const flicker = Math.sin(this.time * 17.3) * Math.cos(this.time * 29.1);
+    const breathe1 = Math.sin(this.time * 2.0);
+    const breathe2 = Math.sin(this.time * 4.2 + 0.9);
+    const flicker = Math.sin(this.time * 16.5) * Math.cos(this.time * 27.2);
     const firePulse = breathe1 * 0.65 + breathe2 * 0.25 + flicker * 0.10;
 
-    const scale = 1.0 + firePulse * 0.14;
+    const scale = 1.0 + firePulse * 0.10;
     const drawW = baseSize * scale;
     const drawH = baseSize * scale;
-    const alpha = Math.max(0.38, Math.min(0.85, 0.58 + firePulse * 0.24));
+    const alpha = Math.max(0.60, Math.min(1.0, 0.82 + firePulse * 0.18));
 
     ctx.save();
-    // 밝은 블렌드모드(lighter)로 화사하고 눈부시게 합성
-    ctx.globalCompositeOperation = "lighter";
+    // overlay 블렌드모드로 배경 디테일을 살리면서 자연스럽고 깊이 있게 합성
+    ctx.globalCompositeOperation = "overlay";
     ctx.globalAlpha = alpha;
 
     const glowReady = this.bonfireGlowLoaded || (this.bonfireGlowImg && this.bonfireGlowImg.complete && this.bonfireGlowImg.naturalWidth > 0);
@@ -3987,7 +3985,7 @@ class HeroCanvasController {
     }
     ctx.restore();
 
-    // 2. 고온 불티 파티클 렌더링 (얇은 두께 배리에이션 & 날렵하고 섬세한 광선)
+    // 2. 고온 불티 파티클 렌더링 (랜덤 크기 스펙트럼 & 선명한 불투명도 유지)
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
@@ -4008,8 +4006,8 @@ class HeroCanvasController {
           if (!p.splitCooldown) {
             this.splitEmberParticle(p);
             p.splitCooldown = 24;
-            p.life *= 0.58;
-            p.size *= 0.78;
+            p.life *= 0.65;
+            p.size *= 0.85;
           }
           p.vx += this.mouse.vx * 0.08 + (dx / dist) * 0.45;
           p.vy -= 0.34;
@@ -4021,23 +4019,24 @@ class HeroCanvasController {
       p.drift += 0.018;
       p.vx *= 0.985;
 
-      const alpha = Math.min(1, p.life * 1.5);
+      // 투명도를 낮춰(불투명도 상향) 선명하게 잘 보이도록 처리
+      const alpha = Math.max(0.65, Math.min(1.0, 0.45 + p.life * 0.65));
       ctx.globalAlpha = alpha;
 
       if (p.type === "spark") {
         ctx.strokeStyle = p.color;
-        ctx.lineWidth = Math.max(0.35, p.size * 0.9);
+        ctx.lineWidth = Math.max(1.0, p.size * 1.25);
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 2.0, p.y - p.vy * 2.2);
+        ctx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.4);
         ctx.stroke();
 
         ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = Math.max(0.20, p.size * 0.4);
+        ctx.lineWidth = Math.max(0.55, p.size * 0.55);
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 1.6, p.y - p.vy * 1.8);
+        ctx.lineTo(p.x - p.vx * 1.7, p.y - p.vy * 1.9);
         ctx.stroke();
       } else if (p.type === "capsule") {
         ctx.save();
@@ -4047,24 +4046,25 @@ class HeroCanvasController {
 
         const g = ctx.createLinearGradient(0, -p.len, 0, p.len);
         g.addColorStop(0, "#ffffff");
-        g.addColorStop(0.35, p.color);
-        g.addColorStop(0.8, p.color);
+        g.addColorStop(0.3, p.color);
+        g.addColorStop(0.85, p.color);
         g.addColorStop(1, "rgba(255, 60, 0, 0)");
         ctx.fillStyle = g;
 
         ctx.beginPath();
-        ctx.ellipse(0, 0, Math.max(0.28, p.size * 0.45), p.len, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, Math.max(0.75, p.size * 0.75), p.len, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       } else {
-        const currentSize = Math.max(0.32, p.size * (0.35 + p.life * 0.45));
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 1.5);
+        const currentSize = Math.max(0.9, p.size * (0.6 + p.life * 0.5));
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.0);
         g.addColorStop(0, "#ffffff");
-        g.addColorStop(0.4, p.color);
+        g.addColorStop(0.35, p.color);
+        g.addColorStop(0.85, p.color);
         g.addColorStop(1, "rgba(255, 60, 0, 0)");
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize * 1.5, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, currentSize * 2.0, 0, Math.PI * 2);
         ctx.fill();
       }
     }
