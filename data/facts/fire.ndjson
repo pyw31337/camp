@@ -11077,8 +11077,8 @@
 {"cid":"osm-w489721338","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/489721338","at":"2026-11-21"}
 {"cid":"osm-w504443138","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/504443138","at":"2026-11-09"}
 {"cid":"osm-w504443138","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/504443138","at":"2026-11-09"}
-{"cid":"osm-w530808243","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/530808243","at":"2026-11-17"}
-{"cid":"osm-w530808243","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/530808243","at":"2026-11-17"}
+{"cid":"osm-w530808243","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/530808243","at":"2026-11-21"}
+{"cid":"osm-w530808243","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/530808243","at":"2026-11-21"}
 {"cid":"osm-w544146098","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/544146098","at":"2026-11-09"}
 {"cid":"osm-w544146098","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/544146098","at":"2026-11-09"}
 {"cid":"osm-w558646580","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/558646580","at":"2026-11-21"}

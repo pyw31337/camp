@@ -3764,7 +3764,7 @@
 {"cid":"osm-n12157043861","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12157043861","at":"2026-11-21"}
 {"cid":"osm-r7004603","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/7004603","at":"2026-11-17"}
 {"cid":"osm-r14696524","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/14696524","at":"2026-11-09"}
-{"cid":"osm-r15731759","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-17"}
+{"cid":"osm-r15731759","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-20"}
 {"cid":"osm-r16498361","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/16498361","at":"2026-11-09"}
 {"cid":"osm-r17862382","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/17862382","at":"2026-11-21"}
 {"cid":"osm-w38170879","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/38170879","at":"2026-11-21"}
