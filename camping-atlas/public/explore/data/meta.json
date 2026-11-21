@@ -554,7 +554,7 @@
       "label": "가을 단풍",
       "icon": "#l-leaf",
       "desc": "단풍 명소",
-      "count": 898
+      "count": 899
     },
     {
       "id": "winter",
@@ -610,7 +610,7 @@
       "label": "카라반",
       "icon": "#t-caravan",
       "desc": "카라반 숙박",
-      "count": 474
+      "count": 475
     },
     {
       "id": "auto",
@@ -650,7 +650,7 @@
       "label": "편의시설 완비",
       "icon": "#l-plug-zap",
       "desc": "전기·온수·장작·마트",
-      "count": 689
+      "count": 688
     },
     {
       "id": "wifi",
@@ -743,7 +743,7 @@
       },
       "EARLY_CHECKIN": {
         "official": 41,
-        "mention": 180
+        "mention": 179
       },
       "LATE_CHECKOUT": {
         "official": 30,

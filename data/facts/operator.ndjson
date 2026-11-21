@@ -19470,7 +19470,7 @@
 {"cid":"imjingak-peace-nuri","attr":"HOMEPAGE","value":"https://ggtour.or.kr/camping/","grade":"CONFIRMED","src":"dayuse_seed","url":"https://ggtour.or.kr/camping/","at":"2026-11-17"}
 {"cid":"imjingak-peace-nuri","attr":"HOMEPAGE","value":"https://ggtour.or.kr/camping/","grade":"CONFIRMED","src":"naver_local","url":"https://ggtour.or.kr/camping/","at":"2026-10-24T21:18:06.626Z","text":"숙박>캠핑,야영장"}
 {"cid":"imjingak-peace-nuri","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/156156716","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/156156716","at":"2026-10-24T21:10:38.623Z","text":"여행 > 숙박 > 야영,캠핑장"}
-{"cid":"imjingak-peace-nuri","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://ggtour.or.kr/camping/","at":"2026-11-17"}
+{"cid":"imjingak-peace-nuri","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://ggtour.or.kr/camping/","at":"2026-11-20"}
 {"cid":"imjingak-peace-nuri","attr":"PHONE","value":"031-956-8350","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/156156716","at":"2026-10-24T21:10:38.623Z"}
 {"cid":"loc-0b21b76f","attr":"PHONE","value":"0552713562","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
 {"cid":"loc-0b128b73","attr":"PHONE","value":"0416420556","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.920Z"}
@@ -20534,7 +20534,7 @@
 {"cid":"osm-w797557106","attr":"HOMEPAGE","value":"https://www.nannara.com/bbs/board.php?bo_table=board5&wr_id=33094","grade":"MENTION","src":"kakao_web","url":"https://www.nannara.com/bbs/board.php?bo_table=board5&wr_id=33094","at":"2026-10-24T21:15:23.690Z","quote":"34회 한국 임업전문인제34회 한국전문임업인 전국대회 행사 폐회영상 1.장소: 경기 광주시 곤지암도자공원"}
 {"cid":"osm-w797557106","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/797557106","at":"2026-11-09"}
 {"cid":"osm-w799013764","attr":"HOMEPAGE","value":"https://www.univ20.com/FunCalendar/Detail/137","grade":"MENTION","src":"kakao_web","url":"https://www.univ20.com/FunCalendar/Detail/137","at":"2026-10-24T21:15:19.807Z","quote":"국립세종수목원 X 카카오프렌즈 특별전시 - 세종"}
-{"cid":"osm-w799013764","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/799013764","at":"2026-11-17"}
+{"cid":"osm-w799013764","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/799013764","at":"2026-11-20"}
 {"cid":"osm-w800017934","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/22674541","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/22674541","at":"2026-10-24T21:17:21.977Z","text":"여행 > 관광,명소 > 자연휴양림"}
 {"cid":"osm-w800017934","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/800017934","at":"2026-11-21"}
 {"cid":"osm-w804101244","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/804101244","at":"2026-11-21"}

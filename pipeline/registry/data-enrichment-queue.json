@@ -95616,6 +95616,48 @@
       }
     },
     {
+      "id": "1384",
+      "name": "봉식이놀이터",
+      "sido": "경북",
+      "sigungu": "청도군",
+      "kind": "campground",
+      "priority": 128,
+      "gaps": [
+        "checkin",
+        "checkout",
+        "manner",
+        "nearby"
+      ],
+      "missing": [
+        "입실",
+        "퇴실",
+        "매너타임",
+        "주변 시설"
+      ],
+      "sources": [
+        "공공 표준·인허가 데이터",
+        "운영자 홈페이지·공지(robots 허용 경로)",
+        "TourAPI 공식 상세",
+        "LOCALDATA 인허가 파일",
+        "공공데이터포털 시설 표준데이터",
+        "주간 OSM 추출본(보조)"
+      ],
+      "current": {
+        "iq": null,
+        "has_photo": true,
+        "has_card_photo": true,
+        "has_booking": true,
+        "has_homepage": true
+      },
+      "collection": {
+        "last_social_at": "2026-11-19T09:29:00+09:00",
+        "last_web_at": null,
+        "next_social_due": "2026-12-03T00:29:00.000Z",
+        "next_web_due": null,
+        "priority_score": 20
+      }
+    },
+    {
       "id": "917",
       "name": "북한산 둥글이네 캠핑",
       "sido": "경기",
@@ -308423,6 +308465,48 @@
         "next_social_due": "2026-11-22T17:59:00.000Z",
         "next_web_due": null,
         "priority_score": 58
+      }
+    },
+    {
+      "id": "osm-w470895444",
+      "name": "함평자연생태공원",
+      "sido": "전남",
+      "sigungu": "함평군",
+      "kind": "day-use",
+      "priority": 78,
+      "gaps": [
+        "manner",
+        "booking",
+        "operator",
+        "contact"
+      ],
+      "missing": [
+        "매너타임",
+        "예약 경로",
+        "운영자 링크",
+        "연락처"
+      ],
+      "sources": [
+        "공공 표준·인허가 데이터",
+        "운영자 홈페이지·공지(robots 허용 경로)",
+        "TourAPI 공식 상세",
+        "운영자 홈페이지·예약 안내",
+        "지자체 공개 안내",
+        "이용자 제보 후 원문 확인"
+      ],
+      "current": {
+        "iq": 14,
+        "has_photo": true,
+        "has_card_photo": true,
+        "has_booking": false,
+        "has_homepage": false
+      },
+      "collection": {
+        "last_social_at": "2026-11-07T08:10:00+09:00",
+        "last_web_at": null,
+        "next_social_due": "2026-11-20T23:10:00.000Z",
+        "next_web_due": null,
+        "priority_score": 41
       }
     },
     {

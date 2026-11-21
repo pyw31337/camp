@@ -2936,8 +2936,8 @@
 {"cid":"8041","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-11-21T08:59:00+09:00"}
 {"cid":"8041","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-11-21T08:59:00+09:00"}
 {"cid":"8041","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8042","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-17T10:52:00+09:00"}
-{"cid":"8042","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-17T10:52:00+09:00"}
+{"cid":"8042","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-20T09:37:00+09:00"}
+{"cid":"8042","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-20T09:37:00+09:00"}
 {"cid":"8042","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8045","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-21T08:59:00+09:00"}
 {"cid":"8045","attr":"BOOKING_CHANNEL","value":"naver-cafe","grade":"CONFIRMED","src":"gocamping","text":"네이버 카페(운영자 카페 예약)","at":"2026-11-21T08:59:00+09:00"}
