@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-17T03:47:04.422Z",
-  "count": 3119,
+  "generated_at": "2026-11-21T18:27:14.330Z",
+  "count": 3129,
   "sources": [
     {
       "id": "gocamping",
       "name": "한국관광공사 고캠핑",
       "url": "https://www.data.go.kr/data/15101933/openapi.do",
       "tier": "A",
-      "fetched_at": "2026-11-17T10:52:00+09:00"
+      "fetched_at": "2026-11-21T23:44:00+09:00"
     },
     {
       "id": "pilot-condition-facts",
@@ -21,35 +21,35 @@
       "name": "행정안전부 공중화장실정보 · OpenStreetMap",
       "url": "https://file.localdata.go.kr/file/public_restroom_info/info",
       "tier": "A",
-      "fetched_at": "2026-11-17T10:59:00+09:00"
+      "fetched_at": "2026-11-21T23:44:00+09:00"
     },
     {
       "id": "tour-fees",
       "name": "한국관광공사 TourAPI 소개정보(안내 요금 문구)",
       "url": "https://www.data.go.kr/data/15101578/openapi.do",
       "tier": "B",
-      "fetched_at": "2026-11-17T12:43:00+09:00"
+      "fetched_at": "2026-11-22T01:32:00+09:00"
     },
     {
       "id": "seoul-yeyak",
       "name": "서울시 공공서비스예약 정보(접수 상태)",
       "url": "https://data.seoul.go.kr/dataList/OA-20497/S/1/datasetView.do",
       "tier": "A",
-      "fetched_at": "2026-11-17T03:46:40.695Z"
+      "fetched_at": "2026-11-21T16:32:45.182Z"
     },
     {
       "id": "nearby",
       "name": "주변 정보: 한국관광공사 TourAPI · OpenStreetMap(ODbL) · 도로공사/졸음쉼터",
       "url": "https://www.openstreetmap.org/copyright",
       "tier": "B",
-      "fetched_at": "2026-11-17T12:42:00+09:00"
+      "fetched_at": "2026-11-22T01:32:00+09:00"
     },
     {
       "id": "calendar",
       "name": "렛츠 캠핑 예약 규칙 레지스트리",
       "url": "https://github.com/pyw31337/camp/blob/main/pipeline/registry/booking-rules.json",
       "tier": "B",
-      "fetched_at": "2026-11-17T01:52:12.822Z"
+      "fetched_at": "2026-11-21T14:44:11.208Z"
     }
   ],
   "providers": [
@@ -219,30 +219,6 @@
         }
       ],
       "events": [
-        {
-          "type": "OPEN",
-          "at": "2026-11-18T09:00:00+09:00",
-          "time_known": true,
-          "label": "국립자연휴양림 비수기 주중 선착순 오픈",
-          "stay": {
-            "from": "2026-12-28",
-            "to": "2027-01-03",
-            "day_types": [
-              "SUN",
-              "MON",
-              "TUE",
-              "WED",
-              "THU"
-            ]
-          },
-          "needs_verification": false,
-          "source": {
-            "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
-            "title": "숲나들e 자주 묻는 질문 — 주중 예약",
-            "checked_at": "2026-10-12",
-            "tier": "B"
-          }
-        },
         {
           "type": "OPEN",
           "at": "2026-11-25T09:00:00+09:00",
@@ -466,6 +442,30 @@
             "checked_at": "2026-10-12",
             "tier": "C"
           }
+        },
+        {
+          "type": "OPEN",
+          "at": "2027-01-06T09:00:00+09:00",
+          "time_known": true,
+          "label": "국립자연휴양림 비수기 주중 선착순 오픈",
+          "stay": {
+            "from": "2027-02-15",
+            "to": "2027-02-21",
+            "day_types": [
+              "SUN",
+              "MON",
+              "TUE",
+              "WED",
+              "THU"
+            ]
+          },
+          "needs_verification": false,
+          "source": {
+            "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+            "title": "숲나들e 자주 묻는 질문 — 주중 예약",
+            "checked_at": "2026-10-12",
+            "tier": "B"
+          }
         }
       ]
     },
@@ -498,7 +498,7 @@
       "label": "계곡 옆",
       "icon": "#l-waves",
       "desc": "계곡을 끼고 있는 캠핑장",
-      "count": 1062
+      "count": 1066
     },
     {
       "id": "sea",
@@ -506,7 +506,7 @@
       "label": "바다·섬",
       "icon": "#l-sailboat",
       "desc": "해변·섬 입지, 해수욕 가능",
-      "count": 468
+      "count": 469
     },
     {
       "id": "forest",
@@ -514,7 +514,7 @@
       "label": "숲속",
       "icon": "#l-trees",
       "desc": "숲 입지, 그늘 많은 사이트",
-      "count": 1035
+      "count": 1038
     },
     {
       "id": "lake",
@@ -522,7 +522,7 @@
       "label": "호수·강변",
       "icon": "#l-droplets",
       "desc": "호수·강 입지, 물멍",
-      "count": 685
+      "count": 683
     },
     {
       "id": "mountain",
@@ -530,7 +530,7 @@
       "label": "산 속",
       "icon": "#l-mountain",
       "desc": "산 입지, 별 보기 좋은 곳",
-      "count": 1225
+      "count": 1226
     },
     {
       "id": "city",
@@ -538,7 +538,7 @@
       "label": "도심 근교",
       "icon": "#l-building-2",
       "desc": "도심 입지, 가볍게 1박",
-      "count": 181
+      "count": 183
     },
     {
       "id": "summer",
@@ -546,7 +546,7 @@
       "label": "여름 물놀이",
       "icon": "#l-sun",
       "desc": "물놀이장·계곡·수상레저",
-      "count": 1599
+      "count": 1600
     },
     {
       "id": "autumn",
@@ -562,7 +562,7 @@
       "label": "겨울 눈꽃",
       "icon": "#l-snowflake",
       "desc": "눈꽃·스키, 동계 운영",
-      "count": 443
+      "count": 442
     },
     {
       "id": "spring",
@@ -570,7 +570,7 @@
       "label": "봄꽃",
       "icon": "#l-flower-2",
       "desc": "봄꽃 여행지",
-      "count": 628
+      "count": 627
     },
     {
       "id": "sunrise",
@@ -586,7 +586,7 @@
       "label": "아이와 함께",
       "icon": "#l-baby",
       "desc": "놀이터·트램펄린·물놀이장",
-      "count": 1669
+      "count": 1671
     },
     {
       "id": "pet",
@@ -594,7 +594,7 @@
       "label": "반려견 동반",
       "icon": "#l-dog",
       "desc": "반려동물 출입 가능",
-      "count": 1135
+      "count": 1137
     },
     {
       "id": "glamping",
@@ -602,7 +602,7 @@
       "label": "글램핑",
       "icon": "#l-bed-double",
       "desc": "장비 없이 몸만",
-      "count": 647
+      "count": 649
     },
     {
       "id": "caravan",
@@ -618,7 +618,7 @@
       "label": "오토캠핑",
       "icon": "#l-car",
       "desc": "차를 사이트 옆에",
-      "count": 836
+      "count": 837
     },
     {
       "id": "trailer",
@@ -634,7 +634,7 @@
       "label": "낚시",
       "icon": "#l-fish",
       "desc": "낚시 가능",
-      "count": 529
+      "count": 531
     },
     {
       "id": "walk",
@@ -642,7 +642,7 @@
       "label": "걷기·산책",
       "icon": "#l-footprints",
       "desc": "산책로·걷기길",
-      "count": 1534
+      "count": 1535
     },
     {
       "id": "comfort",
@@ -658,7 +658,7 @@
       "label": "와이파이",
       "icon": "#l-wifi",
       "desc": "무선인터넷",
-      "count": 1520
+      "count": 1521
     },
     {
       "id": "public",
@@ -674,49 +674,49 @@
       "label": "온라인 실시간 예약",
       "icon": "#l-zap",
       "desc": "바로 예약 가능",
-      "count": 1694
+      "count": 1695
     }
   ],
   "stats": {
-    "with_booking_url": 1414,
-    "online_realtime": 1701,
-    "with_fee_text": 2675,
+    "with_booking_url": 1413,
+    "online_realtime": 1703,
+    "with_fee_text": 2672,
     "with_nearby_toilet": 990,
-    "with_image": 2333,
-    "with_intro": 1632,
+    "with_image": 2335,
+    "with_intro": 1639,
     "with_seoul_status": 6,
     "seoul_services": 27,
-    "with_products": 4,
-    "with_social": 7736,
+    "with_products": 5,
+    "with_social": 7761,
     "with_self_hosted_photo": 0,
-    "with_nearby": 3112,
-    "field_conditions": 6409,
-    "electricity_registered": 2461,
+    "with_nearby": 3121,
+    "field_conditions": 6429,
+    "electricity_registered": 2455,
     "shelter_setup_registered": 0,
-    "site_size_registered": 1079,
-    "ground_registered": 1588,
-    "naver_booking_channel": 410,
-    "camfit_booking_channel": 211,
+    "site_size_registered": 1076,
+    "ground_registered": 1590,
+    "naver_booking_channel": 412,
+    "camfit_booking_channel": 210,
     "official_notice_camps": 0,
     "official_notice_items": 0,
     "verified_condition_facts": 21,
-    "surveyed_condition_facts": 2208,
-    "confirmed_condition_facts": 4180,
-    "parking_tent_side": 1234,
-    "parking_cart_required": 149,
-    "parking_shared": 21,
-    "power_high_w": 62,
-    "firewood_allowed": 2579,
+    "surveyed_condition_facts": 2236,
+    "confirmed_condition_facts": 4172,
+    "parking_tent_side": 1241,
+    "parking_cart_required": 143,
+    "parking_shared": 23,
+    "power_high_w": 63,
+    "firewood_allowed": 2588,
     "firewood_prohibited": 274,
-    "private_bathroom": 475,
-    "kids_play_features": 3488,
-    "with_house_rules": 611,
-    "with_no_tags": 2180,
+    "private_bathroom": 479,
+    "kids_play_features": 3499,
+    "with_house_rules": 612,
+    "with_no_tags": 2182,
     "with_notices": 167
   },
-  "updated_at": "2026-11-17T03:48:47.613Z",
+  "updated_at": "2026-11-21T18:29:18.894Z",
   "operator_site_facts": {
-    "generated_at": "2026-11-17T03:48:48.193Z",
+    "generated_at": "2026-11-21T18:29:19.391Z",
     "campgrounds": 199,
     "w": 58,
     "pk": 61,
@@ -729,17 +729,17 @@
     "sites_read": 912
   },
   "spec_sheet": {
-    "generated_at": "2026-11-17T03:48:48.442Z",
-    "campgrounds_with_spec": 3139,
-    "roundup_reviews_skipped": 8708,
+    "generated_at": "2026-11-21T18:29:19.649Z",
+    "campgrounds_with_spec": 3145,
+    "roundup_reviews_skipped": 9054,
     "fields": {
       "CHECKIN_TIME": {
         "official": 755,
-        "mention": 2618
+        "mention": 2633
       },
       "CHECKOUT_TIME": {
         "official": 743,
-        "mention": 2566
+        "mention": 2582
       },
       "EARLY_CHECKIN": {
         "official": 41,
@@ -747,51 +747,51 @@
       },
       "LATE_CHECKOUT": {
         "official": 30,
-        "mention": 114
+        "mention": 115
       },
       "MANNER_TIME": {
         "official": 579,
-        "mention": 1825
+        "mention": 1829
       },
       "MIN_STAY": {
         "official": 23,
-        "mention": 89
+        "mention": 87
       },
       "EXTRA_PERSON_FEE": {
         "official": 170,
-        "mention": 276
+        "mention": 268
       },
       "EXTRA_CAR_FEE": {
         "official": 48,
-        "mention": 81
+        "mention": 78
       },
       "VISITOR_POLICY": {
         "official": 29,
-        "mention": 38
+        "mention": 34
       },
       "PET_POLICY": {
         "official": 419,
-        "mention": 1458
+        "mention": 1439
       },
       "PARKING": {
         "official": 323,
-        "mention": 540
+        "mention": 534
       },
       "POWER_W": {
         "official": 515,
-        "mention": 268
+        "mention": 280
       },
       "POWER_MAX_A": {
         "official": 2,
         "mention": 1
       },
       "SITE_SIZE": {
-        "official": 258,
-        "mention": 380
+        "official": 257,
+        "mention": 390
       },
       "REFUND_POLICY": {
         "official": 584,
-        "mention": 43
+        "mention": 46
       },
       "RENTAL": {
         "official": 7,
@@ -799,188 +799,188 @@
       },
       "DISCOUNT": {
         "official": 9,
-        "mention": 73
+        "mention": 67
       },
       "PROMOTION": {
         "official": 0,
-        "mention": 3
+        "mention": 4
       }
     }
   },
   "review_digest": {
-    "generated_at": "2026-11-17T03:49:06.021Z",
-    "campgrounds": 3948,
-    "with_pros": 3504,
-    "with_cons": 1060,
-    "reviews": 74803,
-    "sanity_dropped": 1198
+    "generated_at": "2026-11-21T18:29:38.048Z",
+    "campgrounds": 3966,
+    "with_pros": 3514,
+    "with_cons": 1042,
+    "reviews": 75843,
+    "sanity_dropped": 1223
   },
   "nearby_licensed": {
-    "generated_at": "2026-11-17T03:49:10.028Z",
-    "campgrounds": 6370,
-    "details": 6365
+    "generated_at": "2026-11-21T18:29:41.954Z",
+    "campgrounds": 6367,
+    "details": 6362
   },
   "profiles": {
-    "generated_at": "2026-11-17T03:49:15.178Z",
-    "total": 6409,
+    "generated_at": "2026-11-21T18:29:46.992Z",
+    "total": 6429,
     "fields": {
       "TYPE": {
-        "any": 2282,
-        "facts": 2282
+        "any": 2286,
+        "facts": 2286
       },
       "CHECKIN": {
-        "any": 2572,
+        "any": 2587,
         "facts": 564
       },
       "CHECKOUT": {
-        "any": 2537,
-        "facts": 559
+        "any": 2551,
+        "facts": 560
       },
       "MANNER": {
-        "any": 1898,
+        "any": 1901,
         "facts": 352
       },
       "PRICE": {
         "any": 2463,
-        "facts": 512
+        "facts": 529
       },
       "EXTRA_FEE": {
-        "any": 534,
+        "any": 523,
         "facts": 215
       },
       "POWER": {
-        "any": 497,
+        "any": 502,
         "facts": 302
       },
       "PARKING": {
         "any": 1820,
-        "facts": 1335
+        "facts": 1338
       },
       "FIRE": {
-        "any": 2433,
-        "facts": 2433
+        "any": 2437,
+        "facts": 2437
       },
       "CAR_CAMPING": {
         "any": 16,
         "facts": 16
       },
       "PET": {
-        "any": 2873,
-        "facts": 2643
+        "any": 2877,
+        "facts": 2647
       },
       "SITE": {
+        "any": 1781,
+        "facts": 1781
+      },
+      "SANITARY": {
         "any": 1780,
         "facts": 1780
       },
-      "SANITARY": {
-        "any": 1778,
-        "facts": 1778
-      },
       "AMENITIES": {
-        "any": 2450,
-        "facts": 2450
+        "any": 2455,
+        "facts": 2455
       },
       "SEASON": {
-        "any": 2473,
-        "facts": 2473
+        "any": 2476,
+        "facts": 2476
       },
       "REFUND": {
-        "any": 665,
-        "facts": 638
+        "any": 667,
+        "facts": 637
       },
       "BOOKING": {
-        "any": 4459,
-        "facts": 4459
+        "any": 4470,
+        "facts": 4470
       },
       "REVIEW": {
-        "any": 3948,
+        "any": 3966,
         "facts": 0
       }
     },
     "tags": {
-      "VALLEY": 649,
-      "AUTO": 836,
-      "FAMILY": 1809,
-      "SITE_PARKING": 1232,
-      "WATER_PLAY": 1408,
-      "WINTER": 1887,
-      "HIGH_POWER": 54,
-      "PET_OK": 1280,
-      "MOUNTAIN": 1232,
-      "FOREST": 1028,
-      "REVIEW_QUIET": 1168,
-      "CITY": 181,
-      "RIVER": 355,
-      "CARAVAN": 474,
-      "REVIEW_VIEW": 200,
+      "VALLEY": 652,
+      "FAMILY": 1812,
+      "PET_OK": 1283,
+      "WATER_PLAY": 1411,
+      "MOUNTAIN": 1234,
+      "FOREST": 1031,
+      "CITY": 183,
+      "GLAMPING": 649,
       "BEACH": 373,
+      "AUTO": 837,
+      "SITE_PARKING": 1237,
+      "WINTER": 1888,
+      "REVIEW_QUIET": 1191,
+      "REVIEW_VIEW": 211,
+      "CARAVAN": 474,
+      "RIVER": 354,
+      "HIGH_POWER": 55,
       "ISLAND": 87,
-      "GLAMPING": 647,
       "LAKE": 145,
-      "REVIEW_HOST": 23,
+      "REVIEW_HOST": 24,
       "REVIEW_CLEAN": 25,
       "FIREWOOD": 26,
       "CAR_CAMPING": 8
     },
     "facts_distribution": {
-      "0-5": 4017,
+      "0-5": 4032,
       "6-9": 1885,
-      "10-13": 392,
+      "10-13": 397,
       "14-18": 115
     },
     "price": {
-      "published": 2429,
-      "operator": 512,
-      "mention": 1917
+      "published": 2430,
+      "operator": 529,
+      "mention": 1901
     }
   },
   "coverage": {
-    "measured_at": "2026-11-17T03:51:10.670Z",
-    "total": 7724,
+    "measured_at": "2026-11-21T18:31:32.081Z",
+    "total": 7747,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 3163,
-        "confirmed": 637
+        "any": 3178,
+        "confirmed": 657
       },
       "checkin": {
-        "any": 3013,
-        "confirmed": 790
+        "any": 3032,
+        "confirmed": 789
       },
       "checkout": {
-        "any": 2980,
+        "any": 3000,
         "confirmed": 781
       },
       "manner": {
-        "any": 2287,
+        "any": 2310,
         "confirmed": 593
       },
       "extra_fee": {
-        "any": 575,
+        "any": 588,
         "confirmed": 217
       },
       "refund": {
-        "any": 882,
+        "any": 886,
         "confirmed": 847
       },
       "parking": {
-        "any": 3183,
-        "confirmed": 3173
+        "any": 3216,
+        "confirmed": 3200
       },
       "power_w": {
-        "any": 784,
+        "any": 795,
         "confirmed": 537
       },
       "site_types": {
-        "any": 3644,
-        "confirmed": 2721
+        "any": 3663,
+        "confirmed": 2730
       },
       "reviews": {
-        "any": 4520,
+        "any": 4546,
         "confirmed": 0
       },
       "rich5": {
-        "any": 2451,
+        "any": 2484,
         "confirmed": 0
       }
     }
