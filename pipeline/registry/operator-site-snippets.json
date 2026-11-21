@@ -6118,7 +6118,7 @@
    "name": "글램비글램핑",
    "status": "FETCH_FAILED",
    "url": "https://www.glambcamp.com",
-   "checked_at": "2026-11-20T19:36:35.340Z",
+   "checked_at": "2026-11-21T06:59:54.017Z",
    "error": "403"
   },
   "448": {
@@ -10775,7 +10775,7 @@
    "name": "느티나무 캠핑장",
    "status": "NO_RELEVANT_TEXT",
    "url": "https://campblox.co.kr/home",
-   "checked_at": "2026-11-20T19:36:35.305Z",
+   "checked_at": "2026-11-21T06:59:53.983Z",
    "pages": [
     "https://campblox.co.kr/home"
    ],
@@ -39603,7 +39603,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-20T19:36:37.260Z",
+   "checked_at": "2026-11-21T06:59:56.303Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39972,10 +39972,10 @@
      }
     },
     {
-     "text": "18 원주두리캠핑장 수영장 이용수칙 및 안내 원주두리캠핑 2024-05-17 1183",
+     "text": "18 원주두리캠핑장 수영장 이용수칙 및 안내 원주두리캠핑 2024-05-17 1184",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "18 원주두리캠핑장 수영장 이용수칙 및 안내 원주두리캠핑 2024-05-17 1183"
+      "text": "18 원주두리캠핑장 수영장 이용수칙 및 안내 원주두리캠핑 2024-05-17 1184"
      }
     },
     {
@@ -110851,7 +110851,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-20T19:36:35.337Z",
+   "checked_at": "2026-11-21T06:59:54.014Z",
    "error": "404"
   },
   "100126": {
@@ -176990,7 +176990,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-20T19:36:37.545Z",
+   "checked_at": "2026-11-21T06:59:56.339Z",
    "error": "403"
   },
   "101270": {
@@ -225562,7 +225562,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "DISCOVERED_NOT_OPERATOR",
    "url": "https://campingfriend.co.kr/listing-camp-detail/9414",
-   "checked_at": "2026-11-20T19:36:37.148Z",
+   "checked_at": "2026-11-21T06:59:56.187Z",
    "discovered": true,
    "check": {
     "ok": false,
@@ -225957,7 +225957,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-20T19:36:35.338Z",
+    "at": "2026-11-21T06:59:54.015Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -263072,6 +263072,6 @@
    }
   }
  },
- "generated_at": "2026-11-20T19:36:49.817Z",
+ "generated_at": "2026-11-21T07:00:10.516Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
