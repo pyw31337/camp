@@ -5,8 +5,9 @@
 set -uo pipefail
 URL="${2:-http://127.0.0.1:8765/}"
 for i in $(seq 1 30); do curl -sf -o /dev/null "$URL" && break; sleep 1; done
+TEST_TIMEOUT_SECONDS="${PW_TEST_TIMEOUT_SECONDS:-180}"
 for a in 1 2; do
-  node "$@" && exit 0
+  timeout --foreground "$TEST_TIMEOUT_SECONDS" node "$@" && exit 0
   echo "::warning::$(basename "$1") ${a}회차 실패 — $([ $a = 1 ] && echo '한 번 더 시도합니다' || echo '두 번 모두 실패')"
   sleep 5
 done
