@@ -95562,6 +95562,48 @@
       }
     },
     {
+      "id": "1384",
+      "name": "봉식이놀이터",
+      "sido": "경북",
+      "sigungu": "청도군",
+      "kind": "campground",
+      "priority": 128,
+      "gaps": [
+        "checkin",
+        "checkout",
+        "manner",
+        "nearby"
+      ],
+      "missing": [
+        "입실",
+        "퇴실",
+        "매너타임",
+        "주변 시설"
+      ],
+      "sources": [
+        "공공 표준·인허가 데이터",
+        "운영자 홈페이지·공지(robots 허용 경로)",
+        "TourAPI 공식 상세",
+        "LOCALDATA 인허가 파일",
+        "공공데이터포털 시설 표준데이터",
+        "주간 OSM 추출본(보조)"
+      ],
+      "current": {
+        "iq": null,
+        "has_photo": true,
+        "has_card_photo": true,
+        "has_booking": true,
+        "has_homepage": true
+      },
+      "collection": {
+        "last_social_at": "2026-11-19T09:29:00+09:00",
+        "last_web_at": null,
+        "next_social_due": "2026-12-03T00:29:00.000Z",
+        "next_web_due": null,
+        "priority_score": 20
+      }
+    },
+    {
       "id": "917",
       "name": "북한산 둥글이네 캠핑",
       "sido": "경기",
@@ -153203,7 +153245,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 20,
+        "iq": 21,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -311223,7 +311265,7 @@
       "id": "park-29140-00005-qakga",
       "name": "중앙공원",
       "sido": "광주",
-      "sigungu": "서구",
+      "sigungu": "북구",
       "kind": "day-use",
       "priority": 71,
       "gaps": [
@@ -311260,10 +311302,10 @@
       }
     },
     {
-      "id": "osm-w298721515",
-      "name": "중앙탑사적공원",
-      "sido": "충북",
-      "sigungu": "충주시",
+      "id": "osm-n9548742587",
+      "name": "웰리힐리파크 워터플래닛",
+      "sido": "강원",
+      "sigungu": "횡성군",
       "kind": "day-use",
       "priority": 71,
       "gaps": [
@@ -311300,8 +311342,8 @@
       }
     },
     {
-      "id": "park-41150-00001-1v57i",
-      "name": "직동근린공원",
+      "id": "osm-w743442248",
+      "name": "율곡습지공원",
       "sido": "경기",
       "sigungu": "의정부시",
       "kind": "day-use",

@@ -554,9 +554,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 5,
+    "campgrounds": 6,
     "by_grade": {
-     "MENTION": 4,
+     "MENTION": 5,
      "OPERATOR": 1
     }
    }
@@ -1760,9 +1760,9 @@
    "review_label": "가족·모임 힐링",
    "pref": "‘가족·모임 힐링’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1032,
+    "campgrounds": 1024,
     "by_grade": {
-     "MENTION": 1032
+     "MENTION": 1024
     }
    }
   },
@@ -1840,9 +1840,9 @@
    "review_label": "계곡·물놀이 좋음",
    "pref": "‘계곡·물놀이 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 895,
+    "campgrounds": 896,
     "by_grade": {
-     "MENTION": 895
+     "MENTION": 896
     }
    }
   },
@@ -2064,9 +2064,9 @@
    "review_label": "온수 약함",
    "pref": "‘온수 약함’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 37,
+    "campgrounds": 36,
     "by_grade": {
-     "MENTION": 37
+     "MENTION": 36
     }
    }
   },

@@ -15477,8 +15477,8 @@
 {"cid":"osm-r14567012","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/14567012","at":"2026-11-22"}
 {"cid":"osm-r14567012","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/14567012","at":"2026-11-22"}
 {"cid":"osm-r14696524","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/14696524","at":"2026-11-09"}
-{"cid":"osm-r15731759","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-17"}
-{"cid":"osm-r15731759","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-17"}
+{"cid":"osm-r15731759","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-20"}
+{"cid":"osm-r15731759","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-20"}
 {"cid":"osm-r17271545","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/17271545","at":"2026-11-09"}
 {"cid":"osm-r17862382","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://yongsanparkstory.kr/type2_facility_info","at":"2026-10-24T23:02:33.913Z","quote":"어린이 실내 놀이터"}
 {"cid":"osm-r17862382","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/17862382","at":"2026-11-22"}
@@ -15619,7 +15619,7 @@
 {"cid":"osm-w498838783","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/498838783","at":"2026-11-17"}
 {"cid":"osm-w503475828","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/503475828","at":"2026-11-17"}
 {"cid":"osm-w504443138","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/504443138","at":"2026-11-09"}
-{"cid":"osm-w507038971","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/507038971","at":"2026-11-17"}
+{"cid":"osm-w507038971","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/507038971","at":"2026-11-21"}
 {"cid":"osm-w508048299","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/508048299","at":"2026-11-09"}
 {"cid":"osm-w510594453","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/510594453","at":"2026-11-22"}
 {"cid":"osm-w514521820","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/514521820","at":"2026-11-22"}
