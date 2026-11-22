@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-22T06:39:47.637Z",
+ "generated_at": "2026-11-22T23:35:15.002Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -3524,7 +3524,7 @@
    "homepage": null
   },
   "441": {
-   "checked_at": "2026-11-22T06:39:44.621Z",
+   "checked_at": "2026-11-22T23:35:12.241Z",
    "place": {
     "id": "24943507",
     "name": "글램비글램핑",
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-22T06:39:44.644Z",
+   "checked_at": "2026-11-22T23:35:12.242Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8547,7 +8547,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-22T06:39:44.644Z",
+   "checked_at": "2026-11-22T23:35:12.243Z",
    "place": null,
    "candidates": [
     {
@@ -17856,7 +17856,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-22T06:39:46.972Z",
+   "checked_at": "2026-11-22T23:35:14.499Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46400,7 +46400,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-22T06:39:46.189Z",
+   "checked_at": "2026-11-22T23:35:13.664Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49716,7 +49716,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-22T06:39:45.726Z",
+   "checked_at": "2026-11-22T23:35:13.489Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59858,7 +59858,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-22T06:39:46.445Z",
+   "checked_at": "2026-11-22T23:35:13.940Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63119,7 +63119,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-22T06:39:46.514Z",
+   "checked_at": "2026-11-22T23:35:14.020Z",
    "place": null,
    "candidates": [
     {
@@ -64716,7 +64716,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-22T06:39:45.736Z",
+   "checked_at": "2026-11-22T23:35:13.538Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76891,7 +76891,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-22T06:39:47.126Z",
+   "checked_at": "2026-11-22T23:35:14.556Z",
    "place": null,
    "candidates": [
     {
@@ -81214,7 +81214,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-22T06:39:44.645Z",
+   "checked_at": "2026-11-22T23:35:13.076Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83181,7 +83181,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-22T06:39:45.960Z",
+   "checked_at": "2026-11-22T23:35:13.597Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88515,7 +88515,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-22T06:39:45.692Z",
+   "checked_at": "2026-11-22T23:35:13.253Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95287,7 +95287,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-22T06:39:46.202Z",
+   "checked_at": "2026-11-22T23:35:13.902Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96216,7 +96216,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-22T06:39:45.480Z",
+   "checked_at": "2026-11-22T23:35:13.185Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114605,7 +114605,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-22T06:39:46.942Z",
+   "checked_at": "2026-11-22T23:35:14.425Z",
    "place": null,
    "candidates": [
     {
@@ -114754,7 +114754,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-22T06:39:46.663Z",
+   "checked_at": "2026-11-22T23:35:14.306Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115571,7 +115571,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-22T06:39:46.929Z",
+   "checked_at": "2026-11-22T23:35:14.367Z",
    "place": null,
    "candidates": [
     {
@@ -118566,7 +118566,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-22T06:39:46.653Z",
+   "checked_at": "2026-11-22T23:35:14.082Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
@@ -207652,6 +207652,29 @@
      ]
     }
    ],
+   "needs_homepage": true,
+   "homepage": null
+  },
+  "loc-872363c1": {
+   "checked_at": "2026-11-22T23:35:12.209Z",
+   "place": {
+    "id": "664000785",
+    "name": "범바위포레스트",
+    "category": "여행 > 숙박 > 야영,캠핑장 > 글램핑장",
+    "phone": "010-2844-6555",
+    "road_address": "경기 김포시 대곶면 종생로 154",
+    "address": "경기 김포시 대곶면 율생리 184-1",
+    "url": "http://place.map.kakao.com/664000785",
+    "x": 126.599850077041,
+    "y": 37.6421992034043,
+    "match": {
+     "score": 95,
+     "name": 1,
+     "phone": false,
+     "distance_m": 63
+    }
+   },
+   "candidates": [],
    "needs_homepage": true,
    "homepage": null
   }
