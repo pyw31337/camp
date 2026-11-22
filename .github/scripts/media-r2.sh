@@ -15,7 +15,12 @@ set -euo pipefail
 cmd="${1:-}"; shift || true
 
 configured() { [ -n "${R2_ACCOUNT_ID:-}" ] && [ -n "${R2_ACCESS_KEY_ID:-}" ] && [ -n "${R2_SECRET_ACCESS_KEY:-}" ] && [ -n "${R2_BUCKET:-}" ] && [ -n "${R2_PUBLIC_BASE:-}" ]; }
-if [ "$cmd" = "on" ]; then configured && exit 0 || exit 1; fi
+if [ "$cmd" = "on" ]; then
+  if ! configured; then exit 1; fi
+  if r2_available; then exit 0; fi
+  echo "::warning::R2 자격 증명 또는 버킷 권한을 확인할 수 없습니다. 사진 저장소만 일시 중지합니다." >&2
+  exit 1
+fi
 if ! configured; then echo "R2 설정 없음 — 건너뜀($cmd)"; exit 0; fi
 
 export AWS_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
@@ -24,11 +29,18 @@ export AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_RESPONSE_CHECKSUM_VALI
 EP="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
 S3="s3://${R2_BUCKET}"
 aws_s3() { aws s3 "$@" --endpoint-url "$EP" --only-show-errors; }
+# 자격 증명이 만료되었거나 다른 계정/버킷을 가리키면 수집 작업 전체를 실패시키지 않고
+# 사진 저장소만 일시 중지한다. 쓰기 작업은 호출부가 이 확인을 통과한 경우에만 실행한다.
+r2_available() { aws s3 ls "$S3/" --endpoint-url "$EP" --only-show-errors >/dev/null 2>&1; }
 list_keys() { aws s3 ls "$S3/" --recursive --endpoint-url "$EP" | awk '{ $1=$2=$3=""; sub(/^ +/, ""); print }' | grep -E '\.webp$' | sort -u || true; }
 
 case "$cmd" in
   pull)
     dir="$1"; prefix="${2:-}"
+    if ! r2_available; then
+      echo "::warning::R2 접근 실패(Unauthorized/만료 키). 기존 media 브랜치 사진으로 계속합니다." >&2
+      exit 0
+    fi
     aws_s3 sync "$S3/${prefix}" "$dir/${prefix}" --exclude "*.json"
     echo "R2 → $dir/${prefix}: $(find "$dir/${prefix}" -name '*.webp' | wc -l)장"
     ;;
