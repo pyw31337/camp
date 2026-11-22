@@ -75,6 +75,7 @@
 {"cid":"140","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"140","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"140","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"141","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"141","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"141","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"142","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -129,6 +130,7 @@
 {"cid":"277","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"277","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"277","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"289","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"289","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"289","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"301","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -154,7 +156,7 @@
 {"cid":"343","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"343","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"343","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"344","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"344","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"344","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"344","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"349","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -353,7 +355,7 @@
 {"cid":"703","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"703","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"703","attr":"TOILET_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"704","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"704","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"704","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"704","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"710","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -455,7 +457,7 @@
 {"cid":"881","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"881","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"887","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","at":"2026-06-30T00:00:00+09:00"}
-{"cid":"889","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"889","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"889","attr":"SHOWER_COUNT","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"889","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"902","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -493,7 +495,10 @@
 {"cid":"948","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"948","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"948","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"953","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"953","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"960","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"960","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"960","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"960","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"964","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -521,6 +526,7 @@
 {"cid":"1032","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1032","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1032","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1038","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"1040","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1040","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1040","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -575,7 +581,7 @@
 {"cid":"1139","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1139","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1139","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1141","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"1141","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"1141","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1141","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1142","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
@@ -682,6 +688,9 @@
 {"cid":"1370","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1370","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1370","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1384","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"1384","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1384","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1389","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1389","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1389","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -813,6 +822,7 @@
 {"cid":"1681","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1681","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1681","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1682","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1682","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1682","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1684","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -941,7 +951,7 @@
 {"cid":"1986","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1986","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1987","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1993","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"1993","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1993","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://camping.asanfmc.or.kr/main/index.php?m_cd=6","at":"2026-10-20T00:59:00.619Z","quote":"화장실 3개소 (남2/여2/장애인2) 남녀 구분 및 장애인 전용 화장실 구비"}
 {"cid":"1993","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1993","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -982,6 +992,7 @@
 {"cid":"2063","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2063","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2063","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2078","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2078","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2078","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
@@ -991,6 +1002,9 @@
 {"cid":"2081","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2081","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2081","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"2109","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2114","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -1006,9 +1020,9 @@
 {"cid":"2121","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2121","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2121","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2124","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"2124","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2124","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2124","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","at":"2024-07-01T00:00:00+09:00"}
+{"cid":"2124","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping","at":"2024-07-01T00:00:00+09:00"}
+{"cid":"2124","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping","at":"2024-07-01T00:00:00+09:00"}
 {"cid":"2143","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2143","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2143","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -1121,6 +1135,7 @@
 {"cid":"2439","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2439","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2439","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2445","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2445","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2445","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2459","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -1150,7 +1165,6 @@
 {"cid":"2487","attr":"SHOWER_COUNT","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2487","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2488","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"2488","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2488","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2488","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2489","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -1422,6 +1436,9 @@
 {"cid":"2999","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"3004","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"3005","attr":"SHOWER_COUNT","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"TOILET_COUNT","value":28,"grade":"CONFIRMED","src":"gocamping"}
@@ -1646,6 +1663,7 @@
 {"cid":"3436","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3436","attr":"TOILET_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3440","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"3440","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3440","attr":"SHOWER_COUNT","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3440","attr":"TOILET_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3445","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -1737,12 +1755,14 @@
 {"cid":"3605","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://tglamping.co.kr/wp/?page_id=703","at":"2026-10-20T01:19:51.255Z","quote":"형태 : 1,2층 취침공간 + 개별바베큐장 + 개별화장실, 샤워실, 계수대"}
 {"cid":"3605","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3619","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"3619","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3622","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"3622","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3622","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3627","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"3627","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3627","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3633","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"3633","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3633","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3636","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -1803,7 +1823,7 @@
 {"cid":"6842","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"6842","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6842","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6856","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"6856","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"6856","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6856","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6857","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -1864,6 +1884,7 @@
 {"cid":"6998","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"6998","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6998","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6999","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7008","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.forestcamp1.co.kr/sub/menu4_2.php","at":"2026-10-20T00:58:13.893Z","quote":"남,여 화장실 각 4개 샤워실각2, 개수대5개, 수영장2, 전기 ,온수"}
 {"cid":"7008","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"7025","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -1991,7 +2012,6 @@
 {"cid":"7155","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7155","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7157","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"7157","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7157","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7157","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7160","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2050,7 +2070,7 @@
 {"cid":"7208","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7208","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7208","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7209","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"7209","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7209","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7209","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7210","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2102,6 +2122,7 @@
 {"cid":"7254","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7254","attr":"SHOWER_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7254","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7255","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7256","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7256","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7256","attr":"TOILET_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
@@ -2110,12 +2131,13 @@
 {"cid":"7272","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7272","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7272","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7288","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7305","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7314","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7318","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/board/lists/b_id/1","at":"2026-10-20T01:28:53.225Z","quote":"샤워장 온수사용에 관한 공지"}
 {"cid":"7318","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"7344","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"7344","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7344","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","at":"2024-09-19T00:00:00+09:00"}
+{"cid":"7344","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping","at":"2024-09-19T00:00:00+09:00"}
 {"cid":"7353","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7353","attr":"SHOWER_COUNT","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"TOILET_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
@@ -2171,6 +2193,7 @@
 {"cid":"7509","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7528","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7528","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7539","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7539","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7541","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7541","attr":"SHOWER_COUNT","value":12,"grade":"CONFIRMED","src":"gocamping"}
@@ -2217,6 +2240,7 @@
 {"cid":"7603","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7606","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7607","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"7607","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7607","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7607","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7613","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2237,6 +2261,7 @@
 {"cid":"7639","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7639","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7639","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7640","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7642","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7642","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7642","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -2415,6 +2440,7 @@
 {"cid":"7907","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7907","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7908","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"7908","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7908","attr":"SHOWER_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7908","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7909","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2429,7 +2455,6 @@
 {"cid":"7916","attr":"SHOWER_COUNT","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7916","attr":"TOILET_COUNT","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7925","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"7925","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7925","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7925","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7926","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--oi2bjk57hrxi90pg6fs9b.kr/page/facilityInformation/caravanFacility.html","at":"2026-10-20T01:00:35.021Z","quote":"(가스식 고효율 순간 온수기 : 20,000BTU)"}
@@ -2473,7 +2498,7 @@
 {"cid":"7961","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7961","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7961","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7963","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"7963","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"7963","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7963","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7966","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2545,7 +2570,6 @@
 {"cid":"8030","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8030","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8031","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"8031","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8031","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8031","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8032","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2554,7 +2578,7 @@
 {"cid":"8033","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"8033","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8033","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8034","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"8034","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"8034","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8034","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8034","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
@@ -2629,6 +2653,7 @@
 {"cid":"8109","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8111","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"8113","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"8113","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8113","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8113","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8118","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2930,6 +2955,7 @@
 {"cid":"100242","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100243","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100246","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"100246","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100246","attr":"SHOWER_COUNT","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100246","attr":"TOILET_COUNT","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100247","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -2981,7 +3007,7 @@
 {"cid":"100270","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100270","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100270","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100271","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100271","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100271","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100271","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100272","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -3161,17 +3187,15 @@
 {"cid":"100356","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100356","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100357","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"100357","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100357","attr":"SHOWER_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100357","attr":"TOILET_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100358","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"100358","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100358","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100358","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100360","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"100361","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"100361","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100361","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100361","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","at":"2026-11-16T00:00:00+09:00"}
+{"cid":"100361","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping","at":"2026-11-16T00:00:00+09:00"}
+{"cid":"100361","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping","at":"2026-11-16T00:00:00+09:00"}
 {"cid":"100362","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100362","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100362","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -3304,6 +3328,7 @@
 {"cid":"100443","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100443","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100444","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100444","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100445","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100447","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100447","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -3410,7 +3435,7 @@
 {"cid":"100494","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100497","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100498","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"100500","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"100500","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100500","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100500","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100502","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -3567,6 +3592,7 @@
 {"cid":"100592","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100594","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100594","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100595","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100595","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100596","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -3789,6 +3815,7 @@
 {"cid":"100709","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100709","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100710","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100710","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100712","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100713","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -3810,6 +3837,7 @@
 {"cid":"100722","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100722","attr":"SHOWER_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100722","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100724","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100725","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100727","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100727","attr":"SHOWER_COUNT","value":17,"grade":"CONFIRMED","src":"gocamping"}
@@ -3824,6 +3852,7 @@
 {"cid":"100731","attr":"SHOWER_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100731","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100733","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100733","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100733","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100733","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100735","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -3997,6 +4026,7 @@
 {"cid":"100833","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100835","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100836","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100836","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100837","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100837","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100837","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
@@ -4049,9 +4079,10 @@
 {"cid":"100863","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100864","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100864","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100865","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100865","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100865","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100865","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100866","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100868","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100868","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100868","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
@@ -4069,7 +4100,7 @@
 {"cid":"100876","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100876","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100876","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100877","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100877","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100877","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100877","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100878","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033","at":"2026-10-16T09:00:00+09:00","text":"제공"}
@@ -4090,6 +4121,7 @@
 {"cid":"100885","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100885","attr":"SHOWER_COUNT","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100885","attr":"TOILET_COUNT","value":11,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100886","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100887","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.forestbada.com/theseaintheforest/introduction.html","at":"2026-10-20T01:24:04.675Z","quote":"사이드풀과 유아풀은 온수로 운영됩니다."}
 {"cid":"100887","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100887","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4105,6 +4137,7 @@
 {"cid":"100894","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100894","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100895","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100895","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100895","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100895","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100899","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4206,7 +4239,7 @@
 {"cid":"100956","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100956","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--bj0bw8g2qao8jzna54yflj2q7aejc.com/","at":"2026-10-20T01:24:21.600Z","quote":"개별 화장실과 최고급 호텔 침대&침구를 구비하고 있습니다."}
 {"cid":"100956","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100960","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"100960","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100961","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100961","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100961","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
@@ -4229,6 +4262,7 @@
 {"cid":"100969","attr":"SHOWER_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100969","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100970","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100970","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100970","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100970","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100971","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4266,7 +4300,7 @@
 {"cid":"100991","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100991","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100991","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100993","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100993","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100993","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100993","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100994","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4317,7 +4351,7 @@
 {"cid":"101016","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101016","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101016","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101018","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"101018","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101018","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101018","attr":"TOILET_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101022","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4487,6 +4521,7 @@
 {"cid":"101102","attr":"SHOWER_COUNT","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101102","attr":"TOILET_COUNT","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101103","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101103","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101103","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101103","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101105","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4544,7 +4579,6 @@
 {"cid":"101136","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101138","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101139","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101139","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101139","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101139","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101140","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4704,7 +4738,7 @@
 {"cid":"101202","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101202","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101205","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101206","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101206","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"101206","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bn1bu2ffze55bt2gquibh63ie2vwma012d.com/","at":"2026-10-20T01:20:27.825Z","quote":"개별 화장실"}
 {"cid":"101206","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101206","attr":"SHOWER_COUNT","value":17,"grade":"CONFIRMED","src":"gocamping"}
@@ -4856,7 +4890,6 @@
 {"cid":"101267","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101267","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101268","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"TOILET_COUNT","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101269","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4889,7 +4922,6 @@
 {"cid":"101281","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101282","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101283","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101283","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101283","attr":"SHOWER_COUNT","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101283","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101284","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -4923,15 +4955,16 @@
 {"cid":"101307","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-20T01:28:46.275Z","quote":"개별화장실, 초대형존"}
 {"cid":"101307","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101309","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101309","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101311","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101311","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101311","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101312","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101312","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101312","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101313","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101313","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101313","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101313","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","at":"2025-12-19T00:00:00+09:00"}
+{"cid":"101313","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping","at":"2025-12-19T00:00:00+09:00"}
+{"cid":"101313","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping","at":"2025-12-19T00:00:00+09:00"}
 {"cid":"101314","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101314","attr":"SHOWER_COUNT","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101314","attr":"TOILET_COUNT","value":9,"grade":"CONFIRMED","src":"gocamping"}
@@ -4940,7 +4973,6 @@
 {"cid":"101315","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101316","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101317","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101317","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101317","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101317","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101319","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
@@ -4949,7 +4981,7 @@
 {"cid":"101322","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101322","attr":"SHOWER_COUNT","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101322","attr":"TOILET_COUNT","value":16,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101323","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101323","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"101323","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101323","attr":"SHOWER_COUNT","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101323","attr":"TOILET_COUNT","value":12,"grade":"CONFIRMED","src":"gocamping"}
@@ -5018,7 +5050,6 @@
 {"cid":"101358","attr":"TOILET_COUNT","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101359","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101360","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101360","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101360","attr":"SHOWER_COUNT","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101360","attr":"TOILET_COUNT","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101361","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -5308,12 +5339,12 @@
 {"cid":"101499","attr":"SHOWER_COUNT","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101499","attr":"TOILET_COUNT","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101500","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101501","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101504","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101504","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101504","attr":"SHOWER_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101504","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101507","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101507","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101507","attr":"SHOWER_COUNT","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101507","attr":"TOILET_COUNT","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101508","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://joypark24h.com/","at":"2026-10-20T01:14:31.088Z","quote":"미온수풀 선셋 수영장"}
@@ -5362,7 +5393,7 @@
 {"cid":"101527","attr":"SHOWER_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101527","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101532","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://8seasons.co.kr/","at":"2026-10-20T01:15:50.922Z","quote":"· 온수탱크 용량 한계로, 샤워 시 20분이내 사용을 권장합니다."}
-{"cid":"101532","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101532","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"101534","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101534","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101534","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
@@ -5388,6 +5419,7 @@
 {"cid":"101555","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101556","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101556","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101557","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101558","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101559","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101559","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
@@ -5407,6 +5439,7 @@
 {"cid":"101570","attr":"SHOWER_COUNT","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101570","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101574","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101574","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101574","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101574","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101579","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5530,7 +5563,7 @@
 {"cid":"101648","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101648","attr":"SHOWER_COUNT","value":23,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101648","attr":"TOILET_COUNT","value":23,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101649","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
+{"cid":"101649","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101649","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101649","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101651","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5620,6 +5653,7 @@
 {"cid":"101727","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101727","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101728","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101728","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101728","attr":"SHOWER_COUNT","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101728","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101729","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://glam365.co.kr/contents/reserve1.html","at":"2026-10-16T05:35:06.467Z","quote":"온수는 연속 사용 시 온도가 낮아질 수 있으며, 일정 시간이 지나면 다시 데워지니 사용 시 참고해 주세요."}
@@ -5675,7 +5709,6 @@
 {"cid":"101768","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101768","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101769","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101769","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101769","attr":"SHOWER_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101769","attr":"TOILET_COUNT","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101770","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5686,12 +5719,12 @@
 {"cid":"101772","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101772","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101773","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"101774","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101775","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101775","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101775","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101775","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101776","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101776","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101776","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"101776","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101776","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5707,6 +5740,7 @@
 {"cid":"101782","attr":"TOILET_COUNT","value":36,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101784","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101784","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101785","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101785","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101788","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101789","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5782,6 +5816,7 @@
 {"cid":"101861","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101861","attr":"SHOWER_COUNT","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101861","attr":"TOILET_COUNT","value":12,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101862","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101862","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101862","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101864","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5799,6 +5834,7 @@
 {"cid":"101877","attr":"TOILET_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101878","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101878","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101879","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101880","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101880","attr":"SHOWER_COUNT","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101880","attr":"TOILET_COUNT","value":7,"grade":"CONFIRMED","src":"gocamping"}
@@ -5826,7 +5862,6 @@
 {"cid":"101898","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101898","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101899","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101899","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101899","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101899","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101901","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5858,6 +5893,7 @@
 {"cid":"101926","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101926","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101926","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101927","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101928","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://ongillglamping.com/reserve","at":"2026-10-20T01:06:49.138Z","quote":"이용금액 : 미온수(1박당) 70,000원"}
 {"cid":"101928","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101930","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5915,7 +5951,7 @@
 {"cid":"101971","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101971","attr":"SHOWER_COUNT","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101971","attr":"TOILET_COUNT","value":20,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101972","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101972","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101973","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101973","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101973","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
@@ -5926,7 +5962,6 @@
 {"cid":"101977","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101977","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101978","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"101978","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101978","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101978","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101980","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -5948,6 +5983,7 @@
 {"cid":"101991","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"101991","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101991","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101992","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101993","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101993","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101993","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -6200,6 +6236,7 @@
 {"cid":"102349","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"102349","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102350","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"102350","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102353","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102353","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102355","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -6217,58 +6254,71 @@
 {"cid":"102383","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"102383","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102391","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"osm-n10651918639","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-11-17","text":"제공"}
+{"cid":"102396","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"102396","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102396","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"osm-n9548742587","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9548742587","at":"2026-11-22","text":"제공"}
+{"cid":"osm-n10651918639","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-11-22","text":"제공"}
 {"cid":"osm-r15731759","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-17","text":"제공"}
-{"cid":"osm-w256957045","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957045","at":"2026-11-17"}
-{"cid":"osm-w470895444","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/470895444","at":"2026-11-17"}
+{"cid":"osm-w256957045","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957045","at":"2026-11-22"}
+{"cid":"osm-w469664946","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469664946","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w470895444","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/470895444","at":"2026-11-22"}
 {"cid":"osm-w472545129","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/472545129","at":"2026-11-17","text":"제공"}
 {"cid":"osm-w474196879","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474196879","at":"2026-11-17"}
-{"cid":"osm-w477417220","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/477417220","at":"2026-11-17"}
 {"cid":"osm-w504443138","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/504443138","at":"2026-11-09"}
-{"cid":"osm-w597824354","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/597824354","at":"2026-11-17","text":"제공"}
+{"cid":"osm-w510594453","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/510594453","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w597824354","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/597824354","at":"2026-11-22","text":"제공"}
 {"cid":"osm-w618430553","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/618430553","at":"2026-11-09"}
-{"cid":"osm-w682668137","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-11-17","text":"제공"}
-{"cid":"osm-w682668137","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-11-17"}
-{"cid":"osm-w692391492","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/692391492","at":"2026-11-17","text":"제공"}
-{"cid":"osm-w734439882","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/734439882","at":"2026-11-17","text":"제공"}
+{"cid":"osm-w651840236","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/651840236","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w682668137","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w682668137","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-11-22"}
+{"cid":"osm-w692391492","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/692391492","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w734439882","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/734439882","at":"2026-11-22","text":"제공"}
 {"cid":"osm-w858869210","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/858869210","at":"2026-11-09","text":"제공"}
 {"cid":"osm-w892201616","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-11-09","text":"제공"}
 {"cid":"osm-w894062894","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/894062894","at":"2026-11-17","text":"제공"}
-{"cid":"osm-w979805595","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-11-17","text":"제공"}
+{"cid":"osm-w979805595","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w1093816518","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1093816518","at":"2026-11-22","text":"제공"}
 {"cid":"osm-w1103368287","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-11-09"}
 {"cid":"osm-w1171495739","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1171495739","at":"2026-11-17"}
+{"cid":"osm-w1187215466","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1187215466","at":"2026-11-22","text":"제공"}
 {"cid":"osm-w1222300575","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.buan.go.kr/julpoman/index.buan?menuCd=DOM_000001605002000000","at":"2026-10-24T23:02:20.485Z","quote":"개수대 (온수 O)"}
-{"cid":"osm-w1222300575","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1222300575","at":"2026-11-17","text":"제공"}
+{"cid":"osm-w1222300575","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1222300575","at":"2026-11-22","text":"제공"}
 {"cid":"osm-w1271038845","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.ecopoolvilla.com/special.php?special_no=6","at":"2026-10-24T23:06:42.190Z","quote":"개별 온수 수영장"}
-{"cid":"osm-w1271038845","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1271038845","at":"2026-11-17","text":"제공"}
-{"cid":"osm-w1289814941","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1289814941","at":"2026-11-17","text":"제공"}
-{"cid":"osm-w1317056367","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1317056367","at":"2026-11-09","text":"제공"}
-{"cid":"osm-w1428441822","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1428441822","at":"2026-11-17","text":"제공"}
+{"cid":"osm-w1271038845","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1271038845","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w1289814941","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1289814941","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w1317056367","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1317056367","at":"2026-11-22","text":"제공"}
+{"cid":"osm-w1428441822","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1428441822","at":"2026-11-22","text":"제공"}
 {"cid":"osm-w1447606327","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1447606327","at":"2026-11-09","text":"제공"}
-{"cid":"osm-w1562524233","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-17","text":"제공"}
+{"cid":"osm-w1562524233","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-22","text":"제공"}
 {"cid":"park-11290-00052-sx2ge","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-09","text":"제공"}
+{"cid":"park-11320-00001-v47ih","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
 {"cid":"park-11380-00037-sx2ge","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-09","text":"제공"}
-{"cid":"park-11470-00053-1fjvz","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-11530-00001-zfqdi","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
+{"cid":"park-11470-00053-1fjvz","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-11530-00001-zfqdi","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
 {"cid":"park-11530-00066-5wdj2","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-28170-00023-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
+{"cid":"park-11710-00035-zysz","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-28170-00023-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-30170-00108-rrohw","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-30170-00108-rrohw","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22"}
 {"cid":"park-41210-00077-rbxi0","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-09","text":"제공"}
-{"cid":"park-41287-00038-s41g5","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-41360-00010-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-41370-00144-1pwmg","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"24시간"}
+{"cid":"park-41287-00038-s41g5","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-41360-00010-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-41370-00144-1pwmg","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"24시간"}
 {"cid":"park-41390-00093-paypg","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-09","text":"제공"}
-{"cid":"park-41550-00046-pdncm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-41800-00003-18ggn","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17"}
-{"cid":"park-41820-00003-1aik1","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-46720-00017-qyk2p","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
+{"cid":"park-41550-00046-pdncm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-41800-00003-18ggn","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22"}
+{"cid":"park-41820-00003-1aik1","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-46230-00042-y1qz","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22"}
+{"cid":"park-46720-00017-qyk2p","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
 {"cid":"park-46770-00014-qc3lb","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-09","text":"제공"}
-{"cid":"park-47150-02012-ryh2u","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-09","text":"제공"}
-{"cid":"park-47250-00002-n71qm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-47290-00055-1at47","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-48820-00001-n71qm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-51210-00038-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-52111-00082-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
-{"cid":"park-52130-00001-pythb","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-17","text":"제공"}
+{"cid":"park-47150-02012-ryh2u","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-47250-00002-n71qm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-47290-00055-1at47","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-48820-00001-n71qm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-51210-00038-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-52111-00082-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
+{"cid":"park-52130-00001-pythb","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-22","text":"제공"}
 {"cid":"pilot-002-sureui","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00","text":"24시간"}
 {"cid":"pilot-002-sureui","attr":"SHOWER_COUNT","value":4,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-002-sureui","attr":"TOILET_COUNT","value":6,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
@@ -6278,6 +6328,9 @@
 {"cid":"pilot-004-haengun","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00","text":"24시간"}
 {"cid":"pilot-004-haengun","attr":"SHOWER_COUNT","value":4,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","attr":"TOILET_COUNT","value":4,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"pilot-006-yeonin-valley","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley","at":"2026-10-15T09:00:00+09:00","text":"24시간"}
+{"cid":"pilot-006-yeonin-valley","attr":"SHOWER_COUNT","value":4,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"pilot-006-yeonin-valley","attr":"TOILET_COUNT","value":6,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-007-soeggol","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00","text":"24시간"}
 {"cid":"pilot-007-soeggol","attr":"SHOWER_COUNT","value":6,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-007-soeggol","attr":"TOILET_COUNT","value":8,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00"}
@@ -6290,10 +6343,10 @@
 {"cid":"pilot-014-dutasan","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00","text":"제공"}
 {"cid":"pilot-014-dutasan","attr":"SHOWER_COUNT","value":1,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"pilot-014-dutasan","attr":"TOILET_COUNT","value":1,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
-{"cid":"rf-1qroeie","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-17"}
-{"cid":"rf-1qtu3gf","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-17"}
+{"cid":"rf-1qroeie","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-22"}
+{"cid":"rf-1qtu3gf","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-22"}
 {"cid":"rf-7o15ds","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-09"}
-{"cid":"rf-14i1rvd","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-17"}
+{"cid":"rf-14i1rvd","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-22"}
 {"cid":"rf-enl4wf","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-09"}
 {"cid":"rf-kfbqip","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-17"}
-{"cid":"rf-qw604l","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-17"}
+{"cid":"rf-qw604l","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-22"}
