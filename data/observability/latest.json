@@ -1,0 +1,36 @@
+{
+  "schema": "lets_observability_v1",
+  "run_id": "camp-20261122T055257Z",
+  "observed_at": "2026-11-22T05:52:57.031800+00:00",
+  "service_id": "camp",
+  "source": "persisted_campground_catalog",
+  "stages": {
+    "collect": {
+      "status": "success",
+      "ok": 7740,
+      "artifact": true
+    },
+    "analyze": {
+      "status": "success",
+      "ok": 261553
+    },
+    "quality": {
+      "status": "degraded",
+      "quality_issue_count": 123
+    },
+    "publish": {
+      "status": "success",
+      "artifact": true
+    }
+  },
+  "counts": {
+    "records": 7740,
+    "facts": 261553,
+    "increment": null
+  },
+  "artifacts": {
+    "catalog": "50ebfbde4cc76e7f4f2300625347c537dee271f489b4186b372b2a1edc2e1735",
+    "quality": "0c6208d45bb8ee7e1bb25a7c4944ccaa29b9c9a2c3add8d42cabb659c55b8d5e"
+  },
+  "note": "Persisted campground catalog and quality snapshot; no daily increment inferred."
+}
