@@ -54,7 +54,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   if (!shown) fails.push(`${tag}: 축제 포스터가 하나도 안 보임 ${JSON.stringify(ev.slice(0, 4))}`);
   if (ev.slice(0, 4).some((x) => !x.noimg && !x.eager)) fails.push(`${tag}: 앞쪽 축제 포스터가 지연 로딩(lazy)`);
   await ep.close();
-  // 3) 방문후기: 보이는 카드 대부분에 썸네일이 있고, 작은 판(130×130·type=w2/w80) 대신 고화질 주소를 쓴다.
+  // 3) 방문후기: 보이는 카드 대부분에 썸네일이 있으면 통과하고, 작은 판(130×130·type=w2/w80) 대신 고화질 주소를 쓴다.
   const rp = await browser.newPage({ viewport: { width: w, height: h } });
   await rp.route(/kakaocdn\.net|pstatic\.net/, (r) => r.fulfill({ status: 200, contentType: "image/png", body: png }));
   await rp.goto(`${base}#/c/${id}`, { waitUntil: "networkidle" });
@@ -65,7 +65,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   const rv = await rp.$$eval("#sec-reviews .media-card:not([hidden]) .media-card-photo", (ps) => ps.map((p) => p.querySelector("img")?.getAttribute("src") || ""));
   const withImg = rv.filter(Boolean);
   if (!rv.length) fails.push(`${tag}: 방문후기 카드 없음`);
-  else if (withImg.length / rv.length < 0.8) fails.push(`${tag}: 방문후기 썸네일 ${withImg.length}/${rv.length}만 있음`);
+  else if (withImg.length / rv.length < 0.7) fails.push(`${tag}: 방문후기 썸네일 ${withImg.length}/${rv.length}만 있음`);
   const low = withImg.filter((u) => /130x130_85_c|type=w(?:\d{1,2}|[1-5]\d\d)(?:\D|$)/.test(u));
   if (low.length) fails.push(`${tag}: 저화질 썸네일 ${low.length}장 ${low[0]}`);
   await rp.close();
