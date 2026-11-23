@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T23:40:13.262Z",
+  "generated_at": "2026-11-23T23:00:10.012Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -28,7 +28,7 @@
       "status": "OK",
       "name": "글램비글램핑",
       "url": "http://www.glambcamp.com/",
-      "checked_at": "2026-11-22T23:41:07.480Z",
+      "checked_at": "2026-11-23T23:01:04.827Z",
       "pages": [
         "http://www.glambcamp.com/",
         "https://www.glambcamp.com/information",
@@ -429,7 +429,7 @@
       "status": "OK",
       "name": "느티나무 캠핑장",
       "url": "https://theneuti.imweb.me/",
-      "checked_at": "2026-11-22T23:40:35.357Z",
+      "checked_at": "2026-11-23T23:00:31.811Z",
       "pages": [
         "https://theneuti.imweb.me/",
         "https://theneuti.imweb.me/faq",
@@ -2681,7 +2681,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-11-22T23:40:42.296Z",
+      "checked_at": "2026-11-23T23:00:39.212Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
