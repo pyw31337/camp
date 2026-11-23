@@ -432,7 +432,7 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 4168,
+    "campgrounds": 4169,
     "by_grade": {
      "CONFIRMED": 4056,
      "MENTION": 1559,
@@ -554,9 +554,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 5,
+    "campgrounds": 6,
     "by_grade": {
-     "MENTION": 4,
+     "MENTION": 5,
      "OPERATOR": 1
     }
    }
@@ -2064,9 +2064,9 @@
    "review_label": "온수 약함",
    "pref": "‘온수 약함’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 37,
+    "campgrounds": 36,
     "by_grade": {
-     "MENTION": 37
+     "MENTION": 36
     }
    }
   },
