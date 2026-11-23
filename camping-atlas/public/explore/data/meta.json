@@ -821,117 +821,117 @@
     "details": 6365
   },
   "profiles": {
-    "generated_at": "2026-11-17T03:49:15.178Z",
-    "total": 6409,
+    "generated_at": "2026-11-23T09:26:41.683Z",
+    "total": 7740,
     "fields": {
       "TYPE": {
-        "any": 2282,
-        "facts": 2282
+        "any": 2317,
+        "facts": 2317
       },
       "CHECKIN": {
-        "any": 2572,
-        "facts": 564
+        "any": 2631,
+        "facts": 576
       },
       "CHECKOUT": {
-        "any": 2537,
-        "facts": 559
+        "any": 2596,
+        "facts": 570
       },
       "MANNER": {
-        "any": 1898,
-        "facts": 352
+        "any": 1956,
+        "facts": 360
       },
       "PRICE": {
-        "any": 2463,
-        "facts": 512
+        "any": 4010,
+        "facts": 516
       },
       "EXTRA_FEE": {
-        "any": 534,
-        "facts": 215
+        "any": 566,
+        "facts": 217
       },
       "POWER": {
-        "any": 497,
-        "facts": 302
+        "any": 516,
+        "facts": 310
       },
       "PARKING": {
-        "any": 1820,
-        "facts": 1335
+        "any": 1884,
+        "facts": 1358
       },
       "FIRE": {
-        "any": 2433,
-        "facts": 2433
+        "any": 3743,
+        "facts": 3743
       },
       "CAR_CAMPING": {
-        "any": 16,
-        "facts": 16
+        "any": 17,
+        "facts": 17
       },
       "PET": {
-        "any": 2873,
-        "facts": 2643
+        "any": 4197,
+        "facts": 3954
       },
       "SITE": {
-        "any": 1780,
-        "facts": 1780
+        "any": 1810,
+        "facts": 1810
       },
       "SANITARY": {
-        "any": 1778,
-        "facts": 1778
+        "any": 1808,
+        "facts": 1808
       },
       "AMENITIES": {
-        "any": 2450,
-        "facts": 2450
+        "any": 3762,
+        "facts": 3762
       },
       "SEASON": {
-        "any": 2473,
-        "facts": 2473
+        "any": 3784,
+        "facts": 3784
       },
       "REFUND": {
-        "any": 665,
-        "facts": 638
+        "any": 680,
+        "facts": 651
       },
       "BOOKING": {
-        "any": 4459,
-        "facts": 4459
+        "any": 4941,
+        "facts": 4941
       },
       "REVIEW": {
-        "any": 3948,
+        "any": 4359,
         "facts": 0
       }
     },
     "tags": {
-      "VALLEY": 649,
-      "AUTO": 836,
-      "FAMILY": 1809,
-      "SITE_PARKING": 1232,
-      "WATER_PLAY": 1408,
-      "WINTER": 1887,
-      "HIGH_POWER": 54,
-      "PET_OK": 1280,
-      "MOUNTAIN": 1232,
-      "FOREST": 1028,
-      "REVIEW_QUIET": 1168,
-      "CITY": 181,
-      "RIVER": 355,
-      "CARAVAN": 474,
-      "REVIEW_VIEW": 200,
-      "BEACH": 373,
+      "VALLEY": 664,
+      "AUTO": 848,
+      "FAMILY": 1841,
+      "SITE_PARKING": 1260,
+      "WATER_PLAY": 1431,
+      "WINTER": 3191,
+      "HIGH_POWER": 55,
+      "PET_OK": 2578,
+      "MOUNTAIN": 2524,
+      "FOREST": 2314,
+      "REVIEW_QUIET": 1219,
+      "CITY": 184,
+      "RIVER": 359,
+      "GLAMPING": 656,
+      "CARAVAN": 480,
+      "REVIEW_VIEW": 211,
+      "BEACH": 380,
       "ISLAND": 87,
-      "GLAMPING": 647,
-      "LAKE": 145,
-      "REVIEW_HOST": 23,
+      "LAKE": 146,
+      "REVIEW_HOST": 22,
       "REVIEW_CLEAN": 25,
       "FIREWOOD": 26,
-      "CAR_CAMPING": 8
+      "CAR_CAMPING": 9
     },
     "facts_distribution": {
-      "0-5": 4017,
-      "6-9": 1885,
-      "10-13": 392,
-      "14-18": 115
+      "0-5": 5285,
+      "6-9": 1932,
+      "10-13": 402,
+      "14-18": 121
     },
     "price": {
-      "published": 2429,
-      "operator": 512,
-      "mention": 1917
+      "published": 3942,
+      "operator": 516,
+      "mention": 3426
     }
   },
   "coverage": {
