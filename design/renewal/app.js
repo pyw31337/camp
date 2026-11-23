@@ -3160,13 +3160,13 @@ class HeroCanvasController {
     const typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
 
-    // 크기 랜덤 스펙트럼 확대 (소형 0.8~1.4, 중형 1.4~2.4, 대형 2.4~3.6)
+    // 크기 랜덤 스펙트럼 확대 (얇은 불티 0.6~1.1, 중간 1.2~2.1, 큼직한 불씨 2.2~3.5)
     const rSize = Math.random();
-    const baseThick = rSize < 0.45
-      ? (Math.random() * 0.6 + 0.8)
-      : rSize < 0.85
-      ? (Math.random() * 1.0 + 1.4)
-      : (Math.random() * 1.2 + 2.4);
+    const baseThick = rSize < 0.40
+      ? (Math.random() * 0.5 + 0.6)
+      : rSize < 0.78
+      ? (Math.random() * 0.9 + 1.2)
+      : (Math.random() * 1.3 + 2.2);
 
     return {
       type,
@@ -3175,7 +3175,7 @@ class HeroCanvasController {
       vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85),
       vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.0,
       size: baseThick,
-      len: type === "spark" ? Math.random() * 9.0 + 4.0 : type === "capsule" ? Math.random() * 6.0 + 3.0 : 3,
+      len: type === "spark" ? Math.random() * 10.0 + 4.0 : type === "capsule" ? Math.random() * 7.0 + 3.0 : 3,
       angle: 0,
       life: initial ? Math.random() * 0.85 + 0.15 : 1,
       decay: type === "spark" ? Math.random() * 0.0055 + 0.0030 : Math.random() * 0.0030 + 0.0016,
@@ -3944,25 +3944,25 @@ class HeroCanvasController {
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 1. 하단 모닥불 발광 이미지: 화로 바닥 고정 & overlay 블렌드로 깊이 있는 자연스러운 합성
+    // 1. 하단 모닥불 발광 이미지: 화로 바닥 고정 & lighter(밝게 합성)으로 따스하고 눈부신 모닥불 광원 연출
     const isMob = w < 640;
     const cx = w * 0.52;
-    const cy = h * 0.92;
-    const baseSize = Math.max(w * 0.95, h * 0.90, isMob ? 460 : 720);
+    const cy = h * 0.94;
+    const baseSize = Math.max(w * 0.95, h * 0.92, isMob ? 460 : 720);
 
     const breathe1 = Math.sin(this.time * 2.0);
     const breathe2 = Math.sin(this.time * 4.2 + 0.9);
     const flicker = Math.sin(this.time * 16.5) * Math.cos(this.time * 27.2);
     const firePulse = breathe1 * 0.65 + breathe2 * 0.25 + flicker * 0.10;
 
-    const scale = 1.0 + firePulse * 0.10;
+    const scale = 1.0 + firePulse * 0.08;
     const drawW = baseSize * scale;
     const drawH = baseSize * scale;
-    const alpha = Math.max(0.60, Math.min(1.0, 0.82 + firePulse * 0.18));
+    const alpha = Math.max(0.60, Math.min(1.0, 0.78 + firePulse * 0.18));
 
     ctx.save();
-    // overlay 블렌드모드로 배경 디테일을 살리면서 자연스럽고 깊이 있게 합성
-    ctx.globalCompositeOperation = "overlay";
+    // 밝게 합성(lighter) 모드로 배경을 따스하고 눈부시게 밝힘
+    ctx.globalCompositeOperation = "lighter";
     ctx.globalAlpha = alpha;
 
     const glowReady = this.bonfireGlowLoaded || (this.bonfireGlowImg && this.bonfireGlowImg.complete && this.bonfireGlowImg.naturalWidth > 0);
@@ -9724,8 +9724,10 @@ async function initCampWeather(c) {
   container.innerHTML = data.days.map((d) => {
     const meta = parseKstDate(d.dateStr);
     const isToday = meta.diffDays === 0;
-    return `<button type="button" class="w-day-pill${isToday ? " is-today" : ""}" data-wdate="${esc(d.dateStr)}" title="${meta.fullDate} 날씨 상세 보기">
-      <span class="w-rel">${meta.rel}</span>
+    const isWeekend = meta.dayName === "토" || meta.dayName === "일";
+    return `<button type="button" class="w-day-pill${isToday ? " is-today" : ""}${isWeekend ? " is-weekend" : ""}" data-wdate="${esc(d.dateStr)}" title="${meta.fullDate} 날씨 상세 보기">
+      ${isWeekend ? '<span class="w-we-badge">주말</span>' : ""}
+      <span class="w-rel">${meta.rel} (${meta.dayName})</span>
       <span class="w-icon-wrap">${getWeatherIconSvg(d.code, 20)}</span>
       <span class="w-temp">${d.max}°</span>
     </button>`;

@@ -1,0 +1,3332 @@
+{
+  "generated_at": "2026-11-23T09:26:29.667Z",
+  "catalog": {
+    "total": 7740,
+    "active": 7740
+  },
+  "coverage": {
+    "card_thumbnail": {
+      "count": 3699,
+      "pct": 47.8
+    },
+    "detail_photo": {
+      "count": 3699,
+      "pct": 47.8
+    },
+    "social_record": {
+      "count": 7740,
+      "pct": 100
+    },
+    "social_post": {
+      "count": 5320,
+      "pct": 68.7
+    },
+    "social_image": {
+      "count": 7279,
+      "pct": 94
+    },
+    "social_video": {
+      "count": 3103,
+      "pct": 40.1
+    },
+    "web_record": {
+      "count": 5443,
+      "pct": 70.3
+    },
+    "web_body": {
+      "count": 2114,
+      "pct": 27.3
+    },
+    "booking": {
+      "count": 2698,
+      "pct": 34.9
+    },
+    "fee": {
+      "count": 4189,
+      "pct": 54.1
+    },
+    "checkin": {
+      "count": 3016,
+      "pct": 39
+    },
+    "checkout": {
+      "count": 2983,
+      "pct": 38.5
+    },
+    "homepage": {
+      "count": 1953,
+      "pct": 25.2
+    },
+    "contact": {
+      "count": 4665,
+      "pct": 60.3
+    }
+  },
+  "quality": {
+    "measured": 7730,
+    "average": 21.38,
+    "bands": {
+      "under20": 4781,
+      "under40": 5546,
+      "atLeast70": 75
+    }
+  },
+  "gaps": {
+    "checkin": 1439,
+    "checkout": 4842,
+    "video": 4410,
+    "fee": 3556,
+    "photo": 2769,
+    "reviews": 1931,
+    "booking": 5042
+  },
+  "sparse_queue": {
+    "total": 5568,
+    "top": [
+      {
+        "id": "park-52710-00009-1lszl",
+        "name": "고운산근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48240-00004-oolza",
+        "name": "방지공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00038-1embr",
+        "name": "신봉근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46820-00013-13x4h",
+        "name": "산이 근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48820-00003-pwf74",
+        "name": "왕릉공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00015-ysxbg",
+        "name": "아람근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00036-9mu3v",
+        "name": "서그네근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52710-00056-1tmrz",
+        "name": "대아전통문화공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47210-00009-mq79j",
+        "name": "광복공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00014-a54ox",
+        "name": "풀벌레근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-11590-00006-tbd44",
+        "name": "사육신",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41570-00198-2x7lj",
+        "name": "고촌1관문공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-27140-00051-wsdwk",
+        "name": "동내향수공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48310-00405-39p30",
+        "name": "능포 해양공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00030-5toxz",
+        "name": "푸르내공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00009-193ed",
+        "name": "건강마당근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41570-00001-1a9db",
+        "name": "북변근린공원(김포1호)",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00017-hk65m",
+        "name": "다올(1)근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00028-3jiru",
+        "name": "비발디근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46820-00011-13x4h",
+        "name": "산이 근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00016-1tk6l",
+        "name": "해놀(6-2)근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00006-7jizd",
+        "name": "큰솔근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00016-7m9ke",
+        "name": "산오름(4)근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00010-fo3qn",
+        "name": "마북근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-27140-00046-ffhyd",
+        "name": "수리물길공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00033-10xo4",
+        "name": "신릉근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-27140-00048-p5d9g",
+        "name": "새골공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-11590-00010-y0sn",
+        "name": "삼일",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48240-00002-olu5x",
+        "name": "반룡공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46910-00028-phsxe",
+        "name": "흑산생활체육공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41570-00047-1dgmm",
+        "name": "사우5A 45호 근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00021-1l3aw",
+        "name": "동진원1공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47840-00003-p916u",
+        "name": "세록공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00027-1oej7",
+        "name": "정평근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-27140-00040-1bwxv",
+        "name": "대구선반야월공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46730-00016-11xn9",
+        "name": "섬진강힐링산책공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26110-00006-1gseh",
+        "name": "문화공원3",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00005-16xaj",
+        "name": "남사아곡 제2호 근린공원(한숲 햇빛공원)",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41463-00007-1rb7g",
+        "name": "소담근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26110-00007-kw2il",
+        "name": "역사공원2",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00034-1q2hl",
+        "name": "제72호 근린공원(신갈공원)",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00012-qlu2h",
+        "name": "도담근린공원",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41461-00001-1v1qh",
+        "name": "동산근린공원(역북도시개발사업 근린공원 2호)",
+        "score": 0,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-11680-00015-1qnfn",
+        "name": "청담근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44210-00086-1yxp9",
+        "name": "서산 제2호 수변공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00005-yox1y",
+        "name": "다솜 근린공원(소사벌택지 1호)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00065-paph9",
+        "name": "선운공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-36110-00023-15p6i",
+        "name": "아침뜰 근린공원(근2-4)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-50110-00046-mtvft",
+        "name": "김녕공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28110-00012-pvgal",
+        "name": "유수지공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46170-00016-mt199",
+        "name": "근린공원 제8호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00401-15gac",
+        "name": "6호 늘솔길뜰 근린공원 (화양지구)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-50110-00053-ocmor",
+        "name": "만세공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00405-1qdj4",
+        "name": "근린공원 1호(황해자유구역 현덕지구)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47900-00044-15z4e",
+        "name": "산합리공원13",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28110-00113-phizk",
+        "name": "영종하늘도시 22호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44133-00027-1knz4",
+        "name": "불당2공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29110-00001-w5bdd",
+        "name": "푸른길",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48121-00064-16a52",
+        "name": "제동1호근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46770-00003-oehcb",
+        "name": "마치공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-36110-00076-ol6lu",
+        "name": "수1-5",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41500-00044-uv2x1",
+        "name": "복하천제4수변공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-27710-00019-pas17",
+        "name": "서재공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47190-00005-pvbjp",
+        "name": "양지공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41590-00033-16coh",
+        "name": "3호근린 꽃내음 언덕공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48170-00049-1w9to",
+        "name": "옥봉금산근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41113-00001-u26rq",
+        "name": "올림픽",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41273-00028-npg31",
+        "name": "정지제1공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41310-00089-c069c",
+        "name": "사노동체육공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-30200-00040-z17n",
+        "name": "유림",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26230-00001-qsnnx",
+        "name": "초연공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41590-00347-3hd54",
+        "name": "치동천3호(6호)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-42730-00001-1h3ex",
+        "name": "횡성근린공원2호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44180-20008-l4e64",
+        "name": "영보산업단지(LNG인수기지내)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41480-00043-1g8pg",
+        "name": "운정호수공원 12호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.5,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41480-00170-1fuvi",
+        "name": "미래내공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47113-00078-dgkqc",
+        "name": "영일만일반산업단지",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-42780-00000-1v6jq",
+        "name": "남대공원(달빛공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47900-00005-o9mcq",
+        "name": "산합리공원4",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48125-00007-qb6gy",
+        "name": "진동공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-36110-00018-3hhb8",
+        "name": "맑은뜰 근린공원(근1-16)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51130-00012-306fa",
+        "name": "단관(시민)근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29155-00048-16orh",
+        "name": "맹간제공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-11650-00020-njtw1",
+        "name": "망  루",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41115-00004-69vvs",
+        "name": "서호꽃뫼공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48880-00001-qalqz",
+        "name": "죽전공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48730-00012-crbym",
+        "name": "대산체육공원(구혜공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41360-00109-k3aeg",
+        "name": "진접6호은빛공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51170-00052-18l3k",
+        "name": "북평산단제2공원(1호)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00297-ba72t",
+        "name": "수변공원 3호(고덕국제화지구 해창리)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44810-00053-1xroj",
+        "name": "내포1(애향공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28237-00035-o3drj",
+        "name": "함봉공원(1단계)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48250-00262-oggd1",
+        "name": "모산공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-11170-00015-kxv2m",
+        "name": "동빙고공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-11380-00072-77hg6",
+        "name": "제각말문화공원 (은평뉴타운제2호 문화공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-30230-00074-rgr6b",
+        "name": "동춘당",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-36110-00016-oeos1",
+        "name": "새뜰 근린공원(근1-14)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44131-00011-3ty1n",
+        "name": "생활권공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51130-00087-mzk2b",
+        "name": "버들만이근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-31200-00654-1pxww",
+        "name": "신천공원(신천자연마당)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48250-00021-jeskt",
+        "name": "대창들공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41360-00115-1g8kb",
+        "name": "중앙근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48170-00060-1ugmz",
+        "name": "정촌꽃맞이공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-27230-00004-racdk",
+        "name": "태전공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48170-00082-rdb4o",
+        "name": "가좌희망공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28110-00118-phj0e",
+        "name": "영종하늘도시 35호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26440-00031-pd74b",
+        "name": "송정공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52113-00072-ocq31",
+        "name": "만성수변",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52111-00119-om7dz",
+        "name": "백로공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52130-00006-s0lgd",
+        "name": "흥남공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43760-00006-1ur2v",
+        "name": "제2호근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52140-00007-qx9cn",
+        "name": "춘포공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28110-00121-phj0g",
+        "name": "영종하늘도시 38호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-30170-00007-sp1md",
+        "name": "보라매",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41360-00052-1lor3",
+        "name": "바람근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-36110-00015-gd3ze",
+        "name": "푸른뜰 근린공원(근1-13)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-50110-00043-piile",
+        "name": "신엄공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41360-00086-12erl",
+        "name": "별내택지 근린공원7",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41480-00026-14otf",
+        "name": "북부근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52710-00045-hdd3m",
+        "name": "만경강수변생태공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41650-00012-1vgqw",
+        "name": "소흘체육공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41135-00027-pbvts",
+        "name": "수내공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41450-00058-1wqwi",
+        "name": "미사 누리 2호 공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51110-00125-voive",
+        "name": "동내체육공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43112-00005-sdj2p",
+        "name": "사직2공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44131-00060-1ar95",
+        "name": "청수2공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47170-00047-1wglx",
+        "name": "근린공원2",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29155-00023-rpgjk",
+        "name": "풀빛공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47111-00084-13f8x",
+        "name": "지곡근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00094-4iio4",
+        "name": "수문1공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00092-tfrmy",
+        "name": "수문1",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00219-egipk",
+        "name": "견산 근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43130-00023-102v1",
+        "name": "근린공원/18(삼봉공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47170-00068-3umj4",
+        "name": "학봉역사문화공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41173-00022-1prpa",
+        "name": "학운공원(7호)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46770-00009-n44ow",
+        "name": "남계공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41630-00079-1vuri",
+        "name": "옥정체육공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41190-00084-p6893",
+        "name": "산들역사",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41210-00075-1kwes",
+        "name": "기형도문화공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28200-00152-pbl0i",
+        "name": "석촌공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41113-00002-uqdr",
+        "name": "구운",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52130-00030-1yc2x",
+        "name": "37호 근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00408-m4tyn",
+        "name": "금곡 근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41570-00097-l8bn5",
+        "name": "인향제1공원(고촌25호)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41590-00057-aga8d",
+        "name": "남양1호 근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51130-00127-hyuch",
+        "name": "영산근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43150-00005-1p5yk",
+        "name": "청전근린공원(시민공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00067-8fqq8",
+        "name": "역사근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41390-00112-ugfui",
+        "name": "옥구가람공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51790-00001-jhinz",
+        "name": "사내근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52130-00005-rc4ge",
+        "name": "통매공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41390-00149-a8l27",
+        "name": "한울(3)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48330-00006-bsjrp",
+        "name": "유산근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44270-00004-1nb87",
+        "name": "공원:107(당진:06 남산공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44270-00024-f24f9",
+        "name": "공원:129(대덕수청지구 도시개발사업:32/봉암)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41285-00052-y8ky",
+        "name": "식골",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46170-00018-1vp34",
+        "name": "근린공원 제10호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46150-00099-ka2y9",
+        "name": "제1수변공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41133-00009-oikam",
+        "name": "여수지구3호(시청)공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26320-00073-1inwb",
+        "name": "화명근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41113-00016-cso6t",
+        "name": "호매실공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41450-00069-1ohxm",
+        "name": "위례근린공원9호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41570-00005-1a3qa",
+        "name": "고촌근린공원(고촌11호)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41480-00038-80tin",
+        "name": "한빛공원 7호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41131-00008-pfjzc",
+        "name": "수진공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52140-00079-phiu5",
+        "name": "쌍릉공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-31710-00013-ry3o4",
+        "name": "화산공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48720-00002-q806a",
+        "name": "중동공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44800-00076-ofldt",
+        "name": "만해공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44230-00003-rr20r",
+        "name": "강경 2호 근린공원(북옥공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26380-00066-17t1f",
+        "name": "감천 문화마을 공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51170-00051-1vflw",
+        "name": "북평산단제1공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41310-00104-1oz5l",
+        "name": "갈매천공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41287-00012-y3p2",
+        "name": "성저",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-51130-00088-5wxrx",
+        "name": "서리실근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-30170-00107-u0guf",
+        "name": "옥녀봉",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41285-00058-nhvdo",
+        "name": "소개울(일산2-1)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43750-00001-1in7w",
+        "name": "진천3호공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41650-00027-q0wfo",
+        "name": "운천공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41360-00108-kbcol",
+        "name": "진접5호청솔공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26710-00081-7lfob",
+        "name": "안평수변공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41220-00034-17nt3",
+        "name": "죽백 근린공원(용죽지구)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44133-00012-1h7l5",
+        "name": "백석2공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48250-00017-qco05",
+        "name": "주호공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-31170-00048-qal40",
+        "name": "주전공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-26350-00008-q3fgf",
+        "name": "장산공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-46130-00165-nki9y",
+        "name": "대포공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00143-1o0fu",
+        "name": "빛그린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00199-sutik",
+        "name": "빛그린",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48129-00061-1c6ss",
+        "name": "장천체육 공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-52130-00020-pzswq",
+        "name": "요죽공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-41410-00001-oqgra",
+        "name": "부곡공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43130-00027-1ktum",
+        "name": "근린공원/26(동수공원)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-43113-00066-mjwdh",
+        "name": "감나무실",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-48730-00008-njov2",
+        "name": "대치공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44230-00005-1u489",
+        "name": "동산일반산단 1호 근린공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-28110-00111-phiyw",
+        "name": "영종하늘도시 15호",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-29200-00072-dbpge",
+        "name": "황룡강대상",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-44800-00049-dm9za",
+        "name": "신리체육공원(홍성1)",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      },
+      {
+        "id": "park-47170-00025-1uaai",
+        "name": "정상택지지구공원",
+        "score": 2,
+        "gap_score": 156,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 13.3,
+        "web_age_days": null
+      }
+    ]
+  },
+  "sources": {
+    "social": {
+      "last_run_at": "2026-11-20T05:05:00+09:00",
+      "searched": 55,
+      "failed": 0,
+      "calls": 495,
+      "max_calls": 500,
+      "tracked_camps": 2134,
+      "error_count": 0,
+      "latest_errors": []
+    },
+    "youtube": {
+      "last_run_at": "2026-11-15T08:22:00+09:00",
+      "searched": 3000,
+      "failed": 0,
+      "calls": null,
+      "max_calls": 9000,
+      "tracked_camps": 3000,
+      "error_count": 0,
+      "latest_errors": []
+    }
+  },
+  "collection_policy": {
+    "allowed": [
+      "공공데이터포털·TourAPI·고캠핑",
+      "Kakao/Daum 무료 검색 API",
+      "Naver API HUB 무료 한도",
+      "robots.txt 허용 운영자 페이지",
+      "공개 YouTube 검색 메타데이터"
+    ],
+    "blocked": [
+      "로그인 필요 페이지",
+      "캡차·robots.txt 차단 페이지",
+      "유료 API 자동 호출",
+      "원문 이미지 무단 재호스팅"
+    ],
+    "strategy": "빈칸·오래된·실패 업장을 먼저 검색하고 성공한 값은 유지하며 실패 원인과 다음 시도를 기록한다."
+  },
+  "next_actions": [
+    "사진 없음: 공식 사진→운영자 OG→검증된 후기 후보",
+    "영상 없음: 업장명 그대로 동영상 검색어",
+    "글 없음: 네이버 블로그·카페·웹문서·지식iN 무료 검색",
+    "인증·한도·robots 차단은 추정하지 않고 실패 원인 기록"
+  ]
+}

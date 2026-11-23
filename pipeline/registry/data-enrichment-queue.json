@@ -19580,28 +19580,8 @@
       "sigungu": "김포시",
       "kind": "campground",
       "priority": 178,
-      "gaps": [
-        "thumbnail",
-        "price",
-        "checkin",
-        "checkout",
-        "manner",
-        "booking",
-        "operator",
-        "contact",
-        "nearby"
-      ],
-      "missing": [
-        "카드 대표 썸네일",
-        "1박 요금",
-        "입실",
-        "퇴실",
-        "매너타임",
-        "예약 경로",
-        "운영자 링크",
-        "연락처",
-        "주변 시설"
-      ],
+      "gaps": [],
+      "missing": [],
       "sources": [
         "공식 고캠핑·TourAPI 사진",
         "운영자 홈페이지 허용 OG/대표 이미지",
@@ -19617,15 +19597,15 @@
         "주간 OSM 추출본(보조)"
       ],
       "current": {
-        "iq": 6,
-        "has_photo": false,
-        "has_card_photo": false,
-        "has_booking": false,
-        "has_homepage": false
+        "iq": 82,
+        "has_photo": true,
+        "has_card_photo": true,
+        "has_booking": true,
+        "has_homepage": true
       },
       "collection": {
         "last_social_at": null,
-        "last_web_at": null,
+        "last_web_at": "2026-11-23T09:00:00.000Z",
         "next_social_due": null,
         "next_web_due": null,
         "priority_score": 118

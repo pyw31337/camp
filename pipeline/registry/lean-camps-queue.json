@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-17T03:51:14.434Z",
-  "total_lean": 2456,
+  "generated_at": "2026-11-23T09:25:03.737Z",
+  "total_lean": 2461,
   "queue": [
     {
       "id": "2496",
@@ -2092,18 +2092,6 @@
     {
       "id": "loc-aaec4c9c",
       "name": "여울지숲속캠핑장",
-      "sido": "경기",
-      "sigungu": "김포시",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": false,
-      "missingScore": 6,
-      "lastEnrichedAt": null
-    },
-    {
-      "id": "loc-872363c1",
-      "name": "범바위포레스트",
       "sido": "경기",
       "sigungu": "김포시",
       "tel": null,
@@ -15698,6 +15686,29 @@
       "lastEnrichedAt": null
     },
     {
+      "id": "102396",
+      "name": "오롯이",
+      "sido": "경기",
+      "sigungu": "화성시",
+      "tel": "031-355-2611",
+      "hasPhoto": false,
+      "hasFee": false,
+      "hasReview": false,
+      "missingScore": 6,
+      "lastEnrichedAt": "2026-11-19T09:29:00+09:00"
+    },
+    {
+      "id": "102399",
+      "name": "섬이림 오토캠핑장",
+      "sido": "경기",
+      "sigungu": "양평군",
+      "hasPhoto": false,
+      "hasFee": false,
+      "hasReview": false,
+      "missingScore": 6,
+      "lastEnrichedAt": "2026-11-19T09:29:00+09:00"
+    },
+    {
       "id": "887",
       "name": "백련리조트(동원캠핑장) 백멍랜드",
       "sido": "전남",
@@ -18057,6 +18068,17 @@
       "hasReview": true,
       "missingScore": 5,
       "lastEnrichedAt": "2026-10-19T13:49:00+09:00"
+    },
+    {
+      "id": "102395",
+      "name": "방태산 야영장",
+      "sido": "강원",
+      "sigungu": "인제군",
+      "hasPhoto": false,
+      "hasFee": false,
+      "hasReview": true,
+      "missingScore": 5,
+      "lastEnrichedAt": "2026-11-19T09:29:00+09:00"
     },
     {
       "id": "102370",
@@ -25795,6 +25817,28 @@
       "lastEnrichedAt": null
     },
     {
+      "id": "102397",
+      "name": "계룡캠핑장",
+      "sido": "충남",
+      "sigungu": "계룡시",
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-19T09:29:00+09:00"
+    },
+    {
+      "id": "102398",
+      "name": "산타포레리조트 야영장",
+      "sido": "경북",
+      "sigungu": "봉화군",
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-19T09:29:00+09:00"
+    },
+    {
       "id": "2114",
       "name": "어울림펜션 캠핑장",
       "sido": "강원",
@@ -28868,6 +28912,18 @@
       "hasReview": false,
       "missingScore": 1,
       "lastEnrichedAt": "2026-11-05T08:46:00+09:00"
+    },
+    {
+      "id": "loc-872363c1",
+      "name": "범바위포레스트",
+      "sido": "경기",
+      "sigungu": "김포시",
+      "tel": "010-2844-6555",
+      "hasPhoto": true,
+      "hasFee": true,
+      "hasReview": false,
+      "missingScore": 1,
+      "lastEnrichedAt": null
     }
   ]
 }
