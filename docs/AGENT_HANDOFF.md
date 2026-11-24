@@ -1,12 +1,47 @@
 # 인수인계
 
-## 📢 전체 에이전트 인수인계: 카드 썸네일 불필요한 영하 일괄 배지 전면 제거 및 상세페이지 주간날씨 주말(토·일) 강조 애니메이션/인터랙션 탑재 (2026-11-20 기준)
+## 📢 전체 에이전트 인수인계: 기존 플랫폼이 절대 안 알려주는 '5대 실전 캠핑 데이터' 수집·파이프라인·UI 전면 확장 탑재 (2026-11-24 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
 
 ---
 
-### 1. 최근 작업 완료 내역 요약 (2026-11-20 카드 썸네일 영하 배지 제거 & 상세페이지 주간날씨 주말 인터랙션/애니메이션 강조)
+### 1. 최근 작업 완료 내역 요약 (2026-11-24 '5대 실전 캠핑 데이터' 수집 파이프라인 & UI 탑재)
+
+1. **소유자 지시**: "능동 제안: 기존 플랫폼이 절대 안 알려주는 '5대 실전 캠핑 데이터' 수집 확장안. 모두 진행해줘"
+2. **5대 실전 캠핑 데이터 추출 엔진 및 스펙 사전 확장 (`pipeline/lib/spec-extractor.mjs`)**:
+   - `SPEC_FIELDS` 및 `SPEC_GROUPS`에 5대 핵심 실전 필드 신설:
+     - `HOT_WATER_OPERATING` (`facility`, 온수 공급·시간): 24시간 공급, 시간제 운영(시:분~시:분), 동계 야간 단수/동파 방지, 온수용량 한정(교대 이용) 정규화.
+     - `WINTER_SAFETY_RENTALS` (`rental`, 동계 안전·대여): 일산화탄소 경보기 대여(무료/유료), 등유 난로·팬히터 대여(파세코 등), 등유 현장 판매.
+     - `MANNER_ENFORCEMENT` (`rule`, 매너 순찰·관리): 야간 순찰 엄격 (경고 시 퇴실), 관리자 24시간 상주, 야간 무인/자율 관리.
+     - `CAR_DOCKING` (`rule`, 차박·도킹): 차박 가능/불가, 도킹·꼬리 텐트 가능/불가, 진입 높이 제한(2.3m 등).
+     - `TRASH_BAG_POLICY` (`rule`, 쓰레기봉투 정책): 종량제 봉투 기본 제공 (무료), 현장 유상 판매, 쓰레기 되가져가기 (개인 지참).
+   - 다중 대여 품목 공존을 위해 `WINTER_SAFETY_RENTALS`는 충돌(conflict) 제외 및 dedupe(최대 12개) 등록.
+3. **프로필 매핑 (`pipeline/lib/campground-profile.mjs`)**:
+   - `CAR_DOCKING` 스펙을 프로필 `CAR_CAMPING`으로도 연계하여 카탈로그 전반의 차박 가능성 커버리지 대폭 강화.
+4. **전국 캠핑장 일괄 스펙 추출 및 프로필 재계산**:
+   - `node pipeline/scripts/build-spec-sheet.mjs`:
+     - 스펙 시트 보유 업장 4,581곳으로 확대.
+     - 신규 5대 실전 데이터 추출: 온수 공급·시간 (61곳), 동계 안전·대여 (89곳), 매너 순찰·관리 (220곳), 차박·도킹 (646곳), 쓰레기봉투 정책 (128곳).
+   - `node pipeline/scripts/build-campground-profiles.mjs`, `node scripts/split-catalog.mjs`, `node pipeline/scripts/apply-pins.mjs` 완료.
+5. **화면 렌더링 확장 (`design/renewal/app.js` & `camping-atlas/public/app.js`)**:
+   - **상세페이지 이용 정보 (`usageRaw`)**:
+     - `list[0]~list[5]` 기존 인덱스 100% 보존.
+     - `HOT_WATER_OPERATING` (`hotwater`), `WINTER_SAFETY_RENTALS` (`flame`), `MANNER_ENFORCEMENT` (`moon`), `CAR_DOCKING` (`car`), `TRASH_BAG_POLICY` (`recycle`) 항목을 데이터가 있는 곳에 감성적인 아이콘과 함께 자동 렌더링.
+   - **요약 사항 타일 (`specTiles` & `extraTiles`)**:
+     - 온수 타일에서 단순 "있음" 대신 "24시간 온수 제공", "온수 시간제", "동계 야간 단수" 등 실전 정보를 우선 노출.
+     - 추가 타일에 동계안전·대여, 매너 순찰, 차박·도킹, 쓰레기봉투를 원천 출처 팝업과 함께 깔끔하게 노출.
+6. **검증 결과**:
+   - `pipeline/test/spec-extractor.test.mjs`: 10개 테스트 전수 통과.
+   - `pipeline/test/enrich-102377.test.mjs`, `pipeline/test/enrich-t43.test.mjs`: 전수 통과.
+   - `node pipeline/scripts/check-dayuse-idempotent.mjs`: 3,203곳 멱등성 100% 통과.
+   - `npm --prefix pipeline test`: 644개 전체 테스트 통과 (0 fail).
+   - `node pipeline/scripts/field-guard.mjs . .`: 필드 손실 없음 (통과).
+   - `node camping-atlas/scripts/perf-budget.mjs`: `app.js 705KB` (710KB 예산 엄수).
+
+---
+
+### 2. 이전 작업 완료 내역 요약 (2026-11-20 카드 썸네일 영하 배지 제거 & 상세페이지 주간날씨 주말 인터랙션/애니메이션 강조)
 
 1. **카드 썸네일 불필요한 영하 일괄 배지 전면 제거**:
    - **소유자 피드백**: "썸네일에 '영하 -5 예보' 이런건 일괄적으로 붙으니까 불필요한 정보가 되어버렸어. 겨울이니까 영하가 된것인데, 모든 캠핑장마다 저런 뱃지가 붙으니까 별로 의미가 없는 정보 같으니 모두 제거해줘. 차라리 상세페이지 주간날씨에서 주말날씨 부분에 애니메이션이나 인터랙션을 넣어서 더 강조를 해줘."

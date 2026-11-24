@@ -6840,7 +6840,7 @@ function usage(c, d) {
 }
 function usageRaw(c, d) {
   const f = facts(c);
-  return [
+  const list = [
     ["입실", firstValid("입실", profFact(PF(d, "CHECKIN")), specFact(d, "CHECKIN_TIME"), tiFact(c, "i", "checkin")), "clock-in"],
     ["퇴실", firstValid("퇴실", profFact(PF(d, "CHECKOUT")), specFact(d, "CHECKOUT_TIME"), tiFact(c, "o", "checkout")), "clock-out"],
     ["매너타임", firstValid("매너타임", profFact(PF(d, "MANNER")), specFact(d, "MANNER_TIME")), "bed"],
@@ -6848,6 +6848,17 @@ function usageRaw(c, d) {
     ["운영", profFact(PF(d, "SEASON")) ?? ((c.seasons ?? []).length ? { v: (c.seasons ?? []).length === 4 ? "사계절 운영" : `${(c.seasons ?? []).join("·")} 운영`, g: "c", src: { label: "고캠핑 등록 운영 기간", url: c.gc_url } } : null), "calendar"],
     ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : (specFact(d, "RENTAL") ?? null), "cart"],
   ];
+  const hot = specFact(d, "HOT_WATER_OPERATING");
+  if (hot) list.push(["온수", hot, "hotwater"]);
+  const winter = specFact(d, "WINTER_SAFETY_RENTALS");
+  if (winter) list.push(["동계안전", winter, "flame"]);
+  const manner = specFact(d, "MANNER_ENFORCEMENT");
+  if (manner) list.push(["매너순찰", manner, "moon"]);
+  const docking = specFact(d, "CAR_DOCKING");
+  if (docking) list.push(["차박·도킹", docking, "car"]);
+  const trash = specFact(d, "TRASH_BAG_POLICY");
+  if (trash) list.push(["쓰레기봉투", trash, "recycle"]);
+  return list;
 }
 // 값이 없는 항목은 칸마다 ‘확인필요’를 늘어놓지 않고 한 줄로 모은다(소유자 2026-10-19 · 빈 상태 정리).
 function specSection(c, d) {
@@ -6866,6 +6877,7 @@ function specTiles(c, d) {
     power: specFact(d, "POWER_W"),
     powerA: specFact(d, "POWER_MAX_A"),
     pet: specFact(d, "PET_POLICY"),
+    hot: specFact(d, "HOT_WATER_OPERATING"),
   };
   // A 값이 있으면 전기 타일에 우선 표시 (예: "15A"). W와 둘 다 있으면 함께.
   if (mention.powerA?.v) {
@@ -6903,6 +6915,7 @@ function specTiles(c, d) {
       if (/에서만/.test(PF(d, "PET")?.value ?? "")) x = profFact(PF(d, "PET"));
     }
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
+    if (k === "hot" && (!f.hot || f.hot?.v === "있음") && mention.hot?.v) x = mention.hot;
     const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
     const on = x && cls && !isNo;
     return `<div class="tile${x ? "" : " unk"}${isNo ? " tile-no" : on ? ` t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${label}</span><b class="tile-v">${x ? `${factValueHtml(x)}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, label)}</span>` : ""}</div>`;
@@ -6950,6 +6963,10 @@ function extraTiles(c, d, f) {
   add("clock-out", "레이트 퇴실", specFact(d, "LATE_CHECKOUT"));
   add("bed", "최소 숙박", specFact(d, "MIN_STAY"));
   add("car", "추가 차량", specFact(d, "EXTRA_CAR_FEE"));
+  add("flame", "동계안전·대여", specFact(d, "WINTER_SAFETY_RENTALS"));
+  add("moon", "매너 순찰", specFact(d, "MANNER_ENFORCEMENT"));
+  add("car", "차박·도킹", specFact(d, "CAR_DOCKING"));
+  add("recycle", "쓰레기봉투", specFact(d, "TRASH_BAG_POLICY"));
   const shop = pick(/매점|편의점|마트|무인카페/, /근처|주변|분\s*거리|km|미비|2km/);
   if (shop.length) add("store", "매점", { v: shop.some((a) => /마트\.편의점/.test(a)) && shop.length === 1 ? "마트·편의점 있음" : "매점 있음", ...gc(shop) });
   const wifi = pick(/무선인터넷|와이파이|wifi/i);

@@ -106,7 +106,9 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   else if (c.fire === "불가") set("FIRE", "화기 불가", "CONFIRMED", GOCAMPING(c));
   if (details?.FIRE_SET_FEE && fields.FIRE && !fields.FIRE.value.includes("세트")) fields.FIRE.set_fee = details.FIRE_SET_FEE.amount;
   // 차박
+  const spCc = specField(d?.spec, "CAR_DOCKING");
   if (of.cc) set("CAR_CAMPING", of.cc.v ? "차박 가능" : "차박 불가", "OPERATOR", opSource(of.cc));
+  else if (spCc) set("CAR_CAMPING", spCc.value, spCc.grade, spCc.source);
   // 반려견
   const pet = specField(d?.spec, "PET_POLICY");
   if (pet && pet.grade === "OPERATOR") set("PET", pet.value, "OPERATOR", pet.source);
