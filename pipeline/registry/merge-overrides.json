@@ -711,9 +711,9 @@
       "field": "parking",
       "before": 3184,
       "after": 2098,
-      "reason": "주차 방식 판정 기준 강화(임의 추정값 제외 및 확정 출처만 반영)에 따른 수치 정정",
-      "by": "antigravity",
-      "at": "2026-11-23"
+      "reason": "조례·법령 기준값(REFERENCE/statutory) 제외 및 실 업장 확인 주차 데이터로 정제",
+      "by": "Antigravity",
+      "at": "2026-11-24"
     }
   ]
 }
