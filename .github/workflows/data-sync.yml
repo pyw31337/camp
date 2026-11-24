@@ -165,8 +165,8 @@ jobs:
             timeout --foreground 60 git -C "$MEDIA_DIR" switch --orphan media
           fi
           # 사진 파일을 R2에 두는 설정이면(.github/scripts/media-r2.sh) 이미 받은 사진을 R2에서 내려받아 다시 받지 않게 한다.
-          timeout --foreground 60 bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
-          if timeout --foreground 15 bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
+          timeout --foreground 300 bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
+          if timeout --foreground 30 bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
           echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
         env:
           MEDIA_FETCH_TIMEOUT_SECONDS: '120'
