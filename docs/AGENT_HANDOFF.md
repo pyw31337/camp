@@ -1,12 +1,50 @@
 # 인수인계
 
-## 📢 전체 에이전트 인수인계: 기존 플랫폼이 절대 안 알려주는 '5대 실전 캠핑 데이터' 수집·파이프라인·UI 전면 확장 탑재 (2026-11-24 기준)
+## 📢 전체 에이전트 인수인계: 캠핑장 카드 썸네일 진위 검증 로직 탑재 및 범바위포레스트 인물 일러스트 정정 (2026-11-24 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
 
 ---
 
-### 1. 최근 작업 완료 내역 요약 (2026-11-24 '5대 실전 캠핑 데이터' 수집 파이프라인 & UI 탑재)
+### 1. 최근 작업 완료 내역 요약 (2026-11-24 캠핑장 카드 썸네일 진위 검증 & 범바위포레스트 사진 정정)
+
+1. **소유자 지시**: "캠핑장 카드의 이미지 썸네일이 진짜 캠핑장 사진이 맞는지 검증하는 로직도 만들어서 검증해줘. 지금 범바위포레스트 캠핑장의 썸네일이 이상한 사람 그림 같은게 걸려있어."
+2. **원인 규명**:
+   - 범바위포레스트(`loc-872363c1`)의 카탈로그 `img` 및 `sn`이 검색 수집 스니펫(`https://search4.kakaocdn.net/argon/130x130_85_c/AFTO76F1APm`)으로 오염되어 있었음.
+   - 시각 및 메타데이터 확인 결과, `AFTO76F1APm`은 정장 차림 남성의 AI 인물 일러스트(블로그 프로필/아바타성 이미지)로 캠핑장과 100% 무관함.
+   - 한편 업장의 상세 데이터(`camps/loc-872363c1.json`)에는 이미 공식 직영 예약사(그래가)의 고품질 메인 전경 사진(`https://dul339flcqmyl.cloudfront.net/hotel_photos/20260910100918_범바위_메인_01.png`)이 정상 보관되어 있었음.
+3. **캠핑장 썸네일 진위 검증 및 자동 선별 모듈 신설 (`pipeline/lib/thumbnail-validator.mjs`)**:
+   - `isRejectedThumbnail(url)`:
+     - 프로필/아바타 URL 패턴(`blogpfthumb`, `profile_thumb`, `dthumb-phinf` 등) 자동 검출.
+     - `photo-judgments.json` 판정 실패(`ok === false`) 및 `card-photo-pins.json` `reject` 등록 URL 자동 차단.
+   - `isAuthenticOperatorPhoto(url)`:
+     - 공식 예약/운영사 CDN(`*.cloudfront.net/hotel_photos`, `gocamping.or.kr/upload/camp`, `camfit.co.kr`, `thankqcamping.com` 등) 우선 판별.
+   - `pickValidCampThumbnail(camp, detail)`:
+     - 1순위: `card-photo-pins` 및 `curated-pins` 고정 사진.
+     - 2순위: 상세 및 카탈로그의 공식 운영사/고캠핑 정품 사진.
+     - 3순위: 무관/거절 사진을 제외한 유효 캠핑장 사진.
+4. **AI 사진 내용 판정기 부정 라벨 보강 (`pipeline/lib/photo-judge.mjs` RULE_VERSION 4)**:
+   - `an illustration, drawing, cartoon, anime or AI art portrait` (일러스트·그림)
+   - `an avatar, profile picture or icon` (프로필·아바타)
+   - `photo-judgments.json`에 `AFTO76F1APm`을 `ok: false, why: "인물화·일러스트"`로 영구 등록.
+5. **발행 전 상식 검사 R12 규칙 탑재 (`pipeline/scripts/publish-sanity.mjs`)**:
+   - 발행 전 카탈로그(`campgrounds.json`)의 `c.img` 및 `c.sn`이 거절/무관 이미지일 경우, 상세의 정품 사진으로 자동 정정하거나 비움.
+   - 상세(`camps/*.json`)의 `photos` 배열에서도 거절된 이미지를 자동 제외.
+6. **범바위포레스트(`loc-872363c1`) 썸네일 정정 및 영구 고정**:
+   - `curated-pins.json` 및 `card-photo-pins.json`, `card-fallback.json`에 그래가 공식 전경 사진으로 고정.
+   - 카탈로그 `img`, `sn` 및 `camps/loc-872363c1.json` `photos[0]`을 공식 사진으로 교체하고 `AFTO76F1APm` 제거.
+   - `merge-overrides.json`에 정정 사유 등록 완료.
+7. **검증 결과**:
+   - `pipeline/test/thumbnail-validator.test.mjs` (3개 테스트) & `pipeline/test/photo-judge.test.mjs` (2개 테스트) 전수 통과.
+   - `pipeline/test/card-photo-pins.test.mjs`: 통과.
+   - `npm --prefix pipeline test`: 647개 전체 테스트 통과 (0 fail).
+   - `publish-sanity.mjs --check`: 통과.
+   - `field-guard.mjs`: 필드 손실 없음 (통과).
+   - `perf-budget.mjs`: 통과.
+
+---
+
+### 2. 이전 작업 완료 내역 요약 (2026-11-24 '5대 실전 캠핑 데이터' 수집 파이프라인 & UI 탑재)
 
 1. **소유자 지시**: "능동 제안: 기존 플랫폼이 절대 안 알려주는 '5대 실전 캠핑 데이터' 수집 확장안. 모두 진행해줘"
 2. **5대 실전 캠핑 데이터 추출 엔진 및 스펙 사전 확장 (`pipeline/lib/spec-extractor.mjs`)**:
