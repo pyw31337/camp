@@ -5,9 +5,18 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const campgroundsPath = "camping-atlas/public/explore/data/campgrounds.json";
-const discoveredRegistryPath = "pipeline/registry/discovered-camps.json";
-const campsDir = "camping-atlas/public/explore/data/camps";
+function resolveDataPath(relPath) {
+  if (fs.existsSync(relPath)) return relPath;
+  const fromRoot = path.resolve("..", relPath);
+  if (fs.existsSync(fromRoot)) return fromRoot;
+  const fromPipeline = path.resolve(process.cwd(), relPath);
+  if (fs.existsSync(fromPipeline)) return fromPipeline;
+  return relPath;
+}
+
+const campgroundsPath = resolveDataPath("camping-atlas/public/explore/data/campgrounds.json");
+const discoveredRegistryPath = resolveDataPath("pipeline/registry/discovered-camps.json");
+const campsDir = resolveDataPath("camping-atlas/public/explore/data/camps");
 
 const camps = JSON.parse(fs.readFileSync(campgroundsPath, "utf-8"));
 const existingNames = new Set(camps.map(c => normalizeName(c.name)));

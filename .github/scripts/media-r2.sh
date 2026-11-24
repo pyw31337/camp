@@ -28,10 +28,10 @@ export AWS_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$R2_SECRET_A
 export AWS_REQUEST_CHECKSUM_CALCULATION=when_required AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
 EP="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
 S3="s3://${R2_BUCKET}"
-aws_s3() { aws s3 "$@" --endpoint-url "$EP" --only-show-errors; }
+aws_s3() { aws s3 "$@" --endpoint-url "$EP" --connect-timeout 5 --only-show-errors; }
 # 자격 증명이 만료되었거나 다른 계정/버킷을 가리키면 수집 작업 전체를 실패시키지 않고
 # 사진 저장소만 일시 중지한다. 쓰기 작업은 호출부가 이 확인을 통과한 경우에만 실행한다.
-r2_available() { aws s3 ls "$S3/" --endpoint-url "$EP" --only-show-errors >/dev/null 2>&1; }
+r2_available() { timeout 10 aws s3 ls "$S3/" --endpoint-url "$EP" --connect-timeout 5 --only-show-errors >/dev/null 2>&1; }
 list_keys() { aws s3 ls "$S3/" --recursive --endpoint-url "$EP" | awk '{ $1=$2=$3=""; sub(/^ +/, ""); print }' | grep -E '\.webp$' | sort -u || true; }
 
 case "$cmd" in

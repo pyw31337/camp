@@ -56,6 +56,7 @@ jobs:
   sync:
     name: Sync public sources and build open calendar
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     # 그날 수집한 실제 파일을 실행마다 새로 띄우는 PostgreSQL에 넣어 본다(아래 마지막 단계, 비용 없음).
     services:
       postgres:
@@ -154,21 +155,21 @@ jobs:
           # media 브랜치가 일시적으로 잠기거나 GitHub API가 응답하지 않으면 전체
           # 데이터 동기화가 하루 이상 붙잡히지 않게 한다. 사진 단계만 건너뛰고
           # 이미 수집한 텍스트·공공데이터 발행은 계속한다.
-          MEDIA_FETCH_TIMEOUT="${MEDIA_FETCH_TIMEOUT_SECONDS:-300}"
+          MEDIA_FETCH_TIMEOUT="${MEDIA_FETCH_TIMEOUT_SECONDS:-120}"
           MEDIA_DIR="$RUNNER_TEMP/media"
           if timeout --foreground "$MEDIA_FETCH_TIMEOUT" git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
             timeout --foreground "$MEDIA_FETCH_TIMEOUT" git fetch --depth=1 origin +media:refs/remotes/origin/media
-            timeout --foreground 120 git worktree add -B media "$MEDIA_DIR" origin/media
+            timeout --foreground 60 git worktree add -B media "$MEDIA_DIR" origin/media
           else
-            timeout --foreground 120 git worktree add --detach "$MEDIA_DIR"
-            timeout --foreground 120 git -C "$MEDIA_DIR" switch --orphan media
+            timeout --foreground 60 git worktree add --detach "$MEDIA_DIR"
+            timeout --foreground 60 git -C "$MEDIA_DIR" switch --orphan media
           fi
           # 사진 파일을 R2에 두는 설정이면(.github/scripts/media-r2.sh) 이미 받은 사진을 R2에서 내려받아 다시 받지 않게 한다.
-          timeout --foreground 300 bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
-          if timeout --foreground 30 bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
+          timeout --foreground 60 bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
+          if timeout --foreground 15 bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
           echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
         env:
-          MEDIA_FETCH_TIMEOUT_SECONDS: '300'
+          MEDIA_FETCH_TIMEOUT_SECONDS: '120'
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
