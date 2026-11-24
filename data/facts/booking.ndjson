@@ -796,6 +796,9 @@
 {"cid":"1369","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-17T10:52:00+09:00"}
 {"cid":"1370","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-17T10:52:00+09:00"}
 {"cid":"1370","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-17T10:52:00+09:00"}
+{"cid":"1384","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-20T09:37:00+09:00"}
+{"cid":"1384","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-20T09:37:00+09:00"}
+{"cid":"1384","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-20T09:37:00+09:00"}
 {"cid":"1389","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-17T10:52:00+09:00"}
 {"cid":"1389","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-11-17T10:52:00+09:00"}
 {"cid":"1389","attr":"BOOKING_REALTIME","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -6855,6 +6858,9 @@
 {"cid":"102377","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102383","attr":"BOOKING_CHANNEL","value":"naver-cafe","grade":"CONFIRMED","src":"gocamping","text":"네이버 카페(운영자 카페 예약)","at":"2026-11-17T10:52:00+09:00"}
 {"cid":"102383","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-17T10:52:00+09:00"}
+{"cid":"102396","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-11-20T09:37:00+09:00"}
+{"cid":"102396","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-11-20T09:37:00+09:00"}
+{"cid":"102396","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"loc-0b21b76f","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z","text":"전화 예약"}
 {"cid":"loc-0b128b73","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.920Z","text":"전화 예약"}
 {"cid":"loc-0dd8eb7c","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.904Z","text":"전화 예약"}
@@ -7001,6 +7007,9 @@
 {"cid":"loc-608321bd","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z","text":"전화 예약"}
 {"cid":"loc-0717483c","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.901Z","text":"전화 예약"}
 {"cid":"loc-772298d0","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.964Z","text":"전화 예약"}
+{"cid":"loc-872363c1","attr":"BOOKING_CHANNEL","value":"graega","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z","text":"그래가 오토캠핑 예약"}
+{"cid":"loc-872363c1","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z","text":"네이버 글램핑·카라반 예약"}
+{"cid":"loc-872363c1","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z","text":"전화 문의"}
 {"cid":"loc-903608cb","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z","text":"전화 예약"}
 {"cid":"loc-909559df","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.920Z","text":"전화 예약"}
 {"cid":"loc-923884ff","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.969Z","text":"전화 예약"}
@@ -7124,10 +7133,10 @@
 {"cid":"loc-fdf9dccf","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z","text":"전화 예약"}
 {"cid":"loc-fee4e44e","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.945Z","text":"전화 예약"}
 {"cid":"loc-ff1abaca","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z","text":"전화 예약"}
-{"cid":"pdu-amazing-gimpo","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-11-17","text":"어메이징티켓"}
-{"cid":"pdu-amazing-paju","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-11-17","text":"어메이징티켓"}
-{"cid":"pdu-lagrills-yongin","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-11-17","text":"네이버 예약"}
-{"cid":"pdu-mysticcamp-yeongjong","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-11-17","text":"네이버 예약"}
+{"cid":"pdu-amazing-gimpo","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-11-24","text":"어메이징티켓"}
+{"cid":"pdu-amazing-paju","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-11-24","text":"어메이징티켓"}
+{"cid":"pdu-lagrills-yongin","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-11-24","text":"네이버 예약"}
+{"cid":"pdu-mysticcamp-yeongjong","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-11-24","text":"네이버 예약"}
 {"cid":"pilot-002-sureui","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-002-sureui","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-003-duruwell","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}
