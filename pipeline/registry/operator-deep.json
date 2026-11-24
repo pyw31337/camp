@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T23:00:10.012Z",
+  "generated_at": "2026-11-24T21:22:29.601Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -28,7 +28,7 @@
       "status": "OK",
       "name": "글램비글램핑",
       "url": "http://www.glambcamp.com/",
-      "checked_at": "2026-11-23T23:01:04.827Z",
+      "checked_at": "2026-11-24T21:23:23.232Z",
       "pages": [
         "http://www.glambcamp.com/",
         "https://www.glambcamp.com/information",
@@ -429,7 +429,7 @@
       "status": "OK",
       "name": "느티나무 캠핑장",
       "url": "https://theneuti.imweb.me/",
-      "checked_at": "2026-11-23T23:00:31.811Z",
+      "checked_at": "2026-11-24T21:22:51.955Z",
       "pages": [
         "https://theneuti.imweb.me/",
         "https://theneuti.imweb.me/faq",
@@ -2681,7 +2681,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-11-23T23:00:39.212Z",
+      "checked_at": "2026-11-24T21:22:59.316Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
@@ -2703,6 +2703,10 @@
           "url": "https://hsecofarm.hscity.go.kr/"
         },
         {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 27년 1월 일정 및 예약 안내",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
           "text": "[공지] 화성에코팜테마파크 캠핑장 26년 12월 일정 및 예약 안내",
           "url": "https://hsecofarm.hscity.go.kr/"
         },
@@ -2716,10 +2720,6 @@
         },
         {
           "text": "[필독] 화성에코팜테마파크 캠핑장 이용 안내 및 수칙",
-          "url": "https://hsecofarm.hscity.go.kr/"
-        },
-        {
-          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 일정 및 예약 안내",
           "url": "https://hsecofarm.hscity.go.kr/"
         },
         {
@@ -2968,6 +2968,10 @@
         },
         {
           "text": "공지 [필독] 화성에코팜테마파크 캠핑장 이용 안내 및 수칙",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 일정 및 예약 안내",
           "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
         },
         {
@@ -3470,9 +3474,32 @@
       "url": null
     },
     "loc-872363c1": {
-      "status": "SKIPPED",
-      "reason": "not operator host",
-      "url": null
+      "status": "OK",
+      "name": "범바위포레스트",
+      "url": "https://link.inpock.co.kr/bumbawi",
+      "checked_at": "2026-11-24T21:23:24.772Z",
+      "pages": [
+        "https://link.inpock.co.kr/bumbawi"
+      ],
+      "snippets": [
+        {
+          "text": "오토캠핑.글램핑&카라반.BBQ캠크닉.애견캠핑장",
+          "url": "https://link.inpock.co.kr/bumbawi"
+        },
+        {
+          "text": "오토캠핑 예약하기[그래가]",
+          "url": "https://link.inpock.co.kr/bumbawi"
+        },
+        {
+          "text": "글램핑&카라반&무박캠크닉 예약하기[네이버]",
+          "url": "https://link.inpock.co.kr/bumbawi"
+        },
+        {
+          "text": "범바위포레스트 네이버카페[오토캠핑]",
+          "url": "https://link.inpock.co.kr/bumbawi"
+        }
+      ],
+      "images": []
     }
   }
 }
