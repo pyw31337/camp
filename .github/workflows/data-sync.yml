@@ -56,6 +56,7 @@ jobs:
   sync:
     name: Sync public sources and build open calendar
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     # 그날 수집한 실제 파일을 실행마다 새로 띄우는 PostgreSQL에 넣어 본다(아래 마지막 단계, 비용 없음).
     services:
       postgres:

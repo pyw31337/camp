@@ -1,1 +1,925 @@
-{"intro":"경기도 양평군 서종면 화서로246번길 22-6에 위치한 지자체 정식 인허가 등록 야영장인 '수입리 캠핑장'입니다.","nearby":{"tour":[],"food":[],"mart":[]},"photos":[],"seasons":["봄","여름","가을","겨울"],"booking":null,"profile":{"version":1,"fields":{"CHECKIN":{"value":"14:00부터","grade":"MENTION","source":{"label":"후기 5건","url":"https://blog.naver.com/goguma4354/224273371344","date":"2026-05-05","quote":"최대 세사이트 예약 가능 수입리캠핑장 정보 정리 → 장소 이름: 수입리캠핑장 → 카테고리: 캠핑,야영장 → 찾아가기: 경기 양평군 서종면 화서로246번길 22-6...수입리캠핑장 경기도 양평군 서종면 화서로246번길 22-6 입실14시~21시까지 퇴…"}},"CHECKOUT":{"value":"12:00까지","grade":"MENTION","source":{"label":"후기 4건","url":"https://blog.naver.com/jmday/223896616864","date":"2025-06-12","quote":"✔️입실 14:00 퇴실 12:00"}},"MANNER":{"value":"22:30부터","grade":"MENTION","source":{"label":"후기 7건","url":"https://blog.naver.com/loyya30/224112758465","date":"2025-12-18","quote":"매너타임은 오후 10시 30분부터 오전 7시까지로, 이 시간에는 조용히 해주셔야 하니 참고하세요."}},"PRICE":{"value":"6만원대","grade":"MENTION","source":{"label":"후기 언급","url":"https://blog.naver.com/gabriel_carolus_cha/224331667540","date":"2026-06-30","quote":"627-28 · 들꽃들 수입리캠핑장 정보 ✅1박에 6만원 (네이버예약 -> 입"},"count":1,"min":60000,"max":60000},"POWER":{"value":"업장 미공지 · 법정 상한 600W","grade":"REFERENCE","source":{"label":"관광진흥법 야영장 안전위생기준(사이트당 600W 이하)","url":"https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854"},"watts":600,"statutory":true},"FIRE":{"value":"화로대 개별(연료 미확인)","grade":"CONFIRMED","source":{"label":"한국관광공사 고캠핑 등록값","url":null,"date":"2026-11-10T00:41:54.890Z"}},"PET":{"value":"확인필요","grade":"CONFIRMED","source":{"label":"한국관광공사 고캠핑 등록값","url":null,"date":"2026-11-10T00:41:54.890Z"}},"AMENITIES":{"value":"전기 · 화장실 · 샤워실 · 개수대","grade":"CONFIRMED","source":{"label":"한국관광공사 고캠핑 등록값","url":null,"date":"2026-11-10T00:41:54.890Z"},"items":["전기","화장실","샤워실","개수대"]},"SEASON":{"value":"사계절 운영","grade":"CONFIRMED","source":{"label":"한국관광공사 고캠핑 등록값","url":null,"date":"2026-11-10T00:41:54.890Z"}}},"tags":[{"code":"FOREST","label":"숲","why":"고캠핑 입지"},{"code":"MOUNTAIN","label":"산","why":"고캠핑 입지"},{"code":"PET_OK","label":"반려견 동반","why":"고캠핑 등록값"},{"code":"WINTER","label":"겨울 운영","why":"고캠핑 운영 계절 + 전기"}],"summary":"화로대 개별 · 반려견 확인필요","score":{"known":9,"facts":4,"total":18},"generated_at":"2026-11-24T00:21:50.726Z"},"site_products":[{"id":"sp-loc-dd927223-1","name":"오토캠핑 사이트","type":"AUTO","floor":"파쇄석","size":null,"power":"전기 이용 가능","price":null,"photos":[],"desc":"수입리 캠핑장 대표 사이트입니다."}],"videos":[{"title":"서종IC 10분,서종면 수입리, 캠핑장 펜션 전세,벜계천 접함 #양평전원주택 #서종면전원주택","url":"https://www.youtube.com/watch?v=SuynejJIlDY","thumb":"https://search3.kakaocdn.net/argon/138x78_80_pr/L4l6OyftygC","dur":65,"author":"양평전원주택, 토지 전문 - 드림부동산 TV","date":"2026-02-18","yt":"SuynejJIlDY","platform":"youtube","kind":"video"},{"title":"vlog. 캠핑 브이로그 / 힐레베르그 50주년 시에라컵 언박싱 / 헬리녹스 타프 / 노르디스크 레이사 / 캠핑용품 / 서울 근교 캠핑장 / 수입리 캠핑장 / 캠핑요리","url":"https://www.youtube.com/watch?v=ZejSBgioUtA","thumb":"https://search4.kakaocdn.net/argon/138x78_80_pr/BRSoqUKEHow","dur":755,"author":"캠닝아 camningah","date":"2021-10-11","yt":"ZejSBgioUtA","platform":"youtube","kind":"video"},{"title":"[VLOG] 산과 계곡 뷰 최고인 신생 캠핑장에서 / 우중캠핑 / 네이처하이크 / 브라이튼6.4 / 수입리캠핑장 / 다이아몬드타프 / 계곡뷰캠핑 / 불멍","url":"https://www.youtube.com/watch?v=7uT_bzLSfWM","thumb":"https://search2.kakaocdn.net/argon/138x78_80_pr/7rYISeaA4hd","dur":324,"author":"다필부부TV","date":"2021-05-02","yt":"7uT_bzLSfWM","platform":"youtube","kind":"video"},{"title":"서울에서 초근접해 있는 양평 수입리캠핑장 | 노르디스크 | 아스가르드 7.1 | 카리20 | 소규모캠핑장","url":"https://www.youtube.com/watch?v=QKhJcHj46Yg","thumb":"https://search2.kakaocdn.net/argon/138x78_80_pr/83rtjsgVPqY","dur":346,"author":"도형레코드","date":"2021-05-09","yt":"QKhJcHj46Yg","platform":"youtube","kind":"video"},{"title":"【캠핑】 캠핑갈 때 매트를 안가져가면 어떻게 될까? | 캠핑홈파티 | 캐나다 🇨🇦첫캠핑썰 | 양평수입리캠핑장","url":"https://www.youtube.com/watch?v=VkDcTSUTKME","thumb":"https://search4.kakaocdn.net/argon/138x78_80_pr/DwPDEViiMwH","dur":515,"author":"개미네 놀이터 Antfam Playground","date":"2022-11-12","yt":"VkDcTSUTKME","platform":"youtube","kind":"video"},{"title":"늦은 밤까지 힐링한 전세캠핑/ 네이버 평점 97점 양평 수입리 캠핑장 / 17번째 캠핑일기","url":"https://www.youtube.com/watch?v=W2VRkS0kt54","thumb":"https://search3.kakaocdn.net/argon/138x78_80_pr/LnokfN5fwXq","dur":620,"author":"소시지튜브 [sausage tube] :소이시우아빠일기장","date":"2022-01-08","yt":"W2VRkS0kt54","platform":"youtube","kind":"video"},{"title":"[Camping] 동계캠핑2 | 수입리캠핑장","url":"https://www.youtube.com/watch?v=kdMH_YWcg64","thumb":"https://search2.kakaocdn.net/argon/138x78_80_pr/8HoM3V5tG7S","dur":861,"author":"배리진","date":"2022-09-19","yt":"kdMH_YWcg64","platform":"youtube","kind":"video"},{"title":"[캠핑] 양평 수입리캠핑장 (2)","url":"https://blog.naver.com/we921030/223560668291?rvid=64ABAA1982E2BFB5A26AA6403E5E5E19177C","thumb":"https://search4.kakaocdn.net/argon/138x78_80_pr/Dzep4qaMz3a","dur":2,"author":"JangDali","date":"2024-08-26","yt":null,"platform":"web","kind":"short"},{"title":"수입리 캠핑장 계곡 내려가는 계단","url":"https://blog.naver.com/ant_fam_playground/222932959205?rvid=7580699CF041290EF747DA0B300A64198F86","thumb":"https://search3.kakaocdn.net/argon/138x78_80_pr/7YVoDSKXpPd","dur":8,"author":"여행하는 개미맘","date":"2022-11-19","yt":null,"platform":"web","kind":"short"}],"reviews":[{"t":"blog","title":"양평 수입리캠핑장 9번 데크 후기｜남편과 첫 캠핑, 불멍하며 쉬어간 연휴 🏕️","snippet":"앞으로 제 글에 종종 등장할 돼지오리 미니미예요. 귀엽게 봐주세요 💕 ​ 그럼 미니미와 함께 오늘 이야기도 시작해볼게요. ​ 이번 연휴에는 남편이랑 양평 수입리캠핑장에 다녀왔어요. ​ 남편과 둘이 캠핑을 온 건 이번이 처음이에요! 먹을 음식은 미리 다 사서 챙기고, 추울까 봐 전기장…","url":"https://blog.naver.com/pigducklily/224440658824","src":"먹고 놀고 여행하는 부부의 일상기록","thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/80QYzSzX4Zb","date":"2026-10-14"},{"t":"blog","title":"서울근교캠핑장 양평 수입리캠핑장","snippet":"2시에 출발해서 4시 좀 안되게 도착했어요 ​ 평상시 주말이라면 이정도로 걸리진 않을거예요~ 서울근교에서 아담한 캠핑장을 찾고 계신다면 양평 수입리캠핑장도 한번 살펴보세요~ ​ ​ ​ ​ 경기도 양평군 서종면에 있는 곳으로, 산으로 둘러싸여 있고 옆으로는 개울이 흐르는 작은 캠핑장입니…","url":"https://blog.naver.com/thehcandle/224440370963","src":"꿈꾸는 레이첼 ♬","thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/D0A4NlsiSP1","date":"2026-10-13"},{"t":"blog","title":"양평 소규모 캠핑장 수입리캠핑장 조용하고 깨끗한 휴식처","snippet":"최대 세사이트 예약 가능 수입리캠핑장 정보 정리 → 장소 이름: 수입리캠핑장 → 카테고리: 캠핑,야영장 → 찾아가기: 경기 양평군 서종면 화서로246번길 22-6...수입리캠핑장 경기도 양평군 서종면 화서로246번길 22-6 입실14시~21시까지 퇴실12:00 당일퇴실 22시까지 매너…","url":"https://blog.naver.com/goguma4354/224273371344","src":"고구마네 생활 공간 연구소","thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/IyYGOsGeE3b","date":"2026-05-05"}],"sns_images":[{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/JPvQUJ4scXA","img":"https://postfiles.pstatic.net/MjAyMjA0MDdfMTg4/MDAxNjQ5MjkxNzUwMjA2.Mm_x3zHwFjt4x0y2uh4elac2D-0hdQ-b7oWDAy_84vIg.thI4QZdwqZlZwTvjoewOFiSKbWvf1JX-vRJiUGHI1QEg.JPEG.ganachoco7/SE-79aa8137-2b79-4d3a-915b-7b3e8fc256bd.jpg?type=w773","url":"https://blog.naver.com/thebrowlab/222693977386","src":"네이버블로그","w":400,"h":533,"date":"2022-04-07"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/6X3zpRB6CEL","img":"https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fsearch.pstatic.net%2Fcommon%2F%3FautoRotate%3Dtrue%26quality%3D100%26type%3Df640_380%26src%3Dhttps%253A%252F%252Fldb-phinf.pstatic.net%252F20210221_57%252F1613907452385TrlW7_JPEG%252F5Z5QwRpgvoBGHRF1ecb-1IuN.jpg%22&type=ff500_300","url":"https://blog.naver.com/dmsqlsdl93/222525228713","src":"네이버블로그","w":500,"h":300,"date":"2021-10-03"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/5uLshKGwxgf","img":"https://postfiles.pstatic.net/MjAyMTA5MTRfNzEg/MDAxNjMxNjAxMjEyNjk2.cGHSH06ViOsgVl4Xb6kqYJw9AiDlaq_faZPeW-ynRewg.wF6nEjTdTbcrJ3kNBjPBP08tmjNQ4tXKN03VcQqEHSIg.JPEG.myangy/SE-eafa989d-a549-4f09-b52d-527f11aa9c96.jpg?type=w773","url":"https://blog.naver.com/myangy/222505423548","src":"네이버블로그","w":400,"h":300,"date":"2021-09-14"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/61sksuDxhJi","img":"https://postfiles.pstatic.net/MjAyNDA4MjZfMTE2/MDAxNzI0NjEwMDU1NTcz.cY3p2ayfmtuhadov4kuXXPHuxTe1oHIjkMT9hgOiQ6Yg.H0j8NkK1XHLxVxFKDn9Fv3oFuUpZzx3Pnf8hjjDR9dwg.JPEG/IMG_2411.jpg?type=w773","url":"https://blog.naver.com/we921030/223560668291","src":"네이버블로그","w":773,"h":570,"date":"2024-08-26"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/B5iQTsLtQxs","img":"https://tong.visitkorea.or.kr/cms/resource/14/2792514_image2_1.jpg","url":"https://leports.sailing-blog.click/2368","src":"티스토리","w":750,"h":563,"date":"2025-01-03"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/GW4SHqqBUAF","img":"https://tong.visitkorea.or.kr/cms/resource/15/2792515_image2_1.jpg","url":"https://leports.sailing-blog.click/2368","src":"티스토리","w":750,"h":563,"date":"2025-01-03"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/EU4Olc1oB9H","img":"https://postfiles.pstatic.net/MjAyMTA5MTRfMjcz/MDAxNjMxNjAxMjE1ODIx.3v-rxdEeaBjhx3yqm9qFOMNRnNTK-u29stzGqPCJhYcg.B4Eoxr9K7c3bUVlZscAw3JQwdViIw8967W3b5wGw0TMg.JPEG.myangy/SE-1bca0bf8-531a-4aa1-bfcd-14615048e35e.jpg?type=w773","url":"https://blog.naver.com/myangy/222505423548","src":"네이버블로그","w":400,"h":300,"date":"2021-09-14"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/6hyYBqubrIc","img":"https://gocamping.or.kr/upload/camp/8083/thumb/thumb_720_8873vjPFKWtQvVTw4SDzxeiY.jpg","url":"https://daylifehappy.tistory.com/2664","src":"티스토리","w":720,"h":376,"date":"2023-11-11"},{"thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/IoVLSf9sWP0","img":"https://postfiles.pstatic.net/MjAyMTA4MTlfMTQ0/MDAxNjI5MzQ0NTIyMzUw.JDB1KXeIsnvXQUG5lPCthYubUNGOcR6NygATReggCPEg.PFK6sAIzdJZWuC44vkYGr9HYsNLqM7kuO7Ivq5GXOYIg.JPEG.zufly/IMG_6643.JPG?type=w966","url":"https://blog.naver.com/zufly/222482376357","src":"네이버블로그","w":650,"h":866,"date":"2021-08-24"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/CacbxfDvLpi","img":"https://postfiles.pstatic.net/MjAyMTA4MTlfMTYw/MDAxNjI5MzQ0NzA1NDY1.Jy7dX7oqZJ_A8nPHxDp79GoNV23zts0vi8HKz3DLdHYg.PzaPMdIyHaj8JyVJUlyce26qfLyQ9FwIqM_76YGpQs4g.JPEG.zufly/IMG_3196.JPG?type=w966","url":"https://blog.naver.com/zufly/222482376357","src":"네이버블로그","w":650,"h":366,"date":"2021-08-24"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/4ejdSInVTkn","img":"https://postfiles.pstatic.net/MjAyMTA4MTlfNyAg/MDAxNjI5MzQ0NzA2OTE2.cmATu36JvXHPkBPopbuCpBuIVUAZfYRcEtODQwYjJcMg.cgQkk6VqIM6Y4aMOaJcmpckIy-d_S0nfIJVvyvPL2RYg.JPEG.zufly/IMG_6881.jpg?type=w966","url":"https://blog.naver.com/zufly/222482376357","src":"네이버블로그","w":650,"h":486,"date":"2021-08-24"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/EIiXP7thKLV","img":"https://postfiles.pstatic.net/MjAyMjAzMTlfMTI2/MDAxNjQ3NjYzMDc1MDUx.EEsNZNP8s4icitH88h3WbPE1IySrsTEBqvWff2npRk4g.XrghZMvhKqmPBQd4WdOl4Ik9CaYeFxQI1XmDb6sNdZog.JPEG.heynjoo93/IMG_6967.jpg?type=w966","url":"https://blog.naver.com/hyunjooblog/222696269393","src":"네이버블로그","w":900,"h":674,"date":"2022-04-09"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/8uUBapG84fR","img":"https://postfiles.pstatic.net/MjAyMjAzMTlfMjU2/MDAxNjQ3NjYzMDE3NDg5.ERl976TcH97BTrAMB3dSWfF_86bMKvdiZmgNIyrsA7cg.fpxLTcOKyirtwR7spPOejrWAV77HTrXK3K9ivX01WZIg.JPEG.heynjoo93/IMG_6636.jpg?type=w966","url":"https://blog.naver.com/hyunjooblog/222696269393","src":"네이버블로그","w":900,"h":1200,"date":"2022-04-09"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/8amH1dKKZrI","img":"https://postfiles.pstatic.net/MjAyMjAzMTlfMjIz/MDAxNjQ3NjYyOTk5MjUw.ziaCrSusxJmusEbDj44fG5RsVv1U3oZwhLtjkHemZ_Ug.QxTuYqoOF0U9lfr39U7icqwU7tkoquWvvn3MUzRdiukg.JPEG.heynjoo93/IMG_6637.jpg?type=w966","url":"https://blog.naver.com/hyunjooblog/222696269393","src":"네이버블로그","w":900,"h":1200,"date":"2022-04-09"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/Br6VYQqQYhs","img":"https://postfiles.pstatic.net/MjAyMTExMjRfMiAg/MDAxNjM3NzMyMzY2ODU2.QrkSw1nOX2YB02cGqcYaagf_wIoj5VRWddC-8AoJssgg.il_5slHE-ojh2eAqFM6hMKtbZ_0AFR4OjgJrRlTvtdUg.JPEG.zzieuni_1/output_3142475609.jpg?type=w966","url":"https://blog.naver.com/zzieuni_1/222579151010","src":"네이버블로그","w":550,"h":512,"date":"2021-11-26"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/E5lUPSNzaeQ","img":"https://naverbooking-phinf.pstatic.net/20211115_110/1636938310120p6r2S_JPEG/%B9%E8%C4%A1%B5%B5.jpg","url":"https://blog.naver.com/iamgoldmama/222684875266","src":"네이버블로그","w":1310,"h":1078,"date":"2022-03-28"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/BZkqCcfUliE","img":"https://postfiles.pstatic.net/MjAyNjA5MjBfMTQ0/MDAxNzg5OTA1NDI4NTA3.7jWaN38aZrBR5FuhPamuYvXZaiaroD8FXSkR2eErLlAg.ngj-vs6EVEWh4hn9Uz3NoldaJpBHkDkrtuOJ5jSniqYg.JPEG/naver-cd807b8051914e97714b.jpg?type=w773","url":"https://blog.naver.com/nhyeonge/224417978969","src":"네이버블로그","w":736,"h":457,"date":"2026-09-21"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/DU0fRgXgV1d","img":"https://postfiles.pstatic.net/MjAyNDA0MjBfMjY5/MDAxNzEzNTg0MzMzMTc3.d08_hak7wLzrtwotbsl2SYVIOZOloDVdwHN4fAzUeLgg.4DTHtei5BifSLcCfkHhOUcKB5HBAPaZFVx_dRtSAPrgg.JPEG/downloaded_image3.jpg?type=w773","url":"https://blog.naver.com/minki3501/223421423474","src":"네이버블로그","w":560,"h":420,"date":"2024-04-20"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/8qtramhyPgm","img":"https://tong.visitkorea.or.kr/cms/resource/06/2998706_image2_1.jpg","url":"https://leports.sailing-blog.click/2368","src":"티스토리","w":940,"h":529,"date":"2025-01-03"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/5NUaorZDZoI","img":"https://cfile299.uf.daum.net/image/03674A4F51E3F7330C506A","url":"https://cafe.daum.net/dm-club/oaYL/32","src":"Daum카페","w":1024,"h":768,"date":"2013-07-15"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/B1adQrf2p9x","img":"https://postfiles.pstatic.net/MjAyNDAyMDRfOCAg/MDAxNzA3MDQ3OTkxNDEx.OsDRyp7i09r6XsXlFzAMbhtFiXkd-mr_8gSwgxiAc_cg.UCpw8df4_0NMtTvV1afUmjx-TcrUu17zIIk_DEfnP4Ig.JPEG.dlgytjs33/KakaoTalk_20240204_205100668_20.jpg?type=w386","url":"https://blog.naver.com/wooo_wang/223345136213","src":"네이버블로그","w":386,"h":515,"date":"2024-02-06"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/JQpnjRxu9jd","img":"https://postfiles.pstatic.net/MjAyMjEyMjNfNyAg/MDAxNjcxODAzMTYyOTkx.M_41Y6iDHYJU96hm7BdLDoU8Lyzapx7dFOAqIBmNWt4g.lqUPam99NhNHHAR_geX4vR2tBaG00nnz7mGH5-Qyrs0g.JPEG.hsmjtgther/IMG_7323.jpg?type=w773","url":"https://blog.naver.com/excumee/222964017108","src":"네이버블로그","w":773,"h":773,"date":"2022-12-23"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/7ofUQ6DONwV","img":"https://gocamping.or.kr/upload/camp/101090/0108J0FN1YlUsrTe95Xx0mo7.jpg","url":"https://blogsailing.com/14819","src":"티스토리","w":2000,"h":1904,"date":"2025-11-24"},{"thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/15B1L7POBo8","img":"https://gocamping.or.kr/upload/camp/101090/3106EHXjtrI4IaCXsWmKbFOl.jpg","url":"https://blogsailing.com/14819","src":"티스토리","w":7008,"h":4672,"date":"2025-11-24"}],"social_checked_at":"2026-11-23T11:41:00+09:00","social_merged":true,"web":[{"t":"nblog","title":"경기도 양평 수입리캠핑장 후기｜아이와 함께한 가을캠핑, 6번 데크....","snippet":"아이와 함께한 가을캠핑 양평 수입리캠핑장 오늘은 얼마 전 주말에 다녀온 양평 수입리캠핑장 후기를 남겨보려고 한다 :) 아이가 생기기 전에는 그래도 가끔 차박도 다니고 했던 우리 부부인데, 아이가 4살이...","url":"https://blog.naver.com/minibeeworld/224457208925","src":"미니월드 다이어리","date":"2026-10-29"},{"t":"nblog","title":"서울 근교 가을 캠핑장 추천 10곳","snippet":"수입리캠핑장 입] 양평 수입리캠핑장의 숲속 캠핑 풍경 양평군 서종면에 위치한 수입리캠핑장은 산으로 둘러싸인 자연환경 속에 자리한 소규모 캠핑장입니다. 확인되는 최신 관광 정보에 따르면 파쇄석과...","url":"https://blog.naver.com/jackmommy/224426760292","src":"꿀팁저장","date":"2026-09-30"},{"t":"nblog","title":"경기 남부 캠핑장 추천","snippet":"이번에 경기 남부 캠핑장, 글램핑을 소개 하겠습니다. 김포 캠핑파크... 양평 수입리 캠핑장 https://kimjoow0n1.com/entry/%EC%A0%84%EA%B5%AD-%EC%BA%A0%ED%95%91%EB%AA...","url":"https://blog.naver.com/kimjoow0n11/224372425298","src":"☆MY LIFE ☆","date":"2026-08-08"},{"t":"nblog","title":"한적한 양평 서종리 벽계천에서 물놀이 20260808","snippet":"하천이다 #수입리캠핑장 에서도 벽계천에서 놀았던 기억으로 이번엔 #노지캠크닉 느낌으로 벽계천에... 좋았다 #양평물놀이 #양평벽계천 #벽계천계곡 #양평수입리 #양평서종면 #칠오닭갈비서종 #테라로사...","url":"https://blog.naver.com/gabriel_carolus_cha/224372359749","src":"Yuwon family","date":"2026-08-08"},{"t":"nblog","title":"양평 수입리캠핑장 후기, 계곡 바로 앞 가족 캠핑장","snippet":"계곡 캠핑을 즐기고 싶다면, 양평 수입리캠핑장은 충분히 만족스러운 선택이었습니다. 특히 아이들과 물놀이를 즐기고, 조용하게 힐링할 수 있는 캠핑장을 찾는 분들에게 추천드리고 싶은 곳입니다. 1+1...","url":"https://blog.naver.com/babybyeorak/224366742388","src":"Things for me","date":"2026-08-03"},{"t":"nblog","title":"수입리캠핑장_개울가를 마주한 깨끗한 캠핑장 20260627-28","snippet":"들꽃들 수입리캠핑장 정보 ✅1박에 6만원 (네이버예약 -> 입금 후 예약 확정) ✅매월 1일에 다음달... 만나요~~ #양평캠핑장 #수입리캠핑장 #소규모캠핑장 #테라로사양평 #양평맛집 #계곡캠핑 #패슬로우...","url":"https://blog.naver.com/gabriel_carolus_cha/224331667540","src":"Yuwon family","date":"2026-06-30"},{"t":"nblog","title":"양평 수입리 캠핑장 적당한 그늘과 계곡까지 완벽했던 번캠","snippet":"소규모 캠핑장이라 좋았다 캠핑 매너가 잘 자리 잡고 있지만 어차피 야외이고 얇은 천 한두개 사이로... ㅋ #양평수입리캠핑장 바로 옆 계곡이라고 해야하나 아니면 하천이라고 해야하나 장마가 한번 지나가야...","url":"https://blog.naver.com/uranus520/224290342978","src":"사진 좋아하는 쩡동","date":"2026-05-19"},{"t":"nblog","title":"[숲이야 캠핑장, 양평군 수입리] (2026.2.28~3.2) #1","snippet":"다음에는 A사이트로 잡아보자고 다짐을 하며,,,, 2월 마지막날에는 꽁꽁 얼어있었지만, 다음에 가면 푸른 나무잎과 활짝 핀 벚꽃을 기대하며!! #양평캠핑장 #수입리캠핑장 #초보캠핑 #숲이야 #숲이야캠핑장","url":"https://blog.naver.com/mh3634/224209723763","src":"너에게 들려주고 싶은 이야기","date":"2026-03-09"},{"t":"nblog","title":"양평 캠핑장 수입리캠핑장 자연 속 캠핑의 매력","snippet":"매너타임은 오후 10시 30분부터 오전 7시까지로, 이 시간에는 조용히 해주셔야 하니 참고하세요. ✅ 결론적으로, 수입리캠핑장은 조용하고 편안한 캠핑을 즐기고 싶은 분들에게 적합한 장소입니다. 자연과 함께...","url":"https://blog.naver.com/loyya30/224112758465","src":"일상","date":"2025-12-18"},{"t":"nblog","title":"양평 수입리 캠핑장","snippet":"순두부와 지난 1월 22년도 첫 캠핑으로 '양평 수입리 캠핑장'에 다녀왔다. 양평 수입리 캠핑장의 장점이자 단점은 '크지 않다'는 거다. 다시 말하면, 다른 캠핑장에 비해 캠핑 사이트가 많지 않다. 하지만...","url":"https://blog.naver.com/jamie_creates/224094000277","src":"good vibes only","date":"2025-12-01"},{"t":"nblog","title":"양평 서종면 힐링 캠핑Spot, 수입리캠핑장 다녀왔어요! ️","snippet":"매너시간도 10시 30분부터 다음 날 아침 7시까지 엄격히 지켜져서 한적하고 조용한 밤을 보낼 수... 페이지 #수입리캠핑장 #양평캠핑 #경기도캠핑장 #계곡캠핑 #가족캠핑 #힐링캠핑 #캠핑후기 #캠핑추천 만족도...","url":"https://blog.naver.com/hoochoo2467/223974105260","src":"후추와 함께 하는 캠핑스토리","date":"2025-09-19"},{"t":"nblog","title":"서울 근교 양평 서종 조용하고 깨끗한 수입리 캠핑장 1번 파쇄석 후....","snippet":"양평 서종 수입리캠핑장 25년도 우리의 첫 캠핑! 주말 1박 2일 캠핑이라 이동거리가 가장 가까운... ✔️입실 14:00 퇴실 12:00 ✔️샤워실 온수 시간 09:00-11:00/ 18:00-21:00 ✔️매너타임 22:30 분리수거장 바로 옆...","url":"https://blog.naver.com/jmday/223896616864","src":"꿈꾸는 햄토리","date":"2025-06-12"},{"t":"nblog","title":"양평 수입리 캠핑장","snippet":"오랜만에 오빠랑 다녀온 캠핑 !!!!! 더 더워지기 전에 가자 하고 전에 갔었던 수입리 캠핑장으로 〰️ 이마트에서 장보고 성남에서 50분정도 ! 오랜만에 가니까 설레고 신났음 (⸝⸝˃ ᵕ ˂⸝⸝) 캠린이지만...","url":"https://blog.naver.com/eunhye77-/223873167329","src":"소소한 일상:)","date":"2025-05-21"},{"t":"nblog","title":"250227 양평 수입리 캠핑장 방문후기","snippet":"지난 2월 무려 한달만에 서울 근교 양평으로 캠핑을 갔다 왔습니닷. 이번에는 양평 서종면에 위치한 수입리 캠핑장입니다. 4번 자리로 방문했고 잘 쉬다 왔습니다! 입실 14:00, 퇴실 12:00 매너타임 오후 10시 30분...","url":"https://blog.naver.com/hsl0306/223834116052","src":"I'm not HOMEBODY","date":"2025-04-15"},{"t":"nblog","title":"[캠핑] 2023년 기록 #016 양평 수입리캠핑장 4번ㅣ동계장박4주차 장박....","snippet":"수입리 캠핑장 (경기도 양평) 23.12.29.~24.01.01. 장박 4주차 *위치 : 경기... 주심) *매너타임 : 22:30~07:00 와... 2025년에 쓰는... 23년 장박 막주...ㅎ... 와ㅋㅋㅋ 진짜 캠핑 다니면서 눈이 이렇게 많이 내린 건 처음인 것...","url":"https://blog.naver.com/yo_ddori_daily/223806160147","src":"yo_ddori_daily","date":"2025-03-22"},{"t":"nblog","title":"[양평 캠핑]짙은 가을 불멍으로 마음을 나누었던 수입리캠핑장/이용....","snippet":"서울 근교에서 가족들과 함께 캠핑을 즐기고 싶어서 검색을 하다가... 있는 수입리 캠핑장을 다녀왔다. ● 위치 및 이용 안내 * 양평군 서종면 화서로 246번길 22-6 * 0507-1357-2463 * 입실 14:00, 퇴실 12:00 * 주차와...","url":"https://blog.naver.com/chamsae119/223651793689","src":"봄빛","date":"2024-11-08"},{"t":"nblog","title":"아베나키(AVENAKI) 시크 igt테이블 3 / 버너거치대 / 바베큐그릴 / 원버....","snippet":"캠핑 계획 날짜보다 빨리 주문할 것! 제품 검수의 문제만 없다면 제품은 매우 좋다! 수입리 캠핑장 / 사장님 내외분들이 엄청 친절하셨고... 였는데도 매너 타임 잘 지켜져서 편하게 쉬다 갑니다! 비바코 로마...","url":"https://blog.naver.com/rhkdduf06/223540742150","src":"rhkdduf님의블로그","date":"2024-08-08"},{"t":"nblog","title":"아이랑 경기도 양평 서종 캠핑장 소규모 계곡 캠핑장 [수입리 캠핑....","snippet":"(예약하기 힘들어지는데... 쩝..) #경기도양평 #경기도양평캠핑장 #서종캠핑장 #양평서종 #수입리 #수입리계곡 #가족캠핑장 #수입리캠핑장 #아이랑캠핑 #계곡캠핑장 #안나한330 #안나한터널타프","url":"https://blog.naver.com/p__family/223538249840","src":"봄 여름 가을 겨울 온전하게","date":"2024-08-06"},{"t":"nblog","title":"[캠핑] 2023년 기록 #015 양평 수입리캠핑장 4번ㅣ동계장박3주차","snippet":"수입리 캠핑장 (경기도 양평) 23.12.22.~23.12.25. 장박 3주차 *위치 : 경기... 주심) *매너타임 : 22:30~07:00 장박 3주차의 기록을 남겨본다~! 3주차는... 첫 장박이기도 하고 캠핑 쪼랩에 캠린이라... 걱정 한가득,,,ㅎㅎ...","url":"https://blog.naver.com/yo_ddori_daily/223478542799","src":"yo_ddori_daily","date":"2024-06-13"},{"t":"nblog","title":"양평 캠핑장","snippet":"경기도 양평군 서종면 화서로 854-17 수입리 캠핑장 경기도 양평군 서종면 화서로246번길 22-6... 캠핑장 경기도 양평군 캠핑장 #경기양평캠핑장 #경기도양평군캠핑장 #양평군캠핑장 #양평캠핑 #양평캠핑장","url":"https://blog.naver.com/hjstylemm/223476653405","src":"낚시, 여행, 캠핑, 숙박, 헬스, 골프, 자동차 취미","date":"2024-06-12"},{"t":"nblog","title":"[캠핑] 2023년 기록 #013 양평 수입리캠핑장 4번ㅣ동계장박1주차","snippet":"수입리 캠핑장 (경기도 양평) 23.12.07.~23.12.10. 장박 1주차 *위치 : 경기 양평군 서종면 화서로246번길 22-6 *입실시간 / 퇴실시간 : 14:00 / 12:00...","url":"https://blog.naver.com/yo_ddori_daily/223396124300","src":"yo_ddori_daily","date":"2024-03-26"},{"t":"nblog","title":"[캠핑] 2023년 기록 #006 양평 수입리캠핑장 1번","snippet":"*위치 : 경기 양평군 서종면 화서로246번길 22-6 *입실시간 / 퇴실시간 : 14:00 / 12:00 (조기 입실 가능시 문자로 연락 주심) *매너타임 : 22:30~07:00 #수입리캠핑장 은 이전에 6번사이트로 포스팅한 적 있었다....","url":"https://blog.naver.com/yo_ddori_daily/223314337567","src":"yo_ddori_daily","date":"2024-01-06"},{"t":"nblog","title":"수입리캠핑장 동계장박 안내","snippet":"및 매너타임 등 캠핑장 규정과 동일적용됩니다. ✅️인원 성인2아이2 ✅️매너타임 22시30분~7시 ✅️입실 목요일 ✅️퇴실 화요일 12시까지 ✔️입금 후 이용 횟수 상관없이 환불불가 ✔️예약자...","url":"https://blog.naver.com/suipri249/223211948120","src":"수입리캠핑장","date":"2023-09-15"},{"t":"nblog","title":"수입리캠핑장","snippet":"(세팀예약불가) ✔입실14:00~21:00 퇴실12:00 ✔매너시간 22:30~07:00 지켜주세요! ✅카라반 캠핑카 트레일러 불가 ✅애견동반 불가... #수입리캠핑장#양평캠핑장#서울근교캠핑장#계곡캠핑장#소규모캠핑장...","url":"https://blog.naver.com/suipri249/223178830799","src":"수입리캠핑장","date":"2023-08-09"},{"t":"nblog","title":"수입리캠핑장 겨울 장박","snippet":"불가 캠핑카, 카라반, 트레일러 진입불가 입금 후 이용 횟수... 모든 전기 OFF (600W이상 사용시 차단될 수 있습니다.) (전자기기 등... 발생할 경우 환불 없이 퇴실조치합니다. #수입리캠핑장#겨울장박","url":"https://blog.naver.com/suipri249/222878899065","src":"수입리캠핑장","date":"2022-09-19"},{"t":"nblog","title":"[16th] 수입리캠핑장/양평캠핑장/서종캠핑장/수입리/조용한캠핑장/고....","snippet":"20(3박 4일) 양평 수입리캠핑장 체크인: 14시 체크아웃: 12시 사이트 크기: 파쇄석 8*9m, 데크 5*7m 사이트 내 주차: 가능 매너타임: 22시 30분... ㅋㅋㅋ 캠핑 내내 방문했다고 한다.. 다음 날 아침으로 김치찌개...","url":"https://blog.naver.com/sweet_642/222850742986","src":"82_you_and_i_camps","date":"2022-08-17"},{"t":"nblog","title":"[15th] 수입리캠핑장/양평캠핑장/서종캠핑장/수입리/서울근교캠핑장/....","snippet":"13(1박 2일) 양평 수입리캠핑장 체크인: 14시 체크아웃: 12시 사이트 크기: 파쇄석 8*9m, 데크 5*7m 사이트 내 주차: 가능 매너타임: 22시 30분... 죽으로 캠핑 마무리! 리뷰 수입리 캠핑장은 고즈넉한 느낌이 좋다...","url":"https://blog.naver.com/sweet_642/222850722471","src":"82_you_and_i_camps","date":"2022-08-17"},{"t":"nblog","title":"[13th] 수입리캠핑장/양평캠핑장/서종캠핑장/서종데이트/수입리/서울....","snippet":"수입리캠핑장 with 오가와 아폴론T/C&듀랑고 에어미니 2022.01.15~2022.01.16 (1박2일) 양평 수입리캠핑장 체크인: 14시 체크아웃: 12시 사이트 크기: 파쇄석 8*9m, 데크5*7m 사이트 내 주차: 가능 매너타임: 22시 30분...","url":"https://blog.naver.com/sweet_642/222840361008","src":"82_you_and_i_camps","date":"2022-08-05"}],"prices":[{"won":60000,"label":null,"season":null,"day":null,"quote":"627-28 · 들꽃들 수입리캠핑장 정보 ✅1박에 6만원 (네이버예약 -> 입","url":"https://blog.naver.com/gabriel_carolus_cha/224331667540","src":"Yuwon family","date":"2026-06-30"}],"web_checked_at":"2026-11-18T02:11:54.160Z","spec":{"version":1,"generated_at":"2026-11-24T00:21:12.601Z","fields":{"CHECKIN_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"14:00부터","count":5,"latest":"2026-05-05","samples":[{"quote":"최대 세사이트 예약 가능 수입리캠핑장 정보 정리 → 장소 이름: 수입리캠핑장 → 카테고리: 캠핑,야영장 → 찾아가기: 경기 양평군 서종면 화서로246번길 22-6...수입리캠핑장 경기도 양평군 서종면 화서로246번길 22-6 입실14시~21시까지 퇴…","url":"https://blog.naver.com/goguma4354/224273371344","label":"고구마네 생활 공간 연구소","date":"2026-05-05"},{"quote":"✔️입실 14:00 퇴실 12:00","url":"https://blog.naver.com/jmday/223896616864","label":"꿈꾸는 햄토리","date":"2025-06-12"}]}],"conflict":false},"CHECKOUT_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"12:00까지","count":4,"latest":"2025-06-12","samples":[{"quote":"✔️입실 14:00 퇴실 12:00","url":"https://blog.naver.com/jmday/223896616864","label":"꿈꾸는 햄토리","date":"2025-06-12"},{"quote":"입실 14:00, 퇴실 12:00 매너타임 오후 10시 30분...","url":"https://blog.naver.com/hsl0306/223834116052","label":"I'm not HOMEBODY","date":"2025-04-15"}]},{"value":"14:00까지","count":2,"latest":"2024-03-26","samples":[{"quote":"퇴실시간 : 14:00","url":"https://blog.naver.com/yo_ddori_daily/223396124300","label":"yo_ddori_daily","date":"2024-03-26"},{"quote":"퇴실시간 : 14:00","url":"https://blog.naver.com/yo_ddori_daily/223314337567","label":"yo_ddori_daily","date":"2024-01-06"}]}],"conflict":true},"EARLY_CHECKIN":{"grade":"MENTION","values":[],"mentions":[{"value":"가능(요금 미기재)","count":1,"latest":"2024-01-06","samples":[{"quote":"12:00 (조기 입실 가능시 문자로 연락 주심) *매너타임 : 22:30~07:00 #수입리캠핑장 은 이전에 6번사이트로 포스팅한 적 있었다....","url":"https://blog.naver.com/yo_ddori_daily/223314337567","label":"yo_ddori_daily","date":"2024-01-06"}]}],"conflict":false},"MANNER_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"22:30부터","count":7,"latest":"2025-12-18","samples":[{"quote":"매너타임은 오후 10시 30분부터 오전 7시까지로, 이 시간에는 조용히 해주셔야 하니 참고하세요.","url":"https://blog.naver.com/loyya30/224112758465","label":"일상","date":"2025-12-18"},{"quote":"️매너타임 22:30 분리수거장 바로 옆...","url":"https://blog.naver.com/jmday/223896616864","label":"꿈꾸는 햄토리","date":"2025-06-12"}]}],"conflict":false},"PET_POLICY":{"grade":"MENTION","values":[],"mentions":[{"value":"동반 불가","count":1,"latest":"2023-08-09","samples":[{"quote":"애견동반 불가...","url":"https://blog.naver.com/suipri249/223178830799","label":"수입리캠핑장","date":"2023-08-09"}]}],"conflict":false},"HOT_WATER_OPERATING":{"grade":"MENTION","values":[],"mentions":[{"value":"온수 시간제 (09:00~11:00)","count":1,"latest":"2025-06-12","samples":[{"quote":"️샤워실 온수 시간 09:00-11:00/ 18:00-21:00","url":"https://blog.naver.com/jmday/223896616864","label":"꿈꾸는 햄토리","date":"2025-06-12"}]}],"conflict":false}},"stats":{"facts":21,"reviews_used":11,"roundups_skipped":1}}}
+{
+  "intro": "경기도 양평군 서종면 화서로246번길 22-6에 위치한 지자체 정식 인허가 등록 야영장인 '수입리 캠핑장'입니다.",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "photos": [],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": null,
+  "profile": {
+    "version": 1,
+    "fields": {
+      "CHECKIN": {
+        "value": "14:00부터",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 5건",
+          "url": "https://blog.naver.com/goguma4354/224273371344",
+          "date": "2026-05-05",
+          "quote": "최대 세사이트 예약 가능 수입리캠핑장 정보 정리 → 장소 이름: 수입리캠핑장 → 카테고리: 캠핑,야영장 → 찾아가기: 경기 양평군 서종면 화서로246번길 22-6...수입리캠핑장 경기도 양평군 서종면 화서로246번길 22-6 입실14시~21시까지 퇴…"
+        }
+      },
+      "CHECKOUT": {
+        "value": "12:00까지",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 4건",
+          "url": "https://blog.naver.com/jmday/223896616864",
+          "date": "2025-06-12",
+          "quote": "✔️입실 14:00 퇴실 12:00"
+        }
+      },
+      "MANNER": {
+        "value": "22:30부터",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 7건",
+          "url": "https://blog.naver.com/loyya30/224112758465",
+          "date": "2025-12-18",
+          "quote": "매너타임은 오후 10시 30분부터 오전 7시까지로, 이 시간에는 조용히 해주셔야 하니 참고하세요."
+        }
+      },
+      "PRICE": {
+        "value": "6만원대",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 언급",
+          "url": "https://blog.naver.com/gabriel_carolus_cha/224331667540",
+          "date": "2026-06-30",
+          "quote": "627-28 · 들꽃들 수입리캠핑장 정보 ✅1박에 6만원 (네이버예약 -> 입"
+        },
+        "count": 1,
+        "min": 60000,
+        "max": 60000
+      },
+      "POWER": {
+        "value": "업장 미공지 · 법정 상한 600W",
+        "grade": "REFERENCE",
+        "source": {
+          "label": "관광진흥법 야영장 안전위생기준(사이트당 600W 이하)",
+          "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854"
+        },
+        "watts": 600,
+        "statutory": true
+      },
+      "FIRE": {
+        "value": "화로대 개별(연료 미확인)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "한국관광공사 고캠핑 등록값",
+          "url": null,
+          "date": "2026-11-10T00:41:54.890Z"
+        }
+      },
+      "PET": {
+        "value": "확인필요",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "한국관광공사 고캠핑 등록값",
+          "url": null,
+          "date": "2026-11-10T00:41:54.890Z"
+        }
+      },
+      "AMENITIES": {
+        "value": "전기 · 화장실 · 샤워실 · 개수대",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "한국관광공사 고캠핑 등록값",
+          "url": null,
+          "date": "2026-11-10T00:41:54.890Z"
+        },
+        "items": [
+          "전기",
+          "화장실",
+          "샤워실",
+          "개수대"
+        ]
+      },
+      "SEASON": {
+        "value": "사계절 운영",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "한국관광공사 고캠핑 등록값",
+          "url": null,
+          "date": "2026-11-10T00:41:54.890Z"
+        }
+      },
+      "HOT_WATER_OPERATING": {
+        "v": "온수 시간제 (09:00~11:00)",
+        "norm": "09:00~11:00",
+        "grade": "MENTION",
+        "src": "COMMUNITY_BODY",
+        "at": "2026-11-24"
+      }
+    },
+    "tags": [
+      {
+        "code": "FOREST",
+        "label": "숲",
+        "why": "고캠핑 입지"
+      },
+      {
+        "code": "MOUNTAIN",
+        "label": "산",
+        "why": "고캠핑 입지"
+      },
+      {
+        "code": "PET_OK",
+        "label": "반려견 동반",
+        "why": "고캠핑 등록값"
+      },
+      {
+        "code": "WINTER",
+        "label": "겨울 운영",
+        "why": "고캠핑 운영 계절 + 전기"
+      }
+    ],
+    "summary": "화로대 개별 · 반려견 확인필요",
+    "score": {
+      "known": 9,
+      "facts": 4,
+      "total": 18
+    },
+    "generated_at": "2026-11-24T00:21:50.726Z"
+  },
+  "site_products": [
+    {
+      "id": "sp-loc-dd927223-1",
+      "name": "오토캠핑 사이트",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": null,
+      "power": "전기 이용 가능",
+      "price": null,
+      "photos": [],
+      "desc": "수입리 캠핑장 대표 사이트입니다."
+    }
+  ],
+  "videos": [
+    {
+      "title": "서종IC 10분,서종면 수입리, 캠핑장 펜션 전세,벜계천 접함 #양평전원주택 #서종면전원주택",
+      "url": "https://www.youtube.com/watch?v=SuynejJIlDY",
+      "thumb": "https://search3.kakaocdn.net/argon/138x78_80_pr/L4l6OyftygC",
+      "dur": 65,
+      "author": "양평전원주택, 토지 전문 - 드림부동산 TV",
+      "date": "2026-02-18",
+      "yt": "SuynejJIlDY",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "vlog. 캠핑 브이로그 / 힐레베르그 50주년 시에라컵 언박싱 / 헬리녹스 타프 / 노르디스크 레이사 / 캠핑용품 / 서울 근교 캠핑장 / 수입리 캠핑장 / 캠핑요리",
+      "url": "https://www.youtube.com/watch?v=ZejSBgioUtA",
+      "thumb": "https://search4.kakaocdn.net/argon/138x78_80_pr/BRSoqUKEHow",
+      "dur": 755,
+      "author": "캠닝아 camningah",
+      "date": "2021-10-11",
+      "yt": "ZejSBgioUtA",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "[VLOG] 산과 계곡 뷰 최고인 신생 캠핑장에서 / 우중캠핑 / 네이처하이크 / 브라이튼6.4 / 수입리캠핑장 / 다이아몬드타프 / 계곡뷰캠핑 / 불멍",
+      "url": "https://www.youtube.com/watch?v=7uT_bzLSfWM",
+      "thumb": "https://search2.kakaocdn.net/argon/138x78_80_pr/7rYISeaA4hd",
+      "dur": 324,
+      "author": "다필부부TV",
+      "date": "2021-05-02",
+      "yt": "7uT_bzLSfWM",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "서울에서 초근접해 있는 양평 수입리캠핑장 | 노르디스크 | 아스가르드 7.1 | 카리20 | 소규모캠핑장",
+      "url": "https://www.youtube.com/watch?v=QKhJcHj46Yg",
+      "thumb": "https://search2.kakaocdn.net/argon/138x78_80_pr/83rtjsgVPqY",
+      "dur": 346,
+      "author": "도형레코드",
+      "date": "2021-05-09",
+      "yt": "QKhJcHj46Yg",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "【캠핑】 캠핑갈 때 매트를 안가져가면 어떻게 될까? | 캠핑홈파티 | 캐나다 🇨🇦첫캠핑썰 | 양평수입리캠핑장",
+      "url": "https://www.youtube.com/watch?v=VkDcTSUTKME",
+      "thumb": "https://search4.kakaocdn.net/argon/138x78_80_pr/DwPDEViiMwH",
+      "dur": 515,
+      "author": "개미네 놀이터 Antfam Playground",
+      "date": "2022-11-12",
+      "yt": "VkDcTSUTKME",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "늦은 밤까지 힐링한 전세캠핑/ 네이버 평점 97점 양평 수입리 캠핑장 / 17번째 캠핑일기",
+      "url": "https://www.youtube.com/watch?v=W2VRkS0kt54",
+      "thumb": "https://search3.kakaocdn.net/argon/138x78_80_pr/LnokfN5fwXq",
+      "dur": 620,
+      "author": "소시지튜브 [sausage tube] :소이시우아빠일기장",
+      "date": "2022-01-08",
+      "yt": "W2VRkS0kt54",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "[Camping] 동계캠핑2 | 수입리캠핑장",
+      "url": "https://www.youtube.com/watch?v=kdMH_YWcg64",
+      "thumb": "https://search2.kakaocdn.net/argon/138x78_80_pr/8HoM3V5tG7S",
+      "dur": 861,
+      "author": "배리진",
+      "date": "2022-09-19",
+      "yt": "kdMH_YWcg64",
+      "platform": "youtube",
+      "kind": "video"
+    },
+    {
+      "title": "[캠핑] 양평 수입리캠핑장 (2)",
+      "url": "https://blog.naver.com/we921030/223560668291?rvid=64ABAA1982E2BFB5A26AA6403E5E5E19177C",
+      "thumb": "https://search4.kakaocdn.net/argon/138x78_80_pr/Dzep4qaMz3a",
+      "dur": 2,
+      "author": "JangDali",
+      "date": "2024-08-26",
+      "yt": null,
+      "platform": "web",
+      "kind": "short"
+    },
+    {
+      "title": "수입리 캠핑장 계곡 내려가는 계단",
+      "url": "https://blog.naver.com/ant_fam_playground/222932959205?rvid=7580699CF041290EF747DA0B300A64198F86",
+      "thumb": "https://search3.kakaocdn.net/argon/138x78_80_pr/7YVoDSKXpPd",
+      "dur": 8,
+      "author": "여행하는 개미맘",
+      "date": "2022-11-19",
+      "yt": null,
+      "platform": "web",
+      "kind": "short"
+    }
+  ],
+  "reviews": [
+    {
+      "t": "blog",
+      "title": "양평 수입리캠핑장 9번 데크 후기｜남편과 첫 캠핑, 불멍하며 쉬어간 연휴 🏕️",
+      "snippet": "앞으로 제 글에 종종 등장할 돼지오리 미니미예요. 귀엽게 봐주세요 💕 ​ 그럼 미니미와 함께 오늘 이야기도 시작해볼게요. ​ 이번 연휴에는 남편이랑 양평 수입리캠핑장에 다녀왔어요. ​ 남편과 둘이 캠핑을 온 건 이번이 처음이에요! 먹을 음식은 미리 다 사서 챙기고, 추울까 봐 전기장…",
+      "url": "https://blog.naver.com/pigducklily/224440658824",
+      "src": "먹고 놀고 여행하는 부부의 일상기록",
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/80QYzSzX4Zb",
+      "date": "2026-10-14"
+    },
+    {
+      "t": "blog",
+      "title": "서울근교캠핑장 양평 수입리캠핑장",
+      "snippet": "2시에 출발해서 4시 좀 안되게 도착했어요 ​ 평상시 주말이라면 이정도로 걸리진 않을거예요~ 서울근교에서 아담한 캠핑장을 찾고 계신다면 양평 수입리캠핑장도 한번 살펴보세요~ ​ ​ ​ ​ 경기도 양평군 서종면에 있는 곳으로, 산으로 둘러싸여 있고 옆으로는 개울이 흐르는 작은 캠핑장입니…",
+      "url": "https://blog.naver.com/thehcandle/224440370963",
+      "src": "꿈꾸는 레이첼 ♬",
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/D0A4NlsiSP1",
+      "date": "2026-10-13"
+    },
+    {
+      "t": "blog",
+      "title": "양평 소규모 캠핑장 수입리캠핑장 조용하고 깨끗한 휴식처",
+      "snippet": "최대 세사이트 예약 가능 수입리캠핑장 정보 정리 → 장소 이름: 수입리캠핑장 → 카테고리: 캠핑,야영장 → 찾아가기: 경기 양평군 서종면 화서로246번길 22-6...수입리캠핑장 경기도 양평군 서종면 화서로246번길 22-6 입실14시~21시까지 퇴실12:00 당일퇴실 22시까지 매너…",
+      "url": "https://blog.naver.com/goguma4354/224273371344",
+      "src": "고구마네 생활 공간 연구소",
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/IyYGOsGeE3b",
+      "date": "2026-05-05"
+    }
+  ],
+  "sns_images": [
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/JPvQUJ4scXA",
+      "img": "https://postfiles.pstatic.net/MjAyMjA0MDdfMTg4/MDAxNjQ5MjkxNzUwMjA2.Mm_x3zHwFjt4x0y2uh4elac2D-0hdQ-b7oWDAy_84vIg.thI4QZdwqZlZwTvjoewOFiSKbWvf1JX-vRJiUGHI1QEg.JPEG.ganachoco7/SE-79aa8137-2b79-4d3a-915b-7b3e8fc256bd.jpg?type=w773",
+      "url": "https://blog.naver.com/thebrowlab/222693977386",
+      "src": "네이버블로그",
+      "w": 400,
+      "h": 533,
+      "date": "2022-04-07"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/6X3zpRB6CEL",
+      "img": "https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fsearch.pstatic.net%2Fcommon%2F%3FautoRotate%3Dtrue%26quality%3D100%26type%3Df640_380%26src%3Dhttps%253A%252F%252Fldb-phinf.pstatic.net%252F20210221_57%252F1613907452385TrlW7_JPEG%252F5Z5QwRpgvoBGHRF1ecb-1IuN.jpg%22&type=ff500_300",
+      "url": "https://blog.naver.com/dmsqlsdl93/222525228713",
+      "src": "네이버블로그",
+      "w": 500,
+      "h": 300,
+      "date": "2021-10-03"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/5uLshKGwxgf",
+      "img": "https://postfiles.pstatic.net/MjAyMTA5MTRfNzEg/MDAxNjMxNjAxMjEyNjk2.cGHSH06ViOsgVl4Xb6kqYJw9AiDlaq_faZPeW-ynRewg.wF6nEjTdTbcrJ3kNBjPBP08tmjNQ4tXKN03VcQqEHSIg.JPEG.myangy/SE-eafa989d-a549-4f09-b52d-527f11aa9c96.jpg?type=w773",
+      "url": "https://blog.naver.com/myangy/222505423548",
+      "src": "네이버블로그",
+      "w": 400,
+      "h": 300,
+      "date": "2021-09-14"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/61sksuDxhJi",
+      "img": "https://postfiles.pstatic.net/MjAyNDA4MjZfMTE2/MDAxNzI0NjEwMDU1NTcz.cY3p2ayfmtuhadov4kuXXPHuxTe1oHIjkMT9hgOiQ6Yg.H0j8NkK1XHLxVxFKDn9Fv3oFuUpZzx3Pnf8hjjDR9dwg.JPEG/IMG_2411.jpg?type=w773",
+      "url": "https://blog.naver.com/we921030/223560668291",
+      "src": "네이버블로그",
+      "w": 773,
+      "h": 570,
+      "date": "2024-08-26"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/B5iQTsLtQxs",
+      "img": "https://tong.visitkorea.or.kr/cms/resource/14/2792514_image2_1.jpg",
+      "url": "https://leports.sailing-blog.click/2368",
+      "src": "티스토리",
+      "w": 750,
+      "h": 563,
+      "date": "2025-01-03"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/GW4SHqqBUAF",
+      "img": "https://tong.visitkorea.or.kr/cms/resource/15/2792515_image2_1.jpg",
+      "url": "https://leports.sailing-blog.click/2368",
+      "src": "티스토리",
+      "w": 750,
+      "h": 563,
+      "date": "2025-01-03"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/EU4Olc1oB9H",
+      "img": "https://postfiles.pstatic.net/MjAyMTA5MTRfMjcz/MDAxNjMxNjAxMjE1ODIx.3v-rxdEeaBjhx3yqm9qFOMNRnNTK-u29stzGqPCJhYcg.B4Eoxr9K7c3bUVlZscAw3JQwdViIw8967W3b5wGw0TMg.JPEG.myangy/SE-1bca0bf8-531a-4aa1-bfcd-14615048e35e.jpg?type=w773",
+      "url": "https://blog.naver.com/myangy/222505423548",
+      "src": "네이버블로그",
+      "w": 400,
+      "h": 300,
+      "date": "2021-09-14"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/6hyYBqubrIc",
+      "img": "https://gocamping.or.kr/upload/camp/8083/thumb/thumb_720_8873vjPFKWtQvVTw4SDzxeiY.jpg",
+      "url": "https://daylifehappy.tistory.com/2664",
+      "src": "티스토리",
+      "w": 720,
+      "h": 376,
+      "date": "2023-11-11"
+    },
+    {
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/IoVLSf9sWP0",
+      "img": "https://postfiles.pstatic.net/MjAyMTA4MTlfMTQ0/MDAxNjI5MzQ0NTIyMzUw.JDB1KXeIsnvXQUG5lPCthYubUNGOcR6NygATReggCPEg.PFK6sAIzdJZWuC44vkYGr9HYsNLqM7kuO7Ivq5GXOYIg.JPEG.zufly/IMG_6643.JPG?type=w966",
+      "url": "https://blog.naver.com/zufly/222482376357",
+      "src": "네이버블로그",
+      "w": 650,
+      "h": 866,
+      "date": "2021-08-24"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/CacbxfDvLpi",
+      "img": "https://postfiles.pstatic.net/MjAyMTA4MTlfMTYw/MDAxNjI5MzQ0NzA1NDY1.Jy7dX7oqZJ_A8nPHxDp79GoNV23zts0vi8HKz3DLdHYg.PzaPMdIyHaj8JyVJUlyce26qfLyQ9FwIqM_76YGpQs4g.JPEG.zufly/IMG_3196.JPG?type=w966",
+      "url": "https://blog.naver.com/zufly/222482376357",
+      "src": "네이버블로그",
+      "w": 650,
+      "h": 366,
+      "date": "2021-08-24"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/4ejdSInVTkn",
+      "img": "https://postfiles.pstatic.net/MjAyMTA4MTlfNyAg/MDAxNjI5MzQ0NzA2OTE2.cmATu36JvXHPkBPopbuCpBuIVUAZfYRcEtODQwYjJcMg.cgQkk6VqIM6Y4aMOaJcmpckIy-d_S0nfIJVvyvPL2RYg.JPEG.zufly/IMG_6881.jpg?type=w966",
+      "url": "https://blog.naver.com/zufly/222482376357",
+      "src": "네이버블로그",
+      "w": 650,
+      "h": 486,
+      "date": "2021-08-24"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/EIiXP7thKLV",
+      "img": "https://postfiles.pstatic.net/MjAyMjAzMTlfMTI2/MDAxNjQ3NjYzMDc1MDUx.EEsNZNP8s4icitH88h3WbPE1IySrsTEBqvWff2npRk4g.XrghZMvhKqmPBQd4WdOl4Ik9CaYeFxQI1XmDb6sNdZog.JPEG.heynjoo93/IMG_6967.jpg?type=w966",
+      "url": "https://blog.naver.com/hyunjooblog/222696269393",
+      "src": "네이버블로그",
+      "w": 900,
+      "h": 674,
+      "date": "2022-04-09"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/8uUBapG84fR",
+      "img": "https://postfiles.pstatic.net/MjAyMjAzMTlfMjU2/MDAxNjQ3NjYzMDE3NDg5.ERl976TcH97BTrAMB3dSWfF_86bMKvdiZmgNIyrsA7cg.fpxLTcOKyirtwR7spPOejrWAV77HTrXK3K9ivX01WZIg.JPEG.heynjoo93/IMG_6636.jpg?type=w966",
+      "url": "https://blog.naver.com/hyunjooblog/222696269393",
+      "src": "네이버블로그",
+      "w": 900,
+      "h": 1200,
+      "date": "2022-04-09"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/8amH1dKKZrI",
+      "img": "https://postfiles.pstatic.net/MjAyMjAzMTlfMjIz/MDAxNjQ3NjYyOTk5MjUw.ziaCrSusxJmusEbDj44fG5RsVv1U3oZwhLtjkHemZ_Ug.QxTuYqoOF0U9lfr39U7icqwU7tkoquWvvn3MUzRdiukg.JPEG.heynjoo93/IMG_6637.jpg?type=w966",
+      "url": "https://blog.naver.com/hyunjooblog/222696269393",
+      "src": "네이버블로그",
+      "w": 900,
+      "h": 1200,
+      "date": "2022-04-09"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/Br6VYQqQYhs",
+      "img": "https://postfiles.pstatic.net/MjAyMTExMjRfMiAg/MDAxNjM3NzMyMzY2ODU2.QrkSw1nOX2YB02cGqcYaagf_wIoj5VRWddC-8AoJssgg.il_5slHE-ojh2eAqFM6hMKtbZ_0AFR4OjgJrRlTvtdUg.JPEG.zzieuni_1/output_3142475609.jpg?type=w966",
+      "url": "https://blog.naver.com/zzieuni_1/222579151010",
+      "src": "네이버블로그",
+      "w": 550,
+      "h": 512,
+      "date": "2021-11-26"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/E5lUPSNzaeQ",
+      "img": "https://naverbooking-phinf.pstatic.net/20211115_110/1636938310120p6r2S_JPEG/%B9%E8%C4%A1%B5%B5.jpg",
+      "url": "https://blog.naver.com/iamgoldmama/222684875266",
+      "src": "네이버블로그",
+      "w": 1310,
+      "h": 1078,
+      "date": "2022-03-28"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/BZkqCcfUliE",
+      "img": "https://postfiles.pstatic.net/MjAyNjA5MjBfMTQ0/MDAxNzg5OTA1NDI4NTA3.7jWaN38aZrBR5FuhPamuYvXZaiaroD8FXSkR2eErLlAg.ngj-vs6EVEWh4hn9Uz3NoldaJpBHkDkrtuOJ5jSniqYg.JPEG/naver-cd807b8051914e97714b.jpg?type=w773",
+      "url": "https://blog.naver.com/nhyeonge/224417978969",
+      "src": "네이버블로그",
+      "w": 736,
+      "h": 457,
+      "date": "2026-09-21"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/DU0fRgXgV1d",
+      "img": "https://postfiles.pstatic.net/MjAyNDA0MjBfMjY5/MDAxNzEzNTg0MzMzMTc3.d08_hak7wLzrtwotbsl2SYVIOZOloDVdwHN4fAzUeLgg.4DTHtei5BifSLcCfkHhOUcKB5HBAPaZFVx_dRtSAPrgg.JPEG/downloaded_image3.jpg?type=w773",
+      "url": "https://blog.naver.com/minki3501/223421423474",
+      "src": "네이버블로그",
+      "w": 560,
+      "h": 420,
+      "date": "2024-04-20"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/8qtramhyPgm",
+      "img": "https://tong.visitkorea.or.kr/cms/resource/06/2998706_image2_1.jpg",
+      "url": "https://leports.sailing-blog.click/2368",
+      "src": "티스토리",
+      "w": 940,
+      "h": 529,
+      "date": "2025-01-03"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/5NUaorZDZoI",
+      "img": "https://cfile299.uf.daum.net/image/03674A4F51E3F7330C506A",
+      "url": "https://cafe.daum.net/dm-club/oaYL/32",
+      "src": "Daum카페",
+      "w": 1024,
+      "h": 768,
+      "date": "2013-07-15"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/B1adQrf2p9x",
+      "img": "https://postfiles.pstatic.net/MjAyNDAyMDRfOCAg/MDAxNzA3MDQ3OTkxNDEx.OsDRyp7i09r6XsXlFzAMbhtFiXkd-mr_8gSwgxiAc_cg.UCpw8df4_0NMtTvV1afUmjx-TcrUu17zIIk_DEfnP4Ig.JPEG.dlgytjs33/KakaoTalk_20240204_205100668_20.jpg?type=w386",
+      "url": "https://blog.naver.com/wooo_wang/223345136213",
+      "src": "네이버블로그",
+      "w": 386,
+      "h": 515,
+      "date": "2024-02-06"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/JQpnjRxu9jd",
+      "img": "https://postfiles.pstatic.net/MjAyMjEyMjNfNyAg/MDAxNjcxODAzMTYyOTkx.M_41Y6iDHYJU96hm7BdLDoU8Lyzapx7dFOAqIBmNWt4g.lqUPam99NhNHHAR_geX4vR2tBaG00nnz7mGH5-Qyrs0g.JPEG.hsmjtgther/IMG_7323.jpg?type=w773",
+      "url": "https://blog.naver.com/excumee/222964017108",
+      "src": "네이버블로그",
+      "w": 773,
+      "h": 773,
+      "date": "2022-12-23"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/7ofUQ6DONwV",
+      "img": "https://gocamping.or.kr/upload/camp/101090/0108J0FN1YlUsrTe95Xx0mo7.jpg",
+      "url": "https://blogsailing.com/14819",
+      "src": "티스토리",
+      "w": 2000,
+      "h": 1904,
+      "date": "2025-11-24"
+    },
+    {
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/15B1L7POBo8",
+      "img": "https://gocamping.or.kr/upload/camp/101090/3106EHXjtrI4IaCXsWmKbFOl.jpg",
+      "url": "https://blogsailing.com/14819",
+      "src": "티스토리",
+      "w": 7008,
+      "h": 4672,
+      "date": "2025-11-24"
+    }
+  ],
+  "social_checked_at": "2026-11-23T11:41:00+09:00",
+  "social_merged": true,
+  "web": [
+    {
+      "t": "nblog",
+      "title": "경기도 양평 수입리캠핑장 후기｜아이와 함께한 가을캠핑, 6번 데크....",
+      "snippet": "아이와 함께한 가을캠핑 양평 수입리캠핑장 오늘은 얼마 전 주말에 다녀온 양평 수입리캠핑장 후기를 남겨보려고 한다 :) 아이가 생기기 전에는 그래도 가끔 차박도 다니고 했던 우리 부부인데, 아이가 4살이...",
+      "url": "https://blog.naver.com/minibeeworld/224457208925",
+      "src": "미니월드 다이어리",
+      "date": "2026-10-29"
+    },
+    {
+      "t": "nblog",
+      "title": "서울 근교 가을 캠핑장 추천 10곳",
+      "snippet": "수입리캠핑장 입] 양평 수입리캠핑장의 숲속 캠핑 풍경 양평군 서종면에 위치한 수입리캠핑장은 산으로 둘러싸인 자연환경 속에 자리한 소규모 캠핑장입니다. 확인되는 최신 관광 정보에 따르면 파쇄석과...",
+      "url": "https://blog.naver.com/jackmommy/224426760292",
+      "src": "꿀팁저장",
+      "date": "2026-09-30"
+    },
+    {
+      "t": "nblog",
+      "title": "경기 남부 캠핑장 추천",
+      "snippet": "이번에 경기 남부 캠핑장, 글램핑을 소개 하겠습니다. 김포 캠핑파크... 양평 수입리 캠핑장 https://kimjoow0n1.com/entry/%EC%A0%84%EA%B5%AD-%EC%BA%A0%ED%95%91%EB%AA...",
+      "url": "https://blog.naver.com/kimjoow0n11/224372425298",
+      "src": "☆MY LIFE ☆",
+      "date": "2026-08-08"
+    },
+    {
+      "t": "nblog",
+      "title": "한적한 양평 서종리 벽계천에서 물놀이 20260808",
+      "snippet": "하천이다 #수입리캠핑장 에서도 벽계천에서 놀았던 기억으로 이번엔 #노지캠크닉 느낌으로 벽계천에... 좋았다 #양평물놀이 #양평벽계천 #벽계천계곡 #양평수입리 #양평서종면 #칠오닭갈비서종 #테라로사...",
+      "url": "https://blog.naver.com/gabriel_carolus_cha/224372359749",
+      "src": "Yuwon family",
+      "date": "2026-08-08"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 수입리캠핑장 후기, 계곡 바로 앞 가족 캠핑장",
+      "snippet": "계곡 캠핑을 즐기고 싶다면, 양평 수입리캠핑장은 충분히 만족스러운 선택이었습니다. 특히 아이들과 물놀이를 즐기고, 조용하게 힐링할 수 있는 캠핑장을 찾는 분들에게 추천드리고 싶은 곳입니다. 1+1...",
+      "url": "https://blog.naver.com/babybyeorak/224366742388",
+      "src": "Things for me",
+      "date": "2026-08-03"
+    },
+    {
+      "t": "nblog",
+      "title": "수입리캠핑장_개울가를 마주한 깨끗한 캠핑장 20260627-28",
+      "snippet": "들꽃들 수입리캠핑장 정보 ✅1박에 6만원 (네이버예약 -> 입금 후 예약 확정) ✅매월 1일에 다음달... 만나요~~ #양평캠핑장 #수입리캠핑장 #소규모캠핑장 #테라로사양평 #양평맛집 #계곡캠핑 #패슬로우...",
+      "url": "https://blog.naver.com/gabriel_carolus_cha/224331667540",
+      "src": "Yuwon family",
+      "date": "2026-06-30"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 수입리 캠핑장 적당한 그늘과 계곡까지 완벽했던 번캠",
+      "snippet": "소규모 캠핑장이라 좋았다 캠핑 매너가 잘 자리 잡고 있지만 어차피 야외이고 얇은 천 한두개 사이로... ㅋ #양평수입리캠핑장 바로 옆 계곡이라고 해야하나 아니면 하천이라고 해야하나 장마가 한번 지나가야...",
+      "url": "https://blog.naver.com/uranus520/224290342978",
+      "src": "사진 좋아하는 쩡동",
+      "date": "2026-05-19"
+    },
+    {
+      "t": "nblog",
+      "title": "[숲이야 캠핑장, 양평군 수입리] (2026.2.28~3.2) #1",
+      "snippet": "다음에는 A사이트로 잡아보자고 다짐을 하며,,,, 2월 마지막날에는 꽁꽁 얼어있었지만, 다음에 가면 푸른 나무잎과 활짝 핀 벚꽃을 기대하며!! #양평캠핑장 #수입리캠핑장 #초보캠핑 #숲이야 #숲이야캠핑장",
+      "url": "https://blog.naver.com/mh3634/224209723763",
+      "src": "너에게 들려주고 싶은 이야기",
+      "date": "2026-03-09"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 캠핑장 수입리캠핑장 자연 속 캠핑의 매력",
+      "snippet": "매너타임은 오후 10시 30분부터 오전 7시까지로, 이 시간에는 조용히 해주셔야 하니 참고하세요. ✅ 결론적으로, 수입리캠핑장은 조용하고 편안한 캠핑을 즐기고 싶은 분들에게 적합한 장소입니다. 자연과 함께...",
+      "url": "https://blog.naver.com/loyya30/224112758465",
+      "src": "일상",
+      "date": "2025-12-18"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 수입리 캠핑장",
+      "snippet": "순두부와 지난 1월 22년도 첫 캠핑으로 '양평 수입리 캠핑장'에 다녀왔다. 양평 수입리 캠핑장의 장점이자 단점은 '크지 않다'는 거다. 다시 말하면, 다른 캠핑장에 비해 캠핑 사이트가 많지 않다. 하지만...",
+      "url": "https://blog.naver.com/jamie_creates/224094000277",
+      "src": "good vibes only",
+      "date": "2025-12-01"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 서종면 힐링 캠핑Spot, 수입리캠핑장 다녀왔어요! ️",
+      "snippet": "매너시간도 10시 30분부터 다음 날 아침 7시까지 엄격히 지켜져서 한적하고 조용한 밤을 보낼 수... 페이지 #수입리캠핑장 #양평캠핑 #경기도캠핑장 #계곡캠핑 #가족캠핑 #힐링캠핑 #캠핑후기 #캠핑추천 만족도...",
+      "url": "https://blog.naver.com/hoochoo2467/223974105260",
+      "src": "후추와 함께 하는 캠핑스토리",
+      "date": "2025-09-19"
+    },
+    {
+      "t": "nblog",
+      "title": "서울 근교 양평 서종 조용하고 깨끗한 수입리 캠핑장 1번 파쇄석 후....",
+      "snippet": "양평 서종 수입리캠핑장 25년도 우리의 첫 캠핑! 주말 1박 2일 캠핑이라 이동거리가 가장 가까운... ✔️입실 14:00 퇴실 12:00 ✔️샤워실 온수 시간 09:00-11:00/ 18:00-21:00 ✔️매너타임 22:30 분리수거장 바로 옆...",
+      "url": "https://blog.naver.com/jmday/223896616864",
+      "src": "꿈꾸는 햄토리",
+      "date": "2025-06-12"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 수입리 캠핑장",
+      "snippet": "오랜만에 오빠랑 다녀온 캠핑 !!!!! 더 더워지기 전에 가자 하고 전에 갔었던 수입리 캠핑장으로 〰️ 이마트에서 장보고 성남에서 50분정도 ! 오랜만에 가니까 설레고 신났음 (⸝⸝˃ ᵕ ˂⸝⸝) 캠린이지만...",
+      "url": "https://blog.naver.com/eunhye77-/223873167329",
+      "src": "소소한 일상:)",
+      "date": "2025-05-21"
+    },
+    {
+      "t": "nblog",
+      "title": "250227 양평 수입리 캠핑장 방문후기",
+      "snippet": "지난 2월 무려 한달만에 서울 근교 양평으로 캠핑을 갔다 왔습니닷. 이번에는 양평 서종면에 위치한 수입리 캠핑장입니다. 4번 자리로 방문했고 잘 쉬다 왔습니다! 입실 14:00, 퇴실 12:00 매너타임 오후 10시 30분...",
+      "url": "https://blog.naver.com/hsl0306/223834116052",
+      "src": "I'm not HOMEBODY",
+      "date": "2025-04-15"
+    },
+    {
+      "t": "nblog",
+      "title": "[캠핑] 2023년 기록 #016 양평 수입리캠핑장 4번ㅣ동계장박4주차 장박....",
+      "snippet": "수입리 캠핑장 (경기도 양평) 23.12.29.~24.01.01. 장박 4주차 *위치 : 경기... 주심) *매너타임 : 22:30~07:00 와... 2025년에 쓰는... 23년 장박 막주...ㅎ... 와ㅋㅋㅋ 진짜 캠핑 다니면서 눈이 이렇게 많이 내린 건 처음인 것...",
+      "url": "https://blog.naver.com/yo_ddori_daily/223806160147",
+      "src": "yo_ddori_daily",
+      "date": "2025-03-22"
+    },
+    {
+      "t": "nblog",
+      "title": "[양평 캠핑]짙은 가을 불멍으로 마음을 나누었던 수입리캠핑장/이용....",
+      "snippet": "서울 근교에서 가족들과 함께 캠핑을 즐기고 싶어서 검색을 하다가... 있는 수입리 캠핑장을 다녀왔다. ● 위치 및 이용 안내 * 양평군 서종면 화서로 246번길 22-6 * 0507-1357-2463 * 입실 14:00, 퇴실 12:00 * 주차와...",
+      "url": "https://blog.naver.com/chamsae119/223651793689",
+      "src": "봄빛",
+      "date": "2024-11-08"
+    },
+    {
+      "t": "nblog",
+      "title": "아베나키(AVENAKI) 시크 igt테이블 3 / 버너거치대 / 바베큐그릴 / 원버....",
+      "snippet": "캠핑 계획 날짜보다 빨리 주문할 것! 제품 검수의 문제만 없다면 제품은 매우 좋다! 수입리 캠핑장 / 사장님 내외분들이 엄청 친절하셨고... 였는데도 매너 타임 잘 지켜져서 편하게 쉬다 갑니다! 비바코 로마...",
+      "url": "https://blog.naver.com/rhkdduf06/223540742150",
+      "src": "rhkdduf님의블로그",
+      "date": "2024-08-08"
+    },
+    {
+      "t": "nblog",
+      "title": "아이랑 경기도 양평 서종 캠핑장 소규모 계곡 캠핑장 [수입리 캠핑....",
+      "snippet": "(예약하기 힘들어지는데... 쩝..) #경기도양평 #경기도양평캠핑장 #서종캠핑장 #양평서종 #수입리 #수입리계곡 #가족캠핑장 #수입리캠핑장 #아이랑캠핑 #계곡캠핑장 #안나한330 #안나한터널타프",
+      "url": "https://blog.naver.com/p__family/223538249840",
+      "src": "봄 여름 가을 겨울 온전하게",
+      "date": "2024-08-06"
+    },
+    {
+      "t": "nblog",
+      "title": "[캠핑] 2023년 기록 #015 양평 수입리캠핑장 4번ㅣ동계장박3주차",
+      "snippet": "수입리 캠핑장 (경기도 양평) 23.12.22.~23.12.25. 장박 3주차 *위치 : 경기... 주심) *매너타임 : 22:30~07:00 장박 3주차의 기록을 남겨본다~! 3주차는... 첫 장박이기도 하고 캠핑 쪼랩에 캠린이라... 걱정 한가득,,,ㅎㅎ...",
+      "url": "https://blog.naver.com/yo_ddori_daily/223478542799",
+      "src": "yo_ddori_daily",
+      "date": "2024-06-13"
+    },
+    {
+      "t": "nblog",
+      "title": "양평 캠핑장",
+      "snippet": "경기도 양평군 서종면 화서로 854-17 수입리 캠핑장 경기도 양평군 서종면 화서로246번길 22-6... 캠핑장 경기도 양평군 캠핑장 #경기양평캠핑장 #경기도양평군캠핑장 #양평군캠핑장 #양평캠핑 #양평캠핑장",
+      "url": "https://blog.naver.com/hjstylemm/223476653405",
+      "src": "낚시, 여행, 캠핑, 숙박, 헬스, 골프, 자동차 취미",
+      "date": "2024-06-12"
+    },
+    {
+      "t": "nblog",
+      "title": "[캠핑] 2023년 기록 #013 양평 수입리캠핑장 4번ㅣ동계장박1주차",
+      "snippet": "수입리 캠핑장 (경기도 양평) 23.12.07.~23.12.10. 장박 1주차 *위치 : 경기 양평군 서종면 화서로246번길 22-6 *입실시간 / 퇴실시간 : 14:00 / 12:00...",
+      "url": "https://blog.naver.com/yo_ddori_daily/223396124300",
+      "src": "yo_ddori_daily",
+      "date": "2024-03-26"
+    },
+    {
+      "t": "nblog",
+      "title": "[캠핑] 2023년 기록 #006 양평 수입리캠핑장 1번",
+      "snippet": "*위치 : 경기 양평군 서종면 화서로246번길 22-6 *입실시간 / 퇴실시간 : 14:00 / 12:00 (조기 입실 가능시 문자로 연락 주심) *매너타임 : 22:30~07:00 #수입리캠핑장 은 이전에 6번사이트로 포스팅한 적 있었다....",
+      "url": "https://blog.naver.com/yo_ddori_daily/223314337567",
+      "src": "yo_ddori_daily",
+      "date": "2024-01-06"
+    },
+    {
+      "t": "nblog",
+      "title": "수입리캠핑장 동계장박 안내",
+      "snippet": "및 매너타임 등 캠핑장 규정과 동일적용됩니다. ✅️인원 성인2아이2 ✅️매너타임 22시30분~7시 ✅️입실 목요일 ✅️퇴실 화요일 12시까지 ✔️입금 후 이용 횟수 상관없이 환불불가 ✔️예약자...",
+      "url": "https://blog.naver.com/suipri249/223211948120",
+      "src": "수입리캠핑장",
+      "date": "2023-09-15"
+    },
+    {
+      "t": "nblog",
+      "title": "수입리캠핑장",
+      "snippet": "(세팀예약불가) ✔입실14:00~21:00 퇴실12:00 ✔매너시간 22:30~07:00 지켜주세요! ✅카라반 캠핑카 트레일러 불가 ✅애견동반 불가... #수입리캠핑장#양평캠핑장#서울근교캠핑장#계곡캠핑장#소규모캠핑장...",
+      "url": "https://blog.naver.com/suipri249/223178830799",
+      "src": "수입리캠핑장",
+      "date": "2023-08-09"
+    },
+    {
+      "t": "nblog",
+      "title": "수입리캠핑장 겨울 장박",
+      "snippet": "불가 캠핑카, 카라반, 트레일러 진입불가 입금 후 이용 횟수... 모든 전기 OFF (600W이상 사용시 차단될 수 있습니다.) (전자기기 등... 발생할 경우 환불 없이 퇴실조치합니다. #수입리캠핑장#겨울장박",
+      "url": "https://blog.naver.com/suipri249/222878899065",
+      "src": "수입리캠핑장",
+      "date": "2022-09-19"
+    },
+    {
+      "t": "nblog",
+      "title": "[16th] 수입리캠핑장/양평캠핑장/서종캠핑장/수입리/조용한캠핑장/고....",
+      "snippet": "20(3박 4일) 양평 수입리캠핑장 체크인: 14시 체크아웃: 12시 사이트 크기: 파쇄석 8*9m, 데크 5*7m 사이트 내 주차: 가능 매너타임: 22시 30분... ㅋㅋㅋ 캠핑 내내 방문했다고 한다.. 다음 날 아침으로 김치찌개...",
+      "url": "https://blog.naver.com/sweet_642/222850742986",
+      "src": "82_you_and_i_camps",
+      "date": "2022-08-17"
+    },
+    {
+      "t": "nblog",
+      "title": "[15th] 수입리캠핑장/양평캠핑장/서종캠핑장/수입리/서울근교캠핑장/....",
+      "snippet": "13(1박 2일) 양평 수입리캠핑장 체크인: 14시 체크아웃: 12시 사이트 크기: 파쇄석 8*9m, 데크 5*7m 사이트 내 주차: 가능 매너타임: 22시 30분... 죽으로 캠핑 마무리! 리뷰 수입리 캠핑장은 고즈넉한 느낌이 좋다...",
+      "url": "https://blog.naver.com/sweet_642/222850722471",
+      "src": "82_you_and_i_camps",
+      "date": "2022-08-17"
+    },
+    {
+      "t": "nblog",
+      "title": "[13th] 수입리캠핑장/양평캠핑장/서종캠핑장/서종데이트/수입리/서울....",
+      "snippet": "수입리캠핑장 with 오가와 아폴론T/C&듀랑고 에어미니 2022.01.15~2022.01.16 (1박2일) 양평 수입리캠핑장 체크인: 14시 체크아웃: 12시 사이트 크기: 파쇄석 8*9m, 데크5*7m 사이트 내 주차: 가능 매너타임: 22시 30분...",
+      "url": "https://blog.naver.com/sweet_642/222840361008",
+      "src": "82_you_and_i_camps",
+      "date": "2022-08-05"
+    }
+  ],
+  "prices": [
+    {
+      "won": 60000,
+      "label": null,
+      "season": null,
+      "day": null,
+      "quote": "627-28 · 들꽃들 수입리캠핑장 정보 ✅1박에 6만원 (네이버예약 -> 입",
+      "url": "https://blog.naver.com/gabriel_carolus_cha/224331667540",
+      "src": "Yuwon family",
+      "date": "2026-06-30"
+    }
+  ],
+  "web_checked_at": "2026-11-18T02:11:54.160Z",
+  "spec": {
+    "version": 1,
+    "generated_at": "2026-11-24T00:21:12.601Z",
+    "fields": {
+      "CHECKIN_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "14:00부터",
+            "count": 5,
+            "latest": "2026-05-05",
+            "samples": [
+              {
+                "quote": "최대 세사이트 예약 가능 수입리캠핑장 정보 정리 → 장소 이름: 수입리캠핑장 → 카테고리: 캠핑,야영장 → 찾아가기: 경기 양평군 서종면 화서로246번길 22-6...수입리캠핑장 경기도 양평군 서종면 화서로246번길 22-6 입실14시~21시까지 퇴…",
+                "url": "https://blog.naver.com/goguma4354/224273371344",
+                "label": "고구마네 생활 공간 연구소",
+                "date": "2026-05-05"
+              },
+              {
+                "quote": "✔️입실 14:00 퇴실 12:00",
+                "url": "https://blog.naver.com/jmday/223896616864",
+                "label": "꿈꾸는 햄토리",
+                "date": "2025-06-12"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "CHECKOUT_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "12:00까지",
+            "count": 4,
+            "latest": "2025-06-12",
+            "samples": [
+              {
+                "quote": "✔️입실 14:00 퇴실 12:00",
+                "url": "https://blog.naver.com/jmday/223896616864",
+                "label": "꿈꾸는 햄토리",
+                "date": "2025-06-12"
+              },
+              {
+                "quote": "입실 14:00, 퇴실 12:00 매너타임 오후 10시 30분...",
+                "url": "https://blog.naver.com/hsl0306/223834116052",
+                "label": "I'm not HOMEBODY",
+                "date": "2025-04-15"
+              }
+            ]
+          },
+          {
+            "value": "14:00까지",
+            "count": 2,
+            "latest": "2024-03-26",
+            "samples": [
+              {
+                "quote": "퇴실시간 : 14:00",
+                "url": "https://blog.naver.com/yo_ddori_daily/223396124300",
+                "label": "yo_ddori_daily",
+                "date": "2024-03-26"
+              },
+              {
+                "quote": "퇴실시간 : 14:00",
+                "url": "https://blog.naver.com/yo_ddori_daily/223314337567",
+                "label": "yo_ddori_daily",
+                "date": "2024-01-06"
+              }
+            ]
+          }
+        ],
+        "conflict": true
+      },
+      "EARLY_CHECKIN": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "가능(요금 미기재)",
+            "count": 1,
+            "latest": "2024-01-06",
+            "samples": [
+              {
+                "quote": "12:00 (조기 입실 가능시 문자로 연락 주심) *매너타임 : 22:30~07:00 #수입리캠핑장 은 이전에 6번사이트로 포스팅한 적 있었다....",
+                "url": "https://blog.naver.com/yo_ddori_daily/223314337567",
+                "label": "yo_ddori_daily",
+                "date": "2024-01-06"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "MANNER_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "22:30부터",
+            "count": 7,
+            "latest": "2025-12-18",
+            "samples": [
+              {
+                "quote": "매너타임은 오후 10시 30분부터 오전 7시까지로, 이 시간에는 조용히 해주셔야 하니 참고하세요.",
+                "url": "https://blog.naver.com/loyya30/224112758465",
+                "label": "일상",
+                "date": "2025-12-18"
+              },
+              {
+                "quote": "️매너타임 22:30 분리수거장 바로 옆...",
+                "url": "https://blog.naver.com/jmday/223896616864",
+                "label": "꿈꾸는 햄토리",
+                "date": "2025-06-12"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "PET_POLICY": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "동반 불가",
+            "count": 1,
+            "latest": "2023-08-09",
+            "samples": [
+              {
+                "quote": "애견동반 불가...",
+                "url": "https://blog.naver.com/suipri249/223178830799",
+                "label": "수입리캠핑장",
+                "date": "2023-08-09"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "HOT_WATER_OPERATING": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "온수 시간제 (09:00~11:00)",
+            "count": 1,
+            "latest": "2025-06-12",
+            "samples": [
+              {
+                "quote": "️샤워실 온수 시간 09:00-11:00/ 18:00-21:00",
+                "url": "https://blog.naver.com/jmday/223896616864",
+                "label": "꿈꾸는 햄토리",
+                "date": "2025-06-12"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      }
+    },
+    "stats": {
+      "facts": 21,
+      "reviews_used": 11,
+      "roundups_skipped": 1
+    }
+  },
+  "practical_tips": {
+    "HOT_WATER_OPERATING": "온수 시간제 (09:00~11:00)"
+  }
+}
