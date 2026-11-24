@@ -1075,7 +1075,7 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
   }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
-    : `<img data-src="${esc(photoView(u))}"${origAttr(u)} data-hi-src="${esc(photoHiUrl(u))}" alt="" decoding="async" draggable="false">`).join("");
+    : `<img data-src="${esc(photoView(u))}"${origAttr(u)} data-hi-src="${esc(photoHiUrl(u))}" alt="" decoding="async" draggable="false" referrerpolicy="no-referrer">`).join("");
   const dots = ph.length > 1 ? `<span class="car-dots" aria-hidden="true">${ph.map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</span>` : "";
   const nav = ph.length > 1 ? `<button class="car-nav prev" type="button" aria-label="이전 사진">${ic("left")}</button><button class="car-nav next" type="button" aria-label="다음 사진">${ic("right")}</button>` : "";
   return `<div class="car car-multi ${cls}" data-n="${ph.length}"><div class="car-track">${slides}</div>${dots}${nav}</div>`;
@@ -1424,10 +1424,9 @@ function cardFeatures(c) {
   if ((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드/i.test(txt)) list.push({ icon: "leports", text: "수상레저·카약" });
   if (/공예|목공|도자기|만들기\s*체험/i.test(txt)) list.push({ icon: "spark", text: "공예 만들기" });
   if (/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/i.test(txt)) list.push({ icon: "forest", text: "숲체험·탐방" });
-  if (/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기/i.test(txt)) list.push({ icon: "fish", text: "물고기 잡기" });
+  if (c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시|송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기/i.test(txt)) list.push({ icon: "fish", text: "낚시·물고기잡기" });
   if ((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기/i.test(txt)) list.push({ icon: "experience", text: "수확 체험" });
   if (/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험/i.test(txt)) list.push({ icon: "experience", text: "작물 재배" });
-  if (c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시/i.test(txt)) list.push({ icon: "fish", text: "낚시 체험" });
   if (/썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) list.push({ icon: "spark", text: "썰매장" });
 
   // 11. 편의 / 주차
@@ -7514,7 +7513,7 @@ function openProductModal(prod) {
   if (!prod) return;
   document.getElementById("sp-modal")?.remove();
   const photos = prod.photos || (prod.img ? [prod.img] : []);
-  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
+  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy" referrerpolicy="no-referrer">`).join("");
   document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal"><div class="sp-modal-content"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button><h3 class="sp-modal-title">${esc(prod.name)}</h3><div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}</div></div>`);
 }
 function siteProductsHtml(c, d) {
@@ -7524,7 +7523,7 @@ function siteProductsHtml(c, d) {
     const thumb = p.photos?.[0] || p.img || "";
     const cnt = p.photos?.length || 0;
     const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
-    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진"><div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div><div class="sp-body"><h4 class="sp-title">${esc(p.name)}</h4><div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}</div></div>`;
+    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진"><div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.closest('.sp-thumb-wrap').innerHTML='<div class=\\\'sp-thumb\\\' style=\\\'display:flex;align-items:center;justify-content:center;color:#98a2b3;\\\'>${esc(ic("tent"))}</div>';">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div><div class="sp-body"><h4 class="sp-title">${esc(p.name)}</h4><div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}</div></div>`;
   }).join("");
   return `<section class="d-sec sp-sec"><div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div><div class="sp-rail rail">${cards}</div></section>`;
 }
@@ -7895,7 +7894,7 @@ function priceHtml(c, d) {
     const isM = r.kind === "후기 언급", val = String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1"), isNo = !r.won && /불가|금지/.test(val);
     const { thumb, photos, prod } = !r.isExtra ? feeRowProduct(r, c, d) : { thumb: null, photos: [], prod: null };
     const pCnt = photos.length, bHtml = pCnt > 1 ? `<span class="pl-photo-badge">${ic("photo")}${pCnt}장</span>` : "";
-    const tHtml = thumb ? `<div class="pl-thumb-wrap"><img class="pl-thumb" src="${esc(thumb)}" alt="" loading="lazy" decoding="async">${bHtml}</div>` : "";
+    const tHtml = thumb ? `<div class="pl-thumb-wrap"><img class="pl-thumb" src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.closest('.pl-thumb-wrap').remove();">${bHtml}</div>` : "";
     const pIdx = prod && d?.site_products ? d.site_products.indexOf(prod) : -1;
     return `<li class="pl-${isM ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}${thumb ? " has-thumb" : ""}"${pIdx >= 0 ? ` data-sp-idx="${pIdx}"` : ""}>${tHtml}<div class="pl-info"><b${isNo ? ' class="is-no"' : ""}>${r.won ? `${fmt(r.won)}원` : esc(val)}</b><span class="pl-lbl">${esc(feeRowLabel(r.label))}</span></div>${isM ? '<i class="pl-kind">확인필요</i>' : ""}${r.extra && isM ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
   };
@@ -8180,7 +8179,7 @@ function thumbLinks(list, label) {
 function operatorMediaHtml(d) {
   const imgs = (d?.operator_media?.images ?? []).filter((x) => x.url).slice(0, 8);
   if (!imgs.length) return "";
-  const cards = imgs.map((x, i) => `<a class="media-card" href="${esc(x.page || x.url)}" target="_blank" rel="noopener"><div class="media-card-photo"><img src="${esc(x.url)}" alt="${esc(x.alt || "운영자 사진")}" loading="lazy" decoding="async" onerror="this.closest('.media-card').remove()"></div><div class="media-card-body"><i>${x.layout ? "배치·시설" : "운영자 사진"}</i><b>${esc(x.alt || `사진 ${i + 1}`)}</b></div></a>`).join("");
+  const cards = imgs.map((x, i) => `<a class="media-card" href="${esc(x.page || x.url)}" target="_blank" rel="noopener"><div class="media-card-photo"><img src="${esc(x.url)}" alt="${esc(x.alt || "운영자 사진")}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('.media-card').remove()"></div><div class="media-card-body"><i>${x.layout ? "배치·시설" : "운영자 사진"}</i><b>${esc(x.alt || `사진 ${i + 1}`)}</b></div></a>`).join("");
   return `<section class="d-sec"><div class="sec-head">${iconTitle("layers", "운영자 제공 사진")}</div><div class="media-grid">${cards}</div></section>`;
 }
 // 시설 배치도·캠퍼 사진: 누르면 이 화면 안 라이트박스에서 원본 그림을 크게 연다(소유자 2026-10-19).
@@ -8739,12 +8738,13 @@ function formatCommentContent(content) {
   const isShorts = ytUrl.includes("/shorts/");
   const textWithoutUrl = content.replace(ytUrl, "").trim();
   const textHtml = textWithoutUrl ? `<p class="c-cmt-text">${esc(textWithoutUrl)}</p>` : "";
+  const expandBtn = isShorts ? `<button type="button" class="c-yt-expand-btn" data-yt-expand="${esc(ytId)}" aria-label="YouTube Shorts 크게 보기" title="크게 보기"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></button>` : "";
   const ytCardHtml = `<div class="c-yt-card">
     <div class="c-yt-thumb-box" data-yt-inline="${esc(ytId)}" role="button" tabindex="0" aria-label="${isShorts ? "YouTube Shorts" : "YouTube"} 영상 바로 재생">
-      <img src="https://i.ytimg.com/vi/${esc(ytId)}/hqdefault.jpg" alt="YouTube thumbnail" loading="lazy">
+      <img src="https://i.ytimg.com/vi/${esc(ytId)}/hqdefault.jpg" alt="YouTube thumbnail" loading="lazy" referrerpolicy="no-referrer">
       <div class="c-yt-play-btn"><svg viewBox="0 0 24 24" class="c-yt-play-icon" aria-hidden="true"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></div>
     </div>
-    <div class="c-yt-meta"><span class="c-yt-badge">${ytBadgeIcon()}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span></div>
+    <div class="c-yt-meta"><span class="c-yt-badge">${ytBadgeIcon()}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span>${expandBtn}</div>
   </div>`;
   return textHtml ? `${textHtml}${ytCardHtml}` : ytCardHtml;
 }
@@ -9237,16 +9237,99 @@ async function uploadCommentImage(file, campgroundId) {
   if (!r.ok) throw new Error("image-upload-failed");
   return `${SB.url}/storage/v1/object/public/comment-media/${objectPath}`;
 }
+function openImageLightbox(url, alt = "댓글 첨부 사진") {
+  if (!url) return;
+  const existing = $("#image-lightbox-modal");
+  if (existing) existing.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "image-lightbox-modal";
+  overlay.className = "image-lightbox-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", alt);
+  overlay.innerHTML = `
+    <div class="image-lightbox-dialog">
+      <button type="button" class="image-lightbox-close" aria-label="닫기">×</button>
+      <img src="${esc(url)}" alt="${esc(alt)}" class="image-lightbox-img" referrerpolicy="no-referrer">
+    </div>
+  `;
+  const close = () => {
+    overlay.classList.remove("is-active");
+    setTimeout(() => overlay.remove(), 200);
+    document.removeEventListener("keydown", onKey);
+    document.body.style.overflow = "";
+  };
+  const onKey = (e) => {
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+  };
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay || e.target.closest(".image-lightbox-close")) {
+      e.preventDefault(); close();
+    }
+  });
+  document.addEventListener("keydown", onKey);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => overlay.classList.add("is-active"));
+}
+
+function openShortsModal(ytId, embedUrl) {
+  if (!ytId && !embedUrl) return;
+  const src = embedUrl || `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytId)}?autoplay=1&playsinline=1`;
+  const existing = $("#shorts-lightbox-modal");
+  if (existing) existing.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "shorts-lightbox-modal";
+  overlay.className = "shorts-modal-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", "YouTube Shorts 크게 보기");
+  overlay.innerHTML = `
+    <div class="shorts-modal-dialog">
+      <button type="button" class="shorts-modal-close" aria-label="닫기">×</button>
+      <div class="shorts-modal-player">
+        <iframe src="${esc(src)}" title="YouTube Shorts" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  `;
+  const close = () => {
+    overlay.classList.remove("is-active");
+    setTimeout(() => overlay.remove(), 200);
+    document.removeEventListener("keydown", onKey);
+    document.body.style.overflow = "";
+  };
+  const onKey = (e) => {
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+  };
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay || e.target.closest(".shorts-modal-close")) {
+      e.preventDefault(); close();
+    }
+  });
+  document.addEventListener("keydown", onKey);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => overlay.classList.add("is-active"));
+}
+
 function commentAttachmentHtml(row) {
   const url = String(row?.image_url || "").trim();
   if (!/^https:\/\//i.test(url)) return "";
-  return `<a class="comment-attached-image" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url)}" alt="${esc(row?.image_alt || "댓글 첨부 사진")}" loading="lazy" decoding="async"></a>`;
+  const alt = esc(row?.image_alt || "댓글 첨부 사진");
+  return `<div class="comment-attached-image" data-lightbox-src="${esc(url)}" role="button" tabindex="0" aria-label="${alt} 크게 보기"><img src="${esc(url)}" alt="${alt}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>`;
 }
 let commentImageEventsBound = false;
 function bindCommentImageEvents() {
   if (commentImageEventsBound) return;
   commentImageEventsBound = true;
   const formFor = (target) => target?.closest?.("form[data-cmt], form[data-saved-comment-form], form[data-card-cmt-form]");
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      const form = formFor(e.target);
+      if (form && e.target?.name === "content") {
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    }
+  });
   document.addEventListener("paste", (e) => {
     const form = formFor(e.target);
     if (!form || e.target?.name !== "content") return;
@@ -9257,6 +9340,18 @@ function bindCommentImageEvents() {
     setCommentImage(form, file);
   });
   document.addEventListener("click", (e) => {
+    const lightboxTrigger = e.target.closest?.("[data-lightbox-src]");
+    if (lightboxTrigger) {
+      e.preventDefault();
+      openImageLightbox(lightboxTrigger.dataset.lightboxSrc, lightboxTrigger.getAttribute("aria-label"));
+      return;
+    }
+    const shortsExpand = e.target.closest?.("[data-yt-expand]");
+    if (shortsExpand) {
+      e.preventDefault();
+      openShortsModal(shortsExpand.dataset.ytExpand);
+      return;
+    }
     const trigger = e.target.closest?.("[data-comment-image-trigger]");
     if (trigger) {
       e.preventDefault();

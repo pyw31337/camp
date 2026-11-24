@@ -121,11 +121,11 @@ for (const file of files) {
     extractedCampCount++;
     writeFileSync(p, JSON.stringify(d, null, 2));
 
-    // 카탈로그 레코드에도 간략 표시용 필드 주입
+    // 카탈로그 레코드에도 간략 표시용 필드 주입 (c.p5: 5대 실전 데이터 격리 키, c.pt는 카드 사진 폴백 전용)
     if (campRecord) {
-      if (!campRecord.pt) campRecord.pt = {};
+      if (!campRecord.p5) campRecord.p5 = {};
       for (const [code, fact] of practicalFound.entries()) {
-        campRecord.pt[code] = fact.value;
+        campRecord.p5[code] = fact.value;
       }
     }
   }
