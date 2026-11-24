@@ -1,1 +1,845 @@
-{"nearby":{"tour":[{"n":"왜목마을","k":"관광지","ty":"12","m":237,"lat":37.0446338348,"lng":126.5242160129,"a":"충청남도 당진시 석문면 왜목길 9","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=129064","img":"https://tong.visitkorea.or.kr/cms/resource/62/3567562_image3_1.jpg"},{"n":"왜목마을 해수욕장","k":"관광지","ty":"12","m":324,"lat":37.0444338595,"lng":126.5261285112,"a":"충청남도 당진시 석문면 왜목길 26","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2022541","img":"https://tong.visitkorea.or.kr/cms/resource/69/3047169_image3_1.JPG"},{"n":"왜목항","k":"관광지","ty":"12","m":521,"lat":37.0488,"lng":126.5292,"a":"충청남도 당진시 석문면 교로리","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2736713"},{"n":"석문각","k":"관광지","ty":"12","m":987,"lat":37.0511263874,"lng":126.5142393528,"a":"충청남도 당진시 석문면 교로길 30","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2736914","img":"https://tong.visitkorea.or.kr/cms/resource/80/4110280_image3_1.jpg"},{"n":"석문체육공원","k":"레포츠","ty":"28","m":1007,"lat":37.0512723619,"lng":126.5140907626,"a":"충청남도 당진시 석문면 교로길 30","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3083557","img":"https://tong.visitkorea.or.kr/cms/resource/51/3083551_image3_1.JPG"}],"food":[{"n":"왜목마을 태공수산횟집","k":"음식점","ty":"39","m":295,"lat":37.0451872765,"lng":126.5266071142,"a":"충청남도 당진시 석문면 왜목길 35","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2782881","img":"http://tong.visitkorea.or.kr/cms/resource/53/2786053_image2_1.jpg"},{"n":"신준호카페","k":"음식점","ty":"39","m":1621,"lat":37.0367745454,"lng":126.5372313772,"a":"충청남도 당진시 석문면 석문해안로 128-10","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2766733","img":"http://tong.visitkorea.or.kr/cms/resource/38/2767138_image2_1.jpg"},{"n":"수덕회관","k":"음식점","ty":"39","m":3875,"lat":37.028639,"lng":126.561213,"a":"충청남도 당진시 석문면 장고항로 297","u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=134945","img":"https://tong.visitkorea.or.kr/cms/resource/44/1894144_image3_1.jpg"}],"mart":[{"n":"하나로마트","k":"supermarket","m":14377,"lat":36.942115,"lng":126.428837,"b":"하나로마트"},{"n":"서산축협","k":"supermarket","m":14418,"lat":36.938278,"lng":126.434977},{"n":"Family Mart","k":"supermarket","m":14419,"lat":36.938652,"lng":126.434249}],"conv":[{"n":"이마트24","k":"convenience","m":3722,"lat":37.030115,"lng":126.560299,"b":"이마트24"},{"n":"24시편의점","k":"convenience","m":3983,"lat":37.013523,"lng":126.540678}],"fuel":[{"n":"gs주유소","k":"fuel","m":1181,"lat":37.04906,"lng":126.510929,"b":"gs"},{"n":"오일뱅크","k":"fuel","m":3918,"lat":37.012618,"lng":126.534882,"b":"오일뱅크"}],"gear":[{"k":"hardware","m":14829,"lat":36.991626,"lng":126.371831},{"n":"금강철물건재","k":"hardware","m":15303,"lat":36.924211,"lng":126.602345}],"medical":[{"n":"대호약국","k":"hospital","m":913,"lat":37.048576,"lng":126.513883},{"n":"고대전약국","k":"pharmacy","m":15264,"lat":36.924307,"lng":126.601596}],"rest":[{"n":"서해휴게소","k":"SERVICE_AREA","m":18236,"lat":36.978931,"lng":126.710918},{"n":"모세휴게소","k":"SERVICE_AREA","m":18873,"lat":37.166759,"lng":126.674418},{"n":"지곡휴게소","k":"REST_AREA","m":19633,"lat":36.883334,"lng":126.440251}],"public":{"museum":[{"name":"안산어촌민속박물관","kind":"museum","distance_m":19495,"lat":37.19251,"lng":126.64612,"source":"전국박물관미술관정보표준데이터(공공데이터포털)","source_id":"museum:%EC%95%88%EC%82%B0%EC%96%B4%EC%B4%8C%EB%AF%BC%EC%86%8D%EB%B0%95%EB%AC%BC%EA%B4%80:37.1925","addr":"경기도 안산시 단원구 대부황금로 7","facts":{"유형":"공립 박물관","전화":"031-440-8310"},"url":"https://www.ansanuc.net/home/10106/40052/contents.do","img":"https://tong.visitkorea.or.kr/cms/resource/47/3342647_image3_1.jpg","img_u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=654645","img_s":"한국관광공사"},{"name":"종이미술관","kind":"museum","distance_m":20297,"lat":37.22451,"lng":126.57599,"source":"전국박물관미술관정보표준데이터(공공데이터포털)","source_id":"museum:%EC%A2%85%EC%9D%B4%EB%AF%B8%EC%88%A0%EA%B4%80:37.2245","addr":"경기도 안산시 단원구 대남로 233","facts":{"유형":"사립 미술관","전화":"032-887-0606"},"url":"http://종이미술관.com","img":"https://tong.visitkorea.or.kr/cms/resource/72/3563472_image3_1.jpg","img_u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2684972","img_s":"한국관광공사"},{"name":"유리섬미술관","kind":"museum","distance_m":20456,"lat":37.21975,"lng":126.60242,"source":"전국박물관미술관정보표준데이터(공공데이터포털)","source_id":"museum:%EC%9C%A0%EB%A6%AC%EC%84%AC%EB%AF%B8%EC%88%A0%EA%B4%80:37.2197","addr":"경기도 안산시 단원구 부흥로 254","facts":{"유형":"사립 미술관","전화":"032-888-6262"},"url":"http://www.glassisland.co.kr"}],"pool":[{"name":"당진교육문화스포츠센터 수영장","kind":"pool","distance_m":19512,"lat":36.89397,"lng":126.63195,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"pool:%EB%8B%B9%EC%A7%84%EA%B5%90%EC%9C%A1%EB%AC%B8%ED%99%94%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0%20%EC%88%98%EC%98%81%EC%9E%A5:36.8940","addr":"충청남도 당진시 당진중앙2로 132-30","facts":{"유형":"기타","전화":"041-360-6902"},"url":"http://www.dangjin.go.kr/fmres/"},{"name":"송악문화스포츠센터 수영장","kind":"pool","distance_m":21479,"lat":36.9072,"lng":126.6911,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"pool:%EC%86%A1%EC%95%85%EB%AC%B8%ED%99%94%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0%20%EC%88%98%EC%98%81%EC%9E%A5:36.9072","addr":"충청남도 당진시 송악읍 틀모시로 830","facts":{"유형":"기타","전화":"041-358-9914"},"url":"http://www.dangjin.go.kr/fmres/"},{"name":"서산시국민체육센터 국민체육센터 수영장","kind":"pool","distance_m":28708,"lat":36.79844,"lng":126.43551,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"pool:%EC%84%9C%EC%82%B0%EC%8B%9C%EA%B5%AD%EB%AF%BC%EC%B2%B4%EC%9C%A1%EC%84%BC%ED%84%B0%20%EA%B5%AD%EB%AF%BC%EC%B2%B4%EC%9C%A1%EC%84%BC%ED%84%B0%20%EC%88%98%EC%98%81%EC%9E%A5:36.7984","addr":"충청남도 서산시 안견로 661(갈산동)","facts":{"유형":"기타","전화":"041-660-3033"},"url":"https://yeyak.seosan.go.kr/"}]}},"toilet_list":[{"name":"공중화장실","m":394,"lat":37.0435837,"lng":126.5258929,"h24":null,"addr":null,"src":"osm"}],"guide":{"platform":null,"steps":[],"open_rules":[],"next":[],"warnings":["등록된 예약 채널이 없습니다. 캠핑장에 직접 문의하세요."]},"reviews":[{"t":"blog","title":"캠핑장 필수 예약은 네이버는 필수 사용 추가로 가독성 높은 배치도 예약은 운영자 와 이용자가 편리...","snippet":"캠핑장 왜목 석문산 야영장 캠프투나잇 원주 두리캠핑장.원주 한스캠핑장원주 키즈캠핑장원주 황학동 야영장원주피노키오 자연휴양림 야영장원주 금대자동차야영장 원주 치악신림오토캠핑 ..원주 구룡자동차야영장 원주 VIP레져타운 원주오쿠밸리카라반캠핑장원주간현관광지 캠핑장 원주구학리 산채관광마을 원…","url":"https://blog.naver.com/dsyhome/224452846449","src":"Let`s go 캠핑나라 - 캠핑장 홈페이지 제작","thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/AyCfdfYoT3X","date":"2026-10-25","q":41},{"t":"blog","title":"국내1박2일 서해안여행지 충남 당진 차박 숙소-왜목마을 오토캠핑장","snippet":"바라보이는 석문산 아래 조용하고 한적한 작은 포구가 있습니다. ​ 서해안에 한적하고 조용한 포구지만 특히 겨울이 되면 장고항 노적봉의 촛대바위로 떠오르는...서해안여행지 충남 당진 차박 숙소 왜목마을 오토캠핑장 입니다. ​ 왜목마을 오토캠핑장은 왜목마을해변 동쪽 산마루에 있습니다. ​…","url":"https://blog.naver.com/lu2u3u/224418758024","src":"비주 류장하의 딴지세상","thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/IWlfEYNvQHa","date":"2026-09-21","q":41},{"t":"blog","title":"충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내","snippet":"서해안의 아름다운 자연경관을 자랑하는 왜목마을, 삽교호, 난지도에 위치한 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들에게 새로운 명소...인근 언덕에 위치해 조용하고 한적한 캠핑을 즐길 수 있습니다. 석문산이 인접해 등산과 산책을 즐기기에 좋으며, 장고항 수산시장에서…","url":"https://mindset-matters.tistory.com/83","src":"마음이 쉬어가는 공간","thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/LmYsIQ78P1x","date":"2025-04-01","q":41},{"t":"blog","title":"당진시 왜목마을, 해양캠핑공원, 난지도 캠핑장 개장 예약 및 이용방법","snippet":"충남 당진시는 내달 4월 1일부터 왜목마을, 삽교호, 난지도에 공공야영장 3곳을 개장합니다. 31일 시에 따르면 이번 개장하는 공공야영장은 저렴한 이용료와...분위기도 즐길 수 있어 다양한 볼거리와 재미를 느끼실 수 있습니다. 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑…","url":"https://lovelykty.tistory.com/49","src":"알뜰부자 연구소","thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/ECEDeQxjMb6","date":"2025-03-31","q":41},{"t":"blog","title":"당진시, 서해를 품은 공공야영장 개장","snippet":"31일 밝혔다. ​ 서해의 트인 전망을 자랑하는 왜목마을, 삽교호, 난지도에 있는 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들의 새로운 명소...있는 오토캠핑장은 조용하고 한적한 캠핑을 즐길 수 있는 최적의 장소다. 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며…","url":"https://blog.naver.com/binggresmile/223816486884","src":"글로컬타임스(Glocal Times)","thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/3nXg8KHxR7U","date":"2025-03-31","q":41},{"t":"blog","title":"충남권 주요 백패킹 성지와 접근 방법","snippet":"정도 소요되며, 정상에서의 전망이 뛰어납니다. 3. 석문산 (당진) 왜목마을 인근에 위치한 석문산은 노지캠핑, 차박캠핑, 백패킹이 모두 가능한 장소로 유명...4. 죽도 (홍성) 홍성군 서부면에 위치한 죽도는 섬 전체가 야영장으로 조성되어 있어 백패킹을 즐기기에 좋습니다. 남당항에서 …","url":"https://blog.naver.com/topgun35/223798988310","src":"소중한 꿈..","thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/1iI5ztLFYDE","date":"2025-03-25","q":33},{"t":"blog","title":"왜목마을 해수욕장/해돋이모텔 숙박 예약 방법 가격 후기","snippet":"해돋이모텔 내돈내산 해돋이모텔 충청남도 당진시 석문면 왜목길 37 입실 : 오후 3시 / 퇴실 : 오전 11시 주차 : 모텔 뒤 주차장 또는 인근 공영주차장 전화로...조개구이, 활어횟집 2층 : 프론트 주변 관광지, 가볼 만한 곳 : 왜목마을 해수욕장, 석문산(일출 명소), 장고항 …","url":"https://blog.naver.com/ussua/223451778883","src":"일상을 여행처럼","thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/J4G2ccA3IEz","date":"2024-05-19","q":53},{"t":"blog","title":"♥1 5 년 동안 ♥ 계속 진행 되어지는 ~나의 캠핑 발자취^^*","snippet":"23) 24.부여 구경정나루터 25.석문방조제(2023.9.1~9.2) 26.당진 왜목마을 석문산 / (2023.9.2~3) 27 서산벌천포 오지리 / (2022.2.11~12) 28.당진아잘리안그린...OK캠핑장 30.천안 광덕사슴목장 / (2017.12.22~25) 31.천안독립기…","url":"https://blog.naver.com/softol2525/223426503709","src":"캠핑하는 펑키오~","thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/LovtOhY2WhA","date":"2024-04-25","q":41},{"t":"blog","title":"당진시, 대 캠핑의 시대! 당진시 공공야영장 개장!","snippet":"당진시, 대 캠핑의 시대! 당진시 공공야영장 개장! 함께 여는 미래! 생동하는 당진! 충청남도 당진시입니당 ​ 저렴한 가격과 시원한 바다 배경으로 캠핑족 사이...맞았습니다. <해 뜨고 지는 서해‘왜목마을 오토캠핑장’> 왜목마을 해수욕장에 위치한 오토캠핑장은 석문산 옆 높은 언덕에 위…","url":"https://blog.naver.com/dangjin2030/223404173546","src":"당진시 공식블로그","thumb":null,"date":"2024-04-03","q":35}],"sns_images":[{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/4D3mXnIiuYH","img":"https://blog.kakaocdn.net/dn/F6aU7/btsM2zg8aqR/bcq3IC0RkiZbueXHJgakak/img.png","url":"https://mindset-matters.tistory.com/83","src":"티스토리","w":666,"h":61,"date":"2025-04-01","title":"충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/27LnUjkUvT4","img":"https://t1.daumcdn.net/news/202404/03/yonhap/20240403084204768oico.jpg","url":"https://v.daum.net/v/20240403084204817","src":"연합뉴스","w":1200,"h":801,"date":"2024-04-03"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/6nbyjSfnezy","img":"https://t1.daumcdn.net/news/202503/31/daejonilbo/20250331112923888eyhc.jpg","url":"https://v.daum.net/v/20250331112922271","src":"대전일보","w":540,"h":303,"date":"2025-03-31"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/ISYb2VCP6iF","img":"https://t1.daumcdn.net/news/202503/31/newsis/20250331114334253wwtt.jpg","url":"https://v.daum.net/v/20250331114333156","src":"뉴시스","w":720,"h":480,"date":"2025-03-31"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/KaijMqk2ryI","img":"https://t1.daumcdn.net/news/202503/31/THEFACT/20250331104244896xujg.jpg","url":"https://v.daum.net/v/20250331104239479","src":"더팩트","w":640,"h":427,"date":"2025-03-31"}],"layout":{"images":[],"posts":[{"t":"blog","title":"필수 예약은 네이버는 필수 사용 추가로 가독성 높은 배치도 예약은 운영자 와 이용자가 편리 합니다.","snippet":"캠핑장 왜목 석문산 야영장 캠프투나잇 원주 두리캠핑장.원주 한스캠핑장원주 키즈캠핑장원주 황학동 야영장원주피노키오 자연휴양림 야영장원주 금대자동차야영장 원주 치악신림오토캠핑 ..원주 구룡자동차야영장 원주 VIP레져타운 원주오쿠밸리카라반캠핑장원주간현관광지 캠핑장 원주구학리 산채관광마을 원…","url":"https://blog.naver.com/dsyhome/224452846449","src":"Let`s go 캠핑나라 - 캠핑장 홈페이지 제작","thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/AyCfdfYoT3X","date":"2026-10-25"},{"t":"blog","title":"충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내","snippet":"서해안의 아름다운 자연경관을 자랑하는 왜목마을, 삽교호, 난지도에 위치한 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들에게 새로운 명소...인근 언덕에 위치해 조용하고 한적한 캠핑을 즐길 수 있습니다. 석문산이 인접해 등산과 산책을 즐기기에 좋으며, 장고항 수산시장에서…","url":"https://mindset-matters.tistory.com/83","src":"마음이 쉬어가는 공간","thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/LmYsIQ78P1x","date":"2025-04-01"},{"t":"blog","title":"당진시 왜목마을, 해양캠핑공원, 난지도 캠핑장 개장 예약 및 이용방법","snippet":"충남 당진시는 내달 4월 1일부터 왜목마을, 삽교호, 난지도에 공공야영장 3곳을 개장합니다. 31일 시에 따르면 이번 개장하는 공공야영장은 저렴한 이용료와...분위기도 즐길 수 있어 다양한 볼거리와 재미를 느끼실 수 있습니다. 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑…","url":"https://lovelykty.tistory.com/49","src":"알뜰부자 연구소","thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/ECEDeQxjMb6","date":"2025-03-31"},{"t":"blog","title":"당진시, 서해를 품은 공공야영장 개장!","snippet":"31일 밝혔습니다. 서해의 트인 전망을 자랑하는 왜목마을, 삽교호, 난지도에 있는 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들의 새로운...캠핑장은 조용하고 한적한 캠핑을 즐길 수 있는 최적의 장소입니다. ​ 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑…","url":"https://blog.naver.com/dangjin2030/223816021415","src":"당진시 공식블로그","thumb":null,"date":"2025-03-31"}]},"social_checked_at":"2026-11-10T10:42:00+09:00","field_conditions":{"version":2,"status":"CONFIRMED","parking":{"state":"UNKNOWN","mode":"UNKNOWN","tent_side":null,"cart_required":null,"shared_nearby":null,"drop_off_external":null,"auto_camping_sites":null},"shelter_setup":{"state":"UNKNOWN","max_tents":null,"max_tarps":null,"canopy_allowed":null,"note":null},"power":{"state":"UNKNOWN","available":null,"limit_w":null,"regulatory_reference_w":null,"breaker_capacity":null,"statutory_standard":false,"high_power_mention":null},"ground":{"state":"UNKNOWN","types":[]},"charcoal":{"state":"UNKNOWN","allowed":null},"firewood":{"state":"UNKNOWN","allowed":null,"sold":null},"fire_pit":{"state":"UNKNOWN","arrangement":null},"site_size":{"state":"UNKNOWN","groups":[]},"sanitary":{"state":"UNKNOWN","toilets_count":null,"showers_count":null,"sinks_count":null,"private_bathroom":false,"private_bathroom_state":"UNKNOWN","hot_water":null,"note":null},"features":[],"rental_offers":[],"source":{"label":"한국관광공사 고캠핑 운영자 등록 및 공식 소개 전수조사","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102384","checked_at":"2026-11-09T00:00:00+09:00","tier":"A"}},"spec":{"version":1,"generated_at":"2026-11-24T00:21:12.601Z","fields":{"CHECKIN_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"15:00부터","count":1,"latest":"2024-05-19","samples":[{"quote":"해돋이모텔 내돈내산 해돋이모텔 충청남도 당진시 석문면 왜목길 37 입실 : 오후 3시","url":"https://blog.naver.com/ussua/223451778883","label":"일상을 여행처럼","date":"2024-05-19"}]}],"conflict":false},"CHECKOUT_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"11:00까지","count":1,"latest":"2024-05-19","samples":[{"quote":"퇴실 : 오전 11시 주차 : 모텔 뒤 주차장 또는 인근 공영주차장 전화로...조개구이, 활어횟집 2층 : 프론트 주변 관광지, 가볼 만한 곳 : 왜목마을 해수욕장, 석문산(일출 명소), 장고항 …","url":"https://blog.naver.com/ussua/223451778883","label":"일상을 여행처럼","date":"2024-05-19"}]}],"conflict":false}},"stats":{"facts":2,"reviews_used":1,"roundups_skipped":1}},"rv":{"n":9,"p":[["조용·한적",3],["산책·둘레길 좋음",1]],"c":[],"details":{"pros":[{"topic":"조용·한적","count":3,"samples":[{"title":"국내1박2일 서해안여행지 충남 당진 차박 숙소-왜목마을 오토캠핑장","url":"https://blog.naver.com/lu2u3u/224418758024","date":"2026-09-21"},{"title":"충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내","url":"https://mindset-matters.tistory.com/83","date":"2025-04-01"}]},{"topic":"산책·둘레길 좋음","count":1,"samples":[{"title":"충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내","url":"https://mindset-matters.tistory.com/83","date":"2025-04-01"}]}],"cons":[],"issues":[]}},"profile":{"version":1,"fields":{"CHECKIN":{"value":"15:00부터","grade":"MENTION","source":{"label":"일상을 여행처럼","url":"https://blog.naver.com/ussua/223451778883","date":"2024-05-19","quote":"해돋이모텔 내돈내산 해돋이모텔 충청남도 당진시 석문면 왜목길 37 입실 : 오후 3시"}},"CHECKOUT":{"value":"11:00까지","grade":"MENTION","source":{"label":"일상을 여행처럼","url":"https://blog.naver.com/ussua/223451778883","date":"2024-05-19","quote":"퇴실 : 오전 11시 주차 : 모텔 뒤 주차장 또는 인근 공영주차장 전화로...조개구이, 활어횟집 2층 : 프론트 주변 관광지, 가볼 만한 곳 : 왜목마을 해수욕장, 석문산(일출 명소), 장고항 …"}},"PRICE":{"value":"2.5만~7만원대","grade":"MENTION","source":{"label":"후기 언급","url":"https://yuls0505.tistory.com/15","date":"2025-05-14","quote":"촛대 바위 사이로 떠오르는 … · 요금 : 1박 70,000원부터 · 요금 : 1일"},"count":3,"min":25000,"max":70000},"REFUND":{"value":"업장 미공지 · 법정 기준 10일 전 100% 환불","grade":"REFERENCE","source":{"label":"공정거래위원회 소비자분쟁해결기준(야영장업)","url":"https://www.ftc.go.kr/"},"statutory":true},"REVIEW":{"value":"조용·한적, 산책·둘레길 좋음","grade":"MENTION","source":{"label":"후기 요약 9건","url":null,"date":null},"count":9}},"tags":[{"code":"REVIEW_QUIET","label":"후기: 조용","why":"후기 3건"}],"summary":"","score":{"known":5,"facts":0,"total":18},"generated_at":"2026-11-24T00:21:50.726Z"},"site_types":[{"code":"AUTO","label":"오토캠핑","count":null,"sub":null,"grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/lu2u3u/224418758024","at":"2026-09-21","quote":"국내1박2일 서해안여행지 충남 당진 차박 숙소-왜목마을 오토캠핑장. 바라보이는 석문산 아래 조용하고 한적한 작은 포구가 있습니다. ​ 서"}],"web":[{"t":"nblog","title":"당진 왜목마을 가을 일출 캠핑 차박 포인트 및 물때 완벽 가이드","snippet":"서해 일출·일몰: 왜목항 방파제와 석문산 전망대에서 서해안의... 불법 취사 및 화기 사용 주의: 지정된 야영장 외의 구역에서 무분별한... 주므로 매너 타임을 엄수해야 합니다. #왜목마을 #당진차박 #가을캠핑...","url":"https://blog.naver.com/standupandlight/224398414864","src":"standupandlight","date":"2026-09-02"},{"t":"nblog","title":"당진 봄 캠핑 어디로 갈까, 힐링 볼거리 먹거리까지 한 번에","snippet":"당진시는 왜목마을, 삽교호, 난지도 등에 공공야영장을 운영하고 있어서 이용료도 저렴하고 접근성도... 바로 옆에 석문산이 있어서 아침에 가벼운 등산까지 할 수 있다는 게 매력이더라고요. 도심에서 완전히...","url":"https://blog.naver.com/moneycared/224228219798","src":"잡학상회(정보를 파는 가게)","date":"2026-03-24"},{"t":"nblog","title":"당진시, 서해를 품은 공공야영장 개장!","snippet":"서해의 트인 전망을 자랑하는 왜목마을, 삽교호, 난지도에 있는 당진시 공공야영장은 저렴한 이용료와... 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑장 주변에는 장고항 수산시장이 위치해 신선한...","url":"https://blog.naver.com/dangjin2030/223816021415","src":"당진시 공식블로그","date":"2025-03-31"},{"t":"nblog","title":"서해의 낭만 품은 당진 공공야영장, 4월1일 전면 개장!","snippet":"당진시(시장 오성환)는 4월1일, 서해의 절경을 품은 공공야영장... 먼저, 왜목마을 오토캠핑장은 당진시 석문면에 위치한 왜목마을... 캠핑장 내에는 석문산을 배경으로 한 산책로와 등산 코스가 있고, 인근...","url":"https://blog.naver.com/nomadnews/223816184416","src":"노마드뉴스","date":"2025-03-31"},{"t":"nblog","title":"충남 당진시, 공공야영장 3곳 4일부터 운영 시작","snippet":"(사진=당진시청) 충남 당진시는 지역의 대표적 관광지인 왜목마을, 삽교호, 난지도 등 공공야영장 3곳이 4일부터 본격 운영에 돌입한다고 3일 밝혔다. '왜목마을 오토캠핑장'은 석문산 옆 높은 언덕에...","url":"https://blog.naver.com/asiainews/223404525054","src":"에이티엔뉴스","date":"2024-04-03"},{"t":"nblog","title":"[백패킹 No.42] 영흥도 장경리해수욕장 백패킹 (16/03/05 ~03/06일)","snippet":"연락이 ^_^ 당진 왜목마을 석문산을 생각했으나 비가 많이... (버스 이용 요금 : 1,000원) 출발하고 나서 대부도 도착할떄쯤... 솔밭야영장 솔나무와 바다 ~~ 정말 멋진 장소인...다음에 꼭...","url":"https://blog.naver.com/choikoil/220648236826","src":"마글론 먹고 마시고 걷다","date":"2016-03-07"}],"prices":[{"won":70000,"label":null,"season":null,"day":null,"quote":"촛대 바위 사이로 떠오르는 … · 요금 : 1박 70,000원부터 · 요금 : 1일","url":"https://yuls0505.tistory.com/15","src":"밤톨이 그대","date":"2025-05-14"},{"won":60000,"label":null,"season":null,"day":null,"quote":"요금 : 1박 70,000원부터 · 요금 : 1일 60,000원 (4인 기준) · 특","url":"https://yuls0505.tistory.com/15","src":"밤톨이 그대","date":"2025-05-14"},{"won":25000,"label":"텐트","season":null,"day":null,"quote":"1열은 예약제로 운영되며, 당일 텐트 이용 요금은 25,000원입니다. · 망상오토캠","url":"https://yuls0505.tistory.com/15","src":"밤톨이 그대","date":"2025-05-14"}],"web_checked_at":"2026-11-17T19:55:01.947Z"}
+{
+  "nearby": {
+    "tour": [
+      {
+        "n": "왜목마을",
+        "k": "관광지",
+        "ty": "12",
+        "m": 237,
+        "lat": 37.0446338348,
+        "lng": 126.5242160129,
+        "a": "충청남도 당진시 석문면 왜목길 9",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=129064",
+        "img": "https://tong.visitkorea.or.kr/cms/resource/62/3567562_image3_1.jpg"
+      },
+      {
+        "n": "왜목마을 해수욕장",
+        "k": "관광지",
+        "ty": "12",
+        "m": 324,
+        "lat": 37.0444338595,
+        "lng": 126.5261285112,
+        "a": "충청남도 당진시 석문면 왜목길 26",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2022541",
+        "img": "https://tong.visitkorea.or.kr/cms/resource/69/3047169_image3_1.JPG"
+      },
+      {
+        "n": "왜목항",
+        "k": "관광지",
+        "ty": "12",
+        "m": 521,
+        "lat": 37.0488,
+        "lng": 126.5292,
+        "a": "충청남도 당진시 석문면 교로리",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2736713"
+      },
+      {
+        "n": "석문각",
+        "k": "관광지",
+        "ty": "12",
+        "m": 987,
+        "lat": 37.0511263874,
+        "lng": 126.5142393528,
+        "a": "충청남도 당진시 석문면 교로길 30",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2736914",
+        "img": "https://tong.visitkorea.or.kr/cms/resource/80/4110280_image3_1.jpg"
+      },
+      {
+        "n": "석문체육공원",
+        "k": "레포츠",
+        "ty": "28",
+        "m": 1007,
+        "lat": 37.0512723619,
+        "lng": 126.5140907626,
+        "a": "충청남도 당진시 석문면 교로길 30",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3083557",
+        "img": "https://tong.visitkorea.or.kr/cms/resource/51/3083551_image3_1.JPG"
+      }
+    ],
+    "food": [
+      {
+        "n": "왜목마을 태공수산횟집",
+        "k": "음식점",
+        "ty": "39",
+        "m": 295,
+        "lat": 37.0451872765,
+        "lng": 126.5266071142,
+        "a": "충청남도 당진시 석문면 왜목길 35",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2782881",
+        "img": "http://tong.visitkorea.or.kr/cms/resource/53/2786053_image2_1.jpg"
+      },
+      {
+        "n": "신준호카페",
+        "k": "음식점",
+        "ty": "39",
+        "m": 1621,
+        "lat": 37.0367745454,
+        "lng": 126.5372313772,
+        "a": "충청남도 당진시 석문면 석문해안로 128-10",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2766733",
+        "img": "http://tong.visitkorea.or.kr/cms/resource/38/2767138_image2_1.jpg"
+      },
+      {
+        "n": "수덕회관",
+        "k": "음식점",
+        "ty": "39",
+        "m": 3875,
+        "lat": 37.028639,
+        "lng": 126.561213,
+        "a": "충청남도 당진시 석문면 장고항로 297",
+        "u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=134945",
+        "img": "https://tong.visitkorea.or.kr/cms/resource/44/1894144_image3_1.jpg"
+      }
+    ],
+    "mart": [
+      {
+        "n": "하나로마트",
+        "k": "supermarket",
+        "m": 14377,
+        "lat": 36.942115,
+        "lng": 126.428837,
+        "b": "하나로마트"
+      },
+      {
+        "n": "서산축협",
+        "k": "supermarket",
+        "m": 14418,
+        "lat": 36.938278,
+        "lng": 126.434977
+      },
+      {
+        "n": "Family Mart",
+        "k": "supermarket",
+        "m": 14419,
+        "lat": 36.938652,
+        "lng": 126.434249
+      }
+    ],
+    "conv": [
+      {
+        "n": "이마트24",
+        "k": "convenience",
+        "m": 3722,
+        "lat": 37.030115,
+        "lng": 126.560299,
+        "b": "이마트24"
+      },
+      {
+        "n": "24시편의점",
+        "k": "convenience",
+        "m": 3983,
+        "lat": 37.013523,
+        "lng": 126.540678
+      }
+    ],
+    "fuel": [
+      {
+        "n": "gs주유소",
+        "k": "fuel",
+        "m": 1181,
+        "lat": 37.04906,
+        "lng": 126.510929,
+        "b": "gs"
+      },
+      {
+        "n": "오일뱅크",
+        "k": "fuel",
+        "m": 3918,
+        "lat": 37.012618,
+        "lng": 126.534882,
+        "b": "오일뱅크"
+      }
+    ],
+    "gear": [
+      {
+        "k": "hardware",
+        "m": 14829,
+        "lat": 36.991626,
+        "lng": 126.371831
+      },
+      {
+        "n": "금강철물건재",
+        "k": "hardware",
+        "m": 15303,
+        "lat": 36.924211,
+        "lng": 126.602345
+      }
+    ],
+    "medical": [
+      {
+        "n": "대호약국",
+        "k": "hospital",
+        "m": 913,
+        "lat": 37.048576,
+        "lng": 126.513883
+      },
+      {
+        "n": "고대전약국",
+        "k": "pharmacy",
+        "m": 15264,
+        "lat": 36.924307,
+        "lng": 126.601596
+      }
+    ],
+    "rest": [
+      {
+        "n": "서해휴게소",
+        "k": "SERVICE_AREA",
+        "m": 18236,
+        "lat": 36.978931,
+        "lng": 126.710918
+      },
+      {
+        "n": "모세휴게소",
+        "k": "SERVICE_AREA",
+        "m": 18873,
+        "lat": 37.166759,
+        "lng": 126.674418
+      },
+      {
+        "n": "지곡휴게소",
+        "k": "REST_AREA",
+        "m": 19633,
+        "lat": 36.883334,
+        "lng": 126.440251
+      }
+    ],
+    "public": {
+      "museum": [
+        {
+          "name": "안산어촌민속박물관",
+          "kind": "museum",
+          "distance_m": 19495,
+          "lat": 37.19251,
+          "lng": 126.64612,
+          "source": "전국박물관미술관정보표준데이터(공공데이터포털)",
+          "source_id": "museum:%EC%95%88%EC%82%B0%EC%96%B4%EC%B4%8C%EB%AF%BC%EC%86%8D%EB%B0%95%EB%AC%BC%EA%B4%80:37.1925",
+          "addr": "경기도 안산시 단원구 대부황금로 7",
+          "facts": {
+            "유형": "공립 박물관",
+            "전화": "031-440-8310"
+          },
+          "url": "https://www.ansanuc.net/home/10106/40052/contents.do",
+          "img": "https://tong.visitkorea.or.kr/cms/resource/47/3342647_image3_1.jpg",
+          "img_u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=654645",
+          "img_s": "한국관광공사"
+        },
+        {
+          "name": "종이미술관",
+          "kind": "museum",
+          "distance_m": 20297,
+          "lat": 37.22451,
+          "lng": 126.57599,
+          "source": "전국박물관미술관정보표준데이터(공공데이터포털)",
+          "source_id": "museum:%EC%A2%85%EC%9D%B4%EB%AF%B8%EC%88%A0%EA%B4%80:37.2245",
+          "addr": "경기도 안산시 단원구 대남로 233",
+          "facts": {
+            "유형": "사립 미술관",
+            "전화": "032-887-0606"
+          },
+          "url": "http://종이미술관.com",
+          "img": "https://tong.visitkorea.or.kr/cms/resource/72/3563472_image3_1.jpg",
+          "img_u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2684972",
+          "img_s": "한국관광공사"
+        },
+        {
+          "name": "유리섬미술관",
+          "kind": "museum",
+          "distance_m": 20456,
+          "lat": 37.21975,
+          "lng": 126.60242,
+          "source": "전국박물관미술관정보표준데이터(공공데이터포털)",
+          "source_id": "museum:%EC%9C%A0%EB%A6%AC%EC%84%AC%EB%AF%B8%EC%88%A0%EA%B4%80:37.2197",
+          "addr": "경기도 안산시 단원구 부흥로 254",
+          "facts": {
+            "유형": "사립 미술관",
+            "전화": "032-888-6262"
+          },
+          "url": "http://www.glassisland.co.kr"
+        }
+      ],
+      "pool": [
+        {
+          "name": "당진교육문화스포츠센터 수영장",
+          "kind": "pool",
+          "distance_m": 19512,
+          "lat": 36.89397,
+          "lng": 126.63195,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "pool:%EB%8B%B9%EC%A7%84%EA%B5%90%EC%9C%A1%EB%AC%B8%ED%99%94%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0%20%EC%88%98%EC%98%81%EC%9E%A5:36.8940",
+          "addr": "충청남도 당진시 당진중앙2로 132-30",
+          "facts": {
+            "유형": "기타",
+            "전화": "041-360-6902"
+          },
+          "url": "http://www.dangjin.go.kr/fmres/"
+        },
+        {
+          "name": "송악문화스포츠센터 수영장",
+          "kind": "pool",
+          "distance_m": 21479,
+          "lat": 36.9072,
+          "lng": 126.6911,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "pool:%EC%86%A1%EC%95%85%EB%AC%B8%ED%99%94%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0%20%EC%88%98%EC%98%81%EC%9E%A5:36.9072",
+          "addr": "충청남도 당진시 송악읍 틀모시로 830",
+          "facts": {
+            "유형": "기타",
+            "전화": "041-358-9914"
+          },
+          "url": "http://www.dangjin.go.kr/fmres/"
+        },
+        {
+          "name": "서산시국민체육센터 국민체육센터 수영장",
+          "kind": "pool",
+          "distance_m": 28708,
+          "lat": 36.79844,
+          "lng": 126.43551,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "pool:%EC%84%9C%EC%82%B0%EC%8B%9C%EA%B5%AD%EB%AF%BC%EC%B2%B4%EC%9C%A1%EC%84%BC%ED%84%B0%20%EA%B5%AD%EB%AF%BC%EC%B2%B4%EC%9C%A1%EC%84%BC%ED%84%B0%20%EC%88%98%EC%98%81%EC%9E%A5:36.7984",
+          "addr": "충청남도 서산시 안견로 661(갈산동)",
+          "facts": {
+            "유형": "기타",
+            "전화": "041-660-3033"
+          },
+          "url": "https://yeyak.seosan.go.kr/"
+        }
+      ]
+    }
+  },
+  "toilet_list": [
+    {
+      "name": "공중화장실",
+      "m": 394,
+      "lat": 37.0435837,
+      "lng": 126.5258929,
+      "h24": null,
+      "addr": null,
+      "src": "osm"
+    }
+  ],
+  "guide": {
+    "platform": null,
+    "steps": [],
+    "open_rules": [],
+    "next": [],
+    "warnings": [
+      "등록된 예약 채널이 없습니다. 캠핑장에 직접 문의하세요."
+    ]
+  },
+  "reviews": [
+    {
+      "t": "blog",
+      "title": "캠핑장 필수 예약은 네이버는 필수 사용 추가로 가독성 높은 배치도 예약은 운영자 와 이용자가 편리...",
+      "snippet": "캠핑장 왜목 석문산 야영장 캠프투나잇 원주 두리캠핑장.원주 한스캠핑장원주 키즈캠핑장원주 황학동 야영장원주피노키오 자연휴양림 야영장원주 금대자동차야영장 원주 치악신림오토캠핑 ..원주 구룡자동차야영장 원주 VIP레져타운 원주오쿠밸리카라반캠핑장원주간현관광지 캠핑장 원주구학리 산채관광마을 원…",
+      "url": "https://blog.naver.com/dsyhome/224452846449",
+      "src": "Let`s go 캠핑나라 - 캠핑장 홈페이지 제작",
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/AyCfdfYoT3X",
+      "date": "2026-10-25",
+      "q": 41
+    },
+    {
+      "t": "blog",
+      "title": "국내1박2일 서해안여행지 충남 당진 차박 숙소-왜목마을 오토캠핑장",
+      "snippet": "바라보이는 석문산 아래 조용하고 한적한 작은 포구가 있습니다. ​ 서해안에 한적하고 조용한 포구지만 특히 겨울이 되면 장고항 노적봉의 촛대바위로 떠오르는...서해안여행지 충남 당진 차박 숙소 왜목마을 오토캠핑장 입니다. ​ 왜목마을 오토캠핑장은 왜목마을해변 동쪽 산마루에 있습니다. ​…",
+      "url": "https://blog.naver.com/lu2u3u/224418758024",
+      "src": "비주 류장하의 딴지세상",
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/IWlfEYNvQHa",
+      "date": "2026-09-21",
+      "q": 41
+    },
+    {
+      "t": "blog",
+      "title": "충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내",
+      "snippet": "서해안의 아름다운 자연경관을 자랑하는 왜목마을, 삽교호, 난지도에 위치한 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들에게 새로운 명소...인근 언덕에 위치해 조용하고 한적한 캠핑을 즐길 수 있습니다. 석문산이 인접해 등산과 산책을 즐기기에 좋으며, 장고항 수산시장에서…",
+      "url": "https://mindset-matters.tistory.com/83",
+      "src": "마음이 쉬어가는 공간",
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/LmYsIQ78P1x",
+      "date": "2025-04-01",
+      "q": 41
+    },
+    {
+      "t": "blog",
+      "title": "당진시 왜목마을, 해양캠핑공원, 난지도 캠핑장 개장 예약 및 이용방법",
+      "snippet": "충남 당진시는 내달 4월 1일부터 왜목마을, 삽교호, 난지도에 공공야영장 3곳을 개장합니다. 31일 시에 따르면 이번 개장하는 공공야영장은 저렴한 이용료와...분위기도 즐길 수 있어 다양한 볼거리와 재미를 느끼실 수 있습니다. 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑…",
+      "url": "https://lovelykty.tistory.com/49",
+      "src": "알뜰부자 연구소",
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/ECEDeQxjMb6",
+      "date": "2025-03-31",
+      "q": 41
+    },
+    {
+      "t": "blog",
+      "title": "당진시, 서해를 품은 공공야영장 개장",
+      "snippet": "31일 밝혔다. ​ 서해의 트인 전망을 자랑하는 왜목마을, 삽교호, 난지도에 있는 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들의 새로운 명소...있는 오토캠핑장은 조용하고 한적한 캠핑을 즐길 수 있는 최적의 장소다. 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며…",
+      "url": "https://blog.naver.com/binggresmile/223816486884",
+      "src": "글로컬타임스(Glocal Times)",
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/3nXg8KHxR7U",
+      "date": "2025-03-31",
+      "q": 41
+    },
+    {
+      "t": "blog",
+      "title": "충남권 주요 백패킹 성지와 접근 방법",
+      "snippet": "정도 소요되며, 정상에서의 전망이 뛰어납니다. 3. 석문산 (당진) 왜목마을 인근에 위치한 석문산은 노지캠핑, 차박캠핑, 백패킹이 모두 가능한 장소로 유명...4. 죽도 (홍성) 홍성군 서부면에 위치한 죽도는 섬 전체가 야영장으로 조성되어 있어 백패킹을 즐기기에 좋습니다. 남당항에서 …",
+      "url": "https://blog.naver.com/topgun35/223798988310",
+      "src": "소중한 꿈..",
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/1iI5ztLFYDE",
+      "date": "2025-03-25",
+      "q": 33
+    },
+    {
+      "t": "blog",
+      "title": "왜목마을 해수욕장/해돋이모텔 숙박 예약 방법 가격 후기",
+      "snippet": "해돋이모텔 내돈내산 해돋이모텔 충청남도 당진시 석문면 왜목길 37 입실 : 오후 3시 / 퇴실 : 오전 11시 주차 : 모텔 뒤 주차장 또는 인근 공영주차장 전화로...조개구이, 활어횟집 2층 : 프론트 주변 관광지, 가볼 만한 곳 : 왜목마을 해수욕장, 석문산(일출 명소), 장고항 …",
+      "url": "https://blog.naver.com/ussua/223451778883",
+      "src": "일상을 여행처럼",
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/J4G2ccA3IEz",
+      "date": "2024-05-19",
+      "q": 53
+    },
+    {
+      "t": "blog",
+      "title": "♥1 5 년 동안 ♥ 계속 진행 되어지는 ~나의 캠핑 발자취^^*",
+      "snippet": "23) 24.부여 구경정나루터 25.석문방조제(2023.9.1~9.2) 26.당진 왜목마을 석문산 / (2023.9.2~3) 27 서산벌천포 오지리 / (2022.2.11~12) 28.당진아잘리안그린...OK캠핑장 30.천안 광덕사슴목장 / (2017.12.22~25) 31.천안독립기…",
+      "url": "https://blog.naver.com/softol2525/223426503709",
+      "src": "캠핑하는 펑키오~",
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/LovtOhY2WhA",
+      "date": "2024-04-25",
+      "q": 41
+    },
+    {
+      "t": "blog",
+      "title": "당진시, 대 캠핑의 시대! 당진시 공공야영장 개장!",
+      "snippet": "당진시, 대 캠핑의 시대! 당진시 공공야영장 개장! 함께 여는 미래! 생동하는 당진! 충청남도 당진시입니당 ​ 저렴한 가격과 시원한 바다 배경으로 캠핑족 사이...맞았습니다. <해 뜨고 지는 서해‘왜목마을 오토캠핑장’> 왜목마을 해수욕장에 위치한 오토캠핑장은 석문산 옆 높은 언덕에 위…",
+      "url": "https://blog.naver.com/dangjin2030/223404173546",
+      "src": "당진시 공식블로그",
+      "thumb": null,
+      "date": "2024-04-03",
+      "q": 35
+    }
+  ],
+  "sns_images": [
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/4D3mXnIiuYH",
+      "img": "https://blog.kakaocdn.net/dn/F6aU7/btsM2zg8aqR/bcq3IC0RkiZbueXHJgakak/img.png",
+      "url": "https://mindset-matters.tistory.com/83",
+      "src": "티스토리",
+      "w": 666,
+      "h": 61,
+      "date": "2025-04-01",
+      "title": "충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/27LnUjkUvT4",
+      "img": "https://t1.daumcdn.net/news/202404/03/yonhap/20240403084204768oico.jpg",
+      "url": "https://v.daum.net/v/20240403084204817",
+      "src": "연합뉴스",
+      "w": 1200,
+      "h": 801,
+      "date": "2024-04-03"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/6nbyjSfnezy",
+      "img": "https://t1.daumcdn.net/news/202503/31/daejonilbo/20250331112923888eyhc.jpg",
+      "url": "https://v.daum.net/v/20250331112922271",
+      "src": "대전일보",
+      "w": 540,
+      "h": 303,
+      "date": "2025-03-31"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/ISYb2VCP6iF",
+      "img": "https://t1.daumcdn.net/news/202503/31/newsis/20250331114334253wwtt.jpg",
+      "url": "https://v.daum.net/v/20250331114333156",
+      "src": "뉴시스",
+      "w": 720,
+      "h": 480,
+      "date": "2025-03-31"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/KaijMqk2ryI",
+      "img": "https://t1.daumcdn.net/news/202503/31/THEFACT/20250331104244896xujg.jpg",
+      "url": "https://v.daum.net/v/20250331104239479",
+      "src": "더팩트",
+      "w": 640,
+      "h": 427,
+      "date": "2025-03-31"
+    }
+  ],
+  "layout": {
+    "images": [],
+    "posts": [
+      {
+        "t": "blog",
+        "title": "필수 예약은 네이버는 필수 사용 추가로 가독성 높은 배치도 예약은 운영자 와 이용자가 편리 합니다.",
+        "snippet": "캠핑장 왜목 석문산 야영장 캠프투나잇 원주 두리캠핑장.원주 한스캠핑장원주 키즈캠핑장원주 황학동 야영장원주피노키오 자연휴양림 야영장원주 금대자동차야영장 원주 치악신림오토캠핑 ..원주 구룡자동차야영장 원주 VIP레져타운 원주오쿠밸리카라반캠핑장원주간현관광지 캠핑장 원주구학리 산채관광마을 원…",
+        "url": "https://blog.naver.com/dsyhome/224452846449",
+        "src": "Let`s go 캠핑나라 - 캠핑장 홈페이지 제작",
+        "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/AyCfdfYoT3X",
+        "date": "2026-10-25"
+      },
+      {
+        "t": "blog",
+        "title": "충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내",
+        "snippet": "서해안의 아름다운 자연경관을 자랑하는 왜목마을, 삽교호, 난지도에 위치한 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들에게 새로운 명소...인근 언덕에 위치해 조용하고 한적한 캠핑을 즐길 수 있습니다. 석문산이 인접해 등산과 산책을 즐기기에 좋으며, 장고항 수산시장에서…",
+        "url": "https://mindset-matters.tistory.com/83",
+        "src": "마음이 쉬어가는 공간",
+        "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/LmYsIQ78P1x",
+        "date": "2025-04-01"
+      },
+      {
+        "t": "blog",
+        "title": "당진시 왜목마을, 해양캠핑공원, 난지도 캠핑장 개장 예약 및 이용방법",
+        "snippet": "충남 당진시는 내달 4월 1일부터 왜목마을, 삽교호, 난지도에 공공야영장 3곳을 개장합니다. 31일 시에 따르면 이번 개장하는 공공야영장은 저렴한 이용료와...분위기도 즐길 수 있어 다양한 볼거리와 재미를 느끼실 수 있습니다. 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑…",
+        "url": "https://lovelykty.tistory.com/49",
+        "src": "알뜰부자 연구소",
+        "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/ECEDeQxjMb6",
+        "date": "2025-03-31"
+      },
+      {
+        "t": "blog",
+        "title": "당진시, 서해를 품은 공공야영장 개장!",
+        "snippet": "31일 밝혔습니다. 서해의 트인 전망을 자랑하는 왜목마을, 삽교호, 난지도에 있는 당진시 공공야영장은 저렴한 이용료와 뛰어난 접근성으로 캠핑족들의 새로운...캠핑장은 조용하고 한적한 캠핑을 즐길 수 있는 최적의 장소입니다. ​ 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑…",
+        "url": "https://blog.naver.com/dangjin2030/223816021415",
+        "src": "당진시 공식블로그",
+        "thumb": null,
+        "date": "2025-03-31"
+      }
+    ]
+  },
+  "social_checked_at": "2026-11-10T10:42:00+09:00",
+  "field_conditions": {
+    "version": 2,
+    "status": "CONFIRMED",
+    "parking": {
+      "state": "UNKNOWN",
+      "mode": "UNKNOWN",
+      "tent_side": null,
+      "cart_required": null,
+      "shared_nearby": null,
+      "drop_off_external": null,
+      "auto_camping_sites": null
+    },
+    "shelter_setup": {
+      "state": "UNKNOWN",
+      "max_tents": null,
+      "max_tarps": null,
+      "canopy_allowed": null,
+      "note": null
+    },
+    "power": {
+      "state": "UNKNOWN",
+      "available": null,
+      "limit_w": null,
+      "regulatory_reference_w": null,
+      "breaker_capacity": null,
+      "statutory_standard": false,
+      "high_power_mention": null
+    },
+    "ground": {
+      "state": "UNKNOWN",
+      "types": []
+    },
+    "charcoal": {
+      "state": "UNKNOWN",
+      "allowed": null
+    },
+    "firewood": {
+      "state": "UNKNOWN",
+      "allowed": null,
+      "sold": null
+    },
+    "fire_pit": {
+      "state": "UNKNOWN",
+      "arrangement": null
+    },
+    "site_size": {
+      "state": "UNKNOWN",
+      "groups": []
+    },
+    "sanitary": {
+      "state": "UNKNOWN",
+      "toilets_count": null,
+      "showers_count": null,
+      "sinks_count": null,
+      "private_bathroom": false,
+      "private_bathroom_state": "UNKNOWN",
+      "hot_water": null,
+      "note": null
+    },
+    "features": [],
+    "rental_offers": [],
+    "source": {
+      "label": "한국관광공사 고캠핑 운영자 등록 및 공식 소개 전수조사",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102384",
+      "checked_at": "2026-11-09T00:00:00+09:00",
+      "tier": "A"
+    }
+  },
+  "spec": {
+    "version": 1,
+    "generated_at": "2026-11-24T00:21:12.601Z",
+    "fields": {
+      "CHECKIN_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "15:00부터",
+            "count": 1,
+            "latest": "2024-05-19",
+            "samples": [
+              {
+                "quote": "해돋이모텔 내돈내산 해돋이모텔 충청남도 당진시 석문면 왜목길 37 입실 : 오후 3시",
+                "url": "https://blog.naver.com/ussua/223451778883",
+                "label": "일상을 여행처럼",
+                "date": "2024-05-19"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "CHECKOUT_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "11:00까지",
+            "count": 1,
+            "latest": "2024-05-19",
+            "samples": [
+              {
+                "quote": "퇴실 : 오전 11시 주차 : 모텔 뒤 주차장 또는 인근 공영주차장 전화로...조개구이, 활어횟집 2층 : 프론트 주변 관광지, 가볼 만한 곳 : 왜목마을 해수욕장, 석문산(일출 명소), 장고항 …",
+                "url": "https://blog.naver.com/ussua/223451778883",
+                "label": "일상을 여행처럼",
+                "date": "2024-05-19"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      }
+    },
+    "stats": {
+      "facts": 2,
+      "reviews_used": 1,
+      "roundups_skipped": 1
+    }
+  },
+  "rv": {
+    "n": 9,
+    "p": [
+      [
+        "조용·한적",
+        3
+      ],
+      [
+        "산책·둘레길 좋음",
+        1
+      ]
+    ],
+    "c": [],
+    "details": {
+      "pros": [
+        {
+          "topic": "조용·한적",
+          "count": 3,
+          "samples": [
+            {
+              "title": "국내1박2일 서해안여행지 충남 당진 차박 숙소-왜목마을 오토캠핑장",
+              "url": "https://blog.naver.com/lu2u3u/224418758024",
+              "date": "2026-09-21"
+            },
+            {
+              "title": "충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내",
+              "url": "https://mindset-matters.tistory.com/83",
+              "date": "2025-04-01"
+            }
+          ]
+        },
+        {
+          "topic": "산책·둘레길 좋음",
+          "count": 1,
+          "samples": [
+            {
+              "title": "충남 당진시 공공야영장(왜목마을, 삽교호, 난지도) 개장-예약하기,이용안내",
+              "url": "https://mindset-matters.tistory.com/83",
+              "date": "2025-04-01"
+            }
+          ]
+        }
+      ],
+      "cons": [],
+      "issues": []
+    }
+  },
+  "profile": {
+    "version": 1,
+    "fields": {
+      "CHECKIN": {
+        "value": "15:00부터",
+        "grade": "MENTION",
+        "source": {
+          "label": "일상을 여행처럼",
+          "url": "https://blog.naver.com/ussua/223451778883",
+          "date": "2024-05-19",
+          "quote": "해돋이모텔 내돈내산 해돋이모텔 충청남도 당진시 석문면 왜목길 37 입실 : 오후 3시"
+        }
+      },
+      "CHECKOUT": {
+        "value": "11:00까지",
+        "grade": "MENTION",
+        "source": {
+          "label": "일상을 여행처럼",
+          "url": "https://blog.naver.com/ussua/223451778883",
+          "date": "2024-05-19",
+          "quote": "퇴실 : 오전 11시 주차 : 모텔 뒤 주차장 또는 인근 공영주차장 전화로...조개구이, 활어횟집 2층 : 프론트 주변 관광지, 가볼 만한 곳 : 왜목마을 해수욕장, 석문산(일출 명소), 장고항 …"
+        }
+      },
+      "PRICE": {
+        "value": "2.5만~7만원대",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 언급",
+          "url": "https://yuls0505.tistory.com/15",
+          "date": "2025-05-14",
+          "quote": "촛대 바위 사이로 떠오르는 … · 요금 : 1박 70,000원부터 · 요금 : 1일"
+        },
+        "count": 3,
+        "min": 25000,
+        "max": 70000
+      },
+      "REFUND": {
+        "value": "업장 미공지 · 법정 기준 10일 전 100% 환불",
+        "grade": "REFERENCE",
+        "source": {
+          "label": "공정거래위원회 소비자분쟁해결기준(야영장업)",
+          "url": "https://www.ftc.go.kr/"
+        },
+        "statutory": true
+      },
+      "REVIEW": {
+        "value": "조용·한적, 산책·둘레길 좋음",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 요약 9건",
+          "url": null,
+          "date": null
+        },
+        "count": 9
+      }
+    },
+    "tags": [
+      {
+        "code": "REVIEW_QUIET",
+        "label": "후기: 조용",
+        "why": "후기 3건"
+      }
+    ],
+    "summary": "",
+    "score": {
+      "known": 5,
+      "facts": 0,
+      "total": 18
+    },
+    "generated_at": "2026-11-24T00:21:50.726Z"
+  },
+  "site_types": [
+    {
+      "code": "AUTO",
+      "label": "오토캠핑",
+      "count": null,
+      "sub": null,
+      "grade": "MENTION",
+      "src": "blog_mention",
+      "url": "https://blog.naver.com/lu2u3u/224418758024",
+      "at": "2026-09-21",
+      "quote": "국내1박2일 서해안여행지 충남 당진 차박 숙소-왜목마을 오토캠핑장. 바라보이는 석문산 아래 조용하고 한적한 작은 포구가 있습니다. ​ 서"
+    }
+  ],
+  "web": [
+    {
+      "t": "nblog",
+      "title": "당진 왜목마을 가을 일출 캠핑 차박 포인트 및 물때 완벽 가이드",
+      "snippet": "서해 일출·일몰: 왜목항 방파제와 석문산 전망대에서 서해안의... 불법 취사 및 화기 사용 주의: 지정된 야영장 외의 구역에서 무분별한... 주므로 매너 타임을 엄수해야 합니다. #왜목마을 #당진차박 #가을캠핑...",
+      "url": "https://blog.naver.com/standupandlight/224398414864",
+      "src": "standupandlight",
+      "date": "2026-09-02"
+    },
+    {
+      "t": "nblog",
+      "title": "당진 봄 캠핑 어디로 갈까, 힐링 볼거리 먹거리까지 한 번에",
+      "snippet": "당진시는 왜목마을, 삽교호, 난지도 등에 공공야영장을 운영하고 있어서 이용료도 저렴하고 접근성도... 바로 옆에 석문산이 있어서 아침에 가벼운 등산까지 할 수 있다는 게 매력이더라고요. 도심에서 완전히...",
+      "url": "https://blog.naver.com/moneycared/224228219798",
+      "src": "잡학상회(정보를 파는 가게)",
+      "date": "2026-03-24"
+    },
+    {
+      "t": "nblog",
+      "title": "당진시, 서해를 품은 공공야영장 개장!",
+      "snippet": "서해의 트인 전망을 자랑하는 왜목마을, 삽교호, 난지도에 있는 당진시 공공야영장은 저렴한 이용료와... 석문산이 인접해 있어 등산과 산책을 즐길 수 있으며, 캠핑장 주변에는 장고항 수산시장이 위치해 신선한...",
+      "url": "https://blog.naver.com/dangjin2030/223816021415",
+      "src": "당진시 공식블로그",
+      "date": "2025-03-31"
+    },
+    {
+      "t": "nblog",
+      "title": "서해의 낭만 품은 당진 공공야영장, 4월1일 전면 개장!",
+      "snippet": "당진시(시장 오성환)는 4월1일, 서해의 절경을 품은 공공야영장... 먼저, 왜목마을 오토캠핑장은 당진시 석문면에 위치한 왜목마을... 캠핑장 내에는 석문산을 배경으로 한 산책로와 등산 코스가 있고, 인근...",
+      "url": "https://blog.naver.com/nomadnews/223816184416",
+      "src": "노마드뉴스",
+      "date": "2025-03-31"
+    },
+    {
+      "t": "nblog",
+      "title": "충남 당진시, 공공야영장 3곳 4일부터 운영 시작",
+      "snippet": "(사진=당진시청) 충남 당진시는 지역의 대표적 관광지인 왜목마을, 삽교호, 난지도 등 공공야영장 3곳이 4일부터 본격 운영에 돌입한다고 3일 밝혔다. '왜목마을 오토캠핑장'은 석문산 옆 높은 언덕에...",
+      "url": "https://blog.naver.com/asiainews/223404525054",
+      "src": "에이티엔뉴스",
+      "date": "2024-04-03"
+    },
+    {
+      "t": "nblog",
+      "title": "[백패킹 No.42] 영흥도 장경리해수욕장 백패킹 (16/03/05 ~03/06일)",
+      "snippet": "연락이 ^_^ 당진 왜목마을 석문산을 생각했으나 비가 많이... (버스 이용 요금 : 1,000원) 출발하고 나서 대부도 도착할떄쯤... 솔밭야영장 솔나무와 바다 ~~ 정말 멋진 장소인...다음에 꼭...",
+      "url": "https://blog.naver.com/choikoil/220648236826",
+      "src": "마글론 먹고 마시고 걷다",
+      "date": "2016-03-07"
+    }
+  ],
+  "prices": [
+    {
+      "won": 70000,
+      "label": null,
+      "season": null,
+      "day": null,
+      "quote": "촛대 바위 사이로 떠오르는 … · 요금 : 1박 70,000원부터 · 요금 : 1일",
+      "url": "https://yuls0505.tistory.com/15",
+      "src": "밤톨이 그대",
+      "date": "2025-05-14"
+    },
+    {
+      "won": 60000,
+      "label": null,
+      "season": null,
+      "day": null,
+      "quote": "요금 : 1박 70,000원부터 · 요금 : 1일 60,000원 (4인 기준) · 특",
+      "url": "https://yuls0505.tistory.com/15",
+      "src": "밤톨이 그대",
+      "date": "2025-05-14"
+    },
+    {
+      "won": 25000,
+      "label": "텐트",
+      "season": null,
+      "day": null,
+      "quote": "1열은 예약제로 운영되며, 당일 텐트 이용 요금은 25,000원입니다. · 망상오토캠",
+      "url": "https://yuls0505.tistory.com/15",
+      "src": "밤톨이 그대",
+      "date": "2025-05-14"
+    }
+  ],
+  "web_checked_at": "2026-11-17T19:55:01.947Z"
+}
