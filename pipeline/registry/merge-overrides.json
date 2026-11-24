@@ -2,6 +2,14 @@
   "note": "기존 값을 의도적으로 지우거나 줄일 때만 적는다(폐업·중복 합치기·오류 정정). field-guard가 이 목록만 통과시킨다. file(경로 끝부분)·id·field 중 아는 것 + reason(필수) + by(누가) + at(날짜). 쓰고 나면 다음 정리 때 비운다. docs/DATA_MERGE_POLICY.md coverage_acks: 발행 커버리지(coverage-guard)의 검토된 감소 — field·after(줄어든 뒤 값)·reason·at, 기록 후 14일만 유효.",
   "overrides": [
     {
+      "file": "loc-872363c1.json",
+      "id": "loc-872363c1",
+      "field": "photos",
+      "reason": "소유자 2026-11-24: AFTO76F1APm은 사람 그림/일러스트 인물화로 캠핑장 무관 사진 제거, 공식 운영사(그래가) 메인 전경 사진만 유지",
+      "by": "Antigravity",
+      "at": "2026-11-24"
+    },
+    {
       "file": "campgrounds.json",
       "id": "100882",
       "field": "win",

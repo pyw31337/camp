@@ -26,12 +26,16 @@ import { badCoord, sidoStd } from "../lib/geo-sanity.mjs";
 import { SITE_TYPE_LABEL } from "../lib/site-types.mjs";
 import { logReview } from "../lib/merge-policy.mjs";
 import { paperRegistration } from "../lib/camp-reality.mjs";
+import { isRejectedThumbnail, pickValidCampThumbnail } from "../lib/thumbnail-validator.mjs";
 // 지우는 값은 병합 정책(docs/DATA_MERGE_POLICY.md)대로 검토 기록에 이유와 함께 남긴다 → field-guard가 정당한 정정으로 통과시킨다.
 const rm = (id, field, reason, file = "campgrounds.json") => { if (!CHECK) logReview({ action: "removed", file, id: String(id), field, reason, by: "publish-sanity" }); };
 const DUP = (() => { try { return JSON.parse(readFileSync(`${root}pipeline/registry/duplicate-camps.json`, "utf8")).pairs ?? []; } catch { return []; } })();
 const isDay = (c) => c.du === "park" || c.du === "water";
 const issues = {};
 const hit = (k, id) => { (issues[k] ??= []).push(id); };
+
+const campsDir = `${dataDir}/camps`;
+const detail = (id) => { try { return JSON.parse(readFileSync(`${campsDir}/${id}.json`, "utf8")); } catch { return null; } };
 
 const camps = JSON.parse(readFileSync(catPath, "utf8"));
 for (const c of camps) {
@@ -66,13 +70,11 @@ for (const { keep, drop } of DUP) {
   k.mg = [...new Set([...(k.mg ?? []), String(drop)])];
   camps.splice(i, 1);
 }
-const campsDir = `${dataDir}/camps`;
 // R10·R11 캠핑장 실체·휴업(전수 검수 2026-10-22)
 {
   const reg = (p) => { try { return JSON.parse(readFileSync(`${root}pipeline/registry/${p}`, "utf8")); } catch { return {}; } };
   const K = reg("kakao-places.json").campgrounds ?? {}, N = reg("naver-places.json").campgrounds ?? {};
   const NOT = new Map((reg("not-campgrounds.json").items ?? []).map((x) => [String(x.id), x.why]));
-  const detail = (id) => { try { return JSON.parse(readFileSync(`${campsDir}/${id}.json`, "utf8")); } catch { return null; } };
   for (let i = camps.length - 1; i >= 0; i--) {
     const c = camps[i], id = String(c.id);
     if (c.du) continue;
@@ -80,6 +82,40 @@ const campsDir = `${dataDir}/camps`;
     const why = NOT.get(id) ?? paperRegistration(c, { kakao: K[id], naver: N[id], n5: d?.nearby_licensed?.CONVENIENCE?.n5 });
     if (why) { hit("R10 캠핑장 아님(서류상 등록)", id); rm(id, "*", `캠핑장 아님 — ${why}`); camps.splice(i, 1); continue; }
     if (c.status === "운영" && /휴업/.test(d?.gcd?.info?.["운영기간"] ?? "")) { hit("R11 고캠핑 휴업 반영", id); c.status = "휴장"; }
+  }
+}
+// R12 캠핑장 대표 썸네일 진위 검증(2026-11-24 소유자: 인물 일러스트·아바타 등 무관 사진 차단)
+for (const c of camps) {
+  const rImg = isRejectedThumbnail(c.img);
+  const rSn = isRejectedThumbnail(c.sn);
+  if (rImg.rejected || rSn.rejected) {
+    const d = detail(c.id);
+    const picked = pickValidCampThumbnail(c, d);
+    if (rImg.rejected) {
+      if (picked.img) {
+        hit("R12 엉뚱한 대표 썸네일 정정", c.id);
+        c.img = picked.img;
+      } else {
+        hit("R12 엉뚱한 대표 썸네일 제거", c.id);
+        rm(c.id, "img", `인물/일러스트 등 엉뚱한 썸네일 제거 (${rImg.reason || "QA R12"})`);
+        delete c.img;
+      }
+    }
+    if (rSn.rejected) {
+      if (picked.sn) {
+        c.sn = picked.sn;
+      } else {
+        delete c.sn;
+      }
+    }
+    if (d && Array.isArray(d.photos)) {
+      const clean = d.photos.filter((u) => !isRejectedThumbnail(u).rejected);
+      if (clean.length !== d.photos.length) {
+        d.photos = clean;
+        hit("R12 엉뚱한 상세 사진 제거", c.id);
+        if (!CHECK) writeFileSync(`${campsDir}/${c.id}.json`, JSON.stringify(d) + "\n");
+      }
+    }
   }
 }
 // 상세 파일: 당일 장소의 법정·표준 스펙, 관광공사 광고 요금

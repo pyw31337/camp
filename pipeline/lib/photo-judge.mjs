@@ -27,6 +27,8 @@ export const NEG = [
   "a photo of drinks, coffee or alcohol",
   "a photo of snacks or products on a table",
   "a selfie or portrait photo of a person",
+  "an illustration, drawing, cartoon, anime or AI art portrait",
+  "an avatar, profile picture or icon",
   "a photo of people at an event or a speech",
   "a close-up photo of a child",
   "a close-up photo of a dog or cat",
@@ -36,10 +38,12 @@ export const NEG = [
 ];
 const WEAK_NEG = new Set(["a photo of a restaurant or cafe interior"]);
 /** 규칙이 바뀌면 올린다 → 캐시(photo-judgments.json)의 옛 판정은 다시 한다 */
-export const RULE_VERSION = 3;
+export const RULE_VERSION = 4;
 const SHORT = {
   "a photo of food on a plate or a table of dishes": "음식", "a photo of seafood like crab or shrimp": "해산물", "a photo of drinks, coffee or alcohol": "음료·술",
-  "a photo of snacks or products on a table": "과자·물건", "a selfie or portrait photo of a person": "인물", "a photo of people at an event or a speech": "행사·인물",
+  "a photo of snacks or products on a table": "과자·물건", "a selfie or portrait photo of a person": "인물",
+  "an illustration, drawing, cartoon, anime or AI art portrait": "일러스트·그림", "an avatar, profile picture or icon": "프로필·아바타",
+  "a photo of people at an event or a speech": "행사·인물",
   "a close-up photo of a child": "아이 클로즈업", "a close-up photo of a dog or cat": "반려동물 클로즈업", "a photo of a restaurant or cafe interior": "식당·카페 실내",
   "a screenshot of text, a document or a web page": "글·화면 캡처", "a photo of a car interior": "차 안",
 };

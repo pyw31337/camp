@@ -1,17 +1,48 @@
 {
- "policy": "사람이 확인한 카드 대표 사진 고정(pin)과 잘못 고른 후보 제외(reject). 원본 후보 데이터는 지우지 않고 고르기만 바꾼다.",
- "camps": {
-  "101800": {
-   "pin": { "i": "https://blog.kakaocdn.net/dn/bcCofC/btsOpE0Zaaj/Rym53tEH7n1ZEWnzSlj71k/img.jpg", "t": "https://search1.kakaocdn.net/argon/130x130_85_c/8iZcUygdZjd", "u": "https://laball-e.tistory.com/21", "s": "티스토리", "d": "2025-06-04" },
-   "reject": ["https://search4.kakaocdn.net/argon/130x130_85_c/DOBaQpTaO0V", "https://postfiles.pstatic.net/MjAyNTA5MjRfMjU1/MDAxNzU4NjkyMDAwMTMx.qu3M-qw7bQYOW4AGVEAHf95BiX5zIdRCHIUUzX9wg7Ag.jJuuOwWrAxnHYTVAYQsgOBUEtoq2W4pbFQXHPkUdBwMg.JPEG/SE-09EF55D0-FE36-4058-A76A-C0E175AE8BAC.jpg?type=w966"],
-   "why": "2026-10-22 시각 검수: 기존 후보는 MBC 드라마 장면으로 업장 무관. 대체 사진은 차량 외벽의 ‘궁평리어촌체험·휴양 마을’ 표기로 업장 연관을 확인했고, 원문 링크와 함께 외부 원본을 재호스팅하지 않고 표시한다.",
-   "at": "2026-10-22"
-  },
-  "102229": {
-   "pin": { "i": "https://mblogthumb-phinf.pstatic.net/MjAyNjEwMTJfMTEy/MDAxNzkxODA0ODA2NzEz.WgAZa8fZt-jHncwE15-TZ5BJP8bDNAw9Be0YslNRqSMg.EsjxH2oZv9nSfcC75sWfUiVQlEN6gLJ8kncPxsnCLPwg.JPEG/IMG%EF%BC%BF0148.JPG?type=w800", "t": "https://mblogthumb-phinf.pstatic.net/MjAyNjEwMTJfMTEy/MDAxNzkxODA0ODA2NzEz.WgAZa8fZt-jHncwE15-TZ5BJP8bDNAw9Be0YslNRqSMg.EsjxH2oZv9nSfcC75sWfUiVQlEN6gLJ8kncPxsnCLPwg.JPEG/IMG%EF%BC%BF0148.JPG?type=w400", "u": "https://blog.naver.com/2124mj/224440293917", "s": "네이버블로그", "d": "2026-10-12" },
-   "reject": ["https://search3.kakaocdn.net/argon/130x130_85_c/Apxspld2pru"],
-   "why": "영우 님 2026-10-21: 로컬푸드 매장(마트) 사진이 대표로 나옴 → 오토캠핑장 사이트 사진으로 고정",
-   "at": "2026-10-21"
+  "policy": "사람이 확인한 카드 대표 사진 고정(pin)과 잘못 고른 후보 제외(reject). 원본 후보 데이터는 지우지 않고 고르기만 바꾼다.",
+  "camps": {
+    "101800": {
+      "pin": {
+        "i": "https://blog.kakaocdn.net/dn/bcCofC/btsOpE0Zaaj/Rym53tEH7n1ZEWnzSlj71k/img.jpg",
+        "t": "https://search1.kakaocdn.net/argon/130x130_85_c/8iZcUygdZjd",
+        "u": "https://laball-e.tistory.com/21",
+        "s": "티스토리",
+        "d": "2025-06-04"
+      },
+      "reject": [
+        "https://search4.kakaocdn.net/argon/130x130_85_c/DOBaQpTaO0V",
+        "https://postfiles.pstatic.net/MjAyNTA5MjRfMjU1/MDAxNzU4NjkyMDAwMTMx.qu3M-qw7bQYOW4AGVEAHf95BiX5zIdRCHIUUzX9wg7Ag.jJuuOwWrAxnHYTVAYQsgOBUEtoq2W4pbFQXHPkUdBwMg.JPEG/SE-09EF55D0-FE36-4058-A76A-C0E175AE8BAC.jpg?type=w966"
+      ],
+      "why": "2026-10-22 시각 검수: 기존 후보는 MBC 드라마 장면으로 업장 무관. 대체 사진은 차량 외벽의 ‘궁평리어촌체험·휴양 마을’ 표기로 업장 연관을 확인했고, 원문 링크와 함께 외부 원본을 재호스팅하지 않고 표시한다.",
+      "at": "2026-10-22"
+    },
+    "102229": {
+      "pin": {
+        "i": "https://mblogthumb-phinf.pstatic.net/MjAyNjEwMTJfMTEy/MDAxNzkxODA0ODA2NzEz.WgAZa8fZt-jHncwE15-TZ5BJP8bDNAw9Be0YslNRqSMg.EsjxH2oZv9nSfcC75sWfUiVQlEN6gLJ8kncPxsnCLPwg.JPEG/IMG%EF%BC%BF0148.JPG?type=w800",
+        "t": "https://mblogthumb-phinf.pstatic.net/MjAyNjEwMTJfMTEy/MDAxNzkxODA0ODA2NzEz.WgAZa8fZt-jHncwE15-TZ5BJP8bDNAw9Be0YslNRqSMg.EsjxH2oZv9nSfcC75sWfUiVQlEN6gLJ8kncPxsnCLPwg.JPEG/IMG%EF%BC%BF0148.JPG?type=w400",
+        "u": "https://blog.naver.com/2124mj/224440293917",
+        "s": "네이버블로그",
+        "d": "2026-10-12"
+      },
+      "reject": [
+        "https://search3.kakaocdn.net/argon/130x130_85_c/Apxspld2pru"
+      ],
+      "why": "영우 님 2026-10-21: 로컬푸드 매장(마트) 사진이 대표로 나옴 → 오토캠핑장 사이트 사진으로 고정",
+      "at": "2026-10-21"
+    },
+    "loc-872363c1": {
+      "pin": {
+        "i": "https://dul339flcqmyl.cloudfront.net/hotel_photos/20260910100918_범바위_메인_01.png",
+        "t": "https://dul339flcqmyl.cloudfront.net/hotel_photos/20260910100918_범바위_메인_01.png",
+        "u": "https://www.graega.com/rooms/7135",
+        "s": "그래가(운영사 공식)",
+        "d": "2026-11-24"
+      },
+      "reject": [
+        "https://search4.kakaocdn.net/argon/130x130_85_c/AFTO76F1APm"
+      ],
+      "why": "소유자 2026-11-24: AFTO76F1APm은 사람 그림/일러스트 인물화로 캠핑장 무관 사진. 공식 운영/예약사(그래가) 캠핑장 메인 전경 사진으로 고정",
+      "at": "2026-11-24"
+    }
   }
- }
 }
