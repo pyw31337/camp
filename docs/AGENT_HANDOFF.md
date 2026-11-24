@@ -1,12 +1,85 @@
 # 인수인계
 
-## 📢 전체 에이전트 인수인계: 카드 썸네일 불필요한 영하 일괄 배지 전면 제거 및 상세페이지 주간날씨 주말(토·일) 강조 애니메이션/인터랙션 탑재 (2026-11-20 기준)
+## 📢 전체 에이전트 인수인계: 캠핑장 카드 썸네일 진위 검증 로직 탑재 및 범바위포레스트 인물 일러스트 정정 (2026-11-24 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
 
 ---
 
-### 1. 최근 작업 완료 내역 요약 (2026-11-20 카드 썸네일 영하 배지 제거 & 상세페이지 주간날씨 주말 인터랙션/애니메이션 강조)
+### 1. 최근 작업 완료 내역 요약 (2026-11-24 캠핑장 카드 썸네일 진위 검증 & 범바위포레스트 사진 정정)
+
+1. **소유자 지시**: "캠핑장 카드의 이미지 썸네일이 진짜 캠핑장 사진이 맞는지 검증하는 로직도 만들어서 검증해줘. 지금 범바위포레스트 캠핑장의 썸네일이 이상한 사람 그림 같은게 걸려있어."
+2. **원인 규명**:
+   - 범바위포레스트(`loc-872363c1`)의 카탈로그 `img` 및 `sn`이 검색 수집 스니펫(`https://search4.kakaocdn.net/argon/130x130_85_c/AFTO76F1APm`)으로 오염되어 있었음.
+   - 시각 및 메타데이터 확인 결과, `AFTO76F1APm`은 정장 차림 남성의 AI 인물 일러스트(블로그 프로필/아바타성 이미지)로 캠핑장과 100% 무관함.
+   - 한편 업장의 상세 데이터(`camps/loc-872363c1.json`)에는 이미 공식 직영 예약사(그래가)의 고품질 메인 전경 사진(`https://dul339flcqmyl.cloudfront.net/hotel_photos/20260910100918_범바위_메인_01.png`)이 정상 보관되어 있었음.
+3. **캠핑장 썸네일 진위 검증 및 자동 선별 모듈 신설 (`pipeline/lib/thumbnail-validator.mjs`)**:
+   - `isRejectedThumbnail(url)`:
+     - 프로필/아바타 URL 패턴(`blogpfthumb`, `profile_thumb`, `dthumb-phinf` 등) 자동 검출.
+     - `photo-judgments.json` 판정 실패(`ok === false`) 및 `card-photo-pins.json` `reject` 등록 URL 자동 차단.
+   - `isAuthenticOperatorPhoto(url)`:
+     - 공식 예약/운영사 CDN(`*.cloudfront.net/hotel_photos`, `gocamping.or.kr/upload/camp`, `camfit.co.kr`, `thankqcamping.com` 등) 우선 판별.
+   - `pickValidCampThumbnail(camp, detail)`:
+     - 1순위: `card-photo-pins` 및 `curated-pins` 고정 사진.
+     - 2순위: 상세 및 카탈로그의 공식 운영사/고캠핑 정품 사진.
+     - 3순위: 무관/거절 사진을 제외한 유효 캠핑장 사진.
+4. **AI 사진 내용 판정기 부정 라벨 보강 (`pipeline/lib/photo-judge.mjs` RULE_VERSION 4)**:
+   - `an illustration, drawing, cartoon, anime or AI art portrait` (일러스트·그림)
+   - `an avatar, profile picture or icon` (프로필·아바타)
+   - `photo-judgments.json`에 `AFTO76F1APm`을 `ok: false, why: "인물화·일러스트"`로 영구 등록.
+5. **발행 전 상식 검사 R12 규칙 탑재 (`pipeline/scripts/publish-sanity.mjs`)**:
+   - 발행 전 카탈로그(`campgrounds.json`)의 `c.img` 및 `c.sn`이 거절/무관 이미지일 경우, 상세의 정품 사진으로 자동 정정하거나 비움.
+   - 상세(`camps/*.json`)의 `photos` 배열에서도 거절된 이미지를 자동 제외.
+6. **범바위포레스트(`loc-872363c1`) 썸네일 정정 및 영구 고정**:
+   - `curated-pins.json` 및 `card-photo-pins.json`, `card-fallback.json`에 그래가 공식 전경 사진으로 고정.
+   - 카탈로그 `img`, `sn` 및 `camps/loc-872363c1.json` `photos[0]`을 공식 사진으로 교체하고 `AFTO76F1APm` 제거.
+   - `merge-overrides.json`에 정정 사유 등록 완료.
+7. **검증 결과**:
+   - `pipeline/test/thumbnail-validator.test.mjs` (3개 테스트) & `pipeline/test/photo-judge.test.mjs` (2개 테스트) 전수 통과.
+   - `pipeline/test/card-photo-pins.test.mjs`: 통과.
+   - `npm --prefix pipeline test`: 647개 전체 테스트 통과 (0 fail).
+   - `publish-sanity.mjs --check`: 통과.
+   - `field-guard.mjs`: 필드 손실 없음 (통과).
+   - `perf-budget.mjs`: 통과.
+
+---
+
+### 2. 이전 작업 완료 내역 요약 (2026-11-24 '5대 실전 캠핑 데이터' 수집 파이프라인 & UI 탑재)
+
+1. **소유자 지시**: "능동 제안: 기존 플랫폼이 절대 안 알려주는 '5대 실전 캠핑 데이터' 수집 확장안. 모두 진행해줘"
+2. **5대 실전 캠핑 데이터 추출 엔진 및 스펙 사전 확장 (`pipeline/lib/spec-extractor.mjs`)**:
+   - `SPEC_FIELDS` 및 `SPEC_GROUPS`에 5대 핵심 실전 필드 신설:
+     - `HOT_WATER_OPERATING` (`facility`, 온수 공급·시간): 24시간 공급, 시간제 운영(시:분~시:분), 동계 야간 단수/동파 방지, 온수용량 한정(교대 이용) 정규화.
+     - `WINTER_SAFETY_RENTALS` (`rental`, 동계 안전·대여): 일산화탄소 경보기 대여(무료/유료), 등유 난로·팬히터 대여(파세코 등), 등유 현장 판매.
+     - `MANNER_ENFORCEMENT` (`rule`, 매너 순찰·관리): 야간 순찰 엄격 (경고 시 퇴실), 관리자 24시간 상주, 야간 무인/자율 관리.
+     - `CAR_DOCKING` (`rule`, 차박·도킹): 차박 가능/불가, 도킹·꼬리 텐트 가능/불가, 진입 높이 제한(2.3m 등).
+     - `TRASH_BAG_POLICY` (`rule`, 쓰레기봉투 정책): 종량제 봉투 기본 제공 (무료), 현장 유상 판매, 쓰레기 되가져가기 (개인 지참).
+   - 다중 대여 품목 공존을 위해 `WINTER_SAFETY_RENTALS`는 충돌(conflict) 제외 및 dedupe(최대 12개) 등록.
+3. **프로필 매핑 (`pipeline/lib/campground-profile.mjs`)**:
+   - `CAR_DOCKING` 스펙을 프로필 `CAR_CAMPING`으로도 연계하여 카탈로그 전반의 차박 가능성 커버리지 대폭 강화.
+4. **전국 캠핑장 일괄 스펙 추출 및 프로필 재계산**:
+   - `node pipeline/scripts/build-spec-sheet.mjs`:
+     - 스펙 시트 보유 업장 4,581곳으로 확대.
+     - 신규 5대 실전 데이터 추출: 온수 공급·시간 (61곳), 동계 안전·대여 (89곳), 매너 순찰·관리 (220곳), 차박·도킹 (646곳), 쓰레기봉투 정책 (128곳).
+   - `node pipeline/scripts/build-campground-profiles.mjs`, `node scripts/split-catalog.mjs`, `node pipeline/scripts/apply-pins.mjs` 완료.
+5. **화면 렌더링 확장 (`design/renewal/app.js` & `camping-atlas/public/app.js`)**:
+   - **상세페이지 이용 정보 (`usageRaw`)**:
+     - `list[0]~list[5]` 기존 인덱스 100% 보존.
+     - `HOT_WATER_OPERATING` (`hotwater`), `WINTER_SAFETY_RENTALS` (`flame`), `MANNER_ENFORCEMENT` (`moon`), `CAR_DOCKING` (`car`), `TRASH_BAG_POLICY` (`recycle`) 항목을 데이터가 있는 곳에 감성적인 아이콘과 함께 자동 렌더링.
+   - **요약 사항 타일 (`specTiles` & `extraTiles`)**:
+     - 온수 타일에서 단순 "있음" 대신 "24시간 온수 제공", "온수 시간제", "동계 야간 단수" 등 실전 정보를 우선 노출.
+     - 추가 타일에 동계안전·대여, 매너 순찰, 차박·도킹, 쓰레기봉투를 원천 출처 팝업과 함께 깔끔하게 노출.
+6. **검증 결과**:
+   - `pipeline/test/spec-extractor.test.mjs`: 10개 테스트 전수 통과.
+   - `pipeline/test/enrich-102377.test.mjs`, `pipeline/test/enrich-t43.test.mjs`: 전수 통과.
+   - `node pipeline/scripts/check-dayuse-idempotent.mjs`: 3,203곳 멱등성 100% 통과.
+   - `npm --prefix pipeline test`: 644개 전체 테스트 통과 (0 fail).
+   - `node pipeline/scripts/field-guard.mjs . .`: 필드 손실 없음 (통과).
+   - `node camping-atlas/scripts/perf-budget.mjs`: `app.js 705KB` (710KB 예산 엄수).
+
+---
+
+### 2. 이전 작업 완료 내역 요약 (2026-11-20 카드 썸네일 영하 배지 제거 & 상세페이지 주간날씨 주말 인터랙션/애니메이션 강조)
 
 1. **카드 썸네일 불필요한 영하 일괄 배지 전면 제거**:
    - **소유자 피드백**: "썸네일에 '영하 -5 예보' 이런건 일괄적으로 붙으니까 불필요한 정보가 되어버렸어. 겨울이니까 영하가 된것인데, 모든 캠핑장마다 저런 뱃지가 붙으니까 별로 의미가 없는 정보 같으니 모두 제거해줘. 차라리 상세페이지 주간날씨에서 주말날씨 부분에 애니메이션이나 인터랙션을 넣어서 더 강조를 해줘."

@@ -25,9 +25,14 @@ export const SPEC_FIELDS = {
   RENTAL: { group: "rental", label: "대여" },
   DISCOUNT: { group: "promo", label: "할인 대상" },
   PROMOTION: { group: "promo", label: "기간 행사" },
+  HOT_WATER_OPERATING: { group: "facility", label: "온수 공급·시간" },
+  WINTER_SAFETY_RENTALS: { group: "rental", label: "동계 안전·대여" },
+  MANNER_ENFORCEMENT: { group: "rule", label: "매너 순찰·관리" },
+  CAR_DOCKING: { group: "rule", label: "차박·도킹" },
+  TRASH_BAG_POLICY: { group: "rule", label: "쓰레기봉투 정책" },
 };
 export const SPEC_GROUPS = [
-  ["time", "이용 시간"], ["booking", "예약 규칙"], ["fee", "추가 요금"], ["rule", "현장 규칙"], ["rental", "대여"], ["promo", "행사·할인"],
+  ["time", "이용 시간"], ["booking", "예약 규칙"], ["fee", "추가 요금"], ["rule", "현장 규칙"], ["facility", "편의 시설"], ["rental", "대여"], ["promo", "행사·할인"],
 ];
 export const GRADE_RANK = { OPERATOR: 3, OFFICIAL_TEXT: 2, MENTION: 1 };
 
@@ -226,6 +231,75 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   } else if (/(당일\s*취소\s*시|예약\s*당일\s*취소|당일\s*취소)[^.]{0,10}(환불\s*불가|환불\s*안\s*됩)/.test(s)) {
     out.push({ code: "REFUND_POLICY", value: "당일 취소 환불 불가", norm: "SAMEDAY_NONE" });
   }
+
+  // 1. 온수 공급 실태 및 동계 수압/단수 시간 (HOT_WATER_OPERATING)
+  if (/24시간\s*(?:온수|따뜻한\s*물)|(?:온수|따뜻한\s*물)\s*(?:는\s*)?24시간|온수\s*상시\s*(?:공급|제공)/.test(s)) {
+    out.push({ code: "HOT_WATER_OPERATING", value: "24시간 온수 제공", norm: "24H" });
+  } else if (/(?:동계\s*)?(?:야간\s*단수|온수\s*(?:중단|차단)|동파\s*방지\s*(?:단수|퇴수))/.test(s)) {
+    out.push({ code: "HOT_WATER_OPERATING", value: "동계 야간 단수/동파 방지", norm: "WINTER_CUTOFF" });
+  } else if (/(?:순간\s*온수기|온수\s*탱크|온수\s*용량\s*(?:한정|제한)|온수\s*끊김)/.test(s)) {
+    out.push({ code: "HOT_WATER_OPERATING", value: "온수용량 한정 (교대 이용 권장)", norm: "TANK_LIMITED" });
+  } else {
+    const hwM = s.match(new RegExp(String.raw`(?:온수\s*(?:공급|이용|사용)?\s*시간|샤워실\s*온수)[^0-9\n]{0,15}?${CLOCK}\s*(?:부터)?\s*[~\-–]\s*${CLOCK}`, "i"));
+    if (hwM) {
+      const a = parseClock(hwM[1], hwM[2], hwM[3], "any");
+      const b = parseClock(hwM[4], hwM[5], hwM[6], "any");
+      if (a != null && b != null) {
+        out.push({ code: "HOT_WATER_OPERATING", value: `온수 시간제 (${hhmm(a)}~${hhmm(b)})`, norm: `${hhmm(a)}~${hhmm(b)}` });
+      }
+    }
+  }
+
+  // 2. 동계 안전 장치 현장 구비 및 대여 (WINTER_SAFETY_RENTALS)
+  if (/(?:일산화탄소|CO)\s*(?:경보기|감지기)/i.test(s)) {
+    const f = feeOrRule(s.slice(s.search(/(?:일산화탄소|CO)/i)));
+    const feeTxt = f?.fee != null ? ` (${f.text})` : f?.text === "무료" ? " (무료)" : "";
+    out.push({ code: "WINTER_SAFETY_RENTALS", value: `일산화탄소 경보기 대여${feeTxt}`, norm: "CO_ALARM" });
+  }
+  if (/(?:등유\s*난로|팬히터|파세코|옴니|캠핑\s*난로)\s*(?:대여|렌탈)/.test(s)) {
+    const f = feeOrRule(s.slice(s.search(/(?:등유\s*난로|팬히터|파세코|옴니|캠핑\s*난로)/)));
+    const feeTxt = f?.fee != null ? ` (${f.text})` : "";
+    out.push({ code: "WINTER_SAFETY_RENTALS", value: `난로·팬히터 대여${feeTxt}`, norm: "HEATER_RENTAL" });
+  }
+  if (/(?:등유|백등유)\s*(?:현장\s*)?(?:판매|구매|구입)/.test(s)) {
+    out.push({ code: "WINTER_SAFETY_RENTALS", value: "등유 현장 판매", norm: "KEROSENE_SALE" });
+  }
+
+  // 3. 매너타임 관리 실효성 (MANNER_ENFORCEMENT)
+  if (/(?:야간\s*순찰|매너타임\s*순찰|캠지기\s*순찰|관리자\s*순찰|사장님\s*순찰|경고\s*(?:후|2회|시)?\s*(?:강제\s*)?퇴실|강제\s*퇴실|매너타임\s*(?:관리\s*)?철저|순찰을?\s*돕니다)/.test(s)) {
+    out.push({ code: "MANNER_ENFORCEMENT", value: "야간 순찰 엄격 (경고 시 퇴실)", norm: "STRICT_PATROL" });
+  } else if (/(?:캠지기|관리자|관리인)\s*(?:24시간\s*)?상주/.test(s)) {
+    out.push({ code: "MANNER_ENFORCEMENT", value: "관리자 24시간 상주", norm: "RESIDENT_MANAGER" });
+  } else if (/(?:야간\s*)?(?:무인\s*운영|자율\s*관리|캠지기\s*부재)/.test(s)) {
+    out.push({ code: "MANNER_ENFORCEMENT", value: "야간 무인/자율 관리", norm: "AUTONOMOUS" });
+  }
+
+  // 4. 차박 / 도킹 텐트 / 진입 제한 (CAR_DOCKING)
+  if (/(?:도킹|꼬리)\s*텐트[^.]{0,20}?(?:불가|금지|안\s*됩)|트렁크\s*도킹[^.]{0,20}?(?:불가|금지|안\s*됩)/.test(s)) {
+    out.push({ code: "CAR_DOCKING", value: "도킹 텐트 불가", norm: "DOCKING_PROHIBITED" });
+  } else if (/(?:도킹|꼬리)\s*텐트[^.]{0,20}?(?:가능|허용)|트렁크\s*도킹[^.]{0,20}?(?:가능|허용)/.test(s)) {
+    out.push({ code: "CAR_DOCKING", value: "도킹 텐트 가능", norm: "DOCKING_ALLOWED" });
+  } else if (/차박[^.]{0,10}?(?:불가|금지|안\s*됩)/.test(s)) {
+    out.push({ code: "CAR_DOCKING", value: "차박 불가", norm: "CAR_CAMPING_PROHIBITED" });
+  } else if (/(?:차박[^.]{0,10}?(?:가능|환영|동반)|사이트\s*(?:내|옆)\s*차박|차량\s*직접\s*접안)/.test(s)) {
+    out.push({ code: "CAR_DOCKING", value: "차박 가능 (사이트 접안)", norm: "CAR_CAMPING_ALLOWED" });
+  }
+  const hLimit = s.match(/(?:차고|차량\s*높이|진입\s*높이)\s*(\d(?:\.\d)?)\s*m\s*(?:이하|제한)/);
+  if (hLimit) {
+    out.push({ code: "CAR_DOCKING", value: `진입 높이 ${hLimit[1]}m 제한`, norm: `HEIGHT_${hLimit[1]}` });
+  }
+
+  // 5. 쓰레기봉투 및 분리수거 정책 (TRASH_BAG_POLICY)
+  if (/(?:종량제\s*봉투|쓰레기\s*봉투)[^.]{0,20}?(?:기본\s*)?(?:제공|지급|무료)|(?:입실|체크인)\s*시[^.]{0,15}?(?:종량제|쓰레기)\s*봉투/.test(s)) {
+    out.push({ code: "TRASH_BAG_POLICY", value: "종량제 봉투 기본 제공 (무료)", norm: "BAG_FREE" });
+  } else if (/(?:종량제\s*봉투|쓰레기\s*봉투)[^.]{0,20}?(?:현장\s*)?(?:구매|유상|별도|구입|판매)|종량제\s*봉투\s*(\d[\d,]*\s*원)/.test(s)) {
+    const feeMatch = s.match(/(\d[\d,]*\s*원)/);
+    const feeStr = feeMatch ? ` (${feeMatch[1]})` : "";
+    out.push({ code: "TRASH_BAG_POLICY", value: `종량제 봉투 현장 유상 판매${feeStr}`, norm: "BAG_PAID" });
+  } else if (/(?:쓰레기\s*(?:모두\s*)?되가져가기|쓰레기\s*되가져가|종량제\s*봉투\s*(?:개인\s*)?지참)/.test(s)) {
+    out.push({ code: "TRASH_BAG_POLICY", value: "쓰레기 되가져가기 (개인 지참)", norm: "BAG_BYO" });
+  }
+
   return out;
 }
 
@@ -322,12 +396,12 @@ export function buildSpecSheet({ name, regions = [], docs = [], reviews = [], no
       byNorm.set(k, g);
     }
     const official = best[0].grade === "MENTION" ? [] : dedupe(best, code);
-    // RENTAL·DISCOUNT는 여러 값이 함께 성립하므로 충돌로 보지 않는다.
+    // RENTAL·DISCOUNT·WINTER_SAFETY_RENTALS는 여러 값이 함께 성립하므로 충돌로 보지 않는다.
     fields[code] = {
       grade: best[0].grade,
       values: official.map((f) => ({ value: f.value, quote: f.quote, source: f.source, period: f.period ?? null })),
       mentions: [...byNorm.values()].sort((a, b) => b.count - a.count || String(b.latest).localeCompare(String(a.latest))).slice(0, 4),
-      conflict: byNorm.size > 1 && !["RENTAL", "PROMOTION", "DISCOUNT"].includes(code),
+      conflict: byNorm.size > 1 && !["RENTAL", "PROMOTION", "DISCOUNT", "WINTER_SAFETY_RENTALS"].includes(code),
     };
   }
   return { version: 1, generated_at: now, fields, stats: { facts: live.length, reviews_used: usedReviews, roundups_skipped: skippedRoundups } };
@@ -335,5 +409,5 @@ export function buildSpecSheet({ name, regions = [], docs = [], reviews = [], no
 function dedupe(list, code) {
   const seen = new Set(), out = [];
   for (const f of list) { const k = `${code}|${f.norm}`; if (seen.has(k)) continue; seen.add(k); out.push(f); }
-  return out.slice(0, code === "RENTAL" ? 12 : 4);
+  return out.slice(0, ["RENTAL", "WINTER_SAFETY_RENTALS"].includes(code) ? 12 : 4);
 }

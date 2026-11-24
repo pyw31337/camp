@@ -101,3 +101,35 @@ test("매너타임: 시작은 밤만 — 퇴실 시각·시설 이용 시간을 
   assert.deepEqual(mt("매너타임: 22시-익일 8시"), ["22:00~08:00"]);
   assert.deepEqual(mt("밤 11시부터 매너타임이 적용됩니다"), ["23:00부터"]);
 });
+
+test("5대 실전 캠핑 데이터: 온수·동계안전·매너순찰·차박도킹·쓰레기봉투", () => {
+  // 1. 온수
+  assert.equal(codes("샤워장 24시간 온수 공급됩니다").HOT_WATER_OPERATING, "24시간 온수 제공");
+  assert.equal(codes("온수 이용 시간은 07:00 ~ 22:30 입니다").HOT_WATER_OPERATING, "온수 시간제 (07:00~22:30)");
+  assert.equal(codes("동계 야간 단수 안내: 23시 이후 동파 방지로 단수").HOT_WATER_OPERATING, "동계 야간 단수/동파 방지");
+  assert.equal(codes("전기 온수기 온수탱크 용량이 한정되어 교대 이용 권장").HOT_WATER_OPERATING, "온수용량 한정 (교대 이용 권장)");
+
+  // 2. 동계 안전 및 대여
+  assert.equal(codes("일산화탄소 경보기 무료 대여").WINTER_SAFETY_RENTALS, "일산화탄소 경보기 대여 (무료)");
+  assert.equal(codes("일산화탄소 감지기 대여 3,000원").WINTER_SAFETY_RENTALS, "일산화탄소 경보기 대여 (3,000원)");
+  assert.equal(codes("파세코 등유 난로 대여 20,000원").WINTER_SAFETY_RENTALS, "난로·팬히터 대여 (20,000원)");
+  assert.equal(codes("매점에서 등유 현장 판매 합니다").WINTER_SAFETY_RENTALS, "등유 현장 판매");
+
+  // 3. 매너타임 순찰·관리
+  assert.equal(codes("매너타임 순찰 철저히 돌며 경고 후 강제 퇴실 조치합니다").MANNER_ENFORCEMENT, "야간 순찰 엄격 (경고 시 퇴실)");
+  assert.equal(codes("캠지기 야간 순찰 돕니다").MANNER_ENFORCEMENT, "야간 순찰 엄격 (경고 시 퇴실)");
+  assert.equal(codes("관리자 24시간 상주하여 안심하고 머무실 수 있습니다").MANNER_ENFORCEMENT, "관리자 24시간 상주");
+  assert.equal(codes("야간에는 무인 운영으로 자율 관리에 맡깁니다").MANNER_ENFORCEMENT, "야간 무인/자율 관리");
+
+  // 4. 차박·도킹 텐트·진입 제한
+  assert.equal(codes("도킹 텐트 및 꼬리 텐트 설치 불가").CAR_DOCKING, "도킹 텐트 불가");
+  assert.equal(codes("차량 트렁크 도킹 텐트 허용").CAR_DOCKING, "도킹 텐트 가능");
+  assert.equal(codes("전 사이트 차박 환영합니다").CAR_DOCKING, "차박 가능 (사이트 접안)");
+  assert.equal(codes("카라반 및 차박 불가").CAR_DOCKING, "차박 불가");
+  assert.equal(codes("지하 통로 진입 높이 2.3m 제한").CAR_DOCKING, "진입 높이 2.3m 제한");
+
+  // 5. 쓰레기봉투 정책
+  assert.equal(codes("체크인 시 종량제 봉투 1장 무료 제공").TRASH_BAG_POLICY, "종량제 봉투 기본 제공 (무료)");
+  assert.equal(codes("종량제 봉투 현장 유상 판매 (1,000원)").TRASH_BAG_POLICY, "종량제 봉투 현장 유상 판매 (1,000원)");
+  assert.equal(codes("국립공원 특성상 모든 쓰레기 되가져가기 필수").TRASH_BAG_POLICY, "쓰레기 되가져가기 (개인 지참)");
+});

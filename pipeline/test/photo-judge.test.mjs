@@ -6,11 +6,15 @@ import { NEG, POS, decide } from "../lib/photo-judge.mjs";
 const r = (scores) => [...POS, ...NEG].map((label) => ({ label, score: scores[label] ?? 0 }));
 const L = (s) => [...POS, ...NEG].find((x) => x.includes(s));
 
-test("음식·해산물·인물·차 안은 거른다(2026-10-22 여우하우 대게 사진)", () => {
+test("음식·해산물·인물·일러스트·아바타·차 안은 거른다(2026-10-22 여우하우 대게 사진, 2026-11-24 범바위포레스트 인물 일러스트)", () => {
   assert.equal(decide(r({ [L("seafood")]: 1 })).ok, false);
   assert.equal(decide(r({ [L("seafood")]: 1 })).why, "해산물");
   assert.equal(decide(r({ [L("food on a plate")]: 0.55, [L("camping deck")]: 0.3 })).ok, false);
-  assert.equal(decide(r({ [L("portrait")]: 0.88 })).ok, false);
+  assert.equal(decide(r({ [L("selfie or portrait")]: 0.88 })).ok, false);
+  assert.equal(decide(r({ [L("illustration, drawing")]: 0.95 })).ok, false);
+  assert.equal(decide(r({ [L("illustration, drawing")]: 0.95 })).why, "일러스트·그림");
+  assert.equal(decide(r({ [L("avatar, profile")]: 0.92 })).ok, false);
+  assert.equal(decide(r({ [L("avatar, profile")]: 0.92 })).why, "프로필·아바타");
   assert.equal(decide(r({ [L("car interior")]: 0.91 })).ok, false);
   // 캠핑장다운 장면이 약한데 행사 인물이 보이면 거른다
   assert.equal(decide(r({ [L("resort, pension")]: 0.3, [L("event or a speech")]: 0.27 })).ok, false);
