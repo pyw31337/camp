@@ -188,6 +188,10 @@
 {"cid":"1369","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1369","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1370","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1384","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1384","attr":"RENTAL_ITEM","value":"식기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1384","attr":"RENTAL_ITEM","value":"텐트","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1384","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1447","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1473","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1475","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
@@ -930,9 +934,10 @@
 {"cid":"101247","attr":"RENTAL_ITEM","value":"침낭","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101247","attr":"RENTAL_ITEM","value":"텐트","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101252","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101254","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping","at":"2024-01-25T00:00:00+09:00"}
-{"cid":"101254","attr":"RENTAL_ITEM","value":"식기","grade":"CONFIRMED","src":"gocamping","at":"2024-01-25T00:00:00+09:00"}
-{"cid":"101254","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping","at":"2024-01-25T00:00:00+09:00"}
+{"cid":"101254","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101254","attr":"RENTAL_ITEM","value":"식기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101254","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101254","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101257","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101257","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101257","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
@@ -1426,6 +1431,10 @@
 {"cid":"102365","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102383","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102396","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102396","attr":"RENTAL_ITEM","value":"식기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102396","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102396","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"pilot-004-haengun","attr":"RENTAL_ITEM","value":"장작(10kg)","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00","num":12000}
 {"cid":"pilot-007-soeggol","attr":"RENTAL_ITEM","value":"깡통열차 탑승권","grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00","num":4000}
 {"cid":"pilot-007-soeggol","attr":"RENTAL_ITEM","value":"동물 먹이 바구니","grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00","num":3000}

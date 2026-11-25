@@ -6446,7 +6446,6 @@
 {"cid":"101670","name":"가평 제이캠핑장","sido":"경기","sigungu":"가평군","lat":37.938424,"lng":127.540804,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101670","gc_at":"2024-12-16T00:00:00+09:00","kakao_place_id":"1335503371"}
 {"cid":"2833","name":"진안국제 캠핑장","sido":"전북","sigungu":"진안군","lat":35.965493,"lng":127.461119,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=2833","gc_at":"2024-03-11T00:00:00+09:00","kakao_place_id":"26911933"}
 {"cid":"8137","name":"더 빌리지","sido":"충북","sigungu":"진천군","lat":36.78508,"lng":127.423873,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8137","gc_at":"2023-10-23T00:00:00+09:00"}
-{"cid":"rf-ixkoe7","name":"두루웰자연휴양림","sido":"강원","sigungu":"철원군","lat":38.22794,"lng":127.3533,"kakao_place_id":"747336303"}
 {"cid":"1436","name":"비발디캠핑파크 본점","sido":"강원","sigungu":"홍천군","lat":37.6641163,"lng":127.612295,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436","gc_at":"2026-11-10T00:00:58.989Z"}
 {"cid":"100100","name":"양남라라캠핑장","sido":"경북","sigungu":"경주시","lat":35.6877237,"lng":129.396336,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100","gc_at":"2026-11-10T00:00:59.016Z"}
 {"cid":"loc-744eca03","name":"우이동 가족캠핑장","sido":"서울","sigungu":"강북구","lat":37.665379,"lng":127.011505,"gc_at":"2026-11-10T00:41:54.857Z"}
@@ -6589,7 +6588,7 @@
 {"cid":"loc-de0085fe","name":"모산골 야영장","sido":"경기","sigungu":"안성시","lat":37.017386,"lng":127.370651,"gc_at":"2026-11-10T00:41:54.877Z"}
 {"cid":"loc-5075163c","name":"봉바위농원","sido":"경기","sigungu":"김포시","lat":37.740063,"lng":126.611743,"gc_at":"2026-11-10T00:41:54.877Z"}
 {"cid":"loc-aaec4c9c","name":"여울지숲속캠핑장","sido":"경기","sigungu":"김포시","lat":37.725208,"lng":126.654529,"gc_at":"2026-11-10T00:41:54.877Z"}
-{"cid":"loc-872363c1","name":"범바위포레스트","sido":"경기","sigungu":"김포시","lat":37.642291,"lng":126.600554,"gc_at":"2026-11-10T00:41:54.877Z"}
+{"cid":"loc-872363c1","name":"범바위포레스트","sido":"경기","sigungu":"김포시","lat":37.642291,"lng":126.600554,"gc_at":"2026-11-10T00:41:54.877Z","kakao_place_id":"664000785"}
 {"cid":"loc-b7b72009","name":"김포덕포진누리캠핑장 주식회사","sido":"경기","sigungu":"김포시","lat":37.651155,"lng":126.537015,"gc_at":"2026-11-10T00:41:54.877Z"}
 {"cid":"loc-0232868d","name":"우니메이카(연천점)","sido":"경기","sigungu":"연천군","lat":38.155838,"lng":127.062578,"gc_at":"2026-11-10T00:41:54.877Z"}
 {"cid":"loc-2365625f","name":"보물나라캠프","sido":"경기","sigungu":"연천군","lat":38.154527,"lng":127.142926,"gc_at":"2026-11-10T00:41:54.877Z"}
@@ -7722,3 +7721,20 @@
 {"cid":"loc-6f9c384d","name":"메이 더 카라반","sido":"제주","sigungu":"제주시","lat":33.552454,"lng":126.706003,"gc_at":"2026-11-10T00:41:54.978Z"}
 {"cid":"loc-f262f5f8","name":"무거카라반","sido":"제주","sigungu":"제주시","lat":33.548901,"lng":126.655007,"gc_at":"2026-11-10T00:41:54.978Z"}
 {"cid":"loc-44ccd530","name":"벨리타 캠핑장","sido":"제주","sigungu":"제주시","lat":33.507806,"lng":126.698015,"gc_at":"2026-11-10T00:41:54.979Z"}
+{"cid":"park-27230-00096-1veed","name":"구수산공원","sido":"대구","sigungu":"북구","lat":35.93722,"lng":128.55222}
+{"cid":"park-27230-00098-1xirt","name":"금호워터폴리스공원","sido":"대구","sigungu":"북구","lat":35.91083,"lng":128.61861}
+{"cid":"park-43770-00021-19ijl","name":"참샘골공원","sido":"충북","sigungu":"음성군","lat":36.91391,"lng":127.54056}
+{"cid":"park-27230-00097-nith0","name":"도남공원","sido":"대구","sigungu":"북구","lat":35.9575,"lng":128.5833}
+{"cid":"park-43770-00006-kn75k","name":"무극(용담산)근린공원","sido":"충북","sigungu":"음성군","lat":36.99485,"lng":127.59317}
+{"cid":"park-43770-00115-1m316","name":"망가래근린공원","sido":"충북","sigungu":"음성군","lat":36.97353,"lng":127.48749}
+{"cid":"osm-w1577329379","name":"지리산정원","sido":"전남","sigungu":"구례군","lat":35.28799,"lng":127.43875}
+{"cid":"osm-w1571414338","name":"고창꽃정원","sido":"전북","sigungu":"고창군","lat":35.42755,"lng":126.70887}
+{"cid":"osm-w1577308241","name":"서생체육공원","sido":"울산","sigungu":"울주군","lat":35.34875,"lng":129.31885}
+{"cid":"osm-w1570476625","name":"포동생활체육공원","sido":"경기","sigungu":"시흥시","lat":37.40385,"lng":126.78459}
+{"cid":"102395","name":"방태산 야영장","sido":"강원","sigungu":"인제군","lat":37.954778,"lng":128.37095,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102395","gc_at":"2026-11-18T00:00:00+09:00"}
+{"cid":"102396","name":"오롯이","sido":"경기","sigungu":"화성시","lat":37.172716,"lng":126.820551,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102396","gc_at":"2026-11-19T00:00:00+09:00"}
+{"cid":"102397","name":"계룡캠핑장","sido":"충남","sigungu":"계룡시","lat":36.243258,"lng":127.255236,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102397","gc_at":"2026-11-18T00:00:00+09:00"}
+{"cid":"102398","name":"산타포레리조트 야영장","sido":"경북","sigungu":"봉화군","lat":36.928634,"lng":129.05494,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102398","gc_at":"2026-11-18T00:00:00+09:00"}
+{"cid":"102399","name":"섬이림 오토캠핑장","sido":"경기","sigungu":"양평군","lat":37.627439,"lng":127.580958,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102399","gc_at":"2026-11-18T00:00:00+09:00"}
+{"cid":"1384","name":"봉식이놀이터","sido":"경북","sigungu":"청도군","lat":35.663201,"lng":128.556068,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1384","gc_at":"2026-11-18T00:00:00+09:00"}
+{"cid":"rf-ixkoe7","name":"두루웰자연휴양림","sido":"강원","sigungu":"철원군","lat":38.22794,"lng":127.3533,"kakao_place_id":"747336303"}
