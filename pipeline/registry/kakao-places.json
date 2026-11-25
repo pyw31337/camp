@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-24T21:17:31.904Z",
+ "generated_at": "2026-11-25T20:53:38.990Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -3524,7 +3524,7 @@
    "homepage": null
   },
   "441": {
-   "checked_at": "2026-11-24T21:17:28.788Z",
+   "checked_at": "2026-11-25T20:53:36.314Z",
    "place": {
     "id": "24943507",
     "name": "글램비글램핑",
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-24T21:17:28.789Z",
+   "checked_at": "2026-11-25T20:53:36.315Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8547,7 +8547,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-24T21:17:28.789Z",
+   "checked_at": "2026-11-25T20:53:36.316Z",
    "place": null,
    "candidates": [
     {
@@ -17856,7 +17856,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-24T21:17:31.356Z",
+   "checked_at": "2026-11-25T20:53:38.480Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46400,7 +46400,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-24T21:17:30.441Z",
+   "checked_at": "2026-11-25T20:53:37.668Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49716,7 +49716,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-24T21:17:30.214Z",
+   "checked_at": "2026-11-25T20:53:37.485Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59858,7 +59858,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-24T21:17:30.670Z",
+   "checked_at": "2026-11-25T20:53:37.906Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -59914,18 +59914,6 @@
      ]
     },
     {
-     "host": "zzims.kr",
-     "url": "http://www.zzims.kr/home/camp_info.html?znum=166",
-     "score": 4,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "캠핑장   청주키즈캠핑장 충청북도 (137) 청주시 (5) 상당구 (3)",
-       "url": "http://www.zzims.kr/home/camp_info.html?znum=166"
-      }
-     ]
-    },
-    {
      "host": "starscore.kr",
      "url": "https://www.starscore.kr/places/chungbuk/5230",
      "score": 4,
@@ -59934,6 +59922,18 @@
       {
        "title": "수암골전망대 별보기 좋은 곳",
        "url": "https://www.starscore.kr/places/chungbuk/5230"
+      }
+     ]
+    },
+    {
+     "host": "zzims.kr",
+     "url": "http://www.zzims.kr/home/camp_info.html?znum=166",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠핑장   청주키즈캠핑장 충청북도 (137) 청주시 (5) 상당구 (3)",
+       "url": "http://www.zzims.kr/home/camp_info.html?znum=166"
       }
      ]
     }
@@ -63119,7 +63119,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-24T21:17:30.744Z",
+   "checked_at": "2026-11-25T20:53:38.014Z",
    "place": null,
    "candidates": [
     {
@@ -64716,7 +64716,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-24T21:17:30.230Z",
+   "checked_at": "2026-11-25T20:53:37.498Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76891,7 +76891,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-24T21:17:31.401Z",
+   "checked_at": "2026-11-25T20:53:38.534Z",
    "place": null,
    "candidates": [
     {
@@ -81214,7 +81214,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-24T21:17:29.763Z",
+   "checked_at": "2026-11-25T20:53:37.074Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83181,7 +83181,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-24T21:17:30.280Z",
+   "checked_at": "2026-11-25T20:53:37.601Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -83221,18 +83221,6 @@
       {
        "title": "골든쌔들 캠핑장 예약·주소·시설",
        "url": "https://carcare.smarthow.net/camping/101269"
-      }
-     ]
-    },
-    {
-     "host": "dokdokplace.kr",
-     "url": "https://dokdokplace.kr/stores/i2/i201/i20101/gyeonggi-do/yangpyeong-gun/",
-     "score": 4,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "경기도 양평군 백반 한정식 상가 목록",
-       "url": "https://dokdokplace.kr/stores/i2/i201/i20101/gyeonggi-do/yangpyeong-gun/"
       }
      ]
     },
@@ -88515,7 +88503,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-24T21:17:29.974Z",
+   "checked_at": "2026-11-25T20:53:37.247Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95287,7 +95275,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-24T21:17:30.669Z",
+   "checked_at": "2026-11-25T20:53:37.886Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96216,7 +96204,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-24T21:17:29.763Z",
+   "checked_at": "2026-11-25T20:53:37.084Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114605,7 +114593,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-24T21:17:31.199Z",
+   "checked_at": "2026-11-25T20:53:38.426Z",
    "place": null,
    "candidates": [
     {
@@ -114754,7 +114742,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-24T21:17:31.123Z",
+   "checked_at": "2026-11-25T20:53:38.287Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115571,7 +115559,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-24T21:17:31.134Z",
+   "checked_at": "2026-11-25T20:53:38.328Z",
    "place": null,
    "candidates": [
     {
@@ -118566,7 +118554,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-24T21:17:30.913Z",
+   "checked_at": "2026-11-25T20:53:38.073Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
@@ -207656,7 +207644,7 @@
    "homepage": null
   },
   "loc-872363c1": {
-   "checked_at": "2026-11-24T21:17:28.765Z",
+   "checked_at": "2026-11-25T20:53:36.281Z",
    "place": {
     "id": "664000785",
     "name": "범바위포레스트",

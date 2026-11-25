@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T21:22:29.601Z",
+  "generated_at": "2026-11-25T20:58:44.170Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -28,7 +28,7 @@
       "status": "OK",
       "name": "글램비글램핑",
       "url": "http://www.glambcamp.com/",
-      "checked_at": "2026-11-24T21:23:23.232Z",
+      "checked_at": "2026-11-25T20:59:37.055Z",
       "pages": [
         "http://www.glambcamp.com/",
         "https://www.glambcamp.com/information",
@@ -429,7 +429,7 @@
       "status": "OK",
       "name": "느티나무 캠핑장",
       "url": "https://theneuti.imweb.me/",
-      "checked_at": "2026-11-24T21:22:51.955Z",
+      "checked_at": "2026-11-25T20:59:05.818Z",
       "pages": [
         "https://theneuti.imweb.me/",
         "https://theneuti.imweb.me/faq",
@@ -2681,7 +2681,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-11-24T21:22:59.316Z",
+      "checked_at": "2026-11-25T20:59:13.130Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
@@ -3477,7 +3477,7 @@
       "status": "OK",
       "name": "범바위포레스트",
       "url": "https://link.inpock.co.kr/bumbawi",
-      "checked_at": "2026-11-24T21:23:24.772Z",
+      "checked_at": "2026-11-25T20:59:38.696Z",
       "pages": [
         "https://link.inpock.co.kr/bumbawi"
       ],
