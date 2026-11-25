@@ -962,9 +962,14 @@ const origAttr = (u) => { const v = photoUrl(u); return photoView(u) !== v ? ` d
 // 그 사진은 이번 방문 동안 깨진 사진(DEAD)으로 기억해 다음 화면부터 빼고, 지금 칸은 비운 채 둔다(다른 사진·R2 사본이 앞에 온다).
 document.addEventListener("error", (e) => {
   const im = e.target;
-  if (!(im instanceof HTMLImageElement) || !im.dataset.orig) return;
-  const o = im.dataset.orig; im.removeAttribute("data-orig"); e.stopImmediatePropagation();
-  DEAD.add(o); im.removeAttribute("srcset"); im.classList.add("img-gone"); im.closest(".td-main, .car-single, .tr-ph")?.classList.add("img-gone");
+  if (!(im instanceof HTMLImageElement)) return;
+  if (im.dataset.orig) {
+    const o = im.dataset.orig; im.removeAttribute("data-orig"); e.stopImmediatePropagation();
+    DEAD.add(o); im.removeAttribute("srcset"); im.classList.add("img-gone"); im.closest(".td-main, .car-single, .tr-ph")?.classList.add("img-gone");
+    return;
+  }
+  im.classList.add("img-gone");
+  im.closest(".layout-cand, .media-card, .sp-thumb-wrap, .layout-mobile-item, .pl-thumb-wrap, .layout-single-wrap")?.classList.add("is-broken");
 }, true);
 function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320px" } = {}) {
   const src = photoView(u), high = photoHiUrl(u);
@@ -5734,7 +5739,7 @@ function homeView() {
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
     const isWp = key === "WATER_PLAY";
-    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false" referrerpolicy="no-referrer" onerror="this.style.display='none';">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/OPEN">더보기 ${ic("right")}</a></div></div>
@@ -6312,7 +6317,7 @@ function bindList() {
 function themesView() {
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
-    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false">${closed ? '<span class="theme-closed-badge">운영종료</span>' : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false" referrerpolicy="no-referrer" onerror="this.style.display='none';">${closed ? '<span class="theme-closed-badge">운영종료</span>' : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
 
   return `<section class="themes-page"><header class="themes-head shell"><h1>캠핑 테마별 <em>캠핑장 찾기</em></h1><p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p></header><div class="theme-grid shell">${cards}</div></section>`;
@@ -8174,7 +8179,7 @@ const thumbImg = (u, alt = "") => { const hi = hiThumb(u); return `<img src="${e
 const BAD_THUMB = /blogpfthumb|profile|default|favicon|logo|ssl\.pstatic\.net\/static|og_image_default|noimage|blank\.gif/i;
 const apiThumb = (x) => { const t = String(x?.thumb ?? ""); return /^https:\/\//.test(t) && !BAD_THUMB.test(t) ? t : null; };
 function thumbLinks(list, label) {
-  return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
+  return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('a')?.remove();"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
 }
 function operatorMediaHtml(d) {
   const imgs = (d?.operator_media?.images ?? []).filter((x) => x.url).slice(0, 8);
@@ -8225,7 +8230,7 @@ function layoutHtml(d, c) {
     ${items.map((x, i) => {
       const imgUrl = x.img || x.thumb;
       return `<button type="button" class="layout-mobile-item" data-layout-open="${i}" aria-label="시설 배치도 ${i + 1} 크게 보기">
-        <img src="${esc(imgUrl)}" alt="시설 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+        <img src="${esc(imgUrl)}" alt="시설 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'&&'${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
         <span>${i + 1} / ${items.length}</span>
       </button>`;
     }).join("")}
@@ -8242,7 +8247,7 @@ function layoutHtml(d, c) {
       ${mobileRail([officialImg, ...candidates])}
       <div class="layout-single-wrap">
         <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="고캠핑 공식 시설 배치도 원본 크게 보기">
-          <img src="${esc(mainImgUrl)}" alt="고캠핑 공식 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(officialImg.thumb)}'){this.src='${esc(officialImg.thumb)}'}">
+          <img src="${esc(mainImgUrl)}" alt="고캠핑 공식 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(officialImg.thumb)}'&&'${esc(officialImg.thumb)}'){this.src='${esc(officialImg.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
           <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
         </button>
       </div>
@@ -8255,7 +8260,7 @@ function layoutHtml(d, c) {
             return `
             <div class="layout-cand"><button type="button" class="layout-cand-btn" data-layout-open="${i + 1}" aria-label="참고 시설배치도 ${i + 1} 크게 보기">
               <div class="layout-cand-photo">
-                <img src="${esc(imgUrl)}" alt="참고 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+                <img src="${esc(imgUrl)}" alt="참고 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'&&'${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
                 <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
               </div>
               <div class="layout-cand-info">
@@ -8282,7 +8287,7 @@ function layoutHtml(d, c) {
       ${mobileRail([single])}
       <div class="layout-single-wrap">
         <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="추정 시설 배치도 원본 크게 보기">
-          <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}">
+          <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'&&'${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
           <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
         </button>
         ${srcIcon(single, "top")}
@@ -8303,7 +8308,7 @@ function layoutHtml(d, c) {
           return `
           <div class="layout-cand"><button type="button" class="layout-cand-btn" data-layout-open="${i}" aria-label="시설배치도 추정 후보 ${i + 1} 원본 크게 보기">
             <div class="layout-cand-photo">
-              <img src="${esc(imgUrl)}" alt="배치도 후보 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+              <img src="${esc(imgUrl)}" alt="배치도 후보 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'&&'${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
               <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
             </div>
             <div class="layout-cand-info">
