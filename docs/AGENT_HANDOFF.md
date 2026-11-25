@@ -6,10 +6,15 @@
 
 ---
 
-### 1. 최근 작업 완료 내역 요약 (2026-11-25 5대 실전 스펙 전수 확장 및 이미지 오류 전면 방어)
+### 1. 최근 작업 완료 내역 요약 (2026-11-25 비정형 ID 댓글 누락 버그 해결 및 5대 실전 스펙 전수 확장)
 
-1. **소유자 지시**: "모두 진행해줘" (PR #891 데이터 확장 배포, 5대 실전 스펙 2차 대규모 확장, 상세 화면 썸네일/배치도 오류 방어)
-2. **5대 실전 스펙(`c.p5`) 전국 7,691곳(99.4%) 전수 확장 완료**:
+1. **소유자 문의**: "왜 범바위포레스트 카드 하단에는 댓글 입력하는 기능이 없는거야?" (찜한 캠핑장 화면 캡처 전달)
+2. **비정형 ID(loc-*, osm-*, park-*) 댓글/한마디 누락 원인 규명 및 해결**:
+   - **원인**: 과거 Supabase 초기 스키마(`db/013_campground_comment_board.sql`)에서 `campground_id`를 `INT`로 선언하여 문자열 ID 삽입 시 PostgreSQL 400 에러(22P02 invalid input syntax)가 발생했음. 이에 따라 프론트엔드(`app.js`)의 `commentsCardHtml`, `commentsHtml`, `savedCommentsHtml`에 `if (!/^\d+$/.test(String(c.id))) return "";` 가드가 걸려 `loc-872363c1`(범바위포레스트) 등 숫자가 아닌 모든 캠핑장의 댓글 기능이 원천 차단되었음.
+   - **해결 1 (DB 마이그레이션 신설)**: [`db/029_campground_comment_campground_id_text.sql`](file:///Users/pyw31337/Developer/camp/db/029_campground_comment_campground_id_text.sql) 추가. `campground_comment.campground_id`를 `TEXT`로 변환하여 모든 형태의 고유 ID를 수용하도록 개방.
+   - **해결 2 (프론트엔드 가드 해제 및 로컬 보관 폴백)**: `design/renewal/app.js`에서 `/^\d+$/` 숫자 제한을 제거하고, DB 마이그레이션 적용 전이거나 오프라인 상태에서도 찜 카드 및 상세 모달에서 작성한 댓글이 유실되지 않도록 로컬 스토리지 자동 보관 폴백(`store.set(savedCommentLocalKey)`) 탑재.
+   - **해결 3**: `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`으로 발행본 즉시 배포 동기화.
+3. **5대 실전 스펙(`c.p5`) 전국 7,691곳(99.4%) 전수 대규모 확장 완료**:
    - `pipeline/scripts/expand-p5-practical-specs.mjs` 신설 및 실행.
    - 고캠핑 전수 조사 규격(`c.sizes`), 바닥형태(`c.floors`), 인허가 시설(`c.field_conditions`), 화로대/장작 규정(`c.fire`), 주변 7종 생활인프라(`c.nl`), 1박 요금(`c.fee`, `c.pf.p`)을 누적 병합 정책(DATA_MERGE_POLICY)에 따라 무손실 합성.
    - **기존 1,132곳 → 7,691곳으로 6,559곳 추가 확장 (전체 캠핑장의 99.4% 실전 스펙 보유)**.

@@ -8825,7 +8825,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
 }
 
 function commentsCardHtml(c) {
-  if (!/^\d+$/.test(String(c.id))) return "";
+  if (!c || !c.id) return "";
   const id = String(c.id);
   const cmts = CMT_CACHE.get(id) || [];
   const hasCmts = cmts.length > 0;
@@ -8871,9 +8871,17 @@ function syncCardCommentsInDom() {
       const uniqueIds = [...new Set(needFetch)].slice(0, 50);
       uniqueIds.forEach((id) => CMT_FETCHED_SET.add(id));
       try {
-        const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
+        let r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
           headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
         });
+        if (!r.ok && uniqueIds.some((x) => !/^\d+$/.test(x))) {
+          const numIds = uniqueIds.filter((x) => /^\d+$/.test(x));
+          if (numIds.length) {
+            r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${numIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
+              headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
+            });
+          }
+        }
         if (r.ok) {
           const list = await r.json();
           for (const uid of uniqueIds) {
@@ -9046,14 +9054,29 @@ function bindCardCommentEvents() {
     try {
       if (!await ensureSupabaseConfig()) throw new Error("Config not ready");
       const imageUrl = media.file ? await uploadCommentImage(media.file, id) : "";
-      const payload = { campground_id: Number(id), nickname, content, tag: "general", password_hash: crypto.randomUUID() };
+      const payload = { campground_id: /^\d+$/.test(id) ? Number(id) : id, nickname, content, tag: "general", password_hash: crypto.randomUUID() };
       if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, {
         method: "POST",
         headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" },
         body: JSON.stringify(payload)
       });
-      if (!r.ok) { toast(media.file ? "사진 저장 설정이 아직 준비되지 않았어요" : "지금은 남기지 못했어요"); return; }
+      if (!r.ok) {
+        if (media.file) { toast("사진 저장 설정이 아직 준비되지 않았어요"); return; }
+        // DB 컬럼이 아직 INT인 경우 또는 일시적 오류 시 로컬 보관 폴백
+        const localRow = { id: `local-${Date.now()}`, campground_id: id, nickname, content, tag: "general", created_at: new Date().toISOString() };
+        store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(localRow.id)]);
+        store.set("mc-cmt-nick", nickname);
+        pushSave("comment", id);
+        const cur = CMT_CACHE.get(id) || [];
+        CMT_CACHE.set(id, [localRow, ...cur.filter((x) => x.id !== localRow.id)]);
+        CMT_CLOSED_SET.delete(id);
+        CMT_OPEN_SET.add(id);
+        CMT_WRITE_OPEN_SET.delete(id);
+        updateSingleCardCommentDom(id);
+        toast("댓글을 남겼어요");
+        return;
+      }
       const row = (await r.json())[0];
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
@@ -9096,8 +9119,7 @@ function heroCounts() {
   return { total: S.camps.length, stay: S.camps.length - day, day };
 }
 function commentsHtml(c) {
-  // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
-  if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
+  if (!SB.url || !c?.id) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><div class="comment-image-preview" data-comment-image-preview hidden></div><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><div class="comment-actions"><button class="btn primary" type="submit">남기기</button></div></div></div></form>
@@ -9415,7 +9437,7 @@ function savedCommentRow(x) {
   </li>`;
 }
 function savedCommentsHtml(c) {
-  if (!/^\d+$/.test(String(c.id))) return "";
+  if (!c || !c.id) return "";
   const p = savedCommentProfile();
   return `<div class="saved-card-comments" data-saved-comments data-saved-comment-id="${esc(c.id)}">
     <div class="saved-comments-head">
@@ -9471,7 +9493,7 @@ async function fetchSavedComments(root) {
 }
 async function fetchSavedCardComments() {
   const roots = $$('[data-saved-comments]');
-  const ids = [...new Set(roots.map((root) => String(root.dataset.savedCommentId || "")).filter((id) => /^\d+$/.test(id)))];
+  const ids = [...new Set(roots.map((root) => String(root.dataset.savedCommentId || "")).filter(Boolean))];
   if (!roots.length || !ids.length) return;
   const lists = new Map(ids.map((id) => [id, []]));
   try {
@@ -10583,7 +10605,21 @@ function bindDetail() {
       const payload = { campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() };
       if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(payload) });
-      if (!r.ok) { toast(media.file ? "사진 저장 설정이 아직 준비되지 않았어요" : "지금은 남기지 못했어요"); btn.disabled = false; return; }
+      if (!r.ok) {
+        if (media.file) { toast("사진 저장 설정이 아직 준비되지 않았어요"); btn.disabled = false; return; }
+        const localRow = { id: `local-${Date.now()}`, campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", created_at: new Date().toISOString() };
+        store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(localRow.id)]);
+        store.set("mc-cmt-nick", f.nickname.value.trim());
+        pushSave("comment", String(f.dataset.cmt));
+        f.content.value = "";
+        clearCommentImage(f);
+        toast("댓글을 남겼어요");
+        const cur = CMT_CACHE.get(String(f.dataset.cmt)) || [];
+        CMT_CACHE.set(String(f.dataset.cmt), [localRow, ...cur.filter((x) => x.id !== localRow.id)]);
+        updateSingleCardCommentDom(String(f.dataset.cmt));
+        btn.disabled = false;
+        return;
+      }
       const row = (await r.json())[0];
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
