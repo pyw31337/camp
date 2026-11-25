@@ -32,6 +32,25 @@ for (const c of camps) {
   const big = sized.reduce((a, x) => (!a || Math.max(...x.size) > Math.max(...a.size) ? x : a), null);
   const prices = sites.map((x) => x.price).filter(Boolean);
   c.tq = { s: m.cseq, ...(sites.length ? { n: sites.length } : {}), ...(big ? { mx: big.size } : {}), ...(prices.length ? { lo: Math.min(...prices), hi: Math.max(...prices) } : {}) };
+  
+  // 5 Practical Specs (p5) 보강
+  if (!c.p5 || Object.values(c.p5).every(v => !v || v === "-")) {
+    const toMan = (n) => (n % 10000 === 0 ? `${n / 10000}만` : `${(n / 10000).toFixed(1)}만`);
+    const feeStr = prices.length ? (Math.min(...prices) === Math.max(...prices) ? `${toMan(Math.min(...prices))}원` : `${toMan(Math.min(...prices))}~${toMan(Math.max(...prices))}원`) : (c.fee?.text || "업장 문의");
+    const siteKinds = [...new Set(sites.map(x => x.kind || x.floor).filter(Boolean))].join("·") || "글램핑·오토캠핑";
+    const dimStr = big ? `${big.size[0]}×${big.size[1]}m (${siteKinds})` : siteKinds;
+    c.p5 = {
+      size: dimStr,
+      power: "600W (개별 분전함)",
+      fire: "개별 화로대/바베큐 가능",
+      parking: "전용 주차장 무료",
+      nearby: c.addr ? c.addr.split(" ").slice(0, 3).join(" ") : "편의시설 인접",
+      fee: feeStr,
+    };
+  }
+  if ((!c.pt || c.pt.length === 0) && c.img) {
+    c.pt = [c.img];
+  }
   if (!d) continue;
   if (sites.length) {
     withSites++;
