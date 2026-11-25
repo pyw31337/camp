@@ -7518,8 +7518,20 @@ function openProductModal(prod) {
   if (!prod) return;
   document.getElementById("sp-modal")?.remove();
   const photos = prod.photos || (prod.img ? [prod.img] : []);
-  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy" referrerpolicy="no-referrer">`).join("");
+  const gallery = photos.map((u, i) => `<button type="button" class="sp-gallery-btn" data-sp-img-idx="${i}" aria-label="${esc(prod.name)} 사진 ${i + 1} 크게 보기"><img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy" referrerpolicy="no-referrer"><span class="sp-gallery-zoom-badge">${ic("search")}</span></button>`).join("");
   document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal"><div class="sp-modal-content"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button><h3 class="sp-modal-title">${esc(prod.name)}</h3><div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}</div></div>`);
+  const modal = document.getElementById("sp-modal");
+  modal?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-sp-img-idx]");
+    if (btn) {
+      e.stopPropagation();
+      const idx = Number(btn.getAttribute("data-sp-img-idx")) || 0;
+      openLightboxUrls(photos.map((u, i) => ({
+        src: u,
+        cap: `${prod.name} 실물 사진 (${i + 1}/${photos.length})`
+      })), idx, `${prod.name} 실물 사진`);
+    }
+  });
 }
 function siteProductsHtml(c, d) {
   const prods = d?.site_products || [];
