@@ -6118,7 +6118,7 @@
    "name": "글램비글램핑",
    "status": "FETCH_FAILED",
    "url": "https://www.glambcamp.com",
-   "checked_at": "2026-11-25T20:54:40.256Z",
+   "checked_at": "2026-11-26T20:22:59.153Z",
    "error": "403"
   },
   "448": {
@@ -10775,7 +10775,7 @@
    "name": "느티나무 캠핑장",
    "status": "NO_RELEVANT_TEXT",
    "url": "https://campblox.co.kr/home",
-   "checked_at": "2026-11-25T20:54:40.222Z",
+   "checked_at": "2026-11-26T20:22:59.127Z",
    "pages": [
     "https://campblox.co.kr/home"
    ],
@@ -39603,7 +39603,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-25T20:54:42.296Z",
+   "checked_at": "2026-11-26T20:23:01.311Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39909,10 +39909,10 @@
      }
     },
     {
-     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 794",
+     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 795",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 794"
+      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 795"
      }
     },
     {
@@ -39951,10 +39951,10 @@
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1232",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1233",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1232"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1233"
      }
     },
     {
@@ -110851,7 +110851,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-25T20:54:40.254Z",
+   "checked_at": "2026-11-26T20:22:59.151Z",
    "error": "404"
   },
   "100126": {
@@ -176990,7 +176990,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-25T20:54:42.342Z",
+   "checked_at": "2026-11-26T20:23:01.950Z",
    "error": "403"
   },
   "101270": {
@@ -225560,15 +225560,10 @@
   },
   "102221": {
    "name": "WonderWood Glamping(원더우드 글램핑)",
-   "status": "DISCOVERED_NOT_OPERATOR",
-   "url": "https://campingfriend.co.kr/listing-camp-detail/9414",
-   "checked_at": "2026-11-25T20:54:42.285Z",
-   "discovered": true,
-   "check": {
-    "ok": false,
-    "named": true,
-    "rules": 2
-   }
+   "status": "FETCH_FAILED",
+   "url": "https://camping.hansangsoo.com/camp/102221.html",
+   "checked_at": "2026-11-26T20:23:01.264Z",
+   "error": "403"
   },
   "102222": {
    "name": "머무름 캠핑",
@@ -225957,7 +225952,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-25T20:54:40.255Z",
+    "at": "2026-11-26T20:22:59.152Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -263073,17 +263068,67 @@
   },
   "loc-872363c1": {
    "name": "범바위포레스트",
-   "status": "DISCOVERED_NOT_OPERATOR",
+   "status": "OK",
    "url": "https://link.inpock.co.kr/bumbawi",
-   "checked_at": "2026-11-25T20:54:43.816Z",
+   "checked_at": "2026-11-26T20:23:02.387Z",
    "discovered": true,
-   "check": {
-    "ok": false,
-    "named": true,
-    "rules": 0
-   }
+   "pages": [
+    "https://link.inpock.co.kr/bumbawi",
+    "https://www.graega.com/rooms/7135"
+   ],
+   "snippets": [
+    {
+     "text": "오토캠핑.글램핑&카라반.BBQ캠크닉.애견캠핑장",
+     "url": "https://link.inpock.co.kr/bumbawi",
+     "locator": {
+      "text": "오토캠핑.글램핑&카라반.BBQ캠크닉.애견캠핑장"
+     }
+    },
+    {
+     "text": "오토캠핑 예약하기[그래가]",
+     "url": "https://link.inpock.co.kr/bumbawi",
+     "locator": {
+      "text": "오토캠핑 예약하기[그래가]"
+     }
+    },
+    {
+     "text": "글램핑&카라반&무박캠크닉 예약하기[네이버]",
+     "url": "https://link.inpock.co.kr/bumbawi",
+     "locator": {
+      "text": "글램핑&카라반&무박캠크닉 예약하기[네이버]"
+     }
+    },
+    {
+     "text": "범바위포레스트 네이버카페[오토캠핑]",
+     "url": "https://link.inpock.co.kr/bumbawi",
+     "locator": {
+      "text": "범바위포레스트 네이버카페[오토캠핑]"
+     }
+    },
+    {
+     "text": "먼저 예약하고, 느긋하게 퇴실하세요 1개월 우선예약부터 오후 4시 퇴실까지.",
+     "url": "https://www.graega.com/rooms/7135",
+     "locator": {
+      "text": "먼저 예약하고, 느긋하게 퇴실하세요 1개월 우선예약부터 오후 4시 퇴실까지."
+     }
+    },
+    {
+     "text": "평일 캠핑, 1만원으로 가볍게 떠나요 부담은 줄이고, 캠핑의 여유는 더 넉넉하게.",
+     "url": "https://www.graega.com/rooms/7135",
+     "locator": {
+      "text": "평일 캠핑, 1만원으로 가볍게 떠나요 부담은 줄이고, 캠핑의 여유는 더 넉넉하게."
+     }
+    },
+    {
+     "text": "이용약관 | 개인정보처리방침 | 공지사항",
+     "url": "https://www.graega.com/rooms/7135",
+     "locator": {
+      "text": "이용약관 | 개인정보처리방침 | 공지사항"
+     }
+    }
+   ]
   }
  },
- "generated_at": "2026-11-25T20:54:55.169Z",
+ "generated_at": "2026-11-26T20:23:36.904Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
