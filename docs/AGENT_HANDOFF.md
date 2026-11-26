@@ -1,12 +1,63 @@
 # 인수인계
 
-## 📢 전체 에이전트 인수인계: 캠핑장 카드 썸네일 누락 복구 및 네이버 CDN 403 차단 영구 해결 · PR #729·#443 메인 통합 완료 (2026-11-24 기준)
+## 📢 전체 에이전트 인수인계: 5대 실전 스펙(p5) 7,691곳(99.4%) 전수 확장 및 상세화면 이미지 오류 전면 방어 완료 (2026-11-25 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
 
 ---
 
-### 1. 최근 작업 완료 내역 요약 (2026-11-24 썸네일 대량 누락 복구 및 네이버 CDN 403 영구 해결, PR #729·#443 통합)
+### 1. 최근 작업 완료 내역 요약 (2026-11-25 비정형 ID 댓글 누락 버그 해결 및 5대 실전 스펙 전수 확장)
+
+1. **소유자 문의**: "왜 범바위포레스트 카드 하단에는 댓글 입력하는 기능이 없는거야?" (찜한 캠핑장 화면 캡처 전달)
+2. **비정형 ID(loc-*, osm-*, park-*) 댓글/한마디 누락 원인 규명 및 해결**:
+   - **원인**: 과거 Supabase 초기 스키마(`db/013_campground_comment_board.sql`)에서 `campground_id`를 `INT`로 선언하여 문자열 ID 삽입 시 PostgreSQL 400 에러(22P02 invalid input syntax)가 발생했음. 이에 따라 프론트엔드(`app.js`)의 `commentsCardHtml`, `commentsHtml`, `savedCommentsHtml`에 `if (!/^\d+$/.test(String(c.id))) return "";` 가드가 걸려 `loc-872363c1`(범바위포레스트) 등 숫자가 아닌 모든 캠핑장의 댓글 기능이 원천 차단되었음.
+   - **해결 1 (DB 마이그레이션 신설)**: [`db/029_campground_comment_campground_id_text.sql`](file:///Users/pyw31337/Developer/camp/db/029_campground_comment_campground_id_text.sql) 추가. `campground_comment.campground_id`를 `TEXT`로 변환하여 모든 형태의 고유 ID를 수용하도록 개방.
+   - **해결 2 (프론트엔드 가드 해제 및 로컬 보관 폴백)**: `design/renewal/app.js`에서 `/^\d+$/` 숫자 제한을 제거하고, DB 마이그레이션 적용 전이거나 오프라인 상태에서도 찜 카드 및 상세 모달에서 작성한 댓글이 유실되지 않도록 로컬 스토리지 자동 보관 폴백(`store.set(savedCommentLocalKey)`) 탑재.
+   - **해결 3**: `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`으로 발행본 즉시 배포 동기화.
+3. **5대 실전 스펙(`c.p5`) 전국 7,691곳(99.4%) 전수 대규모 확장 완료**:
+   - `pipeline/scripts/expand-p5-practical-specs.mjs` 신설 및 실행.
+   - 고캠핑 전수 조사 규격(`c.sizes`), 바닥형태(`c.floors`), 인허가 시설(`c.field_conditions`), 화로대/장작 규정(`c.fire`), 주변 7종 생활인프라(`c.nl`), 1박 요금(`c.fee`, `c.pf.p`)을 누적 병합 정책(DATA_MERGE_POLICY)에 따라 무손실 합성.
+   - **기존 1,132곳 → 7,691곳으로 6,559곳 추가 확장 (전체 캠핑장의 99.4% 실전 스펙 보유)**.
+3. **상세 페이지 이미지 썸네일·배치도 오류 전면 방어(Fallback 강화)**:
+   - `design/renewal/app.js`: 전역 `error` 이벤트 리스너를 강화하여 `data-orig` 없는 일반/배치도/사이트/후기 이미지도 실패 시 `.img-gone` 처리 및 부모 요소에 `.is-broken` 부여.
+   - 테마 카드, 썸네일 링크, 배치도 후보 이미지의 `onerror` 핸들러 보강 및 `referrerpolicy="no-referrer"` 전면 적용.
+   - `design/renewal/style.css`: `.layout-cand.is-broken, .layout-mobile-item.is-broken, .media-card.is-broken { display: none !important; }` 추가로 깨진 이미지 회색 박스 원천 제거.
+   - `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`으로 발행본 100% 동기화.
+4. **카탈로그 샤드 분할 및 파이프라인 검증**:
+   - `scripts/split-catalog.mjs`: `v=e40b2a515514` (lite 12.5MB + 64 shards) 분할 완료.
+   - `publish-sanity.mjs --check`: 100% 통과.
+   - `npm --prefix pipeline test`: 645개 전체 테스트 무결점 통과 (0 fail).
+5. **PR #891 생성**:
+   - 브랜치 `data/expand-camping-platforms` 기반 PR #891 생성 및 CI 검사 진행.
+
+---
+
+### 2. 이전 작업 완료 내역 요약 (2026-11-24 캠핑 데이터 대규모 확장 완료)
+
+1. **소유자 지시**: "데이터 확장 모두 진행해줘"
+2. **캠핑톡(campingtalk.me) 전수 수집 및 카탈로그 병합 완료**:
+   - `pipeline/lib/campingtalk.mjs` 및 `pipeline/scripts/sync-campingtalk.mjs` 신설.
+   - sitemap 기반 323개 전체 캠핑장의 schema.org JSON-LD 구조화 데이터, 연락처, `img-cdn.campingtalk.net` 고화질 사진 및 운영자 상세 소개글 전수 수집 (`pipeline/registry/campingtalk.json`).
+   - 카탈로그 매칭(134곳) 및 공식 예약 채널(`campingtalk`), 정품 사진(`c.pt`), 전화번호(`c.tel`), 5대 실전 스펙(`c.p5`) 누적 병합.
+3. **공공 통합예약 포털 (숲나들e & 국립공원공단 KNPS) 전수 연계 완료**:
+   - `pipeline/scripts/sync-public-portals.mjs` 신설 및 실행.
+   - **자연휴양림 199곳**: 정부 공식 포털 `foresttrip` 채널(100% 무료 공식 예약), 1~3.5만원대 1박 요금, 숲속 야영데크 규격, 산불조심기간 장작·숯불 제한 규정, 카트 주차 안내 보강.
+   - **국립공원 야영장 14곳**: 국립공원공단 `knps` 채널, 1.7~2.2만원대 1박 요금, 탄소중립 에코 야영지, 국립공원 전 구역 장작 금지 및 숯/버너 가능 안내 보강.
+4. **그래가(graega.com) 86개 파트너 캠핑장 및 175개 노지 수집 완료**:
+   - `pipeline/lib/graega.mjs` 및 `pipeline/scripts/sync-graega.mjs` 실행.
+   - 83곳 매칭 및 5대 실전 스펙(`c.p5`), 구역별 상세 요금표(`c.sitePricingTable`), CloudFront 고화질 사진(`c.pt`), 배치도(`c.siteMapUrl`), 환불 규정 및 입퇴실 시간 누적 병합.
+   - `범바위포레스트`(`loc-872363c1`), `한스빌리지`(`loc-dced66f8`) 등 완벽 검증.
+5. **땡큐캠핑(ThankQ) 513곳 실전 스펙 및 사진 보강**:
+   - `pipeline/scripts/build-thankq-facts.mjs` 실행으로 `글램비글램핑`(`441`) 등 땡큐캠핑 연동 513개 캠핑장에 대해 5대 실전 스펙 및 공식 썸네일 누적 보강.
+6. **카탈로그 전면 분할 및 무결점 검증**:
+   - `scripts/split-catalog.mjs`: full 19.3MB → lite 12.0MB + 64 shards 분할 완료.
+   - **확장 현황**: 5대 실전 스펙(`c.p5`) 보유 캠핑장 **1,132곳**, 구조화된 공식 예약 채널 보유 캠핑장 **2,860곳**으로 대폭 확대.
+   - `publish-sanity.mjs --check`: 상식 검사 통과.
+   - `npm --prefix pipeline test`: 645개 전체 테스트 무결점 통과 (0 fail).
+
+---
+
+### 2. 이전 작업 완료 내역 요약 (2026-11-24 썸네일 대량 누락 복구 및 네이버 CDN 403 영구 해결, PR #729·#443 통합)
 
 1. **소유자 지시**: "모두 진행해줘. 그리고 이미지 썸네일 안나오는게 너무 많아. 어떻게 된거야? 모두 진행해줘." (캠프그레잇 `102145` 및 범바위포레스트 상세/찜 카드 캡처 전달)
 2. **썸네일 대량 누락의 2대 근본 원인 규명 및 해결**:

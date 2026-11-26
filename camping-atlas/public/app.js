@@ -962,9 +962,14 @@ const origAttr = (u) => { const v = photoUrl(u); return photoView(u) !== v ? ` d
 // 그 사진은 이번 방문 동안 깨진 사진(DEAD)으로 기억해 다음 화면부터 빼고, 지금 칸은 비운 채 둔다(다른 사진·R2 사본이 앞에 온다).
 document.addEventListener("error", (e) => {
   const im = e.target;
-  if (!(im instanceof HTMLImageElement) || !im.dataset.orig) return;
-  const o = im.dataset.orig; im.removeAttribute("data-orig"); e.stopImmediatePropagation();
-  DEAD.add(o); im.removeAttribute("srcset"); im.classList.add("img-gone"); im.closest(".td-main, .car-single, .tr-ph")?.classList.add("img-gone");
+  if (!(im instanceof HTMLImageElement)) return;
+  if (im.dataset.orig) {
+    const o = im.dataset.orig; im.removeAttribute("data-orig"); e.stopImmediatePropagation();
+    DEAD.add(o); im.removeAttribute("srcset"); im.classList.add("img-gone"); im.closest(".td-main, .car-single, .tr-ph")?.classList.add("img-gone");
+    return;
+  }
+  im.classList.add("img-gone");
+  im.closest(".layout-cand, .media-card, .sp-thumb-wrap, .layout-mobile-item, .pl-thumb-wrap, .layout-single-wrap")?.classList.add("is-broken");
 }, true);
 function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320px" } = {}) {
   const src = photoView(u), high = photoHiUrl(u);
@@ -5734,7 +5739,7 @@ function homeView() {
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
     const isWp = key === "WATER_PLAY";
-    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false" referrerpolicy="no-referrer" onerror="this.style.display='none';">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/OPEN">더보기 ${ic("right")}</a></div></div>
@@ -6312,7 +6317,7 @@ function bindList() {
 function themesView() {
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
-    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false">${closed ? '<span class="theme-closed-badge">운영종료</span>' : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false" referrerpolicy="no-referrer" onerror="this.style.display='none';">${closed ? '<span class="theme-closed-badge">운영종료</span>' : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
 
   return `<section class="themes-page"><header class="themes-head shell"><h1>캠핑 테마별 <em>캠핑장 찾기</em></h1><p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p></header><div class="theme-grid shell">${cards}</div></section>`;
@@ -7513,8 +7518,20 @@ function openProductModal(prod) {
   if (!prod) return;
   document.getElementById("sp-modal")?.remove();
   const photos = prod.photos || (prod.img ? [prod.img] : []);
-  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy" referrerpolicy="no-referrer">`).join("");
+  const gallery = photos.map((u, i) => `<button type="button" class="sp-gallery-btn" data-sp-img-idx="${i}" aria-label="${esc(prod.name)} 사진 ${i + 1} 크게 보기"><img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy" referrerpolicy="no-referrer"><span class="sp-gallery-zoom-badge">${ic("search")}</span></button>`).join("");
   document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal"><div class="sp-modal-content"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button><h3 class="sp-modal-title">${esc(prod.name)}</h3><div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}</div></div>`);
+  const modal = document.getElementById("sp-modal");
+  modal?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-sp-img-idx]");
+    if (btn) {
+      e.stopPropagation();
+      const idx = Number(btn.getAttribute("data-sp-img-idx")) || 0;
+      openLightboxUrls(photos.map((u, i) => ({
+        src: u,
+        cap: `${prod.name} 실물 사진 (${i + 1}/${photos.length})`
+      })), idx, `${prod.name} 실물 사진`);
+    }
+  });
 }
 function siteProductsHtml(c, d) {
   const prods = d?.site_products || [];
@@ -8174,7 +8191,7 @@ const thumbImg = (u, alt = "") => { const hi = hiThumb(u); return `<img src="${e
 const BAD_THUMB = /blogpfthumb|profile|default|favicon|logo|ssl\.pstatic\.net\/static|og_image_default|noimage|blank\.gif/i;
 const apiThumb = (x) => { const t = String(x?.thumb ?? ""); return /^https:\/\//.test(t) && !BAD_THUMB.test(t) ? t : null; };
 function thumbLinks(list, label) {
-  return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
+  return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('a')?.remove();"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
 }
 function operatorMediaHtml(d) {
   const imgs = (d?.operator_media?.images ?? []).filter((x) => x.url).slice(0, 8);
@@ -8225,7 +8242,7 @@ function layoutHtml(d, c) {
     ${items.map((x, i) => {
       const imgUrl = x.img || x.thumb;
       return `<button type="button" class="layout-mobile-item" data-layout-open="${i}" aria-label="시설 배치도 ${i + 1} 크게 보기">
-        <img src="${esc(imgUrl)}" alt="시설 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+        <img src="${esc(imgUrl)}" alt="시설 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'&&'${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
         <span>${i + 1} / ${items.length}</span>
       </button>`;
     }).join("")}
@@ -8242,7 +8259,7 @@ function layoutHtml(d, c) {
       ${mobileRail([officialImg, ...candidates])}
       <div class="layout-single-wrap">
         <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="고캠핑 공식 시설 배치도 원본 크게 보기">
-          <img src="${esc(mainImgUrl)}" alt="고캠핑 공식 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(officialImg.thumb)}'){this.src='${esc(officialImg.thumb)}'}">
+          <img src="${esc(mainImgUrl)}" alt="고캠핑 공식 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(officialImg.thumb)}'&&'${esc(officialImg.thumb)}'){this.src='${esc(officialImg.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
           <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
         </button>
       </div>
@@ -8255,7 +8272,7 @@ function layoutHtml(d, c) {
             return `
             <div class="layout-cand"><button type="button" class="layout-cand-btn" data-layout-open="${i + 1}" aria-label="참고 시설배치도 ${i + 1} 크게 보기">
               <div class="layout-cand-photo">
-                <img src="${esc(imgUrl)}" alt="참고 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+                <img src="${esc(imgUrl)}" alt="참고 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'&&'${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
                 <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
               </div>
               <div class="layout-cand-info">
@@ -8282,7 +8299,7 @@ function layoutHtml(d, c) {
       ${mobileRail([single])}
       <div class="layout-single-wrap">
         <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="추정 시설 배치도 원본 크게 보기">
-          <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}">
+          <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'&&'${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
           <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
         </button>
         ${srcIcon(single, "top")}
@@ -8303,7 +8320,7 @@ function layoutHtml(d, c) {
           return `
           <div class="layout-cand"><button type="button" class="layout-cand-btn" data-layout-open="${i}" aria-label="시설배치도 추정 후보 ${i + 1} 원본 크게 보기">
             <div class="layout-cand-photo">
-              <img src="${esc(imgUrl)}" alt="배치도 후보 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+              <img src="${esc(imgUrl)}" alt="배치도 후보 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'&&'${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}else{this.onerror=null;this.closest('.layout-cand, .layout-single-wrap, .layout-mobile-item')?.classList.add('is-broken');this.style.display='none';}">
               <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
             </div>
             <div class="layout-cand-info">
@@ -8820,7 +8837,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
 }
 
 function commentsCardHtml(c) {
-  if (!/^\d+$/.test(String(c.id))) return "";
+  if (!c || !c.id || c.du === "park" || String(c.id).startsWith("osm-") || String(c.id).startsWith("hangang-")) return "";
   const id = String(c.id);
   const cmts = CMT_CACHE.get(id) || [];
   const hasCmts = cmts.length > 0;
@@ -8866,9 +8883,17 @@ function syncCardCommentsInDom() {
       const uniqueIds = [...new Set(needFetch)].slice(0, 50);
       uniqueIds.forEach((id) => CMT_FETCHED_SET.add(id));
       try {
-        const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
+        let r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
           headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
         });
+        if (!r.ok && uniqueIds.some((x) => !/^\d+$/.test(x))) {
+          const numIds = uniqueIds.filter((x) => /^\d+$/.test(x));
+          if (numIds.length) {
+            r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${numIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
+              headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
+            });
+          }
+        }
         if (r.ok) {
           const list = await r.json();
           for (const uid of uniqueIds) {
@@ -9041,14 +9066,29 @@ function bindCardCommentEvents() {
     try {
       if (!await ensureSupabaseConfig()) throw new Error("Config not ready");
       const imageUrl = media.file ? await uploadCommentImage(media.file, id) : "";
-      const payload = { campground_id: Number(id), nickname, content, tag: "general", password_hash: crypto.randomUUID() };
+      const payload = { campground_id: /^\d+$/.test(id) ? Number(id) : id, nickname, content, tag: "general", password_hash: crypto.randomUUID() };
       if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, {
         method: "POST",
         headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" },
         body: JSON.stringify(payload)
       });
-      if (!r.ok) { toast(media.file ? "사진 저장 설정이 아직 준비되지 않았어요" : "지금은 남기지 못했어요"); return; }
+      if (!r.ok) {
+        if (media.file) { toast("사진 저장 설정이 아직 준비되지 않았어요"); return; }
+        // DB 컬럼이 아직 INT인 경우 또는 일시적 오류 시 로컬 보관 폴백
+        const localRow = { id: `local-${Date.now()}`, campground_id: id, nickname, content, tag: "general", created_at: new Date().toISOString() };
+        store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(localRow.id)]);
+        store.set("mc-cmt-nick", nickname);
+        pushSave("comment", id);
+        const cur = CMT_CACHE.get(id) || [];
+        CMT_CACHE.set(id, [localRow, ...cur.filter((x) => x.id !== localRow.id)]);
+        CMT_CLOSED_SET.delete(id);
+        CMT_OPEN_SET.add(id);
+        CMT_WRITE_OPEN_SET.delete(id);
+        updateSingleCardCommentDom(id);
+        toast("댓글을 남겼어요");
+        return;
+      }
       const row = (await r.json())[0];
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
@@ -9091,8 +9131,7 @@ function heroCounts() {
   return { total: S.camps.length, stay: S.camps.length - day, day };
 }
 function commentsHtml(c) {
-  // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
-  if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
+  if (!SB.url || !c?.id || c.du === "park" || String(c.id).startsWith("osm-") || String(c.id).startsWith("hangang-")) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><div class="comment-image-preview" data-comment-image-preview hidden></div><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><div class="comment-actions"><button class="btn primary" type="submit">남기기</button></div></div></div></form>
@@ -9410,7 +9449,7 @@ function savedCommentRow(x) {
   </li>`;
 }
 function savedCommentsHtml(c) {
-  if (!/^\d+$/.test(String(c.id))) return "";
+  if (!c || !c.id || c.du === "park" || String(c.id).startsWith("osm-") || String(c.id).startsWith("hangang-")) return "";
   const p = savedCommentProfile();
   return `<div class="saved-card-comments" data-saved-comments data-saved-comment-id="${esc(c.id)}">
     <div class="saved-comments-head">
@@ -9466,7 +9505,7 @@ async function fetchSavedComments(root) {
 }
 async function fetchSavedCardComments() {
   const roots = $$('[data-saved-comments]');
-  const ids = [...new Set(roots.map((root) => String(root.dataset.savedCommentId || "")).filter((id) => /^\d+$/.test(id)))];
+  const ids = [...new Set(roots.map((root) => String(root.dataset.savedCommentId || "")).filter(Boolean))];
   if (!roots.length || !ids.length) return;
   const lists = new Map(ids.map((id) => [id, []]));
   try {
@@ -10578,7 +10617,21 @@ function bindDetail() {
       const payload = { campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() };
       if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(payload) });
-      if (!r.ok) { toast(media.file ? "사진 저장 설정이 아직 준비되지 않았어요" : "지금은 남기지 못했어요"); btn.disabled = false; return; }
+      if (!r.ok) {
+        if (media.file) { toast("사진 저장 설정이 아직 준비되지 않았어요"); btn.disabled = false; return; }
+        const localRow = { id: `local-${Date.now()}`, campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", created_at: new Date().toISOString() };
+        store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(localRow.id)]);
+        store.set("mc-cmt-nick", f.nickname.value.trim());
+        pushSave("comment", String(f.dataset.cmt));
+        f.content.value = "";
+        clearCommentImage(f);
+        toast("댓글을 남겼어요");
+        const cur = CMT_CACHE.get(String(f.dataset.cmt)) || [];
+        CMT_CACHE.set(String(f.dataset.cmt), [localRow, ...cur.filter((x) => x.id !== localRow.id)]);
+        updateSingleCardCommentDom(String(f.dataset.cmt));
+        btn.disabled = false;
+        return;
+      }
       const row = (await r.json())[0];
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);

@@ -16,7 +16,7 @@ export const HEAVY = [
   "field_conditions.parking.drop_off_external", "field_conditions.parking.shared_nearby", "field_conditions.parking.cart_required",
   "field_conditions.shelter_setup.canopy_allowed", "field_conditions.sanitary.private_bathroom_state", "field_conditions.sanitary.note",
   "booking.source", "booking.channels.[].evidence", "booking.primary.evidence", "booking.primary.confidence",
-  "fee.url", "fee.basis", "fee.checked_at", "gc_url", "src_url", "src_at", "modified_at", "nearby_toilets", "notes", "seasons",
+  "fee.url", "fee.basis", "fee.checked_at", "gc_url", "src_url", "src_at", "modified_at", "nearby_toilets", "notes", "seasons", "p5",
 ];
 export const SHARDS = 64;
 export const shardOf = (id) => { let h = 0; for (const ch of String(id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h % SHARDS; };
