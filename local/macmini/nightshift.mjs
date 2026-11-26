@@ -15,6 +15,8 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "../..");
 const home = join(homedir(), ".letscamp");
+const externalVault = "/Volumes/My Passport for Mac/LETS_DATA_VAULT";
+const dataHome = existsSync(externalVault) ? join(externalVault, "services", "camp", "data", "nightshift") : home;
 // launchd는 plist에서 env를 읽지만, 사용자가 README의 명령을 직접 실행할 때도
 // 같은 로컬 비전 모델을 쓰도록 간단한 export 설정을 먼저 적용한다.
 const envFile = join(home, "env");
@@ -23,12 +25,12 @@ if (existsSync(envFile)) for (const raw of readFileSync(envFile, "utf8").split("
   if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^['"]|['"]$/g, "");
 }
 const { budgetOf, clashesWith, idle, isDayOff, kst, pickJob, window } = await import(join(repo, "pipeline/lib/nightshift.mjs"));
-mkdirSync(join(home, "logs"), { recursive: true });
+mkdirSync(join(dataHome, "logs"), { recursive: true });
 const arg = (k) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : null; };
 const DRY = process.argv.includes("--dry-run"), FORCE = arg("--force");
 const readJson = (p, d) => { try { return JSON.parse(readFileSync(p, "utf8")); } catch { return d; } };
 const now = new Date();
-const logFile = join(home, "logs", `${kst(now).ymd}.log`);
+const logFile = join(dataHome, "logs", `${kst(now).ymd}.log`);
 const log = (...a) => { const line = `[${new Date().toISOString()}] ${a.join(" ")}`; console.log(line); appendFileSync(logFile, `${line}\n`); };
 
 // ── 작업 목록(데이터 품질에 도움이 큰 순) ─────────────────────────
@@ -100,7 +102,7 @@ if (!FORCE) {
   const st = idle({ load1: loadavg()[0], cpus: cpus().length, running: running() });
   if (!st.ok) { log(`쉼: ${st.why}`); process.exit(0); }
 }
-const statePath = join(home, "state.json"), state = readJson(statePath, {});
+const statePath = join(dataHome, "state.json"), state = readJson(statePath, readJson(join(home, "state.json"), {}));
 const job = FORCE ? JOBS.find((j) => j.id === FORCE) : pickJob(JOBS, state, { now, minutesLeft: w.minutesLeft, dayOff });
 if (!job) process.exit(0);
 const budget = FORCE ? (job.maxMinutes ?? 120) : budgetOf(job, now, w.minutesLeft) - 10;
@@ -155,7 +157,7 @@ try {
 } finally {
   state[job.id] = { last: new Date().toISOString(), result };
   writeFileSync(statePath, JSON.stringify(state, null, 1));
-  writeFileSync(join(home, "status.json"), JSON.stringify({ at: new Date().toISOString(), job: job.id, result, state }, null, 1));
+  writeFileSync(join(dataHome, "status.json"), JSON.stringify({ at: new Date().toISOString(), job: job.id, result, state }, null, 1));
   try { unlinkSync(lockPath); } catch {}
   log(`마침: ${job.id} → ${result}`);
 }
