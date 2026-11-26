@@ -6287,6 +6287,7 @@
 {"cid":"loc-8b0f48ec","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z","text":"24시간"}
 {"cid":"loc-8b304350","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.912Z","text":"제공"}
 {"cid":"loc-8b304350","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.912Z"}
+{"cid":"loc-08bd2a62","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.936Z"}
 {"cid":"loc-8cbf8d5d","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.892Z"}
 {"cid":"loc-8de605be","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z","text":"제공"}
 {"cid":"loc-8e443ff2","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z","text":"24시간"}
@@ -6355,6 +6356,7 @@
 {"cid":"loc-223f7f77","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.941Z"}
 {"cid":"loc-254ff6ed","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.904Z","text":"제공"}
 {"cid":"loc-270f0648","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.884Z","text":"제공"}
+{"cid":"loc-276f64eb","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.941Z","text":"제공"}
 {"cid":"loc-319f85a5","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z","text":"제공"}
 {"cid":"loc-376c5ae6","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z","text":"제공"}
 {"cid":"loc-388b3215","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.925Z"}
@@ -6369,6 +6371,7 @@
 {"cid":"loc-643ad119","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.865Z"}
 {"cid":"loc-668f7032","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.927Z","text":"제공"}
 {"cid":"loc-668f7032","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.927Z"}
+{"cid":"loc-681d677b","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.977Z"}
 {"cid":"loc-692edcc2","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.879Z","text":"제공"}
 {"cid":"loc-703a9933","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
 {"cid":"loc-703cbe50","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.915Z","text":"제공"}
@@ -6405,6 +6408,7 @@
 {"cid":"loc-4343ec69","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.921Z"}
 {"cid":"loc-5451f197","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.912Z","text":"제공"}
 {"cid":"loc-5454edfd","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.864Z","text":"제공"}
+{"cid":"loc-8808feac","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.882Z"}
 {"cid":"loc-9272d5ad","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.914Z","text":"제공"}
 {"cid":"loc-9272d5ad","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.914Z"}
 {"cid":"loc-9365eb18","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.940Z"}
@@ -6412,6 +6416,7 @@
 {"cid":"loc-9698b60c","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.924Z","text":"제공"}
 {"cid":"loc-9912fc40","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z","text":"제공"}
 {"cid":"loc-9912fc40","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
+{"cid":"loc-17442f58","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.968Z","text":"제공"}
 {"cid":"loc-19053e08","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z","text":"제공"}
 {"cid":"loc-19053e08","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z"}
 {"cid":"loc-25613e93","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.921Z","text":"제공"}
@@ -6473,6 +6478,7 @@
 {"cid":"loc-ad249401","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.946Z","text":"제공"}
 {"cid":"loc-ad249401","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.946Z"}
 {"cid":"loc-ad485920","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z","text":"제공"}
+{"cid":"loc-add1b963","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z","text":"제공"}
 {"cid":"loc-ae1b1524","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z","text":"제공"}
 {"cid":"loc-ae9e66b5","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z","text":"제공"}
 {"cid":"loc-ae9e66b5","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z"}
@@ -6483,6 +6489,7 @@
 {"cid":"loc-b6e8b796","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.883Z"}
 {"cid":"loc-b18d4095","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
 {"cid":"loc-b96a152c","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.868Z","text":"제공"}
+{"cid":"loc-b102b7a8","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.887Z","text":"제공"}
 {"cid":"loc-b668fae1","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
 {"cid":"loc-b965bb82","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.977Z"}
 {"cid":"loc-b3465bf0","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.888Z","text":"제공"}
@@ -6558,6 +6565,7 @@
 {"cid":"loc-dec3d019","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.905Z"}
 {"cid":"loc-dec6f879","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.918Z"}
 {"cid":"loc-df3a3d5a","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.909Z"}
+{"cid":"loc-df4ea587","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z","text":"제공"}
 {"cid":"loc-df3587b9","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
 {"cid":"loc-e0c70683","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.915Z","text":"제공"}
 {"cid":"loc-e4b9bcdb","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.941Z","text":"24시간"}
@@ -6565,6 +6573,7 @@
 {"cid":"loc-e81e4df9","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.911Z","text":"제공"}
 {"cid":"loc-e88dee9c","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.926Z","text":"제공"}
 {"cid":"loc-e111eb14","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.953Z","text":"제공"}
+{"cid":"loc-e323ad40","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z","text":"제공"}
 {"cid":"loc-e596b3ea","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.963Z","text":"제공"}
 {"cid":"loc-e769ad35","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.927Z"}
 {"cid":"loc-e909b29a","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.972Z","text":"제공"}
@@ -6651,6 +6660,7 @@
 {"cid":"park-11710-00035-zysz","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
 {"cid":"park-28170-00023-qakga","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
 {"cid":"park-28260-00019-nbp8l","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
+{"cid":"park-29200-00034-vnd4","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-30170-00108-rrohw","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
 {"cid":"park-30170-00108-rrohw","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-41210-00077-rbxi0","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
@@ -6661,6 +6671,7 @@
 {"cid":"park-41550-00046-pdncm","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
 {"cid":"park-41800-00003-18ggn","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-41820-00003-1aik1","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
+{"cid":"park-46110-00030-vd3n","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46230-00042-y1qz","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46720-00017-qyk2p","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
 {"cid":"park-46770-00014-qc3lb","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26","text":"제공"}
@@ -6692,9 +6703,14 @@
 {"cid":"pilot-014-dutasan","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00","text":"제공"}
 {"cid":"pilot-014-dutasan","attr":"SHOWER_COUNT","value":1,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"pilot-014-dutasan","attr":"TOILET_COUNT","value":1,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
+{"cid":"rf-1k9afni","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1qroeie","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1qtu3gf","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1x439ps","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-11s4exc","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-14i1rvd","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-19o61p1","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-38krg6","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-171ecj6","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-kfbqip","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-qw604l","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
