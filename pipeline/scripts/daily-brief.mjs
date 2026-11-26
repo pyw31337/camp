@@ -60,7 +60,7 @@ if (process.env.GITHUB_TOKEN) {
     const since = new Date(Date.now() - 24 * 3600e3).toISOString();
     const r = await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=100&created=>=${since}`, { headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" } });
     const runs = (await r.json()).workflow_runs ?? [];
-    failed = runs.filter((x) => x.conclusion === "failure" && x.event !== "pull_request").map((x) => ({ name: x.name, at: x.created_at, url: x.html_url }));
+    failed = runs.filter((x) => ["failure", "cancelled", "timed_out"].includes(x.conclusion) && x.event !== "pull_request").map((x) => ({ name: `${x.name} (${x.conclusion})`, at: x.created_at, url: x.html_url }));
   } catch (e) { console.error(`(참고) 워크플로 실행 기록을 읽지 못함: ${e.message}`); }
 }
 
