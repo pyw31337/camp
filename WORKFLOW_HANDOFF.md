@@ -6,3 +6,9 @@
 - Never commit secret values, `.env` files, tokens, cookies, or machine-specific paths.
 
 The authoritative workflow files remain in this repository under `.github/workflows/`. GitHub-hosted Actions do not depend on the old Mac.
+
+## Recent workflow changes
+- **2026-11-26 (`fix/data-sync-timeout-and-monitoring`)**:
+  - `.github/workflows/data-sync.yml`: Raised job `timeout-minutes` from `90` to `180` to prevent daily `Sync web mentions` cancellations, and capped `Fill review thumbnails` (`REVIEW_FILL_MAX=2500`, step `25m`) and `Sync web mentions` (`SEARCH_MINUTES=12`, `BODY_MINUTES=15`, step `35m`) so the full pipeline finishes and publishes daily.
+  - `.github/workflows/quality-supervisor.yml`: Scheduled twice daily (`17 10 * * *`, `17 22 * * *` UTC), expanded detection from 24h `failure`-only to 72h + consecutive `failure|cancelled|timed_out` across non-PR runs, and added automatic GitHub Issue creation/comment/close on alerts.
+  - `pipeline/scripts/daily-brief.mjs`: Included `cancelled` and `timed_out` in daily brief failure reporting.

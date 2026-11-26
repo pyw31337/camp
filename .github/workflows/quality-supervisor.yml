@@ -2,8 +2,9 @@ name: Quality supervisor
 
 on:
   schedule:
-    # 수집 작업과 겹치지 않는 시간에 하루 한 번 읽기 전용 점검
+    # 하루 2회(19:17 KST, 07:17 KST) 읽기 전용 점검 — Data sync 직후 이상 즉시 감지
     - cron: "17 10 * * *"
+    - cron: "17 22 * * *"
   workflow_dispatch:
 
 permissions:
@@ -41,8 +42,9 @@ jobs:
           node pipeline/scripts/publish-sanity.mjs --check > quality-supervisor/publish-sanity.log 2>&1
           node pipeline/scripts/apply-value-sanity.mjs --check --baseline pipeline/registry/value-sanity-baseline.json > quality-supervisor/value-sanity.log 2>&1
 
-      - name: Inspect recent workflow failures
+      - name: Inspect recent workflow failures and cancellations
         id: workflows
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -50,18 +52,82 @@ jobs:
           gh api "repos/${{ github.repository }}/actions/runs?branch=main&per_page=100" > quality-supervisor/workflow-runs.json
           node <<'NODE'
           const fs = require('node:fs');
-          const runs = JSON.parse(fs.readFileSync('quality-supervisor/workflow-runs.json', 'utf8')).workflow_runs || [];
-          const since = Date.now() - 24 * 60 * 60 * 1000;
-          const failures = runs.filter(r => r.conclusion === 'failure' && Date.parse(r.updated_at || r.created_at) >= since);
-          const byWorkflow = {};
-          for (const r of failures) (byWorkflow[r.name] ||= []).push({id:r.id, run:r.run_number, url:r.html_url});
-          const report = { generated_at: new Date().toISOString(), failures_last_24h: failures.length, by_workflow: byWorkflow };
+          const runs = (JSON.parse(fs.readFileSync('quality-supervisor/workflow-runs.json', 'utf8')).workflow_runs || [])
+            .filter(r => r.event !== 'pull_request' && r.status === 'completed');
+          const since72h = Date.now() - 72 * 60 * 60 * 1000;
+          const badSet = new Set(['failure', 'cancelled', 'timed_out']);
+          const byWorkflowAll = {};
+          for (const r of runs) {
+            if (r.name === 'Quality supervisor') continue;
+            (byWorkflowAll[r.name] ||= []).push(r);
+          }
+          const alerts = {};
+          for (const [name, list] of Object.entries(byWorkflowAll)) {
+            list.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+            let consecutive = 0;
+            for (const r of list) {
+              if (badSet.has(r.conclusion)) consecutive++;
+              else break;
+            }
+            const recentBad = list.filter(r => badSet.has(r.conclusion) && Date.parse(r.updated_at || r.created_at) >= since72h);
+            // 최근 실행이 연속 2회 이상 실패/취소/타임아웃이거나, 72시간 내 2회 이상 이상이 있고 최신 실행도 성공이 아닌 경우 경보
+            if (consecutive >= 2 || (recentBad.length >= 2 && list[0] && badSet.has(list[0].conclusion))) {
+              alerts[name] = {
+                consecutive,
+                bad_72h: recentBad.length,
+                latest_conclusion: list[0]?.conclusion,
+                samples: recentBad.slice(0, 3).map(r => ({ id: r.id, conclusion: r.conclusion, at: r.created_at, url: r.html_url }))
+              };
+            }
+          }
+          const report = {
+            generated_at: new Date().toISOString(),
+            alert_workflows: Object.keys(alerts).length,
+            alerts
+          };
           fs.writeFileSync('quality-supervisor/workflow-report.json', JSON.stringify(report, null, 2));
           console.log(JSON.stringify(report, null, 2));
-          // 한 번의 외부 timeout이 아니라 같은 워크플로의 반복 실패만 감독 실패로 판정한다.
-          const repeated = Object.values(byWorkflow).some(rows => rows.length >= 2);
-          if (repeated) process.exitCode = 1;
+          if (Object.keys(alerts).length > 0) process.exitCode = 1;
           NODE
+
+      - name: Open or resolve monitoring issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SANITY_OUTCOME: ${{ steps.sanity.outcome }}
+          WF_OUTCOME: ${{ steps.workflows.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="[자동감시] 데이터 파이프라인 반복 실패·취소 감지"
+          OPEN_NUM=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title --jq "map(select(.title == \"$TITLE\")) | .[0].number // empty")
+          if [ "${{ steps.sanity.outcome }}" = "failure" ] || [ "${{ steps.workflows.outcome }}" = "failure" ]; then
+            BODY_FILE="quality-supervisor/issue-body.md"
+            node <<'NODE'
+          const fs = require('node:fs');
+          const rep = JSON.parse(fs.readFileSync('quality-supervisor/workflow-report.json', 'utf8'));
+          const lines = [
+            `## 파이프라인 이상 감지 (${rep.generated_at})`,
+            ``,
+            `- 데이터 상식 검사: \`${process.env.SANITY_OUTCOME}\``,
+            `- 워크플로 반복 실패·취소 검사: \`${process.env.WF_OUTCOME}\``,
+            ``,
+            `### 이상 워크플로 목록`
+          ];
+          for (const [name, info] of Object.entries(rep.alerts || {})) {
+            lines.push(`- **${name}**: 연속 ${info.consecutive}회 / 72시간 내 ${info.bad_72h}회 (${info.latest_conclusion})`);
+            for (const s of info.samples || []) lines.push(`  - [${s.conclusion}] ${s.at}: ${s.url}`);
+          }
+          lines.push(``, `실행: ${process.env.RUN_URL}`);
+          fs.writeFileSync('quality-supervisor/issue-body.md', lines.join('\n'));
+          NODE
+            if [ -n "$OPEN_NUM" ]; then
+              gh issue comment "$OPEN_NUM" --body-file "$BODY_FILE"
+            else
+              gh issue create --title "$TITLE" --body-file "$BODY_FILE"
+            fi
+          elif [ -n "$OPEN_NUM" ]; then
+            gh issue close "$OPEN_NUM" --comment "모든 워크플로 및 상식 검사가 정상 회복되어 자동 종료합니다. (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          fi
 
       - name: Write supervisor summary
         if: always()
@@ -70,9 +136,9 @@ jobs:
             echo "## 품질 감독 결과"
             echo
             echo "- 데이터 상식 검사: ${{ steps.sanity.outcome }}"
-            echo "- 최근 24시간 워크플로 반복 실패 검사: ${{ steps.workflows.outcome }}"
+            echo "- 최근 72시간 워크플로 반복 실패·취소·타임아웃 검사: ${{ steps.workflows.outcome }}"
             echo
-            echo "실패가 한 번뿐인 외부 timeout·취소는 경고로만 기록하고, 같은 작업이 반복 실패할 때만 조치 대상으로 표시합니다."
+            echo "failure·cancelled·timed_out 모두 감시하며, 연속 2회 이상 이상이 발생하면 자동으로 이슈를 생성·갱신합니다."
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Upload audit report

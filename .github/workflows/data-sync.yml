@@ -56,7 +56,7 @@ jobs:
   sync:
     name: Sync public sources and build open calendar
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     # 그날 수집한 실제 파일을 실행마다 새로 띄우는 PostgreSQL에 넣어 본다(아래 마지막 단계, 비용 없음).
     services:
       postgres:
@@ -292,17 +292,18 @@ jobs:
       - name: Fill review thumbnails from post cover images (og:image, robots.txt respected)
         # 소유자 2026-10-30 “후기 썸네일이 비어 있는 게 너무 많다”: 썸네일 없는 후기 글(네이버 블로그 등 약 3만 건)의 대표 이미지를 읽어
         # 비어 있을 때만 채운다(registry/review-thumbs.json → apply-review-thumbs). robots.txt가 막은 곳·로그인 카페는 열지 않는다.
+        # 2026-11-26: 6,000건 기준 32분+ 소요되어 90분 타임아웃 원인이 되므로 일일 상한 2,500건·단계 25분으로 조정.
         if: github.event_name != 'pull_request'
         continue-on-error: true
-        timeout-minutes: 45
+        timeout-minutes: 25
         run: node scripts/fill-review-thumbs.mjs
         env:
-          REVIEW_FILL_MAX: ${{ vars.REVIEW_FILL_MAX || '6000' }}
+          REVIEW_FILL_MAX: ${{ vars.REVIEW_FILL_MAX || '2500' }}
       - name: Sync web mentions (NAVER search blog·cafe·web·kin + robots-allowed blog text)
         # 네이버 검색 API(HUB, 한시 무료 월 775,000건) 요약과 robots가 허용한 블로그(티스토리 등) 본문의 사실 문장.
         # 소유자 2026-11-11 잔여 쿼터 최대 소진 지시: 일 22,000건(일 한도 25,000의 안전 구간 88%)으로 대폭 상향.
         continue-on-error: true
-        timeout-minutes: 50
+        timeout-minutes: 35
         run: node scripts/sync-web-mentions.mjs
         env:
           NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
@@ -310,9 +311,9 @@ jobs:
           NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
           NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
           NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.naver_mention_max_calls) || '22000' }}
-          # 검색 15분 + 본문 25분 < 단계 제한 50분: 끝까지 가서 out/campground-web.json을 써야 증분 발행·공유 브랜치에 실린다.
-          SEARCH_MINUTES: "15"
-          BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '25' }}
+          # 검색 12분 + 본문 15분 < 단계 제한 35분: 끝까지 가서 out/campground-web.json을 써야 증분 발행·공유 브랜치에 실린다.
+          SEARCH_MINUTES: "12"
+          BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '15' }}
       - name: Save collected caches to the shared data branch (single commit, force push)
         # 수집 직후 바로 저장한다(뒤 단계가 실패해도 남게). 다른 에이전트 공유용: cache/*.json.gz(누적 캐시), out/*.json.gz(이번 결과), MANIFEST.json
         if: always() && github.event_name != 'pull_request'
