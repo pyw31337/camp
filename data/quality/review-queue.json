@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-26T04:59:16.953Z",
+ "generated_at": "2026-11-26T08:42:56.686Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 133,
+ "count": 135,
  "items": [
   {
    "cid": "2179",
@@ -3784,7 +3784,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.691,
+    "confidence": 0.69,
     "sources": 1,
     "evidence": [
      {
@@ -5037,6 +5037,41 @@
    }
   },
   {
+   "cid": "loc-32f3ecb7",
+   "name": "탄금호 야영장",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "15:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9176&res_dt=20261114",
+      "at": "2026-11-25",
+      "quote": ""
+     }
+    ]
+   },
+   "rival": {
+    "value": "13:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/kyeong2soso/224240566340",
+      "at": "2026-04-04",
+      "quote": "애 낳으면 걸어 다닐 때까진 못가겠지...?ㅠ 이상 임산부의 주절주절입니다...ㅎㅎ 위치 및 정보 탄금호야영장 위치 : 충북 충주시 금가면 오미기2길 62-1 탄금호야영장 입실 1시"
+     }
+    ]
+   }
+  },
+  {
    "cid": "loc-223f7f77",
    "name": "고령 대가야 카라반",
    "attr": "CHECKIN_TIME",
@@ -5214,12 +5249,47 @@
   {
    "cid": "loc-eab1d51c",
    "name": "가야산 캠핑장",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "15:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4920&res_dt=20261114",
+      "at": "2026-11-25",
+      "quote": ""
+     }
+    ]
+   },
+   "rival": {
+    "value": "14:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/tuesdayinny/224442477734",
+      "at": "2026-10-15",
+      "quote": "운영 시간 : 입실 - 오후 2시/ 퇴실 - 낮 12시"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "loc-eab1d51c",
+   "name": "가야산 캠핑장",
    "attr": "CHECKOUT_TIME",
    "label": "퇴실 시각",
    "ui": true,
    "top": {
     "value": "11:00",
-    "confidence": 0.935,
+    "confidence": 0.94,
     "sources": 2,
     "evidence": [
      {

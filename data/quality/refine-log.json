@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-26T04:58:59.563Z",
+ "generated_at": "2026-11-26T08:42:41.447Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 309,
- "recoded": 196,
- "scoped": 917,
+ "dropped": 308,
+ "recoded": 198,
+ "scoped": 923,
  "items": [
   {
    "cid": "8122",
@@ -4311,16 +4311,6 @@
    "why": "일부 객실·구역만 허용"
   },
   {
-   "cid": "loc-0c6cc4d3",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/hi_yeeooon/223259400709",
-   "quote": "반려동물 입실 불가능 철이네 캠핑 랜드의 가운데에는 큰 수영장이 자리...",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
    "cid": "loc-19053e08",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -4605,6 +4595,17 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "loc-8de605be",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/kobi_coco/224489479110",
+   "quote": "반려견 동반 가능 객실 펜션은 반려동물 동반이 안 되지만, 카라반 마동·바동과 글램핑 C·D동은...",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "loc-36c0f2b9",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -4613,6 +4614,17 @@
    "quote": "글램핑과 카라반 모두 반려동물 출입이 불가능하고 입실은 오후 3시, 퇴실은 익일 오전 11시다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "loc-0223470e",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/animal_toc/223250833180",
+   "quote": "️8kg 이하의 애견동반 가능 개차반캠핑...",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
   },
   {
    "cid": "loc-16eff58b",

@@ -14235,6 +14235,7 @@
 {"cid":"loc-3c000c38","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
 {"cid":"loc-3c7e29d6","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.934Z","text":"개수대"}
 {"cid":"loc-3c7e29d6","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.934Z"}
+{"cid":"loc-3c7e29d6","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.934Z"}
 {"cid":"loc-3c7e29d6","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.934Z"}
 {"cid":"loc-3c6117da","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z","text":"개수대"}
 {"cid":"loc-3c6117da","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
@@ -14322,6 +14323,7 @@
 {"cid":"loc-4ecf4279","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z"}
 {"cid":"loc-4f7ff056","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.948Z","text":"개수대"}
 {"cid":"loc-4f7ff056","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.948Z"}
+{"cid":"loc-4f7ff056","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.948Z"}
 {"cid":"loc-4f7ff056","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.948Z"}
 {"cid":"loc-4f7ff056","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.948Z"}
 {"cid":"loc-4f9a5a1a","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.866Z","text":"개수대"}
@@ -14858,6 +14860,7 @@
 {"cid":"loc-74f6570b","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z","text":"개수대"}
 {"cid":"loc-74f6570b","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z"}
 {"cid":"loc-75c3b844","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.883Z","text":"개수대"}
+{"cid":"loc-75c3b844","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.883Z"}
 {"cid":"loc-75ff827a","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.886Z","text":"개수대"}
 {"cid":"loc-77b27260","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.914Z","text":"개수대"}
 {"cid":"loc-77b27260","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.914Z"}
@@ -15062,6 +15065,7 @@
 {"cid":"loc-690fa14c","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z"}
 {"cid":"loc-690fa14c","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z"}
 {"cid":"loc-692edcc2","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.879Z","text":"개수대"}
+{"cid":"loc-692edcc2","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.879Z"}
 {"cid":"loc-692edcc2","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.879Z"}
 {"cid":"loc-698e1257","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.929Z","text":"개수대"}
 {"cid":"loc-698e1257","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.929Z"}
@@ -15238,6 +15242,7 @@
 {"cid":"loc-6436c95c","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.903Z"}
 {"cid":"loc-6436c95c","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.903Z"}
 {"cid":"loc-7351b7ff","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z","text":"개수대"}
+{"cid":"loc-7351b7ff","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z"}
 {"cid":"loc-8215c29d","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.933Z","text":"개수대"}
 {"cid":"loc-8215c29d","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.933Z"}
 {"cid":"loc-8292ede6","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.941Z","text":"개수대"}
@@ -15351,6 +15356,7 @@
 {"cid":"loc-089042c2","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.942Z","text":"개수대"}
 {"cid":"loc-90036a58","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.953Z","text":"개수대"}
 {"cid":"loc-95009b7b","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z","text":"개수대"}
+{"cid":"loc-95009b7b","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
 {"cid":"loc-95009b7b","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
 {"cid":"loc-95009b7b","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
 {"cid":"loc-95408da6","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.971Z","text":"개수대"}
@@ -15647,6 +15653,7 @@
 {"cid":"loc-ad805727","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.924Z","text":"개수대"}
 {"cid":"loc-ad805727","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.924Z"}
 {"cid":"loc-add1b963","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z","text":"개수대"}
+{"cid":"loc-add1b963","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z"}
 {"cid":"loc-ae1b1524","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z","text":"개수대"}
 {"cid":"loc-ae1b1524","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z"}
 {"cid":"loc-ae1b1524","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z"}
@@ -15729,6 +15736,7 @@
 {"cid":"loc-b96a152c","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.868Z"}
 {"cid":"loc-b96a152c","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.868Z"}
 {"cid":"loc-b102b7a8","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.887Z","text":"개수대"}
+{"cid":"loc-b102b7a8","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.887Z"}
 {"cid":"loc-b300f0f7","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z","text":"개수대"}
 {"cid":"loc-b668fae1","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z","text":"개수대"}
 {"cid":"loc-b668fae1","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
@@ -15937,6 +15945,7 @@
 {"cid":"loc-c44656d8","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.880Z"}
 {"cid":"loc-c70938b0","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.951Z","text":"개수대"}
 {"cid":"loc-c77943a9","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.874Z","text":"개수대"}
+{"cid":"loc-c77943a9","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.874Z"}
 {"cid":"loc-c83103f7","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z","text":"개수대"}
 {"cid":"loc-c83103f7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
 {"cid":"loc-c174306b","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.899Z","text":"개수대"}
@@ -15960,6 +15969,8 @@
 {"cid":"loc-c8034496","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.875Z","text":"개수대"}
 {"cid":"loc-c8034496","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.875Z"}
 {"cid":"loc-c9046166","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.929Z","text":"개수대"}
+{"cid":"loc-c9046166","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.929Z"}
+{"cid":"loc-c9046166","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.929Z"}
 {"cid":"loc-ca8b19ed","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.875Z","text":"개수대"}
 {"cid":"loc-ca467a6e","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.931Z","text":"개수대"}
 {"cid":"loc-cab2420c","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.892Z","text":"개수대"}
@@ -16157,6 +16168,7 @@
 {"cid":"loc-d96779ad","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z","text":"개수대"}
 {"cid":"loc-d263095c","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.868Z","text":"개수대"}
 {"cid":"loc-d0359065","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.963Z","text":"개수대"}
+{"cid":"loc-d0359065","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.963Z"}
 {"cid":"loc-d0359065","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.963Z"}
 {"cid":"loc-d2665193","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.932Z","text":"개수대"}
 {"cid":"loc-d9224805","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.923Z","text":"개수대"}
@@ -16170,6 +16182,8 @@
 {"cid":"loc-dab246af","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
 {"cid":"loc-dab246af","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
 {"cid":"loc-daba5fbc","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.910Z","text":"개수대"}
+{"cid":"loc-daba5fbc","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.910Z"}
+{"cid":"loc-daba5fbc","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.910Z"}
 {"cid":"loc-dabc2cef","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.946Z","text":"개수대"}
 {"cid":"loc-dabc2cef","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.946Z"}
 {"cid":"loc-dabc2cef","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.946Z"}
@@ -16211,6 +16225,7 @@
 {"cid":"loc-df3a3d5a","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.909Z","text":"개수대"}
 {"cid":"loc-df03ae28","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z","text":"개수대"}
 {"cid":"loc-df4ea587","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z","text":"개수대"}
+{"cid":"loc-df4ea587","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z"}
 {"cid":"loc-df84b619","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.893Z","text":"개수대"}
 {"cid":"loc-df3587b9","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z","text":"개수대"}
 {"cid":"loc-df3587b9","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
@@ -16344,6 +16359,7 @@
 {"cid":"loc-ebde1fbb","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
 {"cid":"loc-ebde1fbb","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
 {"cid":"loc-ebde1fbb","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
+{"cid":"loc-ebde1fbb","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
 {"cid":"loc-ec1beeb8","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.881Z","text":"개수대"}
 {"cid":"loc-ec1beeb8","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.881Z"}
 {"cid":"loc-ed8e3d34","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.903Z","text":"개수대"}
@@ -16483,6 +16499,7 @@
 {"cid":"loc-fc16da8c","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.935Z","text":"개수대"}
 {"cid":"loc-fc955793","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.874Z","text":"개수대"}
 {"cid":"loc-fd8e9f04","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z","text":"개수대"}
+{"cid":"loc-fd8e9f04","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z"}
 {"cid":"loc-fd9cece8","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.976Z","text":"개수대"}
 {"cid":"loc-fd37b9cd","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z","text":"개수대"}
 {"cid":"loc-fd37b9cd","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z"}
@@ -17192,6 +17209,7 @@
 {"cid":"park-46110-00004-1pebe","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46110-00029-yio9x","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46110-00030-vd3n","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
+{"cid":"park-46110-00030-vd3n","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46110-00034-pxe9t","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46130-00004-n71qm","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-46130-00006-r4pbb","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
@@ -17290,6 +17308,7 @@
 {"cid":"park-52113-00001-nkizw","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-52130-00001-pythb","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-52130-00001-pythb","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
+{"cid":"park-52130-00039-1m9yr","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-52710-00002-qakga","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-52710-00002-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
 {"cid":"park-52710-00019-gqzg0","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-26"}
@@ -17328,6 +17347,8 @@
 {"cid":"pilot-010-yumyeongsan","attr":"AMENITY_TRAIL","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0101","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-014-dutasan","attr":"AMENITY_PLAYGROUND","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"pilot-014-dutasan","attr":"AMENITY_TRAIL","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
+{"cid":"rf-1av9n1a","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1dg0cf5","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1dg0cf5","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1esu2lk","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1gch2ur","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17338,9 +17359,14 @@
 {"cid":"rf-1i3ht74","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1i3ht74","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.fes-artvalley.com/pool3.php","at":"2026-10-24T23:07:48.189Z","quote":"- 매점"}
 {"cid":"rf-1i5joiz","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1ii2c47","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1j9pje3","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1j68bms","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1jhve91","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1jhve91","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1k9afni","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1k9afni","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1kcsvr8","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1kcsvr8","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1kjtgns","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1ku10vi","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17353,6 +17379,7 @@
 {"cid":"rf-1qtu3gf","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1r4889r","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1r4889r","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1sruoc8","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1t1yxsb","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1tq4l88","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1ub41x7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17364,6 +17391,8 @@
 {"cid":"rf-2btyj6","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-2btyj6","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-2c2987","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-5w7m1m","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-5w7m1m","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-5xcmjw","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-6erh5d","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-6pvc6h","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17374,6 +17403,7 @@
 {"cid":"rf-11s4exc","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-11s4exc","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-11s4exc","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-12tr8dy","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-13vmkr6","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-13wnp4l","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-14i1rvd","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17383,9 +17413,11 @@
 {"cid":"rf-16hq2oh","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-16hq2oh","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-16hq2oh","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-19o61p1","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-19o61p1","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-19p0vcl","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-19p0vcl","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-38krg6","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-38krg6","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-141ncxi","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-141ncxi","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17401,6 +17433,7 @@
 {"cid":"rf-axdspj","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-bi3phi","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-cpx1a2","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-cpx1a2","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-dduwm3","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-dipj9","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-dxxfss","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17408,6 +17441,7 @@
 {"cid":"rf-eilpwf","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-enl4wf","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-enl4wf","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-f5i808","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-f5i808","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-hgunxq","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-igi3ne","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17415,10 +17449,13 @@
 {"cid":"rf-ixkoe7","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-02"}
 {"cid":"rf-j0w9y0","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-jp2ov6","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-k2mq51","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-k2mq51","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-kfbqip","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-kfbqip","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-kfbqip","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-kg4m5r","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-ltxy5k","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-lz3ylf","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-n8pkdd","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-not5bp","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -17431,8 +17468,10 @@
 {"cid":"rf-s1vjrv","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-s7nsj6","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-ui6jx0","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-ui6jx0","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vd74sa","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vj0bcw","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-xslvy9","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-xuijdf","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-zysmxs","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-zysmxs","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
