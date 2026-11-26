@@ -8837,7 +8837,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
 }
 
 function commentsCardHtml(c) {
-  if (!c || !c.id) return "";
+  if (!c || !c.id || c.du === "park" || String(c.id).startsWith("osm-") || String(c.id).startsWith("hangang-")) return "";
   const id = String(c.id);
   const cmts = CMT_CACHE.get(id) || [];
   const hasCmts = cmts.length > 0;
@@ -9131,7 +9131,7 @@ function heroCounts() {
   return { total: S.camps.length, stay: S.camps.length - day, day };
 }
 function commentsHtml(c) {
-  if (!SB.url || !c?.id) return "";
+  if (!SB.url || !c?.id || c.du === "park" || String(c.id).startsWith("osm-") || String(c.id).startsWith("hangang-")) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><div class="comment-image-preview" data-comment-image-preview hidden></div><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><div class="comment-actions"><button class="btn primary" type="submit">남기기</button></div></div></div></form>
@@ -9449,7 +9449,7 @@ function savedCommentRow(x) {
   </li>`;
 }
 function savedCommentsHtml(c) {
-  if (!c || !c.id) return "";
+  if (!c || !c.id || c.du === "park" || String(c.id).startsWith("osm-") || String(c.id).startsWith("hangang-")) return "";
   const p = savedCommentProfile();
   return `<div class="saved-card-comments" data-saved-comments data-saved-comment-id="${esc(c.id)}">
     <div class="saved-comments-head">
