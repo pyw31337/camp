@@ -1,5 +1,29 @@
 # 인수인계
 
+## 📢 전체 에이전트 인수인계: PR #891 머지 · 상품 사진 라이트박스 · 공원 댓글 가드 완료 (2026-11-26 기준)
+
+### 1. 최근 작업 완료 내역 요약 (2026-11-26 PR #891 머지 및 UI 고도화)
+
+1. **PR #891 `data/expand-camping-platforms` → `main` 머지 완료** (커밋 `5a3f53c930f`)
+   - 4개 CI 검사 모두 통과: `Web quality / Lint and build`, `Web quality / Rail swipe`, `Pipeline quality / Test and lint`, `PostgreSQL schema verification`.
+
+2. **상품 모달 사진 → 라이트박스 연결** (`openProductModal` + `openLightboxUrls`):
+   - '구역·객실별 실물사진 & 세부규격' 모달 내 갤러리 사진을 `<button class="sp-gallery-btn">` 으로 감싸고, 우하단에 돋보기 배지(`.sp-gallery-zoom-badge`) 추가.
+   - 사진 클릭 → `openLightboxUrls(photos, idx, caption)` 호출하여 전체화면 인터랙티브 라이트박스 (터치/화살표 스와이프, 카운터, 키보드 제어) 오픈.
+   - 변경 파일: `design/renewal/app.js`, `design/renewal/style.css` → `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public` 으로 발행본 동기화.
+
+3. **공원·당일형 장소 댓글 가드 추가**:
+   - `commentsCardHtml`, `commentsHtml`, `savedCommentsHtml` 세 함수에 `c.du === "park" || id.startsWith("osm-") || id.startsWith("hangang-")` 가드 추가.
+   - 캠핑장(예: 범바위포레스트 `loc-872363c1`)은 댓글 정상 활성화, 공공공원(`hangang-jamwon` 등)은 댓글 숨김.
+
+4. **카탈로그 분할 `p5` 최적화** (`scripts/split-catalog.mjs`):
+   - `HEAVY` 목록에 `"p5"` 추가 → `campgrounds.lite.json` 초기 로드 용량 절감, 샤드에는 `p5` 데이터 온전히 보유.
+   - `perf-budget.mjs` 임계치: `appJs: 718KB`, `dataGz: 2650KB`.
+
+5. **field-guard `7216.json` 복구**: `booking_sites` 필드 복원으로 field-guard CI 통과.
+
+---
+
 ## 📢 전체 에이전트 인수인계: 5대 실전 스펙(p5) 7,691곳(99.4%) 전수 확장 및 상세화면 이미지 오류 전면 방어 완료 (2026-11-25 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
