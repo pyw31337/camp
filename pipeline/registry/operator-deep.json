@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T20:58:44.170Z",
+  "generated_at": "2026-11-26T20:27:02.715Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -28,7 +28,7 @@
       "status": "OK",
       "name": "글램비글램핑",
       "url": "http://www.glambcamp.com/",
-      "checked_at": "2026-11-25T20:59:37.055Z",
+      "checked_at": "2026-11-26T20:28:00.951Z",
       "pages": [
         "http://www.glambcamp.com/",
         "https://www.glambcamp.com/information",
@@ -429,7 +429,7 @@
       "status": "OK",
       "name": "느티나무 캠핑장",
       "url": "https://theneuti.imweb.me/",
-      "checked_at": "2026-11-25T20:59:05.818Z",
+      "checked_at": "2026-11-26T20:27:25.932Z",
       "pages": [
         "https://theneuti.imweb.me/",
         "https://theneuti.imweb.me/faq",
@@ -437,6 +437,7 @@
         "https://theneuti.imweb.me/namu-guide",
         "https://theneuti.imweb.me/notices",
         "https://theneuti.imweb.me/reservation",
+        "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
         "https://theneuti.imweb.me/byeol-guide/?bmode=view&idx=175339752",
         "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board",
         "https://theneuti.imweb.me/byeol-guide?category=2a7x36kv8J",
@@ -445,8 +446,7 @@
         "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board",
         "https://theneuti.imweb.me/namu-guide?category=x61mQ32ir4",
         "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
-        "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749035&t=board",
-        "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&category=2a7x36kv8J"
+        "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749035&t=board"
       ],
       "snippets": [
         {
@@ -458,31 +458,71 @@
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "물놀이도, 편안한 쉼도.",
+          "text": "느티나무 가족샤워실 안 세면&middot;드라이 공간 &middot; 더 느티 공식 사진 자연 가까이.",
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "실내 온수풀",
+          "text": "아이와 함께 씻을 가족샤워실, 식재료를 보관할 공용냉장고.",
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "운영일 확인 가족샤워실",
+          "text": "씬마미님과 poi_abum님 후기에서는 공용시설의 청결함과 가족샤워실 이용의 편리함이 소개됐습니다.",
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "가족을 위한 편의 드림&middot;타프하우스",
+          "text": "가족샤워실&middot;공용냉장고 느티나무 전용 편의시설",
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "물놀이에 웃음이 번지는 낮 느티나무 온수풀 소개 사진 불빛 곁에서 가까워지는 밤 AI 연출 이미지 겨울 내리 계곡 사진",
+          "text": "실내 온수풀 방문일별 운영 확인 필요",
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "영상 후기 &middot; 샤샥 온수풀부터 겨울 놀이까지 글 후기 &middot; 코미 나무 그늘 아래 아이와 함께",
+          "text": "개별 방문객의 경험을 요약했습니다.",
           "url": "https://theneuti.imweb.me/"
         },
         {
-          "text": "11월부터 동계휴장 중입니다.",
+          "text": "방문객의 실제 경험을 짧게 정리했습니다.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "느티존 C&middot;D에서 아이들과 보낸 2박 3일.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "나무 그늘과 물놀이, 전구가 켜진 저녁 풍경을 담았습니다.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "개수대&middot;공용냉장고의 청결함과 가족샤워실의 편리함을 소개했습니다.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "요고다 &middot; 가족과 머문 따뜻한 겨울 &rarr; 샤샥 &middot; 온수풀부터 겨울 놀이까지 &rarr; dreammms &middot; 겨울 텐트 안, 우리만의 시간 &rarr;",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "느티나무의 드림하우스&middot;타프하우스 등 숙박 상품을 살펴보세요.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "아이와 함께 씻거나 물놀이할 수 있나요?",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "느티나무에는 가족샤워실과 실내 온수풀이 안내되어 있습니다.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "이용 방법과 예약 필요 여부, 방문 날짜의 운영일&middot;시간은 공지 또는 톡톡에서 확인해 주세요.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "계곡 전망&middot;나무 그늘과 화장실&middot;샤워실&middot;수영장까지의 거리를 함께 살펴보세요.",
+          "url": "https://theneuti.imweb.me/"
+        },
+        {
+          "text": "캠블록스에서 느티나무캠핑장을 선택한 뒤 날짜&middot;자리&middot;요금을 확인해 주세요.",
           "url": "https://theneuti.imweb.me/"
         },
         {
@@ -734,6 +774,22 @@
           "url": "https://theneuti.imweb.me/notices"
         },
         {
+          "text": "실내 온수풀",
+          "url": "https://theneuti.imweb.me/reservation"
+        },
+        {
+          "text": "운영일 확인 가족샤워실",
+          "url": "https://theneuti.imweb.me/reservation"
+        },
+        {
+          "text": "가족을 위한 편의 드림&middot;타프하우스",
+          "url": "https://theneuti.imweb.me/reservation"
+        },
+        {
+          "text": "날짜&middot;자리&middot;요금을 확인하세요.",
+          "url": "https://theneuti.imweb.me/reservation"
+        },
+        {
           "text": "예약 화면에서 날짜&middot;사이트&middot;최종 요금을 확인하세요.",
           "url": "https://theneuti.imweb.me/reservation"
         },
@@ -768,6 +824,50 @@
         {
           "text": "느티별은 11월부터 동계휴장 중입니다.",
           "url": "https://theneuti.imweb.me/reservation"
+        },
+        {
+          "text": "[공통 안내] 우리 가족의 캠핑 자리 고르기 : 느티나무캠핑장 공지·이용 규정·환불 안내 | 더 느티",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "공지 [공통 안내] 우리 가족의 캠핑 자리 고르기",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "자리별 사례는 방문객이 머문 당시의 기록으로 구분해 소개합니다.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "사진 속 장비는 방문객 개인 물품일 수 있습니다.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "사진 씬마미 물놀이를 계획하실 때에는 후기의 수심 표현을 현재 상태로 받아들이지 말아 주세요.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "화장실과 개수대, 이용할 물놀이 시설에 자주 오갈 가족이라면 동선을 먼저 비교해 보세요.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "데이지님의 2026년 6월 느티나무 후기에는 계곡 5·6번과 편의동의 위치 관계, 16·17번 건너편의 개수대·분리수거장에 대한 경험이 나옵니다.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "주차 공간과 사이트 사이에 네 계단의 단차가 있었다는 기록도 있어, 큰 짐이나 유모차를 옮길 때 참고할 만합니다.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "느티나무 공지·이용 안내 2026년 11월 19일 공식 홈페이지 확인 기준, 느티별은 11월부터 동계휴장 중이며 재개장 일정은 미확정입니다.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "예약 가능 일정은 재개장 공지 후 확인해 주세요.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
+        },
+        {
+          "text": "느티별 공지·이용 안내 운영자가 작성한 자리 선택 안내입니다.",
+          "url": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039"
         },
         {
           "text": "봄에 다시 만나요, 느티별 | 11월부터 동계휴장 안내 : 느티별캠핑장 공지·이용 규정·환불 안내 | 더 느티",
@@ -828,106 +928,6 @@
         {
           "text": "취소·환불 규정 확인 →",
           "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "입실 오후 2시",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "퇴실 낮 12시.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "반려동물·방문 손님·방문 차량은 동반할 수 없습니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "인원과 차량 기준을 확인해 주세요.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "카라반·캠핑카·폴딩트레일러는 이용할 수 없습니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "전기차·PHEV 차량 충전은 불가합니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "간단한 장비로 편안하게 캠핑할 수 있는 공간은 F구역입니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "가족샤워실과 공용냉장고 안내는 느티나무에 해당하는 시설 안내이므로 예약 시 구분해 주세요.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "조식바구니는 입실 시 캠블록스 앱에서 신청할 수 있습니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "수영장·놀이시설·체험·현장 이벤트는 현장 여건에 따라 운영됩니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "예약 오픈·시즌 운영·중요 운영 변경은 공지사항으로, 현장 이벤트 소식은 느티의 이벤트 로 안내합니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085065&t=board"
-        },
-        {
-          "text": "[공통 선택 안내] 두 캠핑장 비교와 자리 선택, 여기서 확인하세요 : 느티별캠핑장 공지·이용 규정·환불 안내 | 더 느티",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749072&t=board"
-        },
-        {
-          "text": "공지 [공통 선택 안내] 두 캠핑장 비교와 자리 선택, 여기서 확인하세요",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749072&t=board"
-        },
-        {
-          "text": "느티별은 11월부터 동계휴장 중이며 재개장 일정은 미확정입니다.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749072&t=board"
-        },
-        {
-          "text": "예약 일정은 별도 재개장 공지 후 확인해 주세요.",
-          "url": "https://theneuti.imweb.me/byeol-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749072&t=board"
-        },
-        {
-          "text": "[공지] 느티나무 예약 전 확인 안내 : 느티나무캠핑장 공지·이용 규정·환불 안내 | 더 느티",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "공지 [공지] 느티나무 예약 전 확인 안내",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "입실 오후 2시·기본 퇴실 낮 12시.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "11월~3월 동계 기간 일요일에는 오후 4시까지 무료 퇴실 연장이 적용됩니다.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "오후 4시 이후 추가 이용 가능 여부와 추가 요금·결제는 현장관리자에게 문의해 주세요.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "카라반(400 이하)과 폴딩트레일러는 전용 트레일러존으로 예약해 주세요.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "전기차 충전은 별도 충전 구역에서만 가능합니다.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "간단한 장비로 편안하게 캠핑할 수 있는 드림하우스와 타프하우스를 운영합니다.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "가족샤워실과 공용냉장고는 느티나무에서 제공하는 전용 편의시설입니다.",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175085066&t=board"
-        },
-        {
-          "text": "[공통 안내] 우리 가족의 캠핑 자리 고르기 : 느티나무캠핑장 공지·이용 규정·환불 안내 | 더 느티",
-          "url": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board"
         }
       ],
       "images": [
@@ -938,51 +938,39 @@
           "layout": false
         },
         {
-          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/514c0706364b2.png",
+          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/36c31460eff85.png",
           "page": "https://theneuti.imweb.me/",
-          "alt": "불멍 곁에서 함께 웃는 가족의 연출 장면",
+          "alt": "불빛 곁에서 대화하는 가족의 캠핑 분위기 — AI 연출 이미지",
           "layout": false
         },
         {
-          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/f1c8a7e35e610.png",
+          "url": "https://cdn.litt.ly/images/98P5oYj8tDvsvem82y5hkDM31MBktZel?s=1200x1200&f=webp",
           "page": "https://theneuti.imweb.me/",
-          "alt": "눈 내린 내리계곡의 실제 겨울 풍경",
+          "alt": "내리계곡과 숲의 실제 풍경 — 더 느티 공식 사진",
           "layout": false
         },
         {
-          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/a963676cc788e.jpeg",
+          "url": "https://cdn.litt.ly/images/ISNqweuh2xsBPHghzjbCGqIw1hvM5urR?s=1200x1200&m=outside&f=webp",
           "page": "https://theneuti.imweb.me/",
-          "alt": "데이지의 실제 캠핑 방문 기록",
+          "alt": "느티나무 가족샤워실의 세면·드라이 공간 — 공식 사진",
           "layout": false
         },
         {
-          "url": "https://video-phinf.pstatic.net/20250203_40/1738558399977pNkkE_JPEG/j5Vc66bwSW_01.jpg",
+          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/37225d7c2eb45.jpeg",
           "page": "https://theneuti.imweb.me/",
-          "alt": "요고다의 실제 캠핑 방문 기록",
+          "alt": "나무 사이 전구가 켜진 캠핑장의 저녁 — 코미 방문 사진",
           "layout": false
         },
         {
-          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/f634fb20b3144.jpeg",
+          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/fc24a72681f74.jpg",
           "page": "https://theneuti.imweb.me/",
-          "alt": "온니윤마미의 실제 캠핑 방문 기록",
+          "alt": "가을 나무 사이 느티나무 숙박 공간, 셀디문어 방문 사진",
           "layout": false
         },
         {
-          "url": "https://video-phinf.pstatic.net/20260206_284/1770383693463OawkS_JPEG/H4mxRIvJKD_01.jpg",
+          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/96a3e95829f0b.jpg",
           "page": "https://theneuti.imweb.me/",
-          "alt": "샤샥의 실제 캠핑 방문 기록",
-          "layout": false
-        },
-        {
-          "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/426674236683f.jpeg",
-          "page": "https://theneuti.imweb.me/",
-          "alt": "코미의 실제 캠핑 방문 기록",
-          "layout": false
-        },
-        {
-          "url": "https://video-phinf.pstatic.net/20251216_183/1765887612956h5vfF_JPEG/MYHXAWzrsH_01.jpg",
-          "page": "https://theneuti.imweb.me/",
-          "alt": "dreammms의 실제 캠핑 방문 기록",
+          "alt": "poi_abum 가족이 느티나무 계곡 16번에 설치한 텐트",
           "layout": false
         },
         {
@@ -999,37 +987,37 @@
         },
         {
           "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/8f27069ea6798.jpg",
-          "page": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
+          "page": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
           "alt": "계곡 앞 텐트와 주변 나무가 함께 보이는 느티나무 방문 사진",
           "layout": false
         },
         {
           "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/c447a9fbddcdb.jpg",
-          "page": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
+          "page": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
           "alt": "느티별 B8 타프 안에 설치한 개인 텐트의 모습",
           "layout": false
         },
         {
           "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/a17b2c573b323.jpg",
-          "page": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
+          "page": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
           "alt": "느티나무 계곡 앞에서 확인한 해먹 설치대와 난간",
           "layout": false
         },
         {
           "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/cc96606388972.jpg",
-          "page": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
+          "page": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
           "alt": "방문 당시 느티나무 공용 편의시설 내부",
           "layout": true
         },
         {
           "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/6bb8eb7ad38e0.jpg",
-          "page": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
+          "page": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
           "alt": "나무 그늘 아래에 의자를 놓고 쉬는 장면",
           "layout": false
         },
         {
           "url": "https://cdn.imweb.me/upload/S20261012becb9dc437d72/428dab8b03f51.jpg",
-          "page": "https://theneuti.imweb.me/namu-guide/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=175749039&t=board",
+          "page": "https://theneuti.imweb.me/namu-guide/?bmode=view&idx=175749039",
           "alt": "느티별 타프 사이트 사이의 경계와 주변 환경",
           "layout": false
         },
@@ -2681,7 +2669,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-11-25T20:59:13.130Z",
+      "checked_at": "2026-11-26T20:27:33.859Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
@@ -3477,7 +3465,7 @@
       "status": "OK",
       "name": "범바위포레스트",
       "url": "https://link.inpock.co.kr/bumbawi",
-      "checked_at": "2026-11-25T20:59:38.696Z",
+      "checked_at": "2026-11-26T20:28:02.830Z",
       "pages": [
         "https://link.inpock.co.kr/bumbawi"
       ],
