@@ -14,6 +14,9 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "../..");
+if (!String(process.env.PATH || "").split(":").includes("/bin")) {
+  process.env.PATH = `${process.env.PATH || "/usr/local/bin:/usr/bin"}:/bin`;
+}
 const home = join(homedir(), ".letscamp");
 const externalVault = "/Volumes/My Passport for Mac/LETS_DATA_VAULT";
 const dataHome = existsSync(externalVault) ? join(externalVault, "services", "camp", "data", "nightshift") : home;
@@ -39,7 +42,7 @@ const H = (h, m = 0) => h * 60 + m;
 const JOBS = [
   // 찜한 업장 우선(2026-10-23 소유자: “찜한 업장에 수집 가중치”) — 맨 앞, 12시간마다.
   { id: "saved-first", title: "찜한 업장 운영자 홈페이지 다시 읽기 + 깊게 읽기(Apple Vision OCR)", everyHours: 12, minMinutes: 20, maxMinutes: 90,
-    setup: ["npx", "playwright", "install", "chromium"], cmd: ["bash", "scripts/saved-priority-local.sh"], env: { OCR_ENGINE: "apple" },
+    setup: ["npx", "playwright", "install", "chromium"], cmd: ["/bin/bash", "scripts/saved-priority-local.sh"], env: { OCR_ENGINE: "apple" },
     files: ["pipeline/registry/operator-site-snippets.json", "pipeline/registry/operator-deep.json", "data/priority/saved-camps.json"] },
   { id: "nearby-photos", title: "주변시설 사진 판독(Apple Vision 간판 글자 + 로컬 비전 모델)", everyHours: 4, minMinutes: 45, maxMinutes: 360,
     avoid: [{ dow: 5, hm: H(5, 23), minutes: 200 }], cmd: ["node", "scripts/judge-nearby-photos-mac.mjs"], files: ["pipeline/registry/nearby-photos.json"] },
@@ -147,7 +150,7 @@ try {
   if (changed) {
     sh("git", ["commit", "-q", "-m", `chore(data): macmini ${job.id}`]);
     const token = sh("gh", ["auth", "token"]);
-    sh("bash", [".github/scripts/land-on-main.sh", `macmini-${job.id}`], {
+    sh("/bin/bash", [".github/scripts/land-on-main.sh", `macmini-${job.id}`], {
       env: { ...process.env, GITHUB_REPOSITORY: "pyw31337/camp", GITHUB_REF_NAME: "main", GH_TOKEN: token }, timeout: 45 * 60e3,
     });
     result = "올림";
