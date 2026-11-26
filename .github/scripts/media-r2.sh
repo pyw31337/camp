@@ -15,13 +15,10 @@ set -euo pipefail
 cmd="${1:-}"; shift || true
 
 configured() { [ -n "${R2_ACCOUNT_ID:-}" ] && [ -n "${R2_ACCESS_KEY_ID:-}" ] && [ -n "${R2_SECRET_ACCESS_KEY:-}" ] && [ -n "${R2_BUCKET:-}" ] && [ -n "${R2_PUBLIC_BASE:-}" ]; }
-if [ "$cmd" = "on" ]; then
-  if ! configured; then exit 1; fi
-  if r2_available; then exit 0; fi
-  echo "::warning::R2 자격 증명 또는 버킷 권한을 확인할 수 없습니다. 사진 저장소만 일시 중지합니다." >&2
-  exit 1
+if ! configured; then
+  if [ "$cmd" = "on" ]; then exit 1; fi
+  echo "R2 설정 없음 — 건너뜀($cmd)"; exit 0
 fi
-if ! configured; then echo "R2 설정 없음 — 건너뜀($cmd)"; exit 0; fi
 
 export AWS_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
 # 최신 AWS CLI의 기본 체크섬(CRC64 등)을 R2가 다르게 처리할 수 있어 필요할 때만 계산한다.
@@ -33,6 +30,12 @@ aws_s3() { aws s3 "$@" --endpoint-url "$EP" --connect-timeout 5 --only-show-erro
 # 사진 저장소만 일시 중지한다. 쓰기 작업은 호출부가 이 확인을 통과한 경우에만 실행한다.
 r2_available() { timeout 10 aws s3 ls "$S3/" --endpoint-url "$EP" --connect-timeout 5 --only-show-errors >/dev/null 2>&1; }
 list_keys() { aws s3 ls "$S3/" --recursive --endpoint-url "$EP" | awk '{ $1=$2=$3=""; sub(/^ +/, ""); print }' | grep -E '\.webp$' | sort -u || true; }
+
+if [ "$cmd" = "on" ]; then
+  if r2_available; then exit 0; fi
+  echo "::warning::R2 자격 증명 또는 버킷 권한을 확인할 수 없습니다. 사진 저장소만 일시 중지합니다." >&2
+  exit 1
+fi
 
 case "$cmd" in
   pull)
