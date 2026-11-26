@@ -112,3 +112,15 @@
 ## GitHub workflow handoff
 
 Before changing `.github/workflows/`, schedules, deployments, or secret names, read `WORKFLOW_HANDOFF.md` and the canonical private handoff inventory at https://github.com/pyw31337/macmini-workflow-handoff. Update both records in the same PR and never commit secret values.
+
+## 📢 로컬 데이터 외장하드 우선 저장 · 공통 이관 포맷 (2026-11-26 소유자 지시 — 모든 에이전트 필수)
+
+- 맥미니 내부 SSD 용량 보호 및 새 기기(iMac 등) 일괄 이관을 위해, 로컬에서 생성·보관되는 모든 `camp` 산출물·캐시·로그·상태는 **외장하드 공통 볼트(`LETS_DATA_VAULT_V1`)** 에 우선 저장한다.
+- **공통 저장 경로**: `/Volumes/My Passport for Mac/LETS_DATA_VAULT/services/camp/`
+  - `data/pipeline-out/`: `pipeline/out/` 로컬 수집·빌드 산출물
+  - `data/nightshift/`: 야간 작업(`nightshift.mjs`) 및 `local-maintenance.mjs` 로그·상태(`logs/`, `maintenance/`, `state.json`, `status.json`, `busy.json`, `avoid.txt`)
+  - `scripts/`: 이관·유지보수 스크립트 사본
+  - `manifest.json`: `LETS_DATA_VAULT_V1` 규격 서비스 매니페스트 (`manifests/vault_manifest.json` 에 자동 등록)
+- 동기화 실행: `node scripts/vault-sync.mjs` (`--status`로 현재 로컬/외장하드 상태 점검)
+- `local/macmini/nightshift.mjs`와 `scripts/local-maintenance.mjs`는 외장하드 마운트 시 자동으로 외장하드 볼트 경로를 우선 사용한다.
+- **절대 금지**: API 키·`.env`·토큰 등 비밀값은 외장하드 일반 데이터 폴더나 git에 평문으로 복사하지 않는다.

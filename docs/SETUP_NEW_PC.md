@@ -4,7 +4,7 @@
 깃에 없는 것은 세 가지뿐이다.
 - **다시 만들 수 있는 것**: `node_modules`, 빌드 결과, 캐시. 아래 명령으로 되살린다.
 - **비밀**: API 키. GitHub Secrets에 보관한다.
-- **맥미니 야간 작업 상태**: `~/.letscamp`. 설치하면 새로 생긴다.
+- **맥미니 로컬 데이터·야간 작업 상태**: 외장하드 공통 볼트(`/Volumes/My Passport for Mac/LETS_DATA_VAULT/services/camp/`, `LETS_DATA_VAULT_V1` 포맷)에 우선 저장한다. 외장하드 미연결 시 `~/.letscamp`에 폴백한다. 동기화는 `node scripts/vault-sync.mjs`.
 
 ## 1. 받기
 ```bash

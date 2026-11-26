@@ -70,7 +70,10 @@ function print(s, title) {
   console.log(line("  깃이 무시하는 기타(그대로 둠)", s.ignoredOther));
 }
 function save(name, data) {
-  const dir = join(homedir(), ".letscamp", "maintenance");
+  const vaultBase = "/Volumes/My Passport for Mac/LETS_DATA_VAULT";
+  const dir = existsSync(vaultBase)
+    ? join(vaultBase, "services", "camp", "data", "nightshift", "maintenance")
+    : join(homedir(), ".letscamp", "maintenance");
   try { mkdirSync(dir, { recursive: true }); const p = join(dir, `${name}-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "")}.json`); writeFileSync(p, JSON.stringify(data, null, 1)); return p; } catch { return null; }
 }
 

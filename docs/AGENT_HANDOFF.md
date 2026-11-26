@@ -1,5 +1,27 @@
 # 인수인계
 
+## 📢 전체 에이전트 인수인계: Data sync 타임아웃/모니터링 복구 및 로컬 데이터 외장하드 통합 이관 완료 (2026-11-26 기준)
+
+### 1. 최근 작업 완료 내역 요약 (2026-11-26 오후)
+
+1. **`Data sync` 90분 타임아웃 해소 및 자동 감시 강화 (PR `#901`)**:
+   - `.github/workflows/data-sync.yml`: `timeout-minutes: 90 → 180` 상향, `fill-review-thumbs`(`2,500건/25m`) 및 `sync-web-mentions`(`12m+15m/35m`) 상한 조정으로 전체 발행 단계까지 완료되도록 수정.
+   - `.github/workflows/quality-supervisor.yml`: 하루 2회(`07:17`, `19:17 KST`) 실행, `failure`·`cancelled`·`timed_out` 모두 **72시간 + 연속 2회 이상** 감시, 이상 시 자동 GitHub 이슈 생성/해결 시 자동 종료.
+   - `pipeline/scripts/daily-brief.mjs`: 아침 브리핑 메일 실패 목록에 `cancelled`·`timed_out` 포함.
+   - `WORKFLOW_HANDOFF.md` 및 `pyw31337/macmini-workflow-handoff`(`de76fe7`) 동시 갱신.
+
+2. **로컬 맥미니 저장 데이터 점검 및 외장하드(`LETS_DATA_VAULT_V1`) 통합 저장**:
+   - **기존 로컬 잔존 데이터 점검 결과**:
+     - `~/.letscamp/` (**5.6GB**): 활성 `launchd`(`com.letscamp.nightshift`) 전용 클론 `~/.letscamp/camp`(5.6GB), `logs/`, `state.json`, `status.json`, `busy.json`
+     - `pipeline/out/` (**254MB**): 로컬 수집 산출물(`campground-social.json` 등)
+     - 메인 저장소 `.git` (**6.5GB**)
+   - **외장하드 공통 포맷(`LETS_DATA_VAULT_V1`) 통합**:
+     - `scripts/vault-sync.mjs` 신설: `/Volumes/My Passport for Mac/LETS_DATA_VAULT/services/camp/` 아래 `data/pipeline-out/`, `data/nightshift/`, `scripts/`, `manifest.json` 구조로 동기화하고 루트 `manifests/vault_manifest.json`에 `camp` 등록 완료(**260.15 MB / 3,170개 파일**).
+     - `local/macmini/nightshift.mjs`, `scripts/local-maintenance.mjs`: 외장하드 마운트 시 자동으로 외장하드 볼트 경로를 우선 사용하도록 변경.
+     - `AGENTS.md`, `docs/SETUP_NEW_PC.md`에 모든 에이전트 공통 지침 반영.
+
+---
+
 ## 📢 전체 에이전트 인수인계: PR #891 머지 · 상품 사진 라이트박스 · 공원 댓글 가드 완료 (2026-11-26 기준)
 
 ### 1. 최근 작업 완료 내역 요약 (2026-11-26 PR #891 머지 및 UI 고도화)
