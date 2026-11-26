@@ -163,6 +163,9 @@
 {"cid":"231","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"231","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"231","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"236","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -255,9 +258,9 @@
 {"cid":"389","attr":"CHARCOAL_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"389","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"389","attr":"FIREWOOD_ALLOWED","value":false,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
-{"cid":"395","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"395","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"395","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-22T08:26:02.555Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
-{"cid":"395","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"395","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"398","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"398","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"398","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -574,6 +577,10 @@
 {"cid":"810","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"810","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"810","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"811","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"812","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-22T08:26:02.555Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
@@ -605,6 +612,9 @@
 {"cid":"855","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"855","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"855","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"856","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"860","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -735,7 +745,7 @@
 {"cid":"1038","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1040","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1040","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"1040","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1040","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1042","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1042","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"1042","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1045,7 +1055,7 @@
 {"cid":"1513","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"1513","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-22T08:26:02.555Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
-{"cid":"1513","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1513","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"FIRE_PIT","value":"SHARED","grade":"CONFIRMED","src":"gocamping","text":"공동취사장"}
 {"cid":"1528","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1358,6 +1368,10 @@
 {"cid":"2063","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2063","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2063","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"2072","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2078","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2078","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2078","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1372,6 +1386,10 @@
 {"cid":"2094","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2094","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2094","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"2109","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2110","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1392,9 +1410,9 @@
 {"cid":"2121","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2121","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2121","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2124","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2124","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2024-07-01T00:00:00+09:00"}
 {"cid":"2124","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"2124","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2124","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2024-07-01T00:00:00+09:00"}
 {"cid":"2143","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2143","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2143","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1671,6 +1689,10 @@
 {"cid":"2623","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2623","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2623","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"2662","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2667","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2667","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2667","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1729,7 +1751,7 @@
 {"cid":"2764","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2765","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2765","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"2765","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2765","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2778","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2778","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2778","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1932,6 +1954,10 @@
 {"cid":"2999","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
 {"cid":"2999","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"3004","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"3005","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2187,10 +2213,10 @@
 {"cid":"3383","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3389","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3389","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"3389","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3389","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3394","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3394","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"3394","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3394","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3397","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3397","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"3397","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2352,8 +2378,6 @@
 {"cid":"3605","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3605","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3605","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3619","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3619","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3622","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3622","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"3622","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2619,6 +2643,10 @@
 {"cid":"7072","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7072","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7072","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"7074","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7075","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7075","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7075","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2913,9 +2941,9 @@
 {"cid":"7319","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7333","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7333","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7344","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7344","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2024-09-19T00:00:00+09:00"}
 {"cid":"7344","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"7344","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7344","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2024-09-19T00:00:00+09:00"}
 {"cid":"7346","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7346","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7348","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3088,6 +3116,9 @@
 {"cid":"7547","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7547","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7547","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"7560","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7561","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3370,6 +3401,10 @@
 {"cid":"7815","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7815","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7815","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"7818","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7824","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7824","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7824","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3409,7 +3444,7 @@
 {"cid":"7843","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7846","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7846","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"7846","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7846","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7848","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3629,6 +3664,9 @@
 {"cid":"7988","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7988","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7988","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"7990","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7991","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3980,6 +4018,9 @@
 {"cid":"100011","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100011","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100011","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"100012","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100013","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100013","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100013","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4649,9 +4690,9 @@
 {"cid":"100360","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100360","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100360","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100361","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100361","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2026-11-16T00:00:00+09:00"}
 {"cid":"100361","attr":"FIRE_PIT","value":"SHARED","grade":"CONFIRMED","src":"gocamping","text":"공동취사장"}
-{"cid":"100361","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100361","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2026-11-16T00:00:00+09:00"}
 {"cid":"100361","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100362","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100362","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -5146,6 +5187,8 @@
 {"cid":"100542","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_discovered","url":"https://newparavan.creatorlink.net/%EA%B0%9D%EC%8B%A4%EC%86%8C%EA%B0%9C","at":"2026-10-16T07:06:09.074Z","quote":"불멍 세트(장작) : 1만5천원","text":"1.5만원"}
 {"cid":"100542","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100542","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100543","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100543","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100544","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100544","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100544","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7014,7 +7057,7 @@
 {"cid":"101152","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101153","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101153","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101153","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101153","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101155","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101155","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101155","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7577,9 +7620,9 @@
 {"cid":"101312","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101312","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101312","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101313","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101313","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2025-12-19T00:00:00+09:00"}
 {"cid":"101313","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101313","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101313","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2025-12-19T00:00:00+09:00"}
 {"cid":"101313","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101314","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101314","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -7740,6 +7783,7 @@
 {"cid":"101361","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101361","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101361","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101361","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101362","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101362","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101362","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8817,6 +8861,7 @@
 {"cid":"101710","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101710","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
 {"cid":"101710","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101710","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101712","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-20T01:18:01.835Z","quote":"- 바비큐 시설 이용료 (숯+석쇠+친환경 피어콘 착화탄) : 20,000원","text":"2만원"}
 {"cid":"101712","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101712","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-20T01:18:01.835Z","quote":"- 불멍 가능 (1회 20,000원)"}
@@ -8952,6 +8997,8 @@
 {"cid":"101772","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101772","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101772","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101774","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101774","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101775","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101775","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101775","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9264,6 +9311,8 @@
 {"cid":"101962","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101962","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101962","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101966","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101966","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101968","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101968","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101968","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9272,6 +9321,8 @@
 {"cid":"101971","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101971","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101971","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101972","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101972","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101973","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101973","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101973","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9316,9 +9367,13 @@
 {"cid":"101989","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101989","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101989","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101990","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101990","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101991","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101991","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101991","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101992","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101992","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101993","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101993","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101993","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9575,9 +9630,9 @@
 {"cid":"102189","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102193","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102193","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102194","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102194","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2026-06-10T00:00:00+09:00"}
 {"cid":"102194","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"102194","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102194","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","at":"2026-06-10T00:00:00+09:00"}
 {"cid":"102194","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102200","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102200","attr":"FIRE_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://gyeongjurang.com/contents/reserve.html","at":"2026-10-20T01:08:45.364Z","quote":"장작 10kg 1회 3만원","text":"3만원"}
@@ -9616,6 +9671,8 @@
 {"cid":"102221","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102226","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102226","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102229","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102229","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102232","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102232","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102235","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9728,12 +9785,18 @@
 {"cid":"102383","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102387","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102387","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102390","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102390","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102396","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102396","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"102396","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102396","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102397","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102397","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"102398","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"hangang-nanji","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-26"}
 {"cid":"hangang-nanji","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-26"}
 {"cid":"loc-0a0f4d5d","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.933Z"}
@@ -13706,6 +13769,8 @@
 {"cid":"osm-w734439882","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/734439882","at":"2026-11-26"}
 {"cid":"osm-w736741880","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/736741880","at":"2026-11-26"}
 {"cid":"osm-w736741880","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/736741880","at":"2026-11-26"}
+{"cid":"osm-w779169455","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/779169455","at":"2026-11-26"}
+{"cid":"osm-w779169455","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/779169455","at":"2026-11-26"}
 {"cid":"osm-w817548737","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/817548737","at":"2026-11-26"}
 {"cid":"osm-w817548737","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/817548737","at":"2026-11-26"}
 {"cid":"osm-w858869210","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/858869210","at":"2026-11-26"}
@@ -13720,6 +13785,8 @@
 {"cid":"osm-w989857957","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/989857957","at":"2026-11-26"}
 {"cid":"osm-w998679734","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/998679734","at":"2026-11-26"}
 {"cid":"osm-w998679734","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/998679734","at":"2026-11-26"}
+{"cid":"osm-w1059323632","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1059323632","at":"2026-11-26"}
+{"cid":"osm-w1059323632","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1059323632","at":"2026-11-26"}
 {"cid":"osm-w1072583047","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1072583047","at":"2026-11-26"}
 {"cid":"osm-w1072583047","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1072583047","at":"2026-11-26"}
 {"cid":"osm-w1079369625","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1079369625","at":"2026-11-26"}
@@ -13850,6 +13917,10 @@
 {"cid":"pilot-004-haengun","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별","url":"https://camfit.co.kr/camp/haengun"}
 {"cid":"pilot-004-haengun","attr":"FIREWOOD_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://camfit.co.kr/camp/haengun"}
+{"cid":"pilot-006-yeonin-valley","attr":"CHARCOAL_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"pilot-006-yeonin-valley","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley"}
+{"cid":"pilot-006-yeonin-valley","attr":"FIREWOOD_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"pilot-006-yeonin-valley","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley"}
 {"cid":"pilot-007-soeggol","attr":"CHARCOAL_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-007-soeggol","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별","url":"https://booking.naver.com/booking/3/bizes/soeggol"}
 {"cid":"pilot-007-soeggol","attr":"FIREWOOD_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00"}
@@ -13894,8 +13965,8 @@
 {"cid":"rf-1k9afni","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1kcsvr8","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1kcsvr8","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
-{"cid":"rf-1kjtgns","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
-{"cid":"rf-1kjtgns","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1kjtgns","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-1kjtgns","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1ku10vi","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1ku10vi","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-1lrjzjs","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -13950,7 +14021,7 @@
 {"cid":"rf-8flqic","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-9hmhpy","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-9hmhpy","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
-{"cid":"rf-10bgq84","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-10bgq84","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-10bgq84","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-11mwq63","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-11mwq63","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
@@ -14054,8 +14125,12 @@
 {"cid":"rf-s1vjrv","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-s7nsj6","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-s7nsj6","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-thzepk","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-thzepk","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-ui6jx0","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-ui6jx0","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-v1yszx","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-v1yszx","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vd74sa","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vd74sa","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vj0bcw","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
