@@ -185,12 +185,12 @@
 {"cid":"129","attr":"PHONE","value":"010-2476-3657","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"129","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"129","attr":"TOURISM_BIZ_NO","value":"2015000013","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"131","attr":"HOMEPAGE","value":"http://cafe.naver.com/galchunauto","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"131","attr":"HOMEPAGE","value":"https://naver.me/ID324qQO","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"131","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/14588618","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/14588618","at":"2026-10-16T05:35:22.242Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"131","attr":"LICENSE_DATE","value":"2016-07-25","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"131","attr":"OPERATOR_ORG","value":"강묘관","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"131","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"131","attr":"TOURISM_BIZ_NO","value":"2016-3","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"131","attr":"TOURISM_BIZ_NO","value":"2016000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"138","attr":"HOMEPAGE","value":"http://www.haman.go.kr/main/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"138","attr":"HOMEPAGE","value":"https://camp.xticket.kr/web/main?shopEncode=0ca2dbc468034c0554a59d50a00e1fa0d273547243cd913e8ffc7fe403c13729","grade":"CONFIRMED","src":"naver_local","url":"https://camp.xticket.kr/web/main?shopEncode=0ca2dbc468034c0554a59d50a00e1fa0d273547243cd913e8ffc7fe403c13729","at":"2026-10-16T06:39:44.781Z","text":"숙박>캠핑,야영장"}
 {"cid":"138","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/22292459","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/22292459","at":"2026-10-16T05:36:50.472Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -308,6 +308,13 @@
 {"cid":"231","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"231","attr":"PHONE","value":"070-5055-0319","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"231","attr":"STAFF_ONSITE","value":3,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"HOMEPAGE","value":"http://www.parkofdream.com/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"LICENSE_DATE","value":"2017-08-11","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"OPERATOR_ORG","value":"허호 외 2 명","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"PHONE","value":"041-960-1111","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"TOURISM_BIZ_NO","value":"2017000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"LICENSE_DATE","value":"2022-07-21","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"PHONE","value":"010-6789-7143","grade":"CONFIRMED","src":"gocamping"}
@@ -1202,6 +1209,13 @@
 {"cid":"810","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"810","attr":"PHONE","value":"063-322-3173","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"810","attr":"TOURISM_BIZ_NO","value":"일반야영장 : 2015000006, 자동차야영장 : 2015000001","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"HOMEPAGE","value":"http://xn--bj0b34h65dgwlo6h58v.com/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"LICENSE_DATE","value":"2020-07-17","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"OPERATOR_ORG","value":"이성남","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"PHONE","value":"010-4591-6470","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"TOURISM_BIZ_NO","value":"2020000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-16T06:07:27.022Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"812","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/26622191","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26622191","at":"2026-10-16T05:32:39.746Z","text":"여행 > 관광,명소 > 자연휴양림"}
@@ -1267,6 +1281,11 @@
 {"cid":"855","attr":"PHONE","value":"033-463-3555","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"855","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"855","attr":"TOURISM_BIZ_NO","value":"2015-000005","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"LICENSE_DATE","value":"2015-06-08","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"OPERATOR_ORG","value":"이형철","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"PHONE","value":"033-462-6664","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"TOURISM_BIZ_NO","value":"2015000004","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"HOMEPAGE","value":"http://xn--pq1by0hgta924f.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"HOMEPAGE","value":"http://돌풀마루.kr","grade":"CONFIRMED","src":"naver_local","url":"http://돌풀마루.kr","at":"2026-10-16T06:12:08.919Z","text":"숙박>펜션"}
 {"cid":"860","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1141460147","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1141460147","at":"2026-10-16T05:33:15.352Z","text":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
@@ -1751,6 +1770,7 @@
 {"cid":"1208","attr":"HOMEPAGE","value":"http://barasan.uw21.net/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1208","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/25527792","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/25527792","at":"2026-10-16T05:32:58.059Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"1208","attr":"LICENSE_DATE","value":"2015-04-24","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1208","attr":"OPERATOR_ORG","value":"김성제","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1208","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1208","attr":"PHONE","value":"031-8086-7482","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1208","attr":"TOURISM_BIZ_NO","value":"2015000001","grade":"CONFIRMED","src":"gocamping"}
@@ -2803,6 +2823,12 @@
 {"cid":"2063","attr":"PHONE","value":"033-673-3808","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2063","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2063","attr":"TOURISM_BIZ_NO","value":"2017000025","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"HOMEPAGE","value":"http://cafe.naver.com/ccpark","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"LICENSE_DATE","value":"2013-12-27","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"OPERATOR_ORG","value":"이정임","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"PHONE","value":"010-3460-4749","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2072","attr":"TOURISM_BIZ_NO","value":"2013000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2078","attr":"HOMEPAGE","value":"https://www.camfit.co.kr/camp/634924fadd1593001fe41028","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/634924fadd1593001fe41028","at":"2026-10-16T06:26:11.514Z","text":"숙박>캠핑,야영장"}
 {"cid":"2078","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/19825006","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/19825006","at":"2026-10-16T05:35:03.229Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"2078","attr":"LICENSE_DATE","value":"2015-06-12","grade":"CONFIRMED","src":"gocamping"}
@@ -2837,6 +2863,12 @@
 {"cid":"2099","attr":"PHONE","value":"02-2207-0909","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2099","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2099","attr":"TOURISM_BIZ_NO","value":"2016-000013","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"HOMEPAGE","value":"https://blog.naver.com/khr4600","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"LICENSE_DATE","value":"2016-08-18","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"PHONE","value":"010-9537-4600","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"TOURISM_BIZ_NO","value":"2016000025","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"HOMEPAGE","value":"http://me2.do/FhpNyW3i","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"HOMEPAGE","value":"http://www.양양캠핑장.kr","grade":"CONFIRMED","src":"naver_local","url":"http://www.양양캠핑장.kr","at":"2026-10-16T06:06:25.572Z","text":"숙박>캠핑,야영장"}
 {"cid":"2110","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/846987288","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/846987288","at":"2026-10-16T05:32:31.409Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -2880,7 +2912,7 @@
 {"cid":"2124","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2124","attr":"PHONE","value":"010-3771-8424","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2124","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2124","attr":"TOURISM_BIZ_NO","value":"2016-000026","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2124","attr":"TOURISM_BIZ_NO","value":"2016000026","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2143","attr":"HOMEPAGE","value":"http://www.ephraimcamping.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2143","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/13566483","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/13566483","at":"2026-10-16T05:35:36.915Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"2143","attr":"LICENSE_DATE","value":"2016-03-25","grade":"CONFIRMED","src":"gocamping"}
@@ -3447,6 +3479,12 @@
 {"cid":"2623","attr":"PHONE","value":"061-337-7230","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2623","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2623","attr":"TOURISM_BIZ_NO","value":"2015000002","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"HOMEPAGE","value":"http://www.jspark.co.kr/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"LICENSE_DATE","value":"2016-04-29","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"PHONE","value":"041-841-5220","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2662","attr":"TOURISM_BIZ_NO","value":"2016000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2667","attr":"HOMEPAGE","value":"http://blog.naver.com/wips1000","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2667","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/27292244","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/27292244","at":"2026-10-16T05:36:41.714Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"2667","attr":"LICENSE_DATE","value":"2015-11-13","grade":"CONFIRMED","src":"gocamping"}
@@ -3552,8 +3590,10 @@
 {"cid":"2755","attr":"HOMEPAGE","value":"http://www.thebestcamp.co.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2755","attr":"HOMEPAGE","value":"http://www.thebestcamp.co.kr/","grade":"CONFIRMED","src":"naver_local","url":"http://www.thebestcamp.co.kr/","at":"2026-10-16T06:39:15.065Z","text":"숙박>캠핑,야영장"}
 {"cid":"2755","attr":"LICENSE_DATE","value":"2016-06-09","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2755","attr":"OPERATOR_ORG","value":"임수정","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2755","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2755","attr":"PHONE","value":"010-3540-0470","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2755","attr":"TOURISM_BIZ_NO","value":"2016000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2758","attr":"HOMEPAGE","value":"http://www.jumunjincamping.com/default/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2758","attr":"HOMEPAGE","value":"https://www.instagram.com/jumunjin_glamping/","grade":"CONFIRMED","src":"naver_local","url":"https://www.instagram.com/jumunjin_glamping/","at":"2026-10-16T06:06:21.282Z","text":"숙박>캠핑,야영장"}
 {"cid":"2758","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/26814073","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26814073","at":"2026-10-16T05:32:30.919Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -3988,6 +4028,12 @@
 {"cid":"2999","attr":"PHONE","value":"010-4479-5587","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"TOURISM_BIZ_NO","value":"2015-6","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"LICENSE_DATE","value":"2016-12-29","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"OPERATOR_ORG","value":"(주)정진기업  (대표 : 김 순이)","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"PHONE","value":"010-4001-7805","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"TOURISM_BIZ_NO","value":"2016000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"HOMEPAGE","value":"http://chisan.yc.go.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"HOMEPAGE","value":"http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=20010339","grade":"CONFIRMED","src":"naver_local","url":"http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=20010339","at":"2026-10-16T06:26:51.363Z","text":"숙박>캠핑,야영장"}
 {"cid":"3005","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1432549342","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1432549342","at":"2026-10-16T05:35:08.524Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -4224,6 +4270,7 @@
 {"cid":"3209","attr":"HOMEPAGE","value":"http://singihan.goheung.go.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3209","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/8134035","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/8134035","at":"2026-10-16T05:32:46.657Z","text":"여행 > 관광,명소 > 자연휴양림"}
 {"cid":"3209","attr":"LICENSE_DATE","value":"2015-06-11","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3209","attr":"OPERATOR_ORG","value":"공영민","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3209","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3209","attr":"PHONE","value":"061-830-5430","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3209","attr":"TOURISM_BIZ_NO","value":"2015000002","grade":"CONFIRMED","src":"gocamping"}
@@ -4371,9 +4418,9 @@
 {"cid":"3326","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1523943853","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1523943853","at":"2026-10-16T05:32:33.575Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"3326","attr":"LICENSE_DATE","value":"2016-01-26","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3326","attr":"OPERATOR_ORG","value":"이성주 외 1명","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3326","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3326","attr":"PHONE","value":"033-0764-3007","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3326","attr":"STAFF_ONSITE","value":5,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3326","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3326","attr":"PHONE","value":"033-764-5588","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3326","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3326","attr":"TOURISM_BIZ_NO","value":"2016000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3329","attr":"HOMEPAGE","value":"http://www.guryecamp.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3329","attr":"HOMEPAGE","value":"https://www.guryecamp.com/","grade":"CONFIRMED","src":"naver_local","url":"https://www.guryecamp.com/","at":"2026-10-16T06:12:56.401Z","text":"숙박>캠핑,야영장"}
@@ -4619,9 +4666,11 @@
 {"cid":"3440","attr":"PHONE","value":"055-931-6600","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3445","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/27116908","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/27116908","at":"2026-10-16T05:35:50.178Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"3445","attr":"LICENSE_DATE","value":"2015-07-01","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3445","attr":"OPERATOR_ORG","value":"백봉만","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3445","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3445","attr":"PHONE","value":"055-867-6665","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3445","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3445","attr":"TOURISM_BIZ_NO","value":"2015000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3450","attr":"HOMEPAGE","value":"http://cafe.naver.com/haedamcamping","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3450","attr":"HOMEPAGE","value":"https://www.instagram.com/haedam_camp","grade":"CONFIRMED","src":"naver_local","url":"https://www.instagram.com/haedam_camp","at":"2026-10-16T06:05:41.425Z","text":"숙박>캠핑,야영장"}
 {"cid":"3450","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/26518775","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26518775","at":"2026-10-16T05:32:25.828Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -5437,6 +5486,12 @@
 {"cid":"7072","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7072","attr":"PHONE","value":"010-4387-5577","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7072","attr":"TOURISM_BIZ_NO","value":"2014000001","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"HOMEPAGE","value":"http://www.campfive.kr/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"LICENSE_DATE","value":"2022-02-11","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"OPERATOR_ORG","value":"김인순","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"TOURISM_BIZ_NO","value":"2022000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7075","attr":"HOMEPAGE","value":"https://booking.naver.com/booking/3/bizes/934334","grade":"CONFIRMED","src":"naver_local","url":"https://booking.naver.com/booking/3/bizes/934334","at":"2026-10-16T06:40:43.275Z","text":"숙박>캠핑,야영장"}
 {"cid":"7075","attr":"HOMEPAGE","value":"https://m.tongtutu.kr/0_tutu/html/camp_page_01.html","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7075","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1655964756","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1655964756","at":"2026-10-16T05:36:57.812Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -6073,11 +6128,11 @@
 {"cid":"7344","attr":"HOMEPAGE","value":"https://moducasting.com/?bmode=view&idx=164039587","grade":"MENTION","src":"kakao_web","url":"https://moducasting.com/?bmode=view&idx=164039587","at":"2026-10-16T05:36:50.872Z","quote":"노을 전우성 축가 섭외 소노휴 양평  모두캐스팅 "}
 {"cid":"7344","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/738826308","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/738826308","at":"2026-10-16T05:36:50.872Z","text":"여행 > 숙박부속시설"}
 {"cid":"7344","attr":"LICENSE_DATE","value":"2015-05-07","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7344","attr":"OPERATOR_ORG","value":"황혜진","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7344","attr":"OPERATOR_ORG","value":"이병천 외 2 명","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7344","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7344","attr":"PHONE","value":"010-7901-5572","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7344","attr":"STAFF_ONSITE","value":4,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7344","attr":"TOURISM_BIZ_NO","value":"2015-5","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7344","attr":"TOURISM_BIZ_NO","value":"2015000005","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7346","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/808736935","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/808736935","at":"2026-10-16T05:34:54.240Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"7346","attr":"LICENSE_DATE","value":"2018-07-24","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7346","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -6406,6 +6461,13 @@
 {"cid":"7547","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/46223151","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/46223151","at":"2026-10-16T05:36:08.466Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"7547","attr":"LICENSE_DATE","value":"2019-03-14","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7547","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"HOMEPAGE","value":"http://camping.suseong.kr/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"LICENSE_DATE","value":"2019-04-08","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"OPERATOR_ORG","value":"수성구청장","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"PHONE","value":"053-666-3477","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"STAFF_ONSITE","value":7,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"TOURISM_BIZ_NO","value":"2019000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"HOMEPAGE","value":"http://wawoopark.co.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"HOMEPAGE","value":"http://wawoopark.co.kr/","grade":"CONFIRMED","src":"naver_local","url":"http://wawoopark.co.kr/","at":"2026-10-16T06:26:00.533Z","text":"숙박>펜션"}
 {"cid":"7561","attr":"LICENSE_DATE","value":"2019-03-21","grade":"CONFIRMED","src":"gocamping"}
@@ -6879,6 +6941,11 @@
 {"cid":"7815","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7815","attr":"PHONE","value":"010-2412-1340","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7815","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"LICENSE_DATE","value":"2020-01-06","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"OPERATOR_ORG","value":"이창선","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"PHONE","value":"033-461-6625","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"TOURISM_BIZ_NO","value":"2020000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7824","attr":"HOMEPAGE","value":"http://naver.me/GVbdB9LV","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7824","attr":"LICENSE_DATE","value":"2020-01-15","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7824","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -7378,6 +7445,13 @@
 {"cid":"7988","attr":"LICENSE_DATE","value":"2020-08-25","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7988","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7988","attr":"PHONE","value":"010-4691-6813","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"HOMEPAGE","value":"https://foresttrip.go.kr/indvz/main.do?hmpgId=ID02030023","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"LICENSE_DATE","value":"2020-08-26","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"OPERATOR_ORG","value":"동두천시","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"PHONE","value":"031-860-3259","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"TOURISM_BIZ_NO","value":"2020000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"HOMEPAGE","value":"http://dotcampingcaravan.dothome.co.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/66dbb6e607668e001e76635c","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/66dbb6e607668e001e76635c","at":"2026-10-16T06:31:29.652Z","text":"숙박>캠핑,야영장"}
 {"cid":"7991","attr":"LICENSE_DATE","value":"2020-08-27","grade":"CONFIRMED","src":"gocamping"}
@@ -7517,7 +7591,7 @@
 {"cid":"8034","attr":"OPERATOR_ORG","value":"김정화","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8034","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8034","attr":"PHONE","value":"010-8786-0937","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8034","attr":"TOURISM_BIZ_NO","value":"2020-20","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8034","attr":"TOURISM_BIZ_NO","value":"2020000020","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8041","attr":"HOMEPAGE","value":"https://www.usc.go.kr/icevalley/main.do","grade":"CONFIRMED","src":"naver_local","url":"https://www.usc.go.kr/icevalley/main.do","at":"2026-10-16T06:34:14.785Z","text":"숙박>캠핑,야영장"}
 {"cid":"8041","attr":"HOMEPAGE","value":"https://www.usc.go.kr/icevalley/main.tc","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8041","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/797183677","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/797183677","at":"2026-10-16T05:36:06.667Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -8036,6 +8110,12 @@
 {"cid":"100011","attr":"PHONE","value":"031-420-9750","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100011","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100011","attr":"TOURISM_BIZ_NO","value":"2021-1","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"HOMEPAGE","value":"http://xn--9t4b11duur.com/?intro=OK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"LICENSE_DATE","value":"2021-07-28","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"OPERATOR_ORG","value":"(주)포에스","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"TOURISM_BIZ_NO","value":"2021000007","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100013","attr":"HOMEPAGE","value":"https://www.instagram.com/yaksudongsan","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100013","attr":"HOMEPAGE","value":"https://www.yaksudongsan.com","grade":"CONFIRMED","src":"naver_local","url":"https://www.yaksudongsan.com","at":"2026-10-16T06:44:49.032Z","text":"숙박>캠핑,야영장"}
 {"cid":"100013","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/20329422","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/20329422","at":"2026-10-16T05:37:29.026Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -8068,8 +8148,10 @@
 {"cid":"100022","attr":"HOMEPAGE","value":"http://www.toycamp.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100022","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/851860657","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/851860657","at":"2026-10-16T05:34:25.897Z","text":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
 {"cid":"100022","attr":"LICENSE_DATE","value":"2021-07-23","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100022","attr":"OPERATOR_ORG","value":"안슬기","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100022","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100022","attr":"PHONE","value":"031-581-9977","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100022","attr":"TOURISM_BIZ_NO","value":"2021000010","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100033","attr":"HOMEPAGE","value":"https://gwgs.pubcamping.kr/@jajakdo/index","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100033","attr":"HOMEPAGE","value":"https://gwgs.pubcamping.kr/@jajakdo/index","grade":"CONFIRMED","src":"naver_local","url":"https://gwgs.pubcamping.kr/@jajakdo/index","at":"2026-10-16T06:44:35.537Z","text":"숙박>캠핑,야영장"}
 {"cid":"100033","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/24372861","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/24372861","at":"2026-10-16T05:37:27.564Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -8625,6 +8707,7 @@
 {"cid":"100251","attr":"HOMEPAGE","value":"https://tour.goheung.go.kr/tour/rest/camp/11.do","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100251","attr":"HOMEPAGE","value":"https://youtu.be/75GJTRgtc6Q?si=sgY-ZslFuedFQQjL","grade":"CONFIRMED","src":"naver_local","url":"https://youtu.be/75GJTRgtc6Q?si=sgY-ZslFuedFQQjL","at":"2026-10-16T06:14:09.956Z","text":"숙박>캠핑,야영장"}
 {"cid":"100251","attr":"LICENSE_DATE","value":"2022-01-27","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100251","attr":"OPERATOR_ORG","value":"장현호","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100251","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100251","attr":"TOURISM_BIZ_NO","value":"2022000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100252","attr":"HOMEPAGE","value":"http://www.diarogl.kr/default/","grade":"CONFIRMED","src":"gocamping"}
@@ -9180,9 +9263,11 @@
 {"cid":"100356","attr":"HOMEPAGE","value":"https://www.instagram.com/little_forest_camping","grade":"CONFIRMED","src":"naver_local","url":"https://www.instagram.com/little_forest_camping","at":"2026-10-16T06:21:17.432Z","text":"숙박>캠핑,야영장"}
 {"cid":"100356","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1296653073","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1296653073","at":"2026-10-16T05:34:26.326Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"100356","attr":"LICENSE_DATE","value":"2017-09-26","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100356","attr":"OPERATOR_ORG","value":"신동수 외 1 명","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100356","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100356","attr":"PHONE","value":"010-4386-8022","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100356","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100356","attr":"TOURISM_BIZ_NO","value":"2017000030","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100357","attr":"HOMEPAGE","value":"https://blog.naver.com/258_camping","grade":"CONFIRMED","src":"naver_local","url":"https://blog.naver.com/258_camping","at":"2026-10-16T06:22:04.092Z","text":"숙박>캠핑,야영장"}
 {"cid":"100357","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/827053381","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/827053381","at":"2026-10-16T05:34:32.126Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"100357","attr":"LICENSE_DATE","value":"2017-02-07","grade":"CONFIRMED","src":"gocamping"}
@@ -9213,7 +9298,7 @@
 {"cid":"100360","attr":"TOURISM_BIZ_NO","value":"2022-1","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100361","attr":"HOMEPAGE","value":"https://petmilly.campingt.me/3593/home/index","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100361","attr":"LICENSE_DATE","value":"2015-12-31","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100361","attr":"OPERATOR_ORG","value":"김지선","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100361","attr":"OPERATOR_ORG","value":"이영희","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100361","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100361","attr":"PHONE","value":"010-7332-0253","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100361","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -9253,8 +9338,8 @@
 {"cid":"100367","attr":"LICENSE_DATE","value":"2022-05-11","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100367","attr":"OPERATOR_ORG","value":"김대일","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100367","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100367","attr":"PHONE","value":"055-863-4666","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100367","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100367","attr":"PHONE","value":"010-4584-4246","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100367","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100367","attr":"TOURISM_BIZ_NO","value":"2022000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100368","attr":"HOMEPAGE","value":"http://yeoul.xyz/","grade":"CONFIRMED","src":"naver_local","url":"http://yeoul.xyz/","at":"2026-10-16T06:46:11.805Z","text":"숙박>캠핑,야영장"}
 {"cid":"100368","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/265629116","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/265629116","at":"2026-10-16T05:37:39.934Z","text":"여행 > 숙박 > 야영,캠핑장 > 카라반"}
@@ -10351,7 +10436,7 @@
 {"cid":"100592","attr":"HOMEPAGE","value":"http://provenceglamping.com/","grade":"CONFIRMED","src":"naver_local","url":"http://provenceglamping.com/","at":"2026-10-16T06:07:49.208Z","text":"숙박>캠핑,야영장"}
 {"cid":"100592","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/108586078","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/108586078","at":"2026-10-16T05:32:42.676Z","text":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
 {"cid":"100592","attr":"LICENSE_DATE","value":"2022-09-23","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100592","attr":"OPERATOR_ORG","value":"㈜청도 프로방스 글램핑 조두상","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100592","attr":"OPERATOR_ORG","value":"조두상","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"PHONE","value":"010-2380-1938","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -11384,8 +11469,10 @@
 {"cid":"100787","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100788","attr":"HOMEPAGE","value":"http://xn--bj0bl8fh8e68be7y66v.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100788","attr":"HOMEPAGE","value":"http://뉴얼리글램핑.com/","grade":"CONFIRMED","src":"naver_local","url":"http://뉴얼리글램핑.com/","at":"2026-10-16T06:37:33.396Z","text":"숙박>캠핑,야영장"}
-{"cid":"100788","attr":"LICENSE_DATE","value":"2023-01-20","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100788","attr":"LICENSE_DATE","value":"2024-06-13","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100788","attr":"OPERATOR_ORG","value":"김혜지","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100788","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100788","attr":"TOURISM_BIZ_NO","value":"2024000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100789","attr":"HOMEPAGE","value":"https://cafe.naver.com/goormcamping","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/goormcamping","at":"2026-10-16T06:06:59.797Z","text":"숙박>캠핑,야영장"}
 {"cid":"100789","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/2083426430","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2083426430","at":"2026-10-16T05:32:35.992Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"100789","attr":"LICENSE_DATE","value":"2023-01-20","grade":"CONFIRMED","src":"gocamping"}
@@ -11936,8 +12023,10 @@
 {"cid":"100905","attr":"TOURISM_BIZ_NO","value":"2023-4","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100906","attr":"HOMEPAGE","value":"https://평창캠핑장.kr","grade":"CONFIRMED","src":"naver_local","url":"https://평창캠핑장.kr","at":"2026-10-16T06:36:30.662Z","text":"숙박>캠핑,야영장"}
 {"cid":"100906","attr":"LICENSE_DATE","value":"2023-05-01","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100906","attr":"OPERATOR_ORG","value":"정달헌","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100906","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100906","attr":"PHONE","value":"507-1364-1145","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100906","attr":"TOURISM_BIZ_NO","value":"2023000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100907","attr":"LICENSE_DATE","value":"2023-05-01","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100907","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100907","attr":"PHONE","value":"0507-1401-9009","grade":"CONFIRMED","src":"gocamping"}
@@ -12924,12 +13013,13 @@
 {"cid":"101105","attr":"LICENSE_DATE","value":"2023-09-04","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101105","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101106","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/68b521d0d615d6001d08a59c","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/68b521d0d615d6001d08a59c","at":"2026-10-16T06:30:22.362Z","text":"숙박>캠핑,야영장"}
+{"cid":"101106","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/68b521d0d615d6001d08a59c?keyword=%EC%9E%84%EC%A7%84%EA%B0%95%EC%BA%A0%ED%95%91%EC%9E%A5&adultCnt=2","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101106","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/23817060","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/23817060","at":"2026-10-16T05:35:35.623Z","text":"여행 > 숙박 > 펜션"}
 {"cid":"101106","attr":"LICENSE_DATE","value":"2023-09-04","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101106","attr":"OPERATOR_ORG","value":"이민현","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101106","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101106","attr":"PHONE","value":"0507-1364-2069","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101106","attr":"TOURISM_BIZ_NO","value":"2023-1","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101106","attr":"TOURISM_BIZ_NO","value":"2023000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101107","attr":"LICENSE_DATE","value":"2023-09-05","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101107","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101108","attr":"LICENSE_DATE","value":"2023-09-06","grade":"CONFIRMED","src":"gocamping"}
@@ -13232,12 +13322,12 @@
 {"cid":"101165","attr":"TOURISM_BIZ_NO","value":"2023-4","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101166","attr":"HOMEPAGE","value":"https://www.cnstc.or.kr/gjcamping/main/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101166","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1708033534","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1708033534","at":"2026-10-16T05:36:40.088Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
-{"cid":"101166","attr":"LICENSE_DATE","value":"2023-11-10","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101166","attr":"LICENSE_DATE","value":"2023-10-19","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101166","attr":"OPERATOR_ORG","value":"충청남도교육청안전수련원","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101166","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101166","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101166","attr":"PHONE","value":"041-881-9314","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101166","attr":"STAFF_ONSITE","value":3,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101166","attr":"TOURISM_BIZ_NO","value":"2023-2","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101166","attr":"TOURISM_BIZ_NO","value":"2023000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101167","attr":"HOMEPAGE","value":"https://m.site.naver.com/1yQXI","grade":"CONFIRMED","src":"naver_local","url":"https://m.site.naver.com/1yQXI","at":"2026-10-16T06:48:38.843Z","text":"숙박>캠핑,야영장"}
 {"cid":"101167","attr":"HOMEPAGE","value":"https://www.efmc.or.kr/fmcs/1","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101167","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/418517127","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/418517127","at":"2026-10-16T05:37:58.636Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -14075,11 +14165,11 @@
 {"cid":"101313","attr":"HOMEPAGE","value":"https://cafe.naver.com/black7zpw6","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/black7zpw6","at":"2026-10-16T06:23:40.501Z","text":"숙박>캠핑,야영장"}
 {"cid":"101313","attr":"HOMEPAGE","value":"https://star-campnic.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101313","attr":"LICENSE_DATE","value":"2024-03-07","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101313","attr":"OPERATOR_ORG","value":"신권섭 (피움파트너스 주식회사)","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101313","attr":"OPERATOR_ORG","value":"신권섭","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101313","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101313","attr":"PHONE","value":"010-8114-1914","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101313","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101313","attr":"TOURISM_BIZ_NO","value":"2024-1","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101313","attr":"TOURISM_BIZ_NO","value":"2024000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101314","attr":"HOMEPAGE","value":"https://blog.naver.com/mgi74","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101314","attr":"HOMEPAGE","value":"https://blog.naver.com/mgi74","grade":"CONFIRMED","src":"naver_local","url":"https://blog.naver.com/mgi74","at":"2026-10-16T06:23:41.353Z","text":"숙박>캠핑,야영장"}
 {"cid":"101314","attr":"LICENSE_DATE","value":"2024-03-04","grade":"CONFIRMED","src":"gocamping"}
@@ -14837,7 +14927,9 @@
 {"cid":"101442","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/6691179a3cb26b001e960927","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/6691179a3cb26b001e960927","at":"2026-10-16T06:34:18.151Z","text":"숙박>캠핑,야영장"}
 {"cid":"101442","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/265915663","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/265915663","at":"2026-10-16T05:36:07.153Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101442","attr":"LICENSE_DATE","value":"2024-06-19","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101442","attr":"OPERATOR_ORG","value":"우현동 외 1 명","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101442","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101442","attr":"TOURISM_BIZ_NO","value":"2024000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101443","attr":"HOMEPAGE","value":"https://ylangjeju.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101443","attr":"HOMEPAGE","value":"https://ylangjeju.com/","grade":"CONFIRMED","src":"naver_local","url":"https://ylangjeju.com/","at":"2026-10-16T06:41:40.802Z","text":"숙박>캠핑,야영장"}
 {"cid":"101443","attr":"LICENSE_DATE","value":"2024-07-20","grade":"CONFIRMED","src":"gocamping"}
@@ -15471,9 +15563,11 @@
 {"cid":"101559","attr":"HOMEPAGE","value":"https://www.makeus.net/66404","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101559","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/421594095","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/421594095","at":"2026-10-16T05:34:49.582Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"101559","attr":"LICENSE_DATE","value":"2024-08-28","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101559","attr":"OPERATOR_ORG","value":"배준호","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101559","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101559","attr":"PHONE","value":"0507-1436-9655","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101559","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101559","attr":"TOURISM_BIZ_NO","value":"2024000005","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101560","attr":"HOMEPAGE","value":"https://www.instagram.com/jaryonglee/","grade":"CONFIRMED","src":"naver_local","url":"https://www.instagram.com/jaryonglee/","at":"2026-10-16T06:37:03.734Z","text":"숙박>캠핑,야영장"}
 {"cid":"101560","attr":"LICENSE_DATE","value":"2024-08-28","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101560","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -17052,10 +17146,10 @@
 {"cid":"101861","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1383309662","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1383309662","at":"2026-10-16T05:35:44.989Z","text":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
 {"cid":"101861","attr":"LICENSE_DATE","value":"2025-06-13","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101861","attr":"OPERATOR_ORG","value":"이천수","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101861","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101861","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101861","attr":"PHONE","value":"054-638-6628","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101861","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101861","attr":"TOURISM_BIZ_NO","value":"2025-1(글램핑장) / 2025-2(야영장)","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101861","attr":"TOURISM_BIZ_NO","value":"2025000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101862","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/685629696b5d2b001d150f54","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/685629696b5d2b001d150f54","at":"2026-10-16T06:22:20.976Z","text":"숙박>캠핑,야영장"}
 {"cid":"101862","attr":"HOMEPAGE","value":"https://www.instagram.com/ttt_camping","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101862","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1249565110","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1249565110","at":"2026-10-16T05:34:34.116Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -17314,8 +17408,9 @@
 {"cid":"101911","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101911","attr":"TOURISM_BIZ_NO","value":"2025-2","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101912","attr":"LICENSE_DATE","value":"2025-07-22","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101912","attr":"OPERATOR_ORG","value":"이주미","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101912","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101912","attr":"TOURISM_BIZ_NO","value":"2025-5","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101912","attr":"TOURISM_BIZ_NO","value":"2025000005","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101913","attr":"LICENSE_DATE","value":"2025-07-22","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101913","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101913","attr":"PHONE","value":"064-738-0551","grade":"CONFIRMED","src":"gocamping"}
@@ -18625,10 +18720,12 @@
 {"cid":"102193","attr":"OPERATOR_ORG","value":"송현란","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102193","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102193","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102194","attr":"HOMEPAGE","value":"https://daeheungcamping.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"HOMEPAGE","value":"https://www.daeheungcamping.com/","grade":"CONFIRMED","src":"naver_local","url":"https://www.daeheungcamping.com/","at":"2026-10-16T06:16:37.201Z","text":"숙박>캠핑,야영장"}
 {"cid":"102194","attr":"LICENSE_DATE","value":"2026-04-28","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"OPERATOR_ORG","value":"권성민","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102194","attr":"PHONE","value":"010-3826-6352","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102195","attr":"HOMEPAGE","value":"https://www.instagram.com/yangdaengcamp/","grade":"CONFIRMED","src":"naver_local","url":"https://www.instagram.com/yangdaengcamp/","at":"2026-10-16T06:09:58.725Z","text":"숙박>캠핑,야영장"}
@@ -18838,6 +18935,7 @@
 {"cid":"102242","attr":"HOMEPAGE","value":"https://www.instagram.com/amazingcamp.gj","grade":"CONFIRMED","src":"naver_local","url":"https://www.instagram.com/amazingcamp.gj","at":"2026-10-16T06:16:04.211Z","text":"숙박>캠핑,야영장"}
 {"cid":"102242","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1862050920","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1862050920","at":"2026-10-16T05:33:45.570Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"102242","attr":"LICENSE_DATE","value":"2026-06-23","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102242","attr":"OPERATOR_ORG","value":"김규선 외 1 명","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102242","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102242","attr":"PHONE","value":"055-632-3355","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102242","attr":"TOURISM_BIZ_NO","value":"2026000003","grade":"CONFIRMED","src":"gocamping"}
@@ -18874,11 +18972,14 @@
 {"cid":"102253","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102256","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/588081798","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/588081798","at":"2026-10-16T05:32:58.775Z","text":"여행 > 숙박 > 콘도,리조트"}
 {"cid":"102256","attr":"LICENSE_DATE","value":"2026-07-20","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102256","attr":"OPERATOR_ORG","value":"문상훈","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102256","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102256","attr":"PHONE","value":"055-672-3523","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102256","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102257","attr":"LICENSE_DATE","value":"2026-10-06","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102257","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102257","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102257","attr":"PHONE","value":"010-6579-2026","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102257","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102257","attr":"TOURISM_BIZ_NO","value":"2026000003","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102258","attr":"HOMEPAGE","value":"https://blog.naver.com/ntkim/","grade":"CONFIRMED","src":"naver_local","url":"https://blog.naver.com/ntkim/","at":"2026-10-16T06:11:39.980Z","text":"숙박>캠핑,야영장"}
 {"cid":"102258","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1677748526","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1677748526","at":"2026-10-16T05:33:11.753Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -19374,6 +19475,7 @@
 {"cid":"102389","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102389","attr":"TOURISM_BIZ_NO","value":"2015000005","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102390","attr":"LICENSE_DATE","value":"2026-11-12","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102390","attr":"OPERATOR_ORG","value":"이용재","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102390","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102390","attr":"TOURISM_BIZ_NO","value":"2026000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102391","attr":"LICENSE_DATE","value":"2015-03-24","grade":"CONFIRMED","src":"gocamping"}
@@ -19398,12 +19500,22 @@
 {"cid":"102397","attr":"LICENSE_DATE","value":"2026-11-16","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102397","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102397","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"HOMEPAGE","value":"https://santaforet.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102398","attr":"LICENSE_DATE","value":"2026-11-16","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102398","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"OPERATOR_ORG","value":"산타포레 리조트","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"PHONE","value":"070-5129-1668","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102398","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102399","attr":"LICENSE_DATE","value":"2026-11-16","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102399","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102399","attr":"TOURISM_BIZ_NO","value":"2026000002","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102400","attr":"LICENSE_DATE","value":"2026-11-18","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102400","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102400","attr":"TOURISM_BIZ_NO","value":"2026000003","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102401","attr":"LICENSE_DATE","value":"2026-11-18","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102401","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102401","attr":"TOURISM_BIZ_NO","value":"2026000005","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"hangang-banpo","attr":"HOMEPAGE","value":"http://hangang.seoul.go.kr/archives/46727","grade":"CONFIRMED","src":"naver_local","url":"http://hangang.seoul.go.kr/archives/46727","at":"2026-10-24T21:18:00.663Z","text":"여행,명소>시민공원"}
 {"cid":"hangang-banpo","attr":"HOMEPAGE","value":"https://hangang.seoul.go.kr/www/contents/646.do?mid=427","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-26"}
 {"cid":"hangang-banpo","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-26"}
@@ -25426,6 +25538,8 @@
 {"cid":"pilot-003-duruwell","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}
 {"cid":"pilot-004-haengun","attr":"HOMEPAGE","value":"https://www.camfit.co.kr/","grade":"CONFIRMED","src":"gocamping","url":"https://camfit.co.kr/camp/haengun"}
 {"cid":"pilot-004-haengun","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping","url":"https://camfit.co.kr/camp/haengun"}
+{"cid":"pilot-006-yeonin-valley","attr":"HOMEPAGE","value":"https://booking.naver.com/","grade":"CONFIRMED","src":"gocamping","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley"}
+{"cid":"pilot-006-yeonin-valley","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping","url":"https://booking.naver.com/booking/3/bizes/yeoninsan-valley"}
 {"cid":"pilot-007-soeggol","attr":"HOMEPAGE","value":"https://booking.naver.com/","grade":"CONFIRMED","src":"gocamping","url":"https://booking.naver.com/booking/3/bizes/soeggol"}
 {"cid":"pilot-007-soeggol","attr":"HOMEPAGE","value":"https://파주쇠꼴마을.com","grade":"CONFIRMED","src":"naver_local","url":"https://파주쇠꼴마을.com","at":"2026-10-16T06:48:54.251Z","text":"레저,테마"}
 {"cid":"pilot-007-soeggol","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/13561741","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/13561741","at":"2026-10-16T05:38:00.658Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -25884,11 +25998,17 @@
 {"cid":"rf-s7nsj6","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/10015416","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/10015416","at":"2026-10-24T21:17:37.229Z","text":"여행 > 관광,명소 > 자연휴양림"}
 {"cid":"rf-s7nsj6","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-s7nsj6","attr":"PHONE","value":"061-379-3734","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-thzepk","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-thzepk","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-thzepk","attr":"PHONE","value":"055-867-7881","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-ui6jx0","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030115","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-ui6jx0","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030115","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030115","at":"2026-10-24T22:04:21.345Z","text":"숙박>휴양림"}
 {"cid":"rf-ui6jx0","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1015284192","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1015284192","at":"2026-10-24T21:17:37.766Z","text":"여행 > 관광,명소 > 자연휴양림"}
 {"cid":"rf-ui6jx0","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-ui6jx0","attr":"PHONE","value":"055-355-0200","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-v1yszx","attr":"HOMEPAGE","value":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-v1yszx","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
+{"cid":"rf-v1yszx","attr":"PHONE","value":"055-867-7881","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vd74sa","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030039","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-26"}
 {"cid":"rf-vd74sa","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030039","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030039","at":"2026-10-24T22:03:35.290Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"rf-vd74sa","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/424555790","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/424555790","at":"2026-10-24T21:17:31.522Z","text":"여행 > 관광,명소 > 자연휴양림"}

@@ -1,10 +1,20 @@
 {
- "generated_at": "2026-11-26T08:42:41.447Z",
+ "generated_at": "2026-11-26T09:14:06.110Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 308,
- "recoded": 198,
- "scoped": 923,
+ "dropped": 311,
+ "recoded": 199,
+ "scoped": 872,
  "items": [
+  {
+   "cid": "3209",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://all-infor.tistory.com/196",
+   "quote": "8개 기암봉 다도해 조망, 능가사&middot;나로우주센터&middot;남열해수욕장 연계, 합리적 요금, 반려견 불가, 방문 전 체크리스트 포",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
+  },
   {
    "cid": "8122",
    "attr": "PET_POLICY",
@@ -59,17 +69,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "101498",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "ZONE_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/camfit/224444850567",
-   "quote": "반려견 동반 가능(데크사이트만)하고 여름 휴가철 최고의 피서지로 손꼽혀요.",
-   "action": "recode",
-   "why": "일부 객실·구역만 허용"
-  },
-  {
    "cid": "11",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -113,16 +112,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "102362",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/parkjp0821/224386333994",
-   "quote": "아쉽지만 김해 루미테라 베이커리 카페는 반려동물 동반이 불가한...",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
    "cid": "102118",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -160,7 +149,7 @@
    "value": "ALLOWED",
    "to": "ZONE_ONLY",
    "src": "review_search",
-   "url": "https://kr.trip.com/hotels/jecheon-si-hotel-detail-120254723/jecheon-deokdong-hidden-valley-camp-pension/",
+   "url": "https://triple.guide/hotels/1b3f9f5c-0c6d-47ba-8273-6dac0e2a3a6d?checkIn=2024-02-17&checkOut=2024-02-18&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true",
    "quote": "반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
@@ -329,16 +318,6 @@
    "quote": "- 반려견 외 다른 동물(고양이 등)은 입실이 불가합니다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "3209",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://all-infor.tistory.com/196",
-   "quote": "8개 기암봉 다도해 조망, 능가사&middot;나로우주센터&middot;남열해수욕장 연계, 합리적 요금, 반려견 불가, 방문 전 체크리스트 포",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "7830",
@@ -518,6 +497,27 @@
    "why": "크기 제한 있는 허용"
   },
   {
+   "cid": "398",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/arteplace23/224429403253",
+   "quote": "처음에는 반려견 객실만 예약하면 휴양림 곳곳을 같이 산책할 수 있을 줄 알았는데 실제 규정...것도 안 돼요 반려A·B·C는 단순히 반려견 입장이 가능한 객실이 아니라 반려견 동반 전용 객실입니다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "420",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/modestsoul/224395273153",
+   "quote": "굿뜨래웰빙마을 글램핑 충청남도 부여군 부여읍 가탑로 75 ▲ 네이버예약은 여기 특히 홈페이지예약하면...글램핑장은 반려동물은 입장불가 폭죽 사용불가하며 저녁 10시 이후 매너타임으로 경고누적시 퇴실조치될 수 있다.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "860",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -601,6 +601,16 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "7072",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hwi4490/224466235070",
+   "quote": "차량 1대 무료 주차 가능 수영장 이용시간 오후 3시~7시 (온수 미제공) 개인 캠핑 텐트 및 장비 반입 불가 반려동물 동반 불가 객실 내 육류 및 생선류 조리...및 불멍은 사전 신청 여부와 이용 방법을 확인해 주세요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "7208",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -681,8 +691,8 @@
    "value": "ALLOWED",
    "to": "ZONE_ONLY",
    "src": "review_search",
-   "url": "https://blog.naver.com/oo7547/224447184064",
-   "quote": "발견 ㅠㅜ 완전 애교덩어리였어요 ㅎㅎ 여기 강진글램핑장 림스는 애견동반도 가능하니까 강아지 키우시면 꼭 데리고 방문해보세용🙂🙂 다른 강진글램핑장과 다르게 림스글램핑만의 특별한 필란드식 사우나가 있었어요!!",
+   "url": "https://blog.naver.com/dh8955/224463702675",
+   "quote": "애견동반 가능한 객실은 별도로 정해져 있는 듯하니 반려견과 함께 방문하실 분들은 예약 전에 확인해 보시면 좋을 것 같아요.",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
   },
@@ -738,16 +748,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "100490",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/rim_cookie_/224038826612",
-   "quote": "AM 11:00 편의시설 및 서비스 독채, 개별바베큐, 글램핑, 키즈테마, 수영장, 놀이터, 와이파이, 주차 가능 O 주의 사항 개인 숯, 장작 반입 및 사용 금지 애견동반 불가 추가...",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
    "cid": "100687",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -779,6 +779,17 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "100974",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/j___hhhyun/224005384528",
+   "quote": "전남 ‘해남 고구마글램핑’ 내돈내산 솔직 후기(애견동반가능).",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "101057",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -800,15 +811,14 @@
    "why": "일부 객실·구역만 허용"
   },
   {
-   "cid": "101156",
+   "cid": "101163",
    "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
+   "value": "NOT_ALLOWED",
    "src": "review_search",
-   "url": "https://blog.naver.com/angelos_u_ra/224055423114",
-   "quote": "점심시간 추석 음식 먹으며 간단히 해결 캠핑장에서 전이랑 잡채, 식혜 먹으니 또 느낌이 다르네 - 장성 파랑새 캠핑장은 애견 동반 가능한 캠핑장으로 5kg 이하 반려견 (소형견)은 함께 캠핑을 즐길 수 있음...",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
+   "url": "https://blog.naver.com/camfit/224446974463",
+   "quote": "상이) 주요 시설 샤워실, 바베큐, 매점 매너타임 22시~08시 (조용히 해야 하는 시간) 반려동물 불가 ✨ 핵심 매력 3가지 충남 글램핑 추천 장소로 불리는 옥산호수정원(진달래관광농원)의 진짜 매력을 세 가지로 꼽아봤어요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "101280",
@@ -1124,6 +1134,37 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
+   "cid": "7607",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/plzhelphelp/224474886017",
+   "quote": "🌷 한눈에 보기 삿갓펜션 캠핑장 주소: 강원특별자치도 영월군 김삿갓면 김삿갓로 362 사이트: 일반 야영 사이트 13 반려동물: 불가능 지도: 카카오맵 한국관광공사 …",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "7607",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sallymylove/224392487914",
+   "quote": "️5kg 이하 반려견 동반 가능",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "379",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://www.waug.com/ko/accommodations/1484",
+   "quote": "* 전객실 애견동반 불가능합니다.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "100322",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1235,6 +1276,17 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
+   "cid": "7029",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sandeulbaram_/224253042089",
+   "quote": "용인 반딧불캠핑장 벚꽃캠핑 후기 (애견동반 가능).",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "7222",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1317,12 +1369,32 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "400",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://tmhub.co.kr/1435",
+   "quote": "반려동물 동반 금지 , 물놀이 시설 폐쇄, 산불조심기간(2026.11.1~2027.5.15) 바비큐 전체 불가 (숲나들e).",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "1112",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "review_search",
    "url": "https://www.waug.com/ko/accommodations/1484",
    "quote": "* 전객실 애견동반 불가능합니다.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "7583",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/caulfzg618/224477144960",
+   "quote": "퇴실일 09:00-11:00 반려동물 동반 입실 불가 외부 전경 대구 근교 카라반 글램핑…",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
@@ -1655,16 +1727,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "101635",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/hy6_6un/224191908354",
-   "quote": "보이는 금강호국민여가캠핑장 사이트와 세세한 후기 시작 할 게요 장작 불멍가능 애견동반금지 A.B 구역...",
-   "action": "drop",
-   "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
-  },
-  {
    "cid": "3354",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1783,21 +1845,10 @@
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "review_search",
-   "url": "https://blog.naver.com/entp_p_ing/224397915697",
-   "quote": "📍 청계산골든밸리가족캠핑장 주소: 경기 성남시 수정구 달래내로221번길 17-5 위치: 성남 수정구 청계산...반려동물 동반 불가 예약하는 사이트나 객실 타입에 따라 가격이나 입퇴실 시간은 조금씩 다를 수 있으니 이 부분은 예…",
+   "url": "https://blog.naver.com/ker2992/224374958334",
+   "quote": "글램핑 가능 애견동반 불가 캠핑장 입구에...",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "2917",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/yeonheeqq/224293385796",
-   "quote": "청산리 오토캠핑장 입실 13:00 ~ 퇴실 12:00 타프 존 기준 인원 4명 반려동물 동반 가능 (20kg 미만 기준 2마리 가능) 기본 차량 1대 (추가 차량 시 추가 비용 5,000원) 소나무 숲들이 우거져 있고 근방에는 바다, 밭, 자연 말고…",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
   },
   {
    "cid": "101898",
@@ -1861,6 +1912,17 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "1096",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/yournagel88/223203937075",
+   "quote": "포인트 : 매너타임이 있어요, 소형 애견동반 가능, 홈페이지 예약...",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "101031",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1887,8 +1949,8 @@
    "value": "ALLOWED",
    "to": "SMALL_ONLY",
    "src": "review_search",
-   "url": "https://blog.naver.com/romi0890/223723268218",
-   "quote": "파쇄석캠핑은 애견동반이 가능하며 (10kg미만) 추가요금이 발생하니…",
+   "url": "https://blog.naver.com/tnrdml63/224102065251",
+   "quote": "파쇄석캠핑은 애견동반이 가능하며 (10kg미만) 추가요금이 발생하니 미리 문의 부탁드립니다!",
    "action": "recode",
    "why": "크기 제한 있는 허용"
   },
@@ -2013,7 +2075,7 @@
    "to": "ZONE_ONLY",
    "src": "review_search",
    "url": "https://blog.naver.com/bbororomom/224392461459",
-   "quote": "다시 보는 것만으로도 선선한 날씨에 또 캠핑 가고 싶어지네요 :) 용인단풍숲캠핑장 경기도 용인시 처인구 원삼면 보개원삼로1462번길 14-23 단풍숲캠핑장...시설,수영장(하계),반려견동반 가능 사이트 많고 간격 넓음 캠핏 예약 가능 매너타임 23:…",
+   "quote": "용인단풍숲캠핑장 입실 : 12:00 퇴실 12:00 놀이시설,수영장(하계),반려견동반 가능 사이트 많고 간격 넓음 캠핏 예약 가능 매…",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
   },
@@ -2175,17 +2237,6 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
-   "cid": "12",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/ccafemoca/224421748072",
-   "quote": "낮에는 따스한 햇살이 내려쬐어 물놀이를...글램핑 15시 입실 익일 11시 퇴실 애견출입 5kg 이하 1마리 오토캠핑만 가능 매너타임 오후 10시부터 오전 7시까지 바베큐그…",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
-  },
-  {
    "cid": "238",
    "attr": "PET_POLICY",
    "value": "SMALL_ONLY",
@@ -2216,15 +2267,14 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "101084",
+   "cid": "3383",
    "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "ZONE_ONLY",
+   "value": "NOT_ALLOWED",
    "src": "review_search",
-   "url": "https://blog.naver.com/sayuboyoun/224425223938",
-   "quote": "청포대휴캠핑장 오토캠핑장, 해루질 장비 무료 대여, 갯벌체험, 애견 동반 가능, 데크 청포대휴캠핑장 충청남도 태안군 남면 청포대길 63-6 휴캠핑장",
-   "action": "recode",
-   "why": "일부 객실·구역만 허용"
+   "url": "https://all-infor.tistory.com/98",
+   "quote": "매월 4일 오픈&middot;야생화단지&middot;내린천 래프팅 연계&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "101908",
@@ -2341,6 +2391,16 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "101879",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/lovely_weekday/224412703569",
+   "quote": "그리고 강아지는 수영장 입수가 불가능하기 때문에 수영장은...객실이 랜덤으로 배정돼요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "101568",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2371,6 +2431,17 @@
    "quote": "퇴실 12시] 입 퇴실시간 준수 (추가 요금이 부과 될 수 있음 ) - 사이트 옆 주차 1-7번 사이트는 캠핑장 바깥도로로 주차 하기 - 매너타임 23시-8시 - 반려동물 금지...",
    "action": "drop",
    "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
+  },
+  {
+   "cid": "101025",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/w150404/224265679029",
+   "quote": "보은국민여가캠핑장 충청북도 보은군 보은읍 속리산로 30 매월 1일 09:00 다음달 예약 가능 1인 최대 3사이트 예약 가능 입실 시 예약자 신분증 확인 1사이트 1...반려동물 동반 F1~16 사이트만 가능 예약 후 24시간 이내 결제 매너 타임 …",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
   },
   {
    "cid": "1264",
@@ -2524,7 +2595,7 @@
    "to": "ZONE_ONLY",
    "src": "review_search",
    "url": "https://blog.naver.com/mingming5510/224389662971",
-   "quote": "지난주 주말에는 비가 많이 오는 날 다녀온 휘게캠피크 휘게캠피크 경기도 화성시 만세구 우정읍 궁평항로 81-70 #휘게캠피크 입실 14:00 퇴실 12:00 (다음...2시까지 이용 가능) 애견 동반 가능 사이트 넓은 편 기본 주차 1대 차박/캠핑카…",
+   "quote": "지난주 주말에는 비가 많이 오는 날 다녀온 휘게캠피크 휘게캠피크 경기도 화성시 만세구 우정읍 궁평항로 81-70 #휘게캠피크 입실 14:00 퇴실 12:00 (다음날 예약 없을 시 2시까지 이용 가능) 애견 동반 가능 사이트 넓은 편 기본 주차 1대…",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
   },
@@ -2637,8 +2708,8 @@
    "value": "ALLOWED",
    "to": "ZONE_ONLY",
    "src": "review_search",
-   "url": "https://blog.naver.com/toryne_camping/224416799759",
-   "quote": "벚꽃캠핑/계곡캠핑/항아리삼겹살/차박가능 카라반가능/애견동반가능/서울근교 가평 지지밸리 캠핑장만의 특별한 예약 방법 지지밸리...",
+   "url": "https://blog.naver.com/ysrina20/224475543493",
+   "quote": "호수 계곡 광장 3가지 사이트 종류 애견동반은 광장사이트만 가능...장작이나 맥주 등 간단한거 사기는 좋아요 가평 유명산밸리 캠핑장 아이랑 이번 유명산밸리 캠핑에서 가장 기억에 남…",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
   },
@@ -2941,6 +3012,17 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "101501",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sallymylove/224392487914",
+   "quote": "️5kg 이하 반려견 동반 가능",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
    "cid": "101616",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2952,6 +3034,17 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "101639",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/happy_kmom/224398639412",
+   "quote": "온수수영장, 개별화장실,샤워장...썰매, 트램펄린 등 아이들 놀이시설 구비 애견 5kg 미만 동반 가능 매너타임 오후 10시 ~ 오전 7시까지 (…",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
    "cid": "7124",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2961,6 +3054,16 @@
    "quote": "만 E2(애견동반가능)",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "101582",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/persistence10/223766057390",
+   "quote": "수푸로카라반 입실 16 : 00 퇴실 11 : 00 네이버예약 가능 웰컴와인 무료 증정 공용 샤워장&세탁실&주방 반려동물 동반 불가 쏘카일레클 자전거 겨울이...하고싶고, 캠핑도 하고 싶었는데, 겸사겸사 바다구경도 할 겸 속초에 있는 카라반 찾아보다…",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "101590",
@@ -3367,6 +3470,17 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "100498",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/ye_es/224243202868",
+   "quote": "원주 칠봉 두루뭉 캠핑장 선착순 강자갈 사이트 (5m X 10m) ⏰입실 13:00-21:00 퇴실 12:00 반려동물 동반 가능 사이트 옆 주차 칠봉...",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "100566",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -3490,16 +3604,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "101316",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/spotnote2006/224417448000",
-   "quote": "카라반은 반려동물 동반이 불가능하고, 캠핑사이트는 제한된 범위 안에서 가능하지만 주변에 피해가 가지 않도록 안내되어 있어요.",
-   "action": "drop",
-   "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
-  },
-  {
    "cid": "1151",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -3592,6 +3696,16 @@
    "quote": "포천 달사랑캠핑장 깔끔하고 좋았던 가족캠핑장 애견동반 가능, 신읍시장 5일장 때 맞춰갈것.",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "100341",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/snagsang_/224345729138",
+   "quote": "헤어드라이기 제공, 선풍기 있음 매너타임이 있으므로 샤워실 이용시간 정해져 있으면 편의시설은 반려견 출입 불가!",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "100441",
@@ -3978,16 +4092,6 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
-   "cid": "park-41220-00067-101pu",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/sieun3535/224249854712",
-   "quote": "입실 14시, 퇴실 11시 캠핑용품 대여: 매점에서 가능 매점 031-657-0844 주차안내: 무료 반려동물: 입장 불가 주소: 경기 평택시 팽성읍 내리길...",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
    "cid": "park-46130-00170-op7lw",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -3996,27 +4100,6 @@
    "quote": "또한 ▲만 13세 미만 어린이나 영유아 단독입장 불가 ▲출입명부 작성 ▲반려견 인식표 착용 ▲놀이터 내 음식물 반입 금지 등 운영 수칙을 준수해야 한다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "park-43760-00025-14z6t",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://tmhub.co.kr/1434",
-   "quote": "휴양림 이용 규정 (2026년 공지): 반려동물 동반 금지, 산불조심기간(2026.11.1~2027.5.15) 바비큐 전체 불가 , 전체 구역 와이파이 사용 불가",
-   "action": "drop",
-   "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
-  },
-  {
-   "cid": "park-47111-00027-15m52",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "ZONE_ONLY",
-   "src": "review_search",
-   "url": "https://triple.guide/hotels/e100fe76-7a30-457d-8342-fa9052ebe1e2?checkIn=2024-02-24&checkOut=2024-02-25&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true",
-   "quote": "반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
-   "action": "recode",
-   "why": "일부 객실·구역만 허용"
   },
   {
    "cid": "park-11290-00001-y1mf",
@@ -4028,16 +4111,6 @@
    "quote": "바람9번 여름캠핑(카즈미 비바돔플러스) 성북동 숲속야영장 체크인 오후2시 체크아웃 낮12시 매너타임 오후9시-오전7시 매점 없음 화로대 사용 불가 반려견 동반 가능 카라반/캠핑카 이용 불가 소규모 모임(6인 이하) 캠크닉 이용시 물품 대여 가능 바람…",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "osm-r7004603",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://neweveryinfo.com/124",
-   "quote": "필수 전기릴선(오토캠핑), 데크팩 등 장비 챙기기 반려동물 출입 불가, 매너타임(23:00~07:00) 엄수 매점 운영시간(9:00~22:00) 참고, 식재료·생필품 넉넉히...임진각 평화누리공원, 헤이리 예술마을 등 차량 20분 내외 파주 출판도시…",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "osm-w286555214",
@@ -4079,38 +4152,6 @@
    "quote": "시설 트램폴린, 샤워실, 매점, 놀이터 매너타임 23:00 ~ 07:00 체크인/아웃 캠핏에서 확인해주세요 반려동물 펫 불가 (전 사이트 기준) 주변 관광지 바다향기수목원, 갯벌체험, 구봉도 해루질체험, 유리섬박물관, 종이박물관 예약 캠핏 앱/웹 예…",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "osm-w610095375",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/hsansls/224038268196",
-   "quote": "애견 동반으로 내부 이용 시에는 방바닥을 꼭 닦은 후 퇴실하기 털갈이 또는 털 빠짐 심한 반려견은 입실 불가 아침 일찍 오시는 분들 카운터...옆에는 아이스크림도 판매 중이고요~ 화장실은 건물의 층마다 있어요.",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "osm-w32660867",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
-   "src": "review_search",
-   "url": "https://leports.sailing-blog.click/4407",
-   "quote": "반려동물은 대형견이나 소형견 구분 없이 동반 입장이 가능하지만 목줄 착용과 배변 봉투를 지참해야 하며, 대형견은 입마개가 필수다.",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
-  },
-  {
-   "cid": "osm-w800017934",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/yongtanglee/223707814377",
-   "quote": "입실 :오후 1시부터 퇴실: 다음날 오전 11시까지 10kg 이하 애견 동반 가능 매너 타임: 오후 10시 30 ~오전 06...",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
   },
   {
    "cid": "rf-14xm2hg",

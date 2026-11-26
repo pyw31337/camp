@@ -102,6 +102,7 @@
 {"cid":"231","attr":"THEME_SUNSET","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"231","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"231","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"232","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -358,6 +359,12 @@
 {"cid":"810","attr":"THEME_SUNSET","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"810","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"810","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"THEME_SKI","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"THEME_SUNRISE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"THEME_SUNSET","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"811","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"813","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"813","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -379,6 +386,11 @@
 {"cid":"829","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"833","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"833","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"856","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"860","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -842,6 +854,7 @@
 {"cid":"2081","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2081","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2081","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2109","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2110","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2116","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2116","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1198,6 +1211,10 @@
 {"cid":"2997","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2999","attr":"THEME_WATER_LEISURE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3004","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3005","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1627,6 +1644,10 @@
 {"cid":"7071","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7071","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7071","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7074","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7075","attr":"THEME_SUNSET","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7079","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7079","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1907,6 +1928,7 @@
 {"cid":"7542","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7542","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7543","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7560","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"THEME_SUNRISE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"THEME_WATER_LEISURE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1997,6 +2019,8 @@
 {"cid":"7815","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7815","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7815","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7818","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7824","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7826","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7836","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2162,6 +2186,11 @@
 {"cid":"7983","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7983","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7988","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7990","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"THEME_ACTIVITY","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"THEME_SKI","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2361,6 +2390,8 @@
 {"cid":"100011","attr":"THEME_SUNSET","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100011","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100011","attr":"THEME_WATER_LEISURE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100012","attr":"THEME_SUNRISE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100013","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100013","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100015","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2457,8 +2488,11 @@
 {"cid":"100177","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100177","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100177","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100179","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100179","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100179","attr":"THEME_SUMMER_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100179","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100179","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100181","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100181","attr":"THEME_FISHING","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100181","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5140,3 +5174,9 @@
 {"cid":"102377","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102383","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102383","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"THEME_AUTUMN_LEAVES","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"THEME_SPRING_FLOWER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"THEME_SUNRISE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"THEME_SUNSET","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"THEME_WALKING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102398","attr":"THEME_WINTER_SNOW","value":true,"grade":"CONFIRMED","src":"gocamping"}
