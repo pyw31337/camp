@@ -97,7 +97,13 @@ export const isShortVideo = (v) => /\/shorts\//.test(v?.url ?? "") || (v?.dur !=
 export function videoQueries(camp) {
   const name = cleanName(camp?.name);
   if (!name) return [];
-  return [{ q: name, page: 1 }, { q: name, page: 2, ifFull: true }, { q: `${name} 쇼츠`, page: 1 }];
+  const qs = [{ q: name, page: 1 }, { q: name, page: 2, ifFull: true }, { q: `${name} 쇼츠`, page: 1 }];
+  const stem = regionStem(camp?.address?.sigungu);
+  const core = distinctiveTokens(name, camp?.address?.sigungu).join("");
+  if (stem && core && !name.includes(stem) && !/(캠핑장|야영장|글램핑장|캠프장)$/.test(name)) {
+    qs.push({ q: `${stem} ${core} 캠핑장`, page: 1 });
+  }
+  return qs;
 }
 /** 카카오 vclip 문서 → { shorts, videos } (기본은 YouTube 중심, includeAll: true 시 네이버·카카오 등 전체 영상 포함) */
 export function videosFromVclip(camp, docs, opt = {}) {
