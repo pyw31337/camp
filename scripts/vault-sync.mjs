@@ -102,9 +102,13 @@ function main() {
   mkdirSync(CAMP_VAULT_DATA, { recursive: true });
   mkdirSync(CAMP_VAULT_SCRIPTS, { recursive: true });
 
-  // 1) pipeline/out -> services/camp/data/pipeline-out
+  // 1) 원본 데이터(data/, pipeline/registry/, pipeline/out/, camping-atlas/public/explore/data/) -> services/camp/data/
+  const syncedData = syncDir(join(REPO_ROOT, "data"), join(CAMP_VAULT_DATA, "raw-data"));
+  const syncedRegistry = syncDir(join(REPO_ROOT, "pipeline", "registry"), join(CAMP_VAULT_DATA, "raw-registry"));
   const outDst = join(CAMP_VAULT_DATA, "pipeline-out");
   const syncedOut = syncDir(pipelineOut, outDst);
+  const syncedCache = syncDir(join(REPO_ROOT, "pipeline", ".cache"), join(CAMP_VAULT_DATA, "pipeline-cache"));
+  const syncedExplore = syncDir(join(REPO_ROOT, "camping-atlas", "public", "explore", "data"), join(CAMP_VAULT_DATA, "service-explore-data"));
 
   // 2) ~/.letscamp 상태·로그·유지보수 기록 -> services/camp/data/nightshift
   const nsDst = join(CAMP_VAULT_DATA, "nightshift");
@@ -133,7 +137,11 @@ function main() {
     size_mb: dataStats.mb,
     files_count: dataStats.files,
     targets: {
+      raw_data: syncedData ? dirStats(join(CAMP_VAULT_DATA, "raw-data")) : null,
+      raw_registry: syncedRegistry ? dirStats(join(CAMP_VAULT_DATA, "raw-registry")) : null,
       pipeline_out: syncedOut ? dirStats(outDst) : null,
+      pipeline_cache: syncedCache ? dirStats(join(CAMP_VAULT_DATA, "pipeline-cache")) : null,
+      service_explore_data: syncedExplore ? dirStats(join(CAMP_VAULT_DATA, "service-explore-data")) : null,
       nightshift: dirStats(nsDst),
     },
     migration_instructions: "새 Mac에서 외장하드(/Volumes/My Passport for Mac/LETS_DATA_VAULT)를 연결하면 services/camp/data 에서 즉시 이어서 작업하거나 rsync로 복원할 수 있습니다.",
