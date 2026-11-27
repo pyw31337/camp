@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T02:59:16.368Z",
+  "generated_at": "2026-11-27T05:52:40.338Z",
   "summary": {
     "total": 7758,
     "queued": 6606,
@@ -9203,9 +9203,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:46:10.936Z",
+        "last_web_at": "2026-11-27T05:13:09.804Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:46:10.936Z",
+        "next_web_due": "2026-12-11T05:13:09.804Z",
         "priority_score": 105
       }
     },
@@ -9359,9 +9359,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:26.445Z",
+        "last_web_at": "2026-11-27T05:17:32.630Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:26.445Z",
+        "next_web_due": "2026-12-11T05:17:32.630Z",
         "priority_score": 95
       }
     },
@@ -9410,9 +9410,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:30.419Z",
+        "last_web_at": "2026-11-27T05:22:21.987Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:30.419Z",
+        "next_web_due": "2026-12-11T05:22:21.987Z",
         "priority_score": 105
       }
     },
@@ -9504,7 +9504,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 5,
+        "iq": 7,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": false,
@@ -9555,7 +9555,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 0,
+        "iq": 1,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": false,
@@ -9606,7 +9606,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 2,
+        "iq": 3,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": false,
@@ -9657,7 +9657,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 3,
+        "iq": 4,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": false,
@@ -9770,9 +9770,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:40:44.277Z",
+        "last_web_at": "2026-11-27T05:15:53.149Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:40:44.277Z",
+        "next_web_due": "2026-12-11T05:15:53.149Z",
         "priority_score": 105
       }
     },
@@ -10514,9 +10514,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:48:01.718Z",
+        "last_web_at": "2026-11-27T05:13:51.138Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:48:01.718Z",
+        "next_web_due": "2026-12-11T05:13:51.138Z",
         "priority_score": 105
       }
     },
@@ -10565,9 +10565,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:56.474Z",
+        "last_web_at": "2026-11-27T05:17:03.348Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:56.474Z",
+        "next_web_due": "2026-12-11T05:17:03.348Z",
         "priority_score": 95
       }
     },
@@ -10667,9 +10667,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:49:39.372Z",
+        "last_web_at": "2026-11-27T05:14:38.003Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:49:39.372Z",
+        "next_web_due": "2026-12-11T05:14:38.003Z",
         "priority_score": 105
       }
     },
@@ -10988,9 +10988,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:58.294Z",
+        "last_web_at": "2026-11-27T05:19:54.868Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:58.294Z",
+        "next_web_due": "2026-12-11T05:19:54.868Z",
         "priority_score": 105
       }
     },
@@ -11567,9 +11567,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:39:56.328Z",
+        "last_web_at": "2026-11-27T05:15:12.687Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:39:56.328Z",
+        "next_web_due": "2026-12-11T05:15:12.687Z",
         "priority_score": 105
       }
     },
@@ -11939,9 +11939,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:21.989Z",
+        "last_web_at": "2026-11-27T05:19:19.130Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:21.989Z",
+        "next_web_due": "2026-12-11T05:19:19.130Z",
         "priority_score": 79
       }
     },
@@ -11990,9 +11990,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T05:28:00+09:00",
-        "last_web_at": "2026-11-22T23:45:46.942Z",
+        "last_web_at": "2026-11-27T05:12:58.331Z",
         "next_social_due": "2026-12-10T20:28:00.000Z",
-        "next_web_due": "2026-12-06T23:45:46.942Z",
+        "next_web_due": "2026-12-11T05:12:58.331Z",
         "priority_score": 95
       }
     },
@@ -12200,9 +12200,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:48:14.006Z",
+        "last_web_at": "2026-11-27T05:13:57.118Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:48:14.006Z",
+        "next_web_due": "2026-12-11T05:13:57.118Z",
         "priority_score": 105
       }
     },
@@ -12305,9 +12305,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:49:03.522Z",
+        "last_web_at": "2026-11-27T05:14:20.865Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:49:03.522Z",
+        "next_web_due": "2026-12-11T05:14:20.865Z",
         "priority_score": 95
       }
     },
@@ -12515,9 +12515,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:50:03.704Z",
+        "last_web_at": "2026-11-27T05:14:49.706Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:50:03.704Z",
+        "next_web_due": "2026-12-11T05:14:49.706Z",
         "priority_score": 105
       }
     },
@@ -12609,7 +12609,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 2,
+        "iq": 3,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": false,
@@ -12983,9 +12983,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:14.664Z",
+        "last_web_at": "2026-11-27T05:16:22.556Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:14.664Z",
+        "next_web_due": "2026-12-11T05:16:22.556Z",
         "priority_score": 105
       }
     },
@@ -13508,9 +13508,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:00.219Z",
+        "last_web_at": "2026-11-27T05:21:52.711Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:00.219Z",
+        "next_web_due": "2026-12-11T05:21:52.711Z",
         "priority_score": 95
       }
     },
@@ -13805,9 +13805,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:11.446Z",
+        "last_web_at": "2026-11-27T05:21:05.362Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:11.446Z",
+        "next_web_due": "2026-12-11T05:21:05.362Z",
         "priority_score": 50
       }
     },
@@ -13895,7 +13895,7 @@
         "주간 OSM 추출본(보조)"
       ],
       "current": {
-        "iq": 7,
+        "iq": 8,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -14157,9 +14157,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:53.005Z",
+        "last_web_at": "2026-11-27T05:20:47.774Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:53.005Z",
+        "next_web_due": "2026-12-11T05:20:47.774Z",
         "priority_score": 50
       }
     },
@@ -14195,7 +14195,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 11,
+        "iq": 12,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -14301,9 +14301,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:08.883Z",
+        "last_web_at": "2026-11-27T05:16:16.966Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:08.883Z",
+        "next_web_due": "2026-12-11T05:16:16.966Z",
         "priority_score": 60
       }
     },
@@ -14399,9 +14399,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:16.893Z",
+        "last_web_at": "2026-11-27T05:20:12.781Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:16.893Z",
+        "next_web_due": "2026-12-11T05:20:12.781Z",
         "priority_score": 60
       }
     },
@@ -14537,9 +14537,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:51.854Z",
+        "last_web_at": "2026-11-27T05:18:49.864Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:51.854Z",
+        "next_web_due": "2026-12-11T05:18:49.864Z",
         "priority_score": 44
       }
     },
@@ -14632,9 +14632,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:08.460Z",
+        "last_web_at": "2026-11-27T05:17:15.145Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:08.460Z",
+        "next_web_due": "2026-12-11T05:17:15.145Z",
         "priority_score": 50
       }
     },
@@ -14716,7 +14716,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 3,
+        "iq": 4,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -14816,9 +14816,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:48:12.861Z",
+        "last_web_at": "2026-11-27T05:23:03.189Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:48:12.861Z",
+        "next_web_due": "2026-12-11T05:23:03.189Z",
         "priority_score": 60
       }
     },
@@ -15055,9 +15055,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:54.109Z",
+        "last_web_at": "2026-11-27T05:21:46.790Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:54.109Z",
+        "next_web_due": "2026-12-11T05:21:46.790Z",
         "priority_score": 50
       }
     },
@@ -15101,9 +15101,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:54.254Z",
+        "last_web_at": "2026-11-27T05:22:45.191Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:54.254Z",
+        "next_web_due": "2026-12-11T05:22:45.191Z",
         "priority_score": 50
       }
     },
@@ -15346,9 +15346,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:47.760Z",
+        "last_web_at": "2026-11-27T05:21:40.517Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:47.760Z",
+        "next_web_due": "2026-12-11T05:21:40.517Z",
         "priority_score": 50
       }
     },
@@ -15444,10 +15444,10 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": null,
+        "last_web_at": "2026-11-27T05:13:21.352Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": null,
-        "priority_score": 72
+        "next_web_due": "2026-12-11T05:13:21.352Z",
+        "priority_score": 60
       }
     },
     {
@@ -15542,9 +15542,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:23.860Z",
+        "last_web_at": "2026-11-27T05:21:17.426Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:23.860Z",
+        "next_web_due": "2026-12-11T05:21:17.426Z",
         "priority_score": 50
       }
     },
@@ -15640,9 +15640,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T05:28:00+09:00",
-        "last_web_at": "2026-11-23T03:48:36.930Z",
+        "last_web_at": "2026-11-27T05:23:26.463Z",
         "next_social_due": "2026-12-10T20:28:00.000Z",
-        "next_web_due": "2026-12-07T03:48:36.930Z",
+        "next_web_due": "2026-12-11T05:23:26.463Z",
         "priority_score": 44
       }
     },
@@ -15678,7 +15678,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 4,
+        "iq": 5,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -16081,9 +16081,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:49:51.511Z",
+        "last_web_at": "2026-11-27T05:14:43.862Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:49:51.511Z",
+        "next_web_due": "2026-12-11T05:14:43.862Z",
         "priority_score": 36
       }
     },
@@ -16127,9 +16127,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:38.890Z",
+        "last_web_at": "2026-11-27T05:17:44.899Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:38.890Z",
+        "next_web_due": "2026-12-11T05:17:44.899Z",
         "priority_score": 60
       }
     },
@@ -16271,9 +16271,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:47.179Z",
+        "last_web_at": "2026-11-27T05:20:42.201Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:47.179Z",
+        "next_web_due": "2026-12-11T05:20:42.201Z",
         "priority_score": 50
       }
     },
@@ -16317,9 +16317,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:40:08.141Z",
+        "last_web_at": "2026-11-27T05:15:24.039Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:40:08.141Z",
+        "next_web_due": "2026-12-11T05:15:24.039Z",
         "priority_score": 60
       }
     },
@@ -16513,9 +16513,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:40:56.923Z",
+        "last_web_at": "2026-11-27T05:16:05.439Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:40:56.923Z",
+        "next_web_due": "2026-12-11T05:16:05.439Z",
         "priority_score": 60
       }
     },
@@ -16663,9 +16663,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:06.066Z",
+        "last_web_at": "2026-11-27T05:21:58.515Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:06.066Z",
+        "next_web_due": "2026-12-11T05:21:58.515Z",
         "priority_score": 60
       }
     },
@@ -16709,9 +16709,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:48:18.976Z",
+        "last_web_at": "2026-11-27T05:23:09.019Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:48:18.976Z",
+        "next_web_due": "2026-12-11T05:23:09.019Z",
         "priority_score": 50
       }
     },
@@ -17098,9 +17098,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:47:49.869Z",
+        "last_web_at": "2026-11-27T05:13:45.524Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:47:49.869Z",
+        "next_web_due": "2026-12-11T05:13:45.524Z",
         "priority_score": 60
       }
     },
@@ -17438,9 +17438,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:48:51.642Z",
+        "last_web_at": "2026-11-27T05:14:15.172Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:48:51.642Z",
+        "next_web_due": "2026-12-11T05:14:15.172Z",
         "priority_score": 60
       }
     },
@@ -17484,9 +17484,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:45:59.151Z",
+        "last_web_at": "2026-11-27T05:13:04.222Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:45:59.151Z",
+        "next_web_due": "2026-12-11T05:13:04.222Z",
         "priority_score": 50
       }
     },
@@ -17576,9 +17576,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:23.249Z",
+        "last_web_at": "2026-11-27T05:20:19.133Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:23.249Z",
+        "next_web_due": "2026-12-11T05:20:19.133Z",
         "priority_score": 50
       }
     },
@@ -17766,9 +17766,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:50.309Z",
+        "last_web_at": "2026-11-27T05:16:57.304Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:50.309Z",
+        "next_web_due": "2026-12-11T05:16:57.304Z",
         "priority_score": 50
       }
     },
@@ -18020,9 +18020,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:29.680Z",
+        "last_web_at": "2026-11-27T05:21:23.041Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:29.680Z",
+        "next_web_due": "2026-12-11T05:21:23.041Z",
         "priority_score": 50
       }
     },
@@ -18164,9 +18164,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:26.690Z",
+        "last_web_at": "2026-11-27T05:16:34.259Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:26.690Z",
+        "next_web_due": "2026-12-11T05:16:34.259Z",
         "priority_score": 60
       }
     },
@@ -18210,9 +18210,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:38.300Z",
+        "last_web_at": "2026-11-27T05:16:45.549Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:38.300Z",
+        "next_web_due": "2026-12-11T05:16:45.549Z",
         "priority_score": 50
       }
     },
@@ -18256,9 +18256,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:57.072Z",
+        "last_web_at": "2026-11-27T05:18:02.573Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:57.072Z",
+        "next_web_due": "2026-12-11T05:18:02.573Z",
         "priority_score": 44
       }
     },
@@ -18533,7 +18533,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 3,
+        "iq": 5,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -18979,9 +18979,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:46:59.949Z",
+        "last_web_at": "2026-11-27T05:13:33.357Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:46:59.949Z",
+        "next_web_due": "2026-12-11T05:13:33.357Z",
         "priority_score": 60
       }
     },
@@ -19025,9 +19025,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:41.030Z",
+        "last_web_at": "2026-11-27T05:20:36.366Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:41.030Z",
+        "next_web_due": "2026-12-11T05:20:36.366Z",
         "priority_score": 50
       }
     },
@@ -19215,9 +19215,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T05:28:00+09:00",
-        "last_web_at": "2026-11-23T03:40:50.613Z",
+        "last_web_at": "2026-11-27T05:15:59.236Z",
         "next_social_due": "2026-12-10T20:28:00.000Z",
-        "next_web_due": "2026-12-07T03:40:50.613Z",
+        "next_web_due": "2026-12-11T05:15:59.236Z",
         "priority_score": 60
       }
     },
@@ -19365,9 +19365,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:34.262Z",
+        "last_web_at": "2026-11-27T05:19:31.187Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:34.262Z",
+        "next_web_due": "2026-12-11T05:19:31.187Z",
         "priority_score": 60
       }
     },
@@ -19411,9 +19411,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:36.313Z",
+        "last_web_at": "2026-11-27T05:22:27.790Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:36.313Z",
+        "next_web_due": "2026-12-11T05:22:27.790Z",
         "priority_score": 50
       }
     },
@@ -19457,9 +19457,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:49:15.306Z",
+        "last_web_at": "2026-11-27T05:14:26.462Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:49:15.306Z",
+        "next_web_due": "2026-12-11T05:14:26.462Z",
         "priority_score": 44
       }
     },
@@ -19604,9 +19604,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:45.498Z",
+        "last_web_at": "2026-11-27T05:18:43.739Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:45.498Z",
+        "next_web_due": "2026-12-11T05:18:43.739Z",
         "priority_score": 60
       }
     },
@@ -21120,9 +21120,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:04.944Z",
+        "last_web_at": "2026-11-27T05:20:59.278Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:04.944Z",
+        "next_web_due": "2026-12-11T05:20:59.278Z",
         "priority_score": 50
       }
     },
@@ -21164,9 +21164,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:21.517Z",
+        "last_web_at": "2026-11-27T05:18:26.242Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:21.517Z",
+        "next_web_due": "2026-12-11T05:18:26.242Z",
         "priority_score": 52
       }
     },
@@ -23151,9 +23151,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:17.670Z",
+        "last_web_at": "2026-11-27T05:21:11.282Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:17.670Z",
+        "next_web_due": "2026-12-11T05:21:11.282Z",
         "priority_score": 42
       }
     },
@@ -23239,9 +23239,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:15.946Z",
+        "last_web_at": "2026-11-27T05:19:13.255Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:15.946Z",
+        "next_web_due": "2026-12-11T05:19:13.255Z",
         "priority_score": 60
       }
     },
@@ -23556,9 +23556,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:09.750Z",
+        "last_web_at": "2026-11-27T05:19:07.278Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:09.750Z",
+        "next_web_due": "2026-12-11T05:19:07.278Z",
         "priority_score": 60
       }
     },
@@ -26585,9 +26585,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:33.584Z",
+        "last_web_at": "2026-11-27T05:18:38.046Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:33.584Z",
+        "next_web_due": "2026-12-11T05:18:38.046Z",
         "priority_score": 42
       }
     },
@@ -26669,9 +26669,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:39:44.232Z",
+        "last_web_at": "2026-11-27T05:15:01.228Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:39:44.232Z",
+        "next_web_due": "2026-12-11T05:15:01.228Z",
         "priority_score": 42
       }
     },
@@ -26885,9 +26885,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:09.752Z",
+        "last_web_at": "2026-11-27T05:18:14.863Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:09.752Z",
+        "next_web_due": "2026-12-11T05:18:14.863Z",
         "priority_score": 36
       }
     },
@@ -26972,9 +26972,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:46.192Z",
+        "last_web_at": "2026-11-27T05:19:43.070Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:46.192Z",
+        "next_web_due": "2026-12-11T05:19:43.070Z",
         "priority_score": 42
       }
     },
@@ -27095,9 +27095,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:03.928Z",
+        "last_web_at": "2026-11-27T05:19:01.627Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:03.928Z",
+        "next_web_due": "2026-12-11T05:19:01.627Z",
         "priority_score": 42
       }
     },
@@ -27339,7 +27339,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 16,
+        "iq": 17,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": false,
@@ -27389,9 +27389,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:44.293Z",
+        "last_web_at": "2026-11-27T05:16:51.445Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:44.293Z",
+        "next_web_due": "2026-12-11T05:16:51.445Z",
         "priority_score": 42
       }
     },
@@ -27428,9 +27428,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:59.036Z",
+        "last_web_at": "2026-11-27T05:20:53.623Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:59.036Z",
+        "next_web_due": "2026-12-11T05:20:53.623Z",
         "priority_score": 42
       }
     },
@@ -27809,9 +27809,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:42.236Z",
+        "last_web_at": "2026-11-27T05:22:33.594Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:42.236Z",
+        "next_web_due": "2026-12-11T05:22:33.594Z",
         "priority_score": 42
       }
     },
@@ -32242,9 +32242,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:15.725Z",
+        "last_web_at": "2026-11-27T05:18:20.612Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:15.725Z",
+        "next_web_due": "2026-12-11T05:18:20.612Z",
         "priority_score": 50
       }
     },
@@ -37293,9 +37293,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:43:03.222Z",
+        "last_web_at": "2026-11-27T05:18:08.593Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:43:03.222Z",
+        "next_web_due": "2026-12-11T05:18:08.593Z",
         "priority_score": 60
       }
     },
@@ -38367,9 +38367,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:40:14.250Z",
+        "last_web_at": "2026-11-27T05:15:29.994Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:40:14.250Z",
+        "next_web_due": "2026-12-11T05:15:29.994Z",
         "priority_score": 87
       }
     },
@@ -40879,9 +40879,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:20.389Z",
+        "last_web_at": "2026-11-27T05:17:26.704Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:20.389Z",
+        "next_web_due": "2026-12-11T05:17:26.704Z",
         "priority_score": 34
       }
     },
@@ -42022,46 +42022,6 @@
       }
     },
     {
-      "id": "101735",
-      "name": "삼인산밸리캠핑장",
-      "sido": "전남",
-      "sigungu": "담양군",
-      "kind": "campground",
-      "priority": 136,
-      "gaps": [
-        "manner",
-        "operator",
-        "contact"
-      ],
-      "missing": [
-        "매너타임",
-        "운영자 링크",
-        "연락처"
-      ],
-      "sources": [
-        "공공 표준·인허가 데이터",
-        "운영자 홈페이지·공지(robots 허용 경로)",
-        "TourAPI 공식 상세",
-        "운영자 홈페이지·예약 안내",
-        "지자체 공개 안내",
-        "이용자 제보 후 원문 확인"
-      ],
-      "current": {
-        "iq": 17,
-        "has_photo": true,
-        "has_card_photo": true,
-        "has_booking": false,
-        "has_homepage": false
-      },
-      "collection": {
-        "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-27T02:27:58.659Z",
-        "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-11T02:27:58.659Z",
-        "priority_score": 24
-      }
-    },
-    {
       "id": "102366",
       "name": "숲결 캠핑장",
       "sido": "경기",
@@ -42461,9 +42421,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:35.849Z",
+        "last_web_at": "2026-11-27T05:21:28.879Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:35.849Z",
+        "next_web_due": "2026-12-11T05:21:28.879Z",
         "priority_score": 42
       }
     },
@@ -42744,9 +42704,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:04.852Z",
+        "last_web_at": "2026-11-27T05:20:01.144Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:04.852Z",
+        "next_web_due": "2026-12-11T05:20:01.144Z",
         "priority_score": 26
       }
     },
@@ -47851,9 +47811,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:45:10.732Z",
+        "last_web_at": "2026-11-27T05:20:06.815Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:45:10.732Z",
+        "next_web_due": "2026-12-11T05:20:06.815Z",
         "priority_score": 42
       }
     },
@@ -49272,7 +49232,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 42,
+        "iq": 43,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": true,
@@ -50830,7 +50790,7 @@
         "주간 OSM 추출본(보조)"
       ],
       "current": {
-        "iq": 31,
+        "iq": 32,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": true,
@@ -58668,9 +58628,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:02.356Z",
+        "last_web_at": "2026-11-27T05:17:09.017Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:02.356Z",
+        "next_web_due": "2026-12-11T05:17:09.017Z",
         "priority_score": 42
       }
     },
@@ -58762,9 +58722,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:44.847Z",
+        "last_web_at": "2026-11-27T05:17:50.715Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:44.847Z",
+        "next_web_due": "2026-12-11T05:17:50.715Z",
         "priority_score": 42
       }
     },
@@ -59432,9 +59392,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:48:00.257Z",
+        "last_web_at": "2026-11-27T05:22:51.029Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:48:00.257Z",
+        "next_web_due": "2026-12-11T05:22:51.029Z",
         "priority_score": 60
       }
     },
@@ -64847,9 +64807,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:46:41.787Z",
+        "last_web_at": "2026-11-27T05:21:34.750Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:46:41.787Z",
+        "next_web_due": "2026-12-11T05:21:34.750Z",
         "priority_score": 42
       }
     },
@@ -71606,7 +71566,7 @@
         "주간 OSM 추출본(보조)"
       ],
       "current": {
-        "iq": 5,
+        "iq": 16,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": true,
@@ -71644,7 +71604,7 @@
         "주간 OSM 추출본(보조)"
       ],
       "current": {
-        "iq": 5,
+        "iq": 16,
         "has_photo": false,
         "has_card_photo": false,
         "has_booking": true,
@@ -73937,9 +73897,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:48:26.176Z",
+        "last_web_at": "2026-11-27T05:14:02.787Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:48:26.176Z",
+        "next_web_due": "2026-12-11T05:14:02.787Z",
         "priority_score": 42
       }
     },
@@ -74663,9 +74623,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:50.936Z",
+        "last_web_at": "2026-11-27T05:17:56.644Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:50.936Z",
+        "next_web_due": "2026-12-11T05:17:56.644Z",
         "priority_score": 52
       }
     },
@@ -80663,9 +80623,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:48.266Z",
+        "last_web_at": "2026-11-27T05:22:39.397Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:48.266Z",
+        "next_web_due": "2026-12-11T05:22:39.397Z",
         "priority_score": 42
       }
     },
@@ -81698,9 +81658,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:18.170Z",
+        "last_web_at": "2026-11-27T05:22:10.262Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:18.170Z",
+        "next_web_due": "2026-12-11T05:22:10.262Z",
         "priority_score": 42
       }
     },
@@ -85962,9 +85922,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:40:20.363Z",
+        "last_web_at": "2026-11-27T05:15:35.958Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:40:20.363Z",
+        "next_web_due": "2026-12-11T05:15:35.958Z",
         "priority_score": 34
       }
     },
@@ -86488,9 +86448,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:42:32.555Z",
+        "last_web_at": "2026-11-27T05:17:38.603Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:42:32.555Z",
+        "next_web_due": "2026-12-11T05:17:38.603Z",
         "priority_score": 26
       }
     },
@@ -89942,9 +89902,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:49:27.542Z",
+        "last_web_at": "2026-11-27T05:14:32.365Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:49:27.542Z",
+        "next_web_due": "2026-12-11T05:14:32.365Z",
         "priority_score": 42
       }
     },
@@ -90281,6 +90241,46 @@
         "next_social_due": "2026-12-10T01:50:00.000Z",
         "next_web_due": "2026-12-09T03:39:22.606Z",
         "priority_score": 0
+      }
+    },
+    {
+      "id": "101735",
+      "name": "삼인산밸리캠핑장",
+      "sido": "전남",
+      "sigungu": "담양군",
+      "kind": "campground",
+      "priority": 121,
+      "gaps": [
+        "manner",
+        "operator",
+        "contact"
+      ],
+      "missing": [
+        "매너타임",
+        "운영자 링크",
+        "연락처"
+      ],
+      "sources": [
+        "공공 표준·인허가 데이터",
+        "운영자 홈페이지·공지(robots 허용 경로)",
+        "TourAPI 공식 상세",
+        "운영자 홈페이지·예약 안내",
+        "지자체 공개 안내",
+        "이용자 제보 후 원문 확인"
+      ],
+      "current": {
+        "iq": 20,
+        "has_photo": true,
+        "has_card_photo": true,
+        "has_booking": false,
+        "has_homepage": false
+      },
+      "collection": {
+        "last_social_at": "2026-11-27T10:56:00+09:00",
+        "last_web_at": "2026-11-27T02:27:58.659Z",
+        "next_social_due": "2026-12-11T01:56:00.000Z",
+        "next_web_due": "2026-12-11T02:27:58.659Z",
+        "priority_score": 24
       }
     },
     {
@@ -90932,9 +90932,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:41:03.045Z",
+        "last_web_at": "2026-11-27T05:16:11.290Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:41:03.045Z",
+        "next_web_due": "2026-12-11T05:16:11.290Z",
         "priority_score": 18
       }
     },
@@ -97355,9 +97355,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:44:52.204Z",
+        "last_web_at": "2026-11-27T05:19:48.938Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:44:52.204Z",
+        "next_web_due": "2026-12-11T05:19:48.938Z",
         "priority_score": 42
       }
     },
@@ -99464,7 +99464,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 33,
+        "iq": 34,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": true,
@@ -99472,9 +99472,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:47:12.809Z",
+        "last_web_at": "2026-11-27T05:13:39.662Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:47:12.809Z",
+        "next_web_due": "2026-12-11T05:13:39.662Z",
         "priority_score": 18
       }
     },
@@ -100001,9 +100001,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:48:39.173Z",
+        "last_web_at": "2026-11-27T05:14:09.095Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:48:39.173Z",
+        "next_web_due": "2026-12-11T05:14:09.095Z",
         "priority_score": 18
       }
     },
@@ -106701,9 +106701,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:40:02.299Z",
+        "last_web_at": "2026-11-27T05:15:18.413Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:40:02.299Z",
+        "next_web_due": "2026-12-11T05:15:18.413Z",
         "priority_score": 34
       }
     },
@@ -110397,9 +110397,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:39:50.468Z",
+        "last_web_at": "2026-11-27T05:15:07.044Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:39:50.468Z",
+        "next_web_due": "2026-12-11T05:15:07.044Z",
         "priority_score": 18
       }
     },
@@ -112302,9 +112302,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-22T23:46:47.614Z",
+        "last_web_at": "2026-11-27T05:13:27.134Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-06T23:46:47.614Z",
+        "next_web_due": "2026-12-11T05:13:27.134Z",
         "priority_score": 42
       }
     },
@@ -123971,7 +123971,7 @@
         "주간 OSM 추출본(보조)"
       ],
       "current": {
-        "iq": null,
+        "iq": 46,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": true,
@@ -129449,7 +129449,7 @@
         "이용자 제보 후 원문 확인"
       ],
       "current": {
-        "iq": 31,
+        "iq": 32,
         "has_photo": true,
         "has_card_photo": true,
         "has_booking": true,
@@ -139423,9 +139423,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T10:56:00+09:00",
-        "last_web_at": "2026-11-23T03:47:24.396Z",
+        "last_web_at": "2026-11-27T05:22:16.247Z",
         "next_social_due": "2026-12-11T01:56:00.000Z",
-        "next_web_due": "2026-12-07T03:47:24.396Z",
+        "next_web_due": "2026-12-11T05:22:16.247Z",
         "priority_score": 18
       }
     },
@@ -288354,9 +288354,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T05:28:00+09:00",
-        "last_web_at": "2026-11-23T03:45:34.937Z",
+        "last_web_at": "2026-11-27T05:20:30.482Z",
         "next_social_due": "2026-12-10T20:28:00.000Z",
-        "next_web_due": "2026-12-07T03:45:34.937Z",
+        "next_web_due": "2026-12-11T05:20:30.482Z",
         "priority_score": 34
       }
     },
@@ -288850,9 +288850,9 @@
       },
       "collection": {
         "last_social_at": "2026-11-27T05:28:00+09:00",
-        "last_web_at": "2026-11-23T03:45:29.029Z",
+        "last_web_at": "2026-11-27T05:20:24.843Z",
         "next_social_due": "2026-12-10T20:28:00.000Z",
-        "next_web_due": "2026-12-07T03:45:29.029Z",
+        "next_web_due": "2026-12-11T05:20:24.843Z",
         "priority_score": 50
       }
     },
