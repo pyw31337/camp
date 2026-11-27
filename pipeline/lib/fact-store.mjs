@@ -27,6 +27,7 @@ export const SOURCES = {
   // ffb91fefd에서 다시 빠져 복구(2026-10-19 14:1x KST). 지우면 build-fact-store가 exit 1로 발행을 막는다 — test/fact-store-sources.test.mjs.
   blog_mention: "블로그 후기 언급(검색 API 요약·허용 본문)",
   cafe_mention: "카페 글 언급(검색 API 요약)",
+  youtube_mention: "유튜브 영상 설명·자막 언급",
   kin: "네이버 지식iN 언급(검색 API 요약)",
   local_gov: "지자체 공개 데이터",
   localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
