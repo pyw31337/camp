@@ -74,9 +74,9 @@
    "pref": "일반 야영을(를) 원하나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1153,
+    "campgrounds": 1155,
     "by_grade": {
-     "CONFIRMED": 1153
+     "CONFIRMED": 1155
     }
    }
   },
@@ -89,9 +89,9 @@
    "pref": "글램핑을(를) 원하나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 659,
+    "campgrounds": 660,
     "by_grade": {
-     "CONFIRMED": 659
+     "CONFIRMED": 660
     }
    }
   },
@@ -104,9 +104,9 @@
    "pref": "카라반을(를) 원하나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 486,
+    "campgrounds": 487,
     "by_grade": {
-     "CONFIRMED": 486
+     "CONFIRMED": 487
     }
    }
   },
@@ -132,9 +132,9 @@
    "pref": "작고 한적한 곳(사이트 적음)을 선호하나요?",
    "filter": "range",
    "coverage": {
-    "campgrounds": 2330,
+    "campgrounds": 2332,
     "by_grade": {
-     "CONFIRMED": 2333
+     "CONFIRMED": 2335
     }
    }
   },
@@ -147,9 +147,9 @@
    "pref": "캠핑카·카라반을 가져가나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 113,
+    "campgrounds": 114,
     "by_grade": {
-     "CONFIRMED": 113
+     "CONFIRMED": 114
     }
    }
   },
@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 4898,
+    "campgrounds": 4900,
     "by_grade": {
-     "MENTION": 9582,
-     "OPERATOR": 1105,
-     "CONFIRMED": 5958
+     "CONFIRMED": 5965,
+     "MENTION": 9583,
+     "OPERATOR": 1103
     }
    }
   },
@@ -194,9 +194,9 @@
    "pref": "전기가 꼭 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3817,
+    "campgrounds": 3820,
     "by_grade": {
-     "CONFIRMED": 3793,
+     "CONFIRMED": 3796,
      "VERIFIED": 24
     }
    }
@@ -275,9 +275,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 4218,
+    "campgrounds": 4219,
     "by_grade": {
-     "CONFIRMED": 4194,
+     "CONFIRMED": 4195,
      "VERIFIED": 24
     }
    }
@@ -289,9 +289,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 4218,
+    "campgrounds": 4219,
     "by_grade": {
-     "CONFIRMED": 4194,
+     "CONFIRMED": 4195,
      "VERIFIED": 24
     }
    }
@@ -308,9 +308,9 @@
    },
    "filter": "in",
    "coverage": {
-    "campgrounds": 3770,
+    "campgrounds": 3771,
     "by_grade": {
-     "CONFIRMED": 3770
+     "CONFIRMED": 3771
     }
    }
   },
@@ -321,9 +321,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 1814,
+    "campgrounds": 1816,
     "by_grade": {
-     "CONFIRMED": 1814
+     "CONFIRMED": 1816
     }
    }
   },
@@ -398,9 +398,9 @@
    "pref": "트레일러를 끌고 가나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3171,
+    "campgrounds": 3172,
     "by_grade": {
-     "CONFIRMED": 3171
+     "CONFIRMED": 3172
     }
    }
   },
@@ -412,9 +412,9 @@
    "pref": "개인 카라반으로 가나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3171,
+    "campgrounds": 3172,
     "by_grade": {
-     "CONFIRMED": 3171
+     "CONFIRMED": 3172
     }
    }
   },
@@ -432,9 +432,9 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 4181,
+    "campgrounds": 4182,
     "by_grade": {
-     "CONFIRMED": 4065,
+     "CONFIRMED": 4066,
      "MENTION": 2166,
      "OPERATOR": 284,
      "VERIFIED": 64
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 4113,
+    "campgrounds": 4117,
     "by_grade": {
-     "MENTION": 21423
+     "MENTION": 21429
     }
    }
   },
@@ -568,10 +568,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 3912,
+    "campgrounds": 3913,
     "by_grade": {
+     "MENTION": 5376,
      "OPERATOR": 799,
-     "MENTION": 5373,
      "REFERENCE": 499,
      "CONFIRMED": 6
     }
@@ -585,10 +585,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 3852,
+    "campgrounds": 3853,
     "by_grade": {
+     "MENTION": 5482,
      "REFERENCE": 493,
-     "MENTION": 5478,
      "OPERATOR": 763,
      "CONFIRMED": 3
     }
@@ -630,10 +630,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2971,
+    "campgrounds": 2973,
     "by_grade": {
+     "MENTION": 4034,
      "REFERENCE": 511,
-     "MENTION": 4032,
      "CONFIRMED": 8,
      "OPERATOR": 131
     }
@@ -678,9 +678,9 @@
    "unit": "개",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1714,
+    "campgrounds": 1716,
     "by_grade": {
-     "CONFIRMED": 1690,
+     "CONFIRMED": 1692,
      "VERIFIED": 24
     }
    }
@@ -693,9 +693,9 @@
    "unit": "개",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1678,
+    "campgrounds": 1680,
     "by_grade": {
-     "CONFIRMED": 1654,
+     "CONFIRMED": 1656,
      "VERIFIED": 24
     }
    }
@@ -708,9 +708,9 @@
    "pref": "온수 샤워가 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2576,
+    "campgrounds": 2577,
     "by_grade": {
-     "CONFIRMED": 2552,
+     "CONFIRMED": 2553,
      "OPERATOR": 132,
      "VERIFIED": 24
     }
@@ -763,10 +763,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1647,
+    "campgrounds": 1649,
     "by_grade": {
-     "CONFIRMED": 1950,
-     "MENTION": 685,
+     "CONFIRMED": 1952,
+     "MENTION": 688,
      "OPERATOR": 825,
      "VERIFIED": 45
     }
@@ -781,10 +781,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1576,
+    "campgrounds": 1577,
     "by_grade": {
-     "OPERATOR": 99,
-     "CONFIRMED": 1546
+     "CONFIRMED": 1547,
+     "OPERATOR": 99
     }
    }
   },
@@ -797,10 +797,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1039,
+    "campgrounds": 1041,
     "by_grade": {
-     "OPERATOR": 190,
-     "CONFIRMED": 914
+     "CONFIRMED": 916,
+     "OPERATOR": 190
     }
    }
   },
@@ -813,9 +813,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 2631,
+    "campgrounds": 2632,
     "by_grade": {
-     "CONFIRMED": 3869,
+     "CONFIRMED": 3872,
      "OPERATOR": 258,
      "VERIFIED": 4
     }
@@ -830,9 +830,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1981,
+    "campgrounds": 1982,
     "by_grade": {
-     "CONFIRMED": 2862,
+     "CONFIRMED": 2864,
      "OPERATOR": 77,
      "VERIFIED": 7
     }
@@ -847,9 +847,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 897,
+    "campgrounds": 898,
     "by_grade": {
-     "CONFIRMED": 1377,
+     "CONFIRMED": 1379,
      "OPERATOR": 37,
      "VERIFIED": 7
     }
@@ -864,9 +864,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1266,
+    "campgrounds": 1268,
     "by_grade": {
-     "CONFIRMED": 1266
+     "CONFIRMED": 1268
     }
    }
   },
@@ -879,9 +879,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1963,
+    "campgrounds": 1966,
     "by_grade": {
-     "CONFIRMED": 2706,
+     "CONFIRMED": 2709,
      "VERIFIED": 19
     }
    }
@@ -925,9 +925,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 31,
+    "campgrounds": 32,
     "by_grade": {
-     "CONFIRMED": 31
+     "CONFIRMED": 32
     }
    }
   },
@@ -1195,9 +1195,9 @@
    "pref": "산 근처를 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2533,
+    "campgrounds": 2534,
     "by_grade": {
-     "CONFIRMED": 2533
+     "CONFIRMED": 2534
     }
    }
   },
@@ -1209,9 +1209,9 @@
    "pref": "숲 근처를 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2322,
+    "campgrounds": 2323,
     "by_grade": {
-     "CONFIRMED": 2322
+     "CONFIRMED": 2323
     }
    }
   },
@@ -1307,9 +1307,9 @@
    "pref": "여름 물놀이 여행을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 1172,
+    "campgrounds": 1174,
     "by_grade": {
-     "CONFIRMED": 1172
+     "CONFIRMED": 1174
     }
    }
   },
@@ -1335,9 +1335,9 @@
    "pref": "봄꽃 여행을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 643,
+    "campgrounds": 644,
     "by_grade": {
-     "CONFIRMED": 643
+     "CONFIRMED": 644
     }
    }
   },
@@ -1349,9 +1349,9 @@
    "pref": "가을 단풍 여행을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 920,
+    "campgrounds": 921,
     "by_grade": {
-     "CONFIRMED": 920
+     "CONFIRMED": 921
     }
    }
   },
@@ -1363,9 +1363,9 @@
    "pref": "겨울 눈꽃 여행을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 442,
+    "campgrounds": 443,
     "by_grade": {
-     "CONFIRMED": 442
+     "CONFIRMED": 443
     }
    }
   },
@@ -1391,9 +1391,9 @@
    "pref": "일몰 여행을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 376,
+    "campgrounds": 377,
     "by_grade": {
-     "CONFIRMED": 376
+     "CONFIRMED": 377
     }
    }
   },
@@ -1405,9 +1405,9 @@
    "pref": "일출 여행을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 224,
+    "campgrounds": 225,
     "by_grade": {
-     "CONFIRMED": 224
+     "CONFIRMED": 225
     }
    }
   },
@@ -1474,9 +1474,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3784,
+    "campgrounds": 3785,
     "by_grade": {
-     "CONFIRMED": 3784
+     "CONFIRMED": 3785
     }
    }
   },
@@ -1487,9 +1487,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3784,
+    "campgrounds": 3785,
     "by_grade": {
-     "CONFIRMED": 3784
+     "CONFIRMED": 3785
     }
    }
   },
@@ -1500,9 +1500,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3784,
+    "campgrounds": 3785,
     "by_grade": {
-     "CONFIRMED": 3784
+     "CONFIRMED": 3785
     }
    }
   },
@@ -1513,9 +1513,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 3784,
+    "campgrounds": 3785,
     "by_grade": {
-     "CONFIRMED": 3784
+     "CONFIRMED": 3785
     }
    }
   },
@@ -1530,9 +1530,9 @@
    },
    "filter": "in",
    "coverage": {
-    "campgrounds": 2545,
+    "campgrounds": 2546,
     "by_grade": {
-     "CONFIRMED": 2545
+     "CONFIRMED": 2546
     }
    }
   },
@@ -1574,9 +1574,9 @@
    },
    "filter": "in",
    "coverage": {
-    "campgrounds": 7757,
+    "campgrounds": 7758,
     "by_grade": {
-     "CONFIRMED": 7757
+     "CONFIRMED": 7758
     }
    }
   },
@@ -1589,9 +1589,9 @@
    "multi": true,
    "note": "value=플랫폼 코드(homepage·phone·onsite·naver·camfit·thankqcamping·foresttrip·knps·public-site 등), text=플랫폼 이름",
    "coverage": {
-    "campgrounds": 2874,
+    "campgrounds": 2877,
     "by_grade": {
-     "CONFIRMED": 5529
+     "CONFIRMED": 5537
     }
    }
   },
@@ -1603,9 +1603,9 @@
    "pref": "온라인으로 바로 예약하고 싶나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2047,
+    "campgrounds": 2050,
     "by_grade": {
-     "CONFIRMED": 2047
+     "CONFIRMED": 2050
     }
    }
   },
@@ -1625,9 +1625,9 @@
    "pref": "공공 캠핑장을 선호하나요?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 6507,
+    "campgrounds": 6508,
     "by_grade": {
-     "CONFIRMED": 6517,
+     "CONFIRMED": 6518,
      "VERIFIED": 5
     }
    }
@@ -1638,9 +1638,9 @@
    "label": "전화",
    "type": "text",
    "coverage": {
-    "campgrounds": 4795,
+    "campgrounds": 4796,
     "by_grade": {
-     "CONFIRMED": 4805
+     "CONFIRMED": 4806
     }
    }
   },
@@ -1650,9 +1650,9 @@
    "label": "홈페이지",
    "type": "url",
    "coverage": {
-    "campgrounds": 2997,
+    "campgrounds": 2998,
     "by_grade": {
-     "CONFIRMED": 4301,
+     "CONFIRMED": 4302,
      "MENTION": 182
     }
    }
@@ -1678,9 +1678,9 @@
    "filter": "has",
    "note": "가격은 value_num",
    "coverage": {
-    "campgrounds": 595,
+    "campgrounds": 597,
     "by_grade": {
-     "CONFIRMED": 1437,
+     "CONFIRMED": 1445,
      "VERIFIED": 10
     }
    }
@@ -1711,9 +1711,9 @@
    "review_label": "사이트 넓음",
    "pref": "‘사이트 넓음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 2004,
+    "campgrounds": 2006,
     "by_grade": {
-     "MENTION": 2004
+     "MENTION": 2006
     }
    }
   },
@@ -1727,9 +1727,9 @@
    "review_label": "뷰·경치 좋음",
    "pref": "‘뷰·경치 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 895,
+    "campgrounds": 896,
     "by_grade": {
-     "MENTION": 895
+     "MENTION": 896
     }
    }
   },
@@ -1743,9 +1743,9 @@
    "review_label": "산책·둘레길 좋음",
    "pref": "‘산책·둘레길 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 509,
+    "campgrounds": 511,
     "by_grade": {
-     "MENTION": 509
+     "MENTION": 511
     }
    }
   },
@@ -1775,9 +1775,9 @@
    "review_label": "별 보기 좋음",
    "pref": "‘별 보기 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 118,
+    "campgrounds": 119,
     "by_grade": {
-     "MENTION": 118
+     "MENTION": 119
     }
    }
   },
@@ -1807,9 +1807,9 @@
    "review_label": "아이들 놀기 좋음",
    "pref": "‘아이들 놀기 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 842,
+    "campgrounds": 843,
     "by_grade": {
-     "MENTION": 842
+     "MENTION": 843
     }
    }
   },
@@ -1823,9 +1823,9 @@
    "review_label": "조용·한적",
    "pref": "‘조용·한적’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 2601,
+    "campgrounds": 2605,
     "by_grade": {
-     "MENTION": 2601
+     "MENTION": 2605
     }
    }
   },
@@ -1839,9 +1839,9 @@
    "review_label": "계곡·물놀이 좋음",
    "pref": "‘계곡·물놀이 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1296,
+    "campgrounds": 1297,
     "by_grade": {
-     "MENTION": 1296
+     "MENTION": 1297
     }
    }
   },
@@ -1887,9 +1887,9 @@
    "review_label": "주차 편함·옆 주차",
    "pref": "‘주차 편함·옆 주차’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 854,
+    "campgrounds": 855,
     "by_grade": {
-     "MENTION": 854
+     "MENTION": 855
     }
    }
   },
@@ -1967,9 +1967,9 @@
    "review_label": "소음·매너",
    "pref": "‘소음·매너’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 507,
+    "campgrounds": 508,
     "by_grade": {
-     "MENTION": 507
+     "MENTION": 508
     }
    }
   },
@@ -1983,9 +1983,9 @@
    "review_label": "화장실 멀거나 불편",
    "pref": "‘화장실 멀거나 불편’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 74,
+    "campgrounds": 73,
     "by_grade": {
-     "MENTION": 74
+     "MENTION": 73
     }
    }
   },
@@ -2143,9 +2143,9 @@
    "review_label": "시설 깔끔·쾌적",
    "pref": "‘시설 깔끔·쾌적’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 2479,
+    "campgrounds": 2481,
     "by_grade": {
-     "MENTION": 2479
+     "MENTION": 2481
     }
    }
   },
@@ -2159,9 +2159,9 @@
    "review_label": "바베큐·불멍 힐링",
    "pref": "‘바베큐·불멍 힐링’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 367,
+    "campgrounds": 368,
     "by_grade": {
-     "MENTION": 367
+     "MENTION": 368
     }
    }
   },
@@ -2175,9 +2175,9 @@
    "review_label": "접근성 좋음",
    "pref": "‘접근성 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 904,
+    "campgrounds": 905,
     "by_grade": {
-     "MENTION": 904
+     "MENTION": 905
     }
    }
   },
@@ -2191,9 +2191,9 @@
    "review_label": "힐링·자연 감성",
    "pref": "‘힐링·자연 감성’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1136,
+    "campgrounds": 1138,
     "by_grade": {
-     "MENTION": 1136
+     "MENTION": 1138
     }
    }
   },
@@ -2253,9 +2253,9 @@
    "unit": "건",
    "filter": "min",
    "coverage": {
-    "campgrounds": 5219,
+    "campgrounds": 5221,
     "by_grade": {
-     "MENTION": 5219
+     "MENTION": 5221
     }
    }
   },
@@ -2378,9 +2378,9 @@
    "filter": "min",
    "note": "고캠핑 등록값(extshrCo). 0·빈값은 미입력으로 보고 행 없음",
    "coverage": {
-    "campgrounds": 1578,
+    "campgrounds": 1580,
     "by_grade": {
-     "CONFIRMED": 1578
+     "CONFIRMED": 1580
     }
    }
   },
@@ -2393,9 +2393,9 @@
    "filter": "min",
    "note": "고캠핑 등록값(frprvtWrppCo)",
    "coverage": {
-    "campgrounds": 471,
+    "campgrounds": 473,
     "by_grade": {
-     "CONFIRMED": 471
+     "CONFIRMED": 473
     }
    }
   },
@@ -2408,9 +2408,9 @@
    "filter": "min",
    "note": "고캠핑 등록값(frprvtSandCo)",
    "coverage": {
-    "campgrounds": 394,
+    "campgrounds": 396,
     "by_grade": {
-     "CONFIRMED": 394
+     "CONFIRMED": 396
     }
    }
   },
@@ -2423,9 +2423,9 @@
    "filter": "min",
    "note": "고캠핑 등록값(fireSensorCo)",
    "coverage": {
-    "campgrounds": 724,
+    "campgrounds": 727,
     "by_grade": {
-     "CONFIRMED": 724
+     "CONFIRMED": 727
     }
    }
   },
@@ -2438,9 +2438,9 @@
    "pref": "보험 가입한 곳이면 좋겠나요?",
    "note": "고캠핑 insrncAt=Y일 때만 true 행. N은 미입력과 구분되지 않아 행을 만들지 않는다",
    "coverage": {
-    "campgrounds": 2827,
+    "campgrounds": 2829,
     "by_grade": {
-     "CONFIRMED": 2827
+     "CONFIRMED": 2829
     }
    }
   },
@@ -2453,9 +2453,9 @@
    "filter": "min",
    "note": "고캠핑 등록값(manageNmpr)",
    "coverage": {
-    "campgrounds": 1459,
+    "campgrounds": 1461,
     "by_grade": {
-     "CONFIRMED": 1459
+     "CONFIRMED": 1461
     }
    }
   },
@@ -2467,9 +2467,9 @@
    "filter": "has",
    "note": "YYYY-MM-DD. 고캠핑 prmisnDe. LOCALDATA 인허가 매칭 특징으로도 쓴다",
    "coverage": {
-    "campgrounds": 3162,
+    "campgrounds": 3163,
     "by_grade": {
-     "CONFIRMED": 3162
+     "CONFIRMED": 3163
     }
    }
   },
@@ -2481,9 +2481,9 @@
    "filter": "has",
    "note": "고캠핑 trsagntNo. 관광진흥법 등록 야영장업",
    "coverage": {
-    "campgrounds": 2111,
+    "campgrounds": 2114,
     "by_grade": {
-     "CONFIRMED": 2111
+     "CONFIRMED": 2114
     }
    }
   },
@@ -2495,9 +2495,9 @@
    "filter": "has",
    "note": "고캠핑 mgcDiv. 공공 캠핑장의 운영 공단·지자체 부서",
    "coverage": {
-    "campgrounds": 1287,
+    "campgrounds": 1290,
     "by_grade": {
-     "CONFIRMED": 1287
+     "CONFIRMED": 1290
     }
    }
   },
@@ -2531,9 +2531,9 @@
    "filter": "min",
    "note": "고캠핑 sitedStnc",
    "coverage": {
-    "campgrounds": 614,
+    "campgrounds": 615,
     "by_grade": {
-     "CONFIRMED": 614
+     "CONFIRMED": 615
     }
    }
   },
@@ -2546,9 +2546,9 @@
    "filter": "min",
    "note": "고캠핑 allar",
    "coverage": {
-    "campgrounds": 1236,
+    "campgrounds": 1237,
     "by_grade": {
-     "CONFIRMED": 1236
+     "CONFIRMED": 1237
     }
    }
   },
@@ -2573,9 +2573,9 @@
    "pref": "글램핑·카라반 안에 꼭 있어야 할 것은?",
    "note": "고캠핑 glampInnerFclty·caravInnerFclty. label=GLAMPING|CARAVAN, text=원문",
    "coverage": {
-    "campgrounds": 762,
+    "campgrounds": 764,
     "by_grade": {
-     "CONFIRMED": 6344
+     "CONFIRMED": 6355
     }
    }
   },
@@ -2602,9 +2602,9 @@
    "pref": "아이와 할 체험 프로그램이 있으면 좋겠나요?",
    "note": "고캠핑 exprnProgrmAt=Y일 때만 행",
    "coverage": {
-    "campgrounds": 338,
+    "campgrounds": 339,
     "by_grade": {
-     "CONFIRMED": 338
+     "CONFIRMED": 339
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-11-26T09:14:06.110Z"
+ "generated_at": "2026-11-27T02:59:24.850Z"
 }

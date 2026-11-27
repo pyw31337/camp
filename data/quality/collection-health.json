@@ -1,87 +1,87 @@
 {
-  "generated_at": "2026-11-26T09:14:05.461Z",
+  "generated_at": "2026-11-27T02:59:24.032Z",
   "catalog": {
-    "total": 7757,
-    "active": 7757
+    "total": 7758,
+    "active": 7758
   },
   "coverage": {
     "card_thumbnail": {
-      "count": 3708,
+      "count": 3709,
       "pct": 47.8
     },
     "detail_photo": {
-      "count": 3708,
+      "count": 3709,
       "pct": 47.8
     },
     "social_record": {
-      "count": 7754,
+      "count": 7758,
       "pct": 100
     },
     "social_post": {
-      "count": 5328,
+      "count": 5331,
       "pct": 68.7
     },
     "social_image": {
-      "count": 7304,
+      "count": 7307,
       "pct": 94.2
     },
     "social_video": {
-      "count": 3114,
-      "pct": 40.1
+      "count": 3117,
+      "pct": 40.2
     },
     "web_record": {
-      "count": 5446,
-      "pct": 70.2
+      "count": 5456,
+      "pct": 70.3
     },
     "web_body": {
-      "count": 2112,
+      "count": 2111,
       "pct": 27.2
     },
     "booking": {
-      "count": 2878,
+      "count": 2881,
       "pct": 37.1
     },
     "fee": {
-      "count": 4242,
+      "count": 4246,
       "pct": 54.7
     },
     "checkin": {
-      "count": 4093,
+      "count": 4094,
       "pct": 52.8
     },
     "checkout": {
-      "count": 4044,
+      "count": 4045,
       "pct": 52.1
     },
     "homepage": {
-      "count": 1968,
+      "count": 1969,
       "pct": 25.4
     },
     "contact": {
-      "count": 4711,
+      "count": 4712,
       "pct": 60.7
     }
   },
   "quality": {
-    "measured": 7740,
-    "average": 24.37,
+    "measured": 7757,
+    "average": 24.27,
     "bands": {
-      "under20": 3720,
-      "under40": 5495,
-      "atLeast70": 74
+      "under20": 3748,
+      "under40": 5505,
+      "atLeast70": 76
     }
   },
   "gaps": {
-    "video": 4408,
+    "video": 4406,
     "checkout": 3796,
-    "fee": 3520,
-    "booking": 4879,
+    "fee": 3517,
+    "booking": 4877,
     "checkin": 164,
-    "reviews": 1929,
+    "reviews": 1923,
     "photo": 2777
   },
   "sparse_queue": {
-    "total": 4092,
+    "total": 4203,
     "top": [
       {
         "id": "102386",
@@ -97,7 +97,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.5,
+        "social_age_days": 0.3,
         "web_age_days": null
       },
       {
@@ -114,7 +114,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.5,
+        "social_age_days": 0.3,
         "web_age_days": null
       },
       {
@@ -131,7 +131,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.5,
+        "social_age_days": 0.3,
         "web_age_days": null
       },
       {
@@ -148,7 +148,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.5,
+        "social_age_days": 0.3,
         "web_age_days": null
       },
       {
@@ -165,7 +165,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.5,
+        "social_age_days": 0.3,
         "web_age_days": null
       },
       {
@@ -182,24 +182,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.5,
-        "web_age_days": null
-      },
-      {
-        "id": "102322",
-        "name": "글램치프",
-        "score": 0,
-        "gap_score": 145,
-        "gaps": [
-          "photo",
-          "reviews",
-          "video",
-          "fee",
-          "checkin",
-          "checkout",
-          "booking"
-        ],
-        "social_age_days": 0.5,
+        "social_age_days": 0.3,
         "web_age_days": null
       },
       {
@@ -216,7 +199,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.3,
+        "social_age_days": 0,
         "web_age_days": null
       },
       {
@@ -233,13 +216,13 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 0.3,
+        "social_age_days": 0,
         "web_age_days": null
       },
       {
         "id": "pilot-006-yeonin-valley",
         "name": "[사설] 가평 연인산 밸리캠핑장",
-        "score": null,
+        "score": 42,
         "gap_score": 145,
         "gaps": [
           "photo",
@@ -264,7 +247,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -280,7 +263,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -296,7 +279,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -312,7 +295,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -328,7 +311,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -344,7 +327,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -360,7 +343,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -376,7 +359,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -392,7 +375,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.3,
+        "social_age_days": 4,
         "web_age_days": null
       },
       {
@@ -408,7 +391,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.3,
+        "social_age_days": 4,
         "web_age_days": null
       },
       {
@@ -424,7 +407,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.3,
+        "social_age_days": 4,
         "web_age_days": null
       },
       {
@@ -440,7 +423,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -456,7 +439,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -472,7 +455,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -488,7 +471,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -504,7 +487,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -520,7 +503,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -536,7 +519,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -552,7 +535,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -568,7 +551,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -584,7 +567,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -600,7 +583,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -616,7 +599,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -632,7 +615,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -648,7 +631,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -664,7 +647,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -680,7 +663,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -696,7 +679,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -712,7 +695,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -728,7 +711,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -744,7 +727,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -760,7 +743,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -776,7 +759,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -792,7 +775,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -808,7 +791,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -824,7 +807,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -840,7 +823,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -856,7 +839,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -872,7 +855,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -888,7 +871,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -904,7 +887,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -920,7 +903,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -936,7 +919,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -952,7 +935,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -968,7 +951,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -984,7 +967,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -1000,7 +983,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -1016,7 +999,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -1032,7 +1015,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 3.8,
+        "social_age_days": 4.5,
         "web_age_days": null
       },
       {
@@ -1048,7 +1031,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1064,7 +1047,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1080,7 +1063,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1096,7 +1079,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1112,7 +1095,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1128,7 +1111,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1144,7 +1127,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1160,7 +1143,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1176,7 +1159,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1192,7 +1175,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1208,7 +1191,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1224,7 +1207,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1240,7 +1223,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1256,7 +1239,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1272,7 +1255,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1288,7 +1271,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1304,7 +1287,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1320,7 +1303,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1336,7 +1319,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1352,7 +1335,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1368,7 +1351,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1384,7 +1367,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1400,7 +1383,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1416,7 +1399,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1432,7 +1415,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1448,7 +1431,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1464,7 +1447,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1480,7 +1463,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1496,7 +1479,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1512,7 +1495,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1528,7 +1511,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1544,7 +1527,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 2.2,
+        "social_age_days": 3,
         "web_age_days": null
       },
       {
@@ -1560,7 +1543,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1576,7 +1559,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1592,7 +1575,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1608,7 +1591,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1624,7 +1607,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1640,7 +1623,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1656,7 +1639,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1672,7 +1655,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1688,7 +1671,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1704,7 +1687,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1720,7 +1703,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 1.3,
+        "social_age_days": 2,
         "web_age_days": null
       },
       {
@@ -1736,7 +1719,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1752,7 +1735,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1768,7 +1751,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1784,7 +1767,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1800,7 +1783,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1816,7 +1799,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1832,7 +1815,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1848,7 +1831,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 5.4,
+        "social_age_days": 6.1,
         "web_age_days": null
       },
       {
@@ -1864,7 +1847,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1880,7 +1863,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1896,7 +1879,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1912,7 +1895,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1928,7 +1911,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1944,7 +1927,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1960,7 +1943,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1976,7 +1959,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -1992,7 +1975,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2008,7 +1991,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2024,7 +2007,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2040,7 +2023,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2056,7 +2039,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2072,7 +2055,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2088,7 +2071,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2104,7 +2087,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2120,7 +2103,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2136,7 +2119,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2152,7 +2135,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2168,7 +2151,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2184,7 +2167,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2200,7 +2183,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2216,7 +2199,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2232,7 +2215,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2248,7 +2231,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2264,7 +2247,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2280,7 +2263,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2296,7 +2279,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2312,7 +2295,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2328,7 +2311,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2344,7 +2327,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2360,7 +2343,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2376,7 +2359,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2392,7 +2375,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2408,7 +2391,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2424,7 +2407,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2440,7 +2423,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2456,7 +2439,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2472,7 +2455,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2488,7 +2471,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2504,7 +2487,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2520,7 +2503,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2536,7 +2519,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2552,7 +2535,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2568,7 +2551,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2584,7 +2567,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2600,7 +2583,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2616,7 +2599,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2632,7 +2615,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2648,7 +2631,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2664,7 +2647,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2680,7 +2663,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2696,7 +2679,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2712,7 +2695,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2728,7 +2711,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2744,7 +2727,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2760,7 +2743,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2776,7 +2759,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2792,7 +2775,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2808,7 +2791,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2824,7 +2807,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2840,7 +2823,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2856,7 +2839,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2872,7 +2855,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2888,7 +2871,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2904,7 +2887,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2920,7 +2903,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2936,7 +2919,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2952,7 +2935,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2968,7 +2951,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -2984,7 +2967,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3000,7 +2983,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3016,7 +2999,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3032,7 +3015,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3048,7 +3031,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3064,7 +3047,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3080,7 +3063,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3096,7 +3079,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3112,7 +3095,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3128,7 +3111,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3144,7 +3127,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3160,7 +3143,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3176,7 +3159,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3192,7 +3175,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3208,7 +3191,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3224,7 +3207,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3240,7 +3223,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3256,7 +3239,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3272,7 +3255,7 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
         "web_age_days": null
       },
       {
@@ -3288,19 +3271,35 @@
           "checkout",
           "booking"
         ],
-        "social_age_days": 4.8,
+        "social_age_days": 5.5,
+        "web_age_days": null
+      },
+      {
+        "id": "osm-w871018691",
+        "name": "교평지구공원",
+        "score": 0,
+        "gap_score": 143,
+        "gaps": [
+          "photo",
+          "reviews",
+          "video",
+          "fee",
+          "checkout",
+          "booking"
+        ],
+        "social_age_days": 5.5,
         "web_age_days": null
       }
     ]
   },
   "sources": {
     "social": {
-      "last_run_at": "2026-11-26T16:51:00+09:00",
-      "searched": 13,
+      "last_run_at": "2026-11-27T10:56:00+09:00",
+      "searched": 446,
       "failed": 0,
-      "calls": 117,
+      "calls": 4014,
       "max_calls": 18200,
-      "tracked_camps": 2134,
+      "tracked_camps": 2149,
       "error_count": 0,
       "latest_errors": []
     },
