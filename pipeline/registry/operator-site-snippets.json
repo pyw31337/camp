@@ -6118,7 +6118,7 @@
    "name": "글램비글램핑",
    "status": "FETCH_FAILED",
    "url": "https://www.glambcamp.com",
-   "checked_at": "2026-11-26T20:22:59.153Z",
+   "checked_at": "2026-11-27T10:35:45.943Z",
    "error": "403"
   },
   "448": {
@@ -10775,7 +10775,7 @@
    "name": "느티나무 캠핑장",
    "status": "NO_RELEVANT_TEXT",
    "url": "https://campblox.co.kr/home",
-   "checked_at": "2026-11-26T20:22:59.127Z",
+   "checked_at": "2026-11-27T10:35:45.897Z",
    "pages": [
     "https://campblox.co.kr/home"
    ],
@@ -39603,7 +39603,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-26T20:23:01.311Z",
+   "checked_at": "2026-11-27T10:35:51.264Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39916,10 +39916,10 @@
      }
     },
     {
-     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1832",
+     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1834",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1832"
+      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1834"
      }
     },
     {
@@ -39951,10 +39951,10 @@
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1233",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1234",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1233"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1234"
      }
     },
     {
@@ -110851,7 +110851,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-26T20:22:59.151Z",
+   "checked_at": "2026-11-27T10:35:45.942Z",
    "error": "404"
   },
   "100126": {
@@ -176990,7 +176990,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-26T20:23:01.950Z",
+   "checked_at": "2026-11-27T10:35:53.063Z",
    "error": "403"
   },
   "101270": {
@@ -225562,7 +225562,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "FETCH_FAILED",
    "url": "https://camping.hansangsoo.com/camp/102221.html",
-   "checked_at": "2026-11-26T20:23:01.264Z",
+   "checked_at": "2026-11-27T10:35:48.859Z",
    "error": "403"
   },
   "102222": {
@@ -225952,7 +225952,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-26T20:22:59.152Z",
+    "at": "2026-11-27T10:35:45.943Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -263070,7 +263070,7 @@
    "name": "범바위포레스트",
    "status": "OK",
    "url": "https://link.inpock.co.kr/bumbawi",
-   "checked_at": "2026-11-26T20:23:02.387Z",
+   "checked_at": "2026-11-27T10:35:54.358Z",
    "discovered": true,
    "pages": [
     "https://link.inpock.co.kr/bumbawi",
@@ -263129,6 +263129,6 @@
    ]
   }
  },
- "generated_at": "2026-11-26T20:23:36.904Z",
+ "generated_at": "2026-11-27T10:36:16.251Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
