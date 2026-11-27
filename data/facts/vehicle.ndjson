@@ -440,6 +440,8 @@
 {"cid":"978","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"991","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"991","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1023","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1023","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1024","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4913,7 +4915,7 @@
 {"cid":"101551","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101551","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101553","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101553","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101553","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101554","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101554","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101555","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}

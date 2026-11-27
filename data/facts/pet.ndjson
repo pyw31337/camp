@@ -337,6 +337,7 @@
 {"cid":"978","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--2o2b21q82j1vg6a.kr/main","at":"2026-10-20T01:09:00.970Z","quote":"애견동반은 소형견만 가능합니다,,","text":"동반 가능 (소형견)"}
 {"cid":"978","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"987","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"991","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"1023","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"1023","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://daylifehappy.tistory.com/4011","at":"2025-06-30","quote":"반려동물 동반 불가능","text":"동반 불가","n":1}
 {"cid":"1024","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -1268,7 +1269,7 @@
 {"cid":"7108","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7108","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lby9754/224466325507","at":"2026-11-05","quote":"강아지 동반 가능 가족 모두 함께한 글램핑 아기와 반려견을 위한 여행 숙소 선택","text":"동반 가능","n":1}
 {"cid":"7109","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
-{"cid":"7110","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"7110","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7110","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kaia4254/223479486082","at":"2024-06-14","quote":"예원캠핑장 입실12시 퇴실 사전문의 4만원~~~ 온돌방,파쇄석 캠핑,야영장,계곡 수영장,바베큐장 애견동반가능 담양 가족소풍캠핑장 입퇴실 사전문의 4만원~~~ 캠핑,팬션,카라반 남녀화장실구분 방방이 보유...","text":"동반 가능","n":1}
 {"cid":"7120","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"7120","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ihhihh/224446999485","at":"2026-10-23","quote":"한눈에 핵심정보 영광 캠핑아이 중 반려견 동반 가능한 궁지골농원캠핑장은 전남 영광군 묘량면에 위치한 오토캠핑장입니다.","text":"동반 가능","n":1}
@@ -4128,7 +4129,7 @@
 {"cid":"101654","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ihhihh/224407577692","at":"2026-09-11","quote":"항목 상세 정보 위치...요일/시즌별 변동) 주요 시설 샤워실, 반려견 동반 가능, 바베큐, 매점 매너타임 22:00 ~ 08:00 (조명 낮추기, 소음 …","text":"동반 가능","n":2}
 {"cid":"101654","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chojozo/224444942345","at":"2026-10-17","quote":"데크는 오징어팩만(관리사무소 무료 대여), 전기 1,100W 이하, 매너타임 22:00~07:00, 반려견 동반 불가 쓰레기 울주군 종량제봉투 600원 현장 구매, 카드 결제 가능 #대운산하늘숲야영장 #울산캠핑장 #울주군립야영장 #대운산캠핑장 #울주…","text":"동반 불가","n":1}
 {"cid":"101655","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
-{"cid":"101655","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101655","at":"2026-01-14T00:00:00+09:00","quote":"가족, 친구, 연인과 함께 즐거운 시간을 보낼 수 있으며, 특히 반려견 동반이 가능하여 더욱 편안하고 자유로운 시간을 보낼 수 있습니다.","text":"동반 가능"}
+{"cid":"101655","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101655","at":"2026-11-26T00:00:00+09:00","quote":"가족, 친구, 연인과 함께 즐거운 시간을 보낼 수 있으며, 특히 반려견 동반이 가능하여 더욱 편안하고 자유로운 시간을 보낼 수 있습니다.","text":"동반 가능"}
 {"cid":"101655","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/le2ry/224077419517","at":"2025-11-16","quote":"디저트, 이유식, 애견 간식 제외) - 반려동물 동반 가능 (목줄 착용 필수, 매너벨트 배변봉투 지참) - 텐트 내 금연 (흡연 적발 시 강제 퇴실) 주말에 망고랑...타임 이용했다!!","text":"동반 가능","n":3}
 {"cid":"101656","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101656","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blogsailing.com/14781","at":"2025-12-12","quote":"[경기도 가평군] 모모글램핑 - 반려견 동반이 가능한 웨스턴마차 모모글램핑 (2)","text":"동반 가능","n":1}
@@ -6566,7 +6567,7 @@
 {"cid":"park-48820-00001-n71qm","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://outguide88.tistory.com/21","at":"2025-04-04","quote":"반려동물 동반 가능","text":"동반 가능","n":1}
 {"cid":"park-51130-00106-1ksg7","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lrehyebin/224219271552","at":"2026-03-17","quote":"23:40) 033-734-7292 혁신도시 수변공원을 따라 걷다 보면 애견 동반이 가능한 반곡동술집...기분을 느낄 수 있고요 날이 풀리면 데크 야외 자리를 활짝 개방하시는데 두물수변공원 산…","text":"동반 가능","n":1}
 {"cid":"park-51790-00005-1majq","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sooso_han_/224427127564","at":"2026-10-01","quote":"외부 음식은 반입 금지지만 반려견 동반은 가능하고, 글램핑 느낌을 낼 수 있는...안내사항을 확인해요.","text":"동반 가능","n":1}
-{"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-11-26","text":"가능(소형견)"}
+{"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-11-27","text":"가능(소형견)"}
 {"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tkdwlddkx/224445492991","at":"2026-10-18","quote":"용인 가을 나들이 모임 하기 좋은 바베큐장 | 라그릴스 셀프 바베큐 애견동반 가능.","text":"동반 가능","n":3}
 {"cid":"pdu-mysticcamp-yeongjong","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/csj1391/224010098514","at":"2025-09-16","quote":"테라스에서는 캠프파이어도 가능하고, 강아지들이 놀수도 있답니다 ㅎㅎ 많은 인원이 바베큐도 가능해…","text":"동반 가능","n":2}
 {"cid":"pdu-mysticcamp-yeongjong","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/mysticcamp/223343820171","at":"2024-02-04","quote":"애견동반 불가 실외(site 9-10 예약자) - 애견동반 가능 (실외 테라스 공간) 미스틱캠프는 실외 사이트를 예약하신 분에 한해, '실외 테라스' 공간 애견동반이...고기 구워먹어도 되나요?","text":"동반 불가","n":1}

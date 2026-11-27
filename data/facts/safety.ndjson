@@ -434,6 +434,11 @@
 {"cid":"978","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"987","attr":"SAFETY_EXTINGUISHER","value":40,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"991","attr":"SAFETY_EXTINGUISHER","value":40,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"991","attr":"SAFETY_FIRE_SAND","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"991","attr":"SAFETY_FIRE_SENSOR","value":6,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"991","attr":"SAFETY_FIRE_WATER","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"991","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"1023","attr":"SAFETY_EXTINGUISHER","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1023","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"1024","attr":"SAFETY_EXTINGUISHER","value":26,"grade":"CONFIRMED","src":"gocamping"}
@@ -1624,7 +1629,9 @@
 {"cid":"7108","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"7109","attr":"SAFETY_EXTINGUISHER","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7109","attr":"SAFETY_FIRE_SENSOR","value":10,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7110","attr":"SAFETY_EXTINGUISHER","value":30,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7110","attr":"SAFETY_EXTINGUISHER","value":20,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7110","attr":"SAFETY_FIRE_SENSOR","value":3,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7110","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"7120","attr":"SAFETY_EXTINGUISHER","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7120","attr":"SAFETY_FIRE_SAND","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7120","attr":"SAFETY_FIRE_WATER","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -4915,6 +4922,10 @@
 {"cid":"101550","attr":"SAFETY_EXTINGUISHER","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101550","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"101551","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"101553","attr":"SAFETY_EXTINGUISHER","value":40,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101553","attr":"SAFETY_FIRE_SAND","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101553","attr":"SAFETY_FIRE_SENSOR","value":10,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101553","attr":"SAFETY_FIRE_WATER","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101553","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"101554","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"101555","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
