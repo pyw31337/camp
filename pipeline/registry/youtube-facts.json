@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T13:38:00+09:00",
+  "updated_at": "2026-11-27T15:25:00+09:00",
   "videos": {
     "98kZk3eVVRs": {
       "cid": "10",
@@ -891,6 +891,4497 @@
       "desc_len": 252,
       "transcript_len": 0,
       "facts_count": 0
+    },
+    "WWTaHGM9B7o": {
+      "cid": "123",
+      "url": "https://www.youtube.com/watch?v=WWTaHGM9B7o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 345,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "BmA7y9M0wlI": {
+      "cid": "123",
+      "url": "https://www.youtube.com/watch?v=BmA7y9M0wlI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 303,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "gG5H5SVqSSA": {
+      "cid": "123",
+      "url": "https://www.youtube.com/watch?v=gG5H5SVqSSA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 66,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "tN1LxmrHPl4": {
+      "cid": "124",
+      "url": "https://www.youtube.com/watch?v=tN1LxmrHPl4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1000,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "brQ9WeSND9M": {
+      "cid": "129",
+      "url": "https://www.youtube.com/watch?v=brQ9WeSND9M",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 141,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "XTTG8Pou2Y8": {
+      "cid": "129",
+      "url": "https://www.youtube.com/watch?v=XTTG8Pou2Y8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 59,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "bx2oJwlGYWU": {
+      "cid": "129",
+      "url": "https://www.youtube.com/watch?v=bx2oJwlGYWU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 486,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "B8iOf2_0QDI": {
+      "cid": "129",
+      "url": "https://www.youtube.com/watch?v=B8iOf2_0QDI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1272,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "SVc4UBpJe04": {
+      "cid": "129",
+      "url": "https://www.youtube.com/watch?v=SVc4UBpJe04",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 799,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "3PX2cA5sTuo": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=3PX2cA5sTuo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 413,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ALOk_K3q-5I": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=ALOk_K3q-5I",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 364,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "z-FuDrMlGFw": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=z-FuDrMlGFw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 789,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jD5tgOXUa5M": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=jD5tgOXUa5M",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 66,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "H80FsQ0gGMo": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=H80FsQ0gGMo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 173,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_wLjGRHLs2s": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=_wLjGRHLs2s",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 682,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "B9MfWTgFaMw": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=B9MfWTgFaMw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 439,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "cB4CKKu0nHY": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=cB4CKKu0nHY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 48,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "3PRpWGm5MU0": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=3PRpWGm5MU0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 43,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "S2AICxv5418": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=S2AICxv5418",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 191,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Dq1WfRyHack": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=Dq1WfRyHack",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 176,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-y8Hwg77Ovs": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=-y8Hwg77Ovs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 175,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2Fq7GxEq4ZM": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=2Fq7GxEq4ZM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 358,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_s3jHbHL8HI": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=_s3jHbHL8HI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 238,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "kVv0xMJrKkI": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=kVv0xMJrKkI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 225,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "bXG5iKeeNK8": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=bXG5iKeeNK8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 601,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2R1Ggwq5S5Y": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=2R1Ggwq5S5Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 611,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "FBjoXS22qjA": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=FBjoXS22qjA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 406,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "WNwPeiR4Pjg": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=WNwPeiR4Pjg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 343,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "swFsYGR23F4": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=swFsYGR23F4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1059,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "AedpZstOrSg": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=AedpZstOrSg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 513,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "3z1KO_3qbNk": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=3z1KO_3qbNk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 57,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OodLfqK9_s0": {
+      "cid": "131",
+      "url": "https://www.youtube.com/watch?v=OodLfqK9_s0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1034,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "gnoq2ZZSe2w": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=gnoq2ZZSe2w",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 135,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_5KdfsqIzrU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=_5KdfsqIzrU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 11,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "59shDSp-8po": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=59shDSp-8po",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 273,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-ocjz2L3JD4": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=-ocjz2L3JD4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 146,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "K5nIulpyxRQ": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=K5nIulpyxRQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 129,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yalVrxCqRI0": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=yalVrxCqRI0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 108,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "DtZybrxpUQA": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=DtZybrxpUQA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 126,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9bdRkbvt6gI": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=9bdRkbvt6gI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 61,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "deDMJgq4YfM": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=deDMJgq4YfM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 48,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "iH6FoJu2SLU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=iH6FoJu2SLU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 954,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "L2iOnqwXWU8": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=L2iOnqwXWU8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 20,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2qGipr4L-AQ": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=2qGipr4L-AQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 286,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "EcUAdRQThF4": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=EcUAdRQThF4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 432,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "v65KOsZ_5jU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=v65KOsZ_5jU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 27,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "CkZBSRdDOfc": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=CkZBSRdDOfc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 125,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "xZMZqJ2pXL8": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=xZMZqJ2pXL8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 390,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IODe7iKI__w": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=IODe7iKI__w",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 133,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "g3sYFCDRKD4": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=g3sYFCDRKD4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1497,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "EBe8gGRC-TU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=EBe8gGRC-TU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 24,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "8kEOcsQ-kqU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=8kEOcsQ-kqU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 105,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "LI-NrDds34o": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=LI-NrDds34o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 743,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "bm9BbJB6FvU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=bm9BbJB6FvU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 28,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "nv3WJNlwx28": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=nv3WJNlwx28",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 680,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "iEtvsMrXvPw": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=iEtvsMrXvPw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 28,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9vPkNs0wV2M": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=9vPkNs0wV2M",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 28,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "uwyIuR_lfs0": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=uwyIuR_lfs0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 28,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "UOw5a0ocRFo": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=UOw5a0ocRFo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 156,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "VEKqtnUMkbA": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=VEKqtnUMkbA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 273,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "8lDa4QpuS0A": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=8lDa4QpuS0A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 67,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yGU_ocRkpns": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=yGU_ocRkpns",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 689,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1wFgMjFF3M0": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=1wFgMjFF3M0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 51,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MRWJCK8Y_pU": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=MRWJCK8Y_pU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 86,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "k3T-NxyyfPE": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=k3T-NxyyfPE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 437,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5BhKVsWxaO0": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=5BhKVsWxaO0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 43,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "oVWs_3GDPsw": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=oVWs_3GDPsw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 273,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "hZMhNvod13k": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=hZMhNvod13k",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 550,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5gnhOouNIkg": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=5gnhOouNIkg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 321,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "JG8fpR-5W3g": {
+      "cid": "138",
+      "url": "https://www.youtube.com/watch?v=JG8fpR-5W3g",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 376,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "88kmGvj78pA": {
+      "cid": "140",
+      "url": "https://www.youtube.com/watch?v=88kmGvj78pA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 250,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "v0P2n3JqYMs": {
+      "cid": "140",
+      "url": "https://www.youtube.com/watch?v=v0P2n3JqYMs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 31,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jm7rIM5q438": {
+      "cid": "140",
+      "url": "https://www.youtube.com/watch?v=jm7rIM5q438",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 156,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZFgOiTZSPiA": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=ZFgOiTZSPiA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 448,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "rabq8INfCZM": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=rabq8INfCZM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 92,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "dpRdpI7KzDM": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=dpRdpI7KzDM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 66,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "0lcIUzOUoxE": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=0lcIUzOUoxE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 16,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Nf_wrV-ZOd0": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=Nf_wrV-ZOd0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 49,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Ir4lSpYloxw": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=Ir4lSpYloxw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 34,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wiawC6KNA5s": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=wiawC6KNA5s",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 465,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zMGoRNaFfBY": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=zMGoRNaFfBY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 210,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1GNkLDqIvNQ": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=1GNkLDqIvNQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 601,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "G9ALavK-ztw": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=G9ALavK-ztw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 483,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "T3VaTa5lB9o": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=T3VaTa5lB9o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 598,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yMwPyl1xWeI": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=yMwPyl1xWeI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 221,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "e1shbr8wU-g": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=e1shbr8wU-g",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1505,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "SqZGZnJSfoM": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=SqZGZnJSfoM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 967,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "pbmVFJ-fRWM": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=pbmVFJ-fRWM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 12,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "YWvHjU816FQ": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=YWvHjU816FQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 69,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Mng0mWazgEo": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=Mng0mWazgEo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 16,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_bK0GVtNRIY": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=_bK0GVtNRIY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 268,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "F_cCOD1TLx0": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=F_cCOD1TLx0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 188,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jYWT0r0EMtM": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=jYWT0r0EMtM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 391,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zcPeWyH7Oww": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=zcPeWyH7Oww",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 215,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "O3GLZLJaICg": {
+      "cid": "141",
+      "url": "https://www.youtube.com/watch?v=O3GLZLJaICg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 252,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1XyJC5J1STw": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=1XyJC5J1STw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 649,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "bD4bR6qWgj0": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=bD4bR6qWgj0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 286,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "H2GJV_JxTAM": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=H2GJV_JxTAM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 575,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "VrBTJQ-q0no": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=VrBTJQ-q0no",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 470,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "eNaX9uLTd4Y": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=eNaX9uLTd4Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 691,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "u9A94mUf5xA": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=u9A94mUf5xA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 689,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "y3W162R-amI": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=y3W162R-amI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 337,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "VK5yHpf-B6g": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=VK5yHpf-B6g",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 408,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "SP5vJ-Zsfa0": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=SP5vJ-Zsfa0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 147,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "P6LIYCCPTHI": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=P6LIYCCPTHI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 15,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "w-1VQly7txE": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=w-1VQly7txE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 567,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "A8B5Yi6mM3Y": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=A8B5Yi6mM3Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 393,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lKJCxVPhxXw": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=lKJCxVPhxXw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 648,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jScMdCQXvCs": {
+      "cid": "142",
+      "url": "https://www.youtube.com/watch?v=jScMdCQXvCs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 830,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "RG71WRxLiI8": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=RG71WRxLiI8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 174,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "dIKUOAdKV1Q": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=dIKUOAdKV1Q",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 619,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "iaOTL3TEnXM": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=iaOTL3TEnXM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 360,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZMT3Vbq1uJ4": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=ZMT3Vbq1uJ4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 23,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-pBzoLPTQo4": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=-pBzoLPTQo4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 83,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "8eJUJeJ1jQ4": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=8eJUJeJ1jQ4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 64,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZZpRgE99RmQ": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=ZZpRgE99RmQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 16,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_Wltg65rpuk": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=_Wltg65rpuk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 186,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Z3nPS7pzCfs": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=Z3nPS7pzCfs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 19,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jQU-gCJTdKk": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=jQU-gCJTdKk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 303,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lDVq_TjCBVU": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=lDVq_TjCBVU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 352,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "oyVOQXDgCn8": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=oyVOQXDgCn8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 364,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "kD7dqePmCFg": {
+      "cid": "146",
+      "url": "https://www.youtube.com/watch?v=kD7dqePmCFg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 269,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OyRuH5ow8z0": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=OyRuH5ow8z0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 199,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Foes-7GVVLk": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=Foes-7GVVLk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1052,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5fE3cyCpqFU": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=5fE3cyCpqFU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 60,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "0sGjp_ePLME": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=0sGjp_ePLME",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 136,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "iMxvWOYt0X8": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=iMxvWOYt0X8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 971,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Z69B8KLBII0": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=Z69B8KLBII0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1039,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "l-3Ma7MUrFU": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=l-3Ma7MUrFU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 653,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "CCLyqX9xoU4": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=CCLyqX9xoU4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 222,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "FM_IidoHWWU": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=FM_IidoHWWU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 434,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZXZAb-BBTJs": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=ZXZAb-BBTJs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 913,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Egc0u8jXCFA": {
+      "cid": "148",
+      "url": "https://www.youtube.com/watch?v=Egc0u8jXCFA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 506,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "xfWEU2ZXGxs": {
+      "cid": "238",
+      "url": "https://www.youtube.com/watch?v=xfWEU2ZXGxs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 132,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Ens05XaPpWU": {
+      "cid": "238",
+      "url": "https://www.youtube.com/watch?v=Ens05XaPpWU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 124,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Hh7NfjT7VGc": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=Hh7NfjT7VGc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 143,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "B_otwjN5Rec": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=B_otwjN5Rec",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 588,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "7jqICCI4Jbo": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=7jqICCI4Jbo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 117,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wyAp3be5bhc": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=wyAp3be5bhc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 516,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "prSffmGqu7I": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=prSffmGqu7I",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 170,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IathLhG-RV4": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=IathLhG-RV4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 691,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "RBHrl9ZStxc": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=RBHrl9ZStxc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 551,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "4ONmNdkuz8Q": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=4ONmNdkuz8Q",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 900,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "C5UgdAHEHOs": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=C5UgdAHEHOs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 158,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "56eGcXJaYJc": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=56eGcXJaYJc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 256,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "L6yRW0PMB-0": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=L6yRW0PMB-0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 656,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "BrtjFQLg_SY": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=BrtjFQLg_SY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 284,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "A0EwNl-81Aw": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=A0EwNl-81Aw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 5450,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "rsmB1SHmxjE": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=rsmB1SHmxjE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 86,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "RjBrOBKH6cY": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=RjBrOBKH6cY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 182,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "N_1nIMmJcnc": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=N_1nIMmJcnc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 97,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5y6NByjT4vY": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=5y6NByjT4vY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 351,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "0xVsoGW0dPQ": {
+      "cid": "267",
+      "url": "https://www.youtube.com/watch?v=0xVsoGW0dPQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 438,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "GsPGc-0uyEc": {
+      "cid": "277",
+      "url": "https://www.youtube.com/watch?v=GsPGc-0uyEc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 221,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OObI65m8b3c": {
+      "cid": "277",
+      "url": "https://www.youtube.com/watch?v=OObI65m8b3c",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 222,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yA4p3EkFQ8Y": {
+      "cid": "289",
+      "url": "https://www.youtube.com/watch?v=yA4p3EkFQ8Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 128,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "4jW5z8xxdxM": {
+      "cid": "289",
+      "url": "https://www.youtube.com/watch?v=4jW5z8xxdxM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 13,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZiBUMhADelc": {
+      "cid": "289",
+      "url": "https://www.youtube.com/watch?v=ZiBUMhADelc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 28,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "tvrH7ilAJm4": {
+      "cid": "289",
+      "url": "https://www.youtube.com/watch?v=tvrH7ilAJm4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 51,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "VG8GuHBYCWg": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=VG8GuHBYCWg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 104,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_sysRG6e6Hw": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=_sysRG6e6Hw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 510,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "z1QMRGHLRrM": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=z1QMRGHLRrM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 229,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "S8lY6P7_eYQ": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=S8lY6P7_eYQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 687,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "eRDFCS3a8sg": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=eRDFCS3a8sg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 107,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-f6SM3n-UWU": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=-f6SM3n-UWU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 618,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "BeD5y-nGtl8": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=BeD5y-nGtl8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 53,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "nhK6TFnN2XU": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=nhK6TFnN2XU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 699,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "TE7J6-mvI7Y": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=TE7J6-mvI7Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1215,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "A720vM9Ugm8": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=A720vM9Ugm8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 383,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zQ6Jt-BvxOc": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=zQ6Jt-BvxOc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 108,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZbpYP42ZgPA": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=ZbpYP42ZgPA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1923,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "aD7DiGX-on0": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=aD7DiGX-on0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 44,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "sv1-89-L_z8": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=sv1-89-L_z8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 410,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yMbvcvazKVM": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=yMbvcvazKVM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 941,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lV8-Now3GaI": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=lV8-Now3GaI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 362,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_xEPcvBljnA": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=_xEPcvBljnA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 336,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "4O4xxdSkFVo": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=4O4xxdSkFVo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 550,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "BoBQAEvatEk": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=BoBQAEvatEk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 93,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "VhFAlyIlwdI": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=VhFAlyIlwdI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 858,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "PBzNJDnewbM": {
+      "cid": "301",
+      "url": "https://www.youtube.com/watch?v=PBzNJDnewbM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 146,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1bFpsd42Qtw": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=1bFpsd42Qtw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 172,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Q6CgQGgkqUY": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=Q6CgQGgkqUY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 90,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_7qaw_q4yCw": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=_7qaw_q4yCw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 59,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zGBoRZ2dbgg": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=zGBoRZ2dbgg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 237,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "f2WchNL-DBE": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=f2WchNL-DBE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 304,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1ommr2pp_tY": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=1ommr2pp_tY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 246,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "FAJ5k1y0RMg": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=FAJ5k1y0RMg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 402,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "dNNJHt_nSeU": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=dNNJHt_nSeU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 287,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "rObR0JO4geY": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=rObR0JO4geY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 144,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "YbKDnNOfIH8": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=YbKDnNOfIH8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 594,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "TKle6O9Y3mI": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=TKle6O9Y3mI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 274,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "CuZquMpQCD8": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=CuZquMpQCD8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 165,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5GagYjnQQao": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=5GagYjnQQao",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 67,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "XMUcn99mhWw": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=XMUcn99mhWw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 421,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Xmkj493NIic": {
+      "cid": "306",
+      "url": "https://www.youtube.com/watch?v=Xmkj493NIic",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 664,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1mjKLlAqH6s": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=1mjKLlAqH6s",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2490,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "AFb77GV3mT0": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=AFb77GV3mT0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 12,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "G9kXdduWWpE": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=G9kXdduWWpE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 246,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "FXbIzfREsY8": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=FXbIzfREsY8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 319,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yw1SqQbYqK8": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=yw1SqQbYqK8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 385,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "7M3LnD0wTOQ": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=7M3LnD0wTOQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2341,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "OVc2X12fxXA": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=OVc2X12fxXA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 306,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2QszDZO4GOI": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=2QszDZO4GOI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 333,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wagkhV1VGbM": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=wagkhV1VGbM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 41,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5_ACcJ11GCs": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=5_ACcJ11GCs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 790,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Xn4oroSs59o": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=Xn4oroSs59o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 250,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "b0ksXJb2udU": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=b0ksXJb2udU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 95,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "gL6_PGrlpNk": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=gL6_PGrlpNk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 766,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5pZtq2BP-TQ": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=5pZtq2BP-TQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 828,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "CueXiNKM5Oc": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=CueXiNKM5Oc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 12,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "RmVEmurU_L0": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=RmVEmurU_L0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 27,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "uHwZqYNhL8o": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=uHwZqYNhL8o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 98,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-4thf0a8UQE": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=-4thf0a8UQE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 60,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "NUtiX5xwGDk": {
+      "cid": "315",
+      "url": "https://www.youtube.com/watch?v=NUtiX5xwGDk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 335,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "BSI8nUhHzQU": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=BSI8nUhHzQU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 48,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Ojb7JodVBXw": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=Ojb7JodVBXw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 88,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "rZr_PIntX6w": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=rZr_PIntX6w",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1877,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "B1Dp6aEqV7M": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=B1Dp6aEqV7M",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 298,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5qB3BB4qdWM": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=5qB3BB4qdWM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 49,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "n3L4GCU0Grk": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=n3L4GCU0Grk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 247,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Ei1N1UF6plk": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=Ei1N1UF6plk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 156,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "KW21snotGOo": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=KW21snotGOo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 113,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wwjZIP8YQjI": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=wwjZIP8YQjI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 536,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "imRXmhgV_90": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=imRXmhgV_90",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 357,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "s_ZK5MeHotY": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=s_ZK5MeHotY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1364,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2skKKpIUpJw": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=2skKKpIUpJw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1302,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Q32JhB5Dc4k": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=Q32JhB5Dc4k",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 116,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "g6mresB9n08": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=g6mresB9n08",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 379,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5gLZuDZbJzU": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=5gLZuDZbJzU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 465,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-bSwB6dqohY": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=-bSwB6dqohY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1052,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "TnuzOV_1ewI": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=TnuzOV_1ewI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 237,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2cIBkSgHjWw": {
+      "cid": "320",
+      "url": "https://www.youtube.com/watch?v=2cIBkSgHjWw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 31,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZwcCDXHQRZg": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=ZwcCDXHQRZg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 242,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MMXtTZQfQhM": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=MMXtTZQfQhM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 61,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "k4uaE_axvSU": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=k4uaE_axvSU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 21,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9aZvmrUlbRo": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=9aZvmrUlbRo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 231,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "cSXkbeJPwe0": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=cSXkbeJPwe0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 250,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ddoE_rbl6bM": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=ddoE_rbl6bM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 8,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1kOjFQsxJPk": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=1kOjFQsxJPk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 348,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "xdiYu_CffAw": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=xdiYu_CffAw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 345,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "6K51IjJzni0": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=6K51IjJzni0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 314,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1x25OXVyXUM": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=1x25OXVyXUM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 109,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "DISWB32V9uA": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=DISWB32V9uA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 395,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2jITCPQvHao": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=2jITCPQvHao",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 323,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zdMPygQKcbY": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=zdMPygQKcbY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 257,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "bdNF58O7vF8": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=bdNF58O7vF8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 152,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "vICj6jXktyA": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=vICj6jXktyA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 599,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Vmox6VwYTCw": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=Vmox6VwYTCw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 237,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "w3AfKvKo1eY": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=w3AfKvKo1eY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 132,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Q8pfLgrMPI8": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=Q8pfLgrMPI8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 126,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MMFIe0Knu58": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=MMFIe0Knu58",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 227,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Xwu8Cw1R1E0": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=Xwu8Cw1R1E0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 123,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "47APogXap8M": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=47APogXap8M",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 502,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "YI8FRdbCxO0": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=YI8FRdbCxO0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 48,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "I_RjnG6Lm2A": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=I_RjnG6Lm2A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 272,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Ei8eVOv1bDE": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=Ei8eVOv1bDE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 236,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "18QtxjGg798": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=18QtxjGg798",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 442,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5FMin7bMOuE": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=5FMin7bMOuE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 302,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OyyuZZR7gu0": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=OyyuZZR7gu0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 456,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "eOglNX6l-lc": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=eOglNX6l-lc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 316,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wkjrb8tnkSk": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=wkjrb8tnkSk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 97,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2Dbsf1OGO6A": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=2Dbsf1OGO6A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 63,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9vcDlShKedc": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=9vcDlShKedc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 134,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "QTseVfQieTI": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=QTseVfQieTI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 10,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "HRG6Y05J0AY": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=HRG6Y05J0AY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 218,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "4Vif6OrE9f8": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=4Vif6OrE9f8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 355,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "X1Tukb-t1rQ": {
+      "cid": "331",
+      "url": "https://www.youtube.com/watch?v=X1Tukb-t1rQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 695,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "gWVkZhATTrI": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=gWVkZhATTrI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 827,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "RJVXx4kp-Vs": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=RJVXx4kp-Vs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 628,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "fO9Rl4ga2Eg": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=fO9Rl4ga2Eg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 156,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "khHMie2JaKI": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=khHMie2JaKI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 543,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MxW_4y-xX7c": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=MxW_4y-xX7c",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 155,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "D2xhBHEK2LQ": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=D2xhBHEK2LQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 333,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "aJu7eAWmI8I": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=aJu7eAWmI8I",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 148,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "KGPh7lDBUaM": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=KGPh7lDBUaM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 932,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "i5LUCH3kGzM": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=i5LUCH3kGzM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 226,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "FeJcnGdP6vw": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=FeJcnGdP6vw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 467,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "6Bj2uqXU0ag": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=6Bj2uqXU0ag",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 714,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OijUeS7U5Y0": {
+      "cid": "333",
+      "url": "https://www.youtube.com/watch?v=OijUeS7U5Y0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 123,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Qzur7RaTis4": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=Qzur7RaTis4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1655,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1ZpFS81b9n0": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=1ZpFS81b9n0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 56,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "PGKkJ13oAcs": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=PGKkJ13oAcs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 957,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "eccM9H_VFZ0": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=eccM9H_VFZ0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 44,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "3SHJIcAjWD4": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=3SHJIcAjWD4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 133,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "KaiV95RbA0o": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=KaiV95RbA0o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 61,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "7IY5vFJ31Rs": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=7IY5vFJ31Rs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 271,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "YJsSgJA6XuA": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=YJsSgJA6XuA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 162,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "pD8ukVQjOjE": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=pD8ukVQjOjE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 570,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "75bfbif23Mk": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=75bfbif23Mk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 276,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "fQ3nVN7P3eM": {
+      "cid": "337",
+      "url": "https://www.youtube.com/watch?v=fQ3nVN7P3eM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 702,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9NySLxKxvEY": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=9NySLxKxvEY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 401,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "9FlrOyiQOIU": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=9FlrOyiQOIU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 90,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Us2BcVtlt7M": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=Us2BcVtlt7M",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 204,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "HzEgPqALGd8": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=HzEgPqALGd8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 413,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "eK6wtYj7m1k": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=eK6wtYj7m1k",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 980,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ajplhHwHIKE": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=ajplhHwHIKE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2204,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "M65xS2r3xAk": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=M65xS2r3xAk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 254,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "WhmO0hL6U4A": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=WhmO0hL6U4A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 234,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "uHGs4YonSvY": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=uHGs4YonSvY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 243,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "0UmB9D86NkQ": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=0UmB9D86NkQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2134,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "hqfEJgP-zuw": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=hqfEJgP-zuw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 282,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "NMB4gEXtufg": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=NMB4gEXtufg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 153,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "I7CEXBFSwkE": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=I7CEXBFSwkE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 923,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Fz9tWo1TDv0": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=Fz9tWo1TDv0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 411,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "XUwYl_J3aVU": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=XUwYl_J3aVU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 632,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "M57k5SvYaps": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=M57k5SvYaps",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 104,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MDd0FO4SvhY": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=MDd0FO4SvhY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 593,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "mt5ZwiP2E5E": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=mt5ZwiP2E5E",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 27,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yrFqqVSpPLk": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=yrFqqVSpPLk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 36,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Wkd0N8hBBXI": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=Wkd0N8hBBXI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 38,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "vzfrKhaBDO4": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=vzfrKhaBDO4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 78,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "xswTepQJU-0": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=xswTepQJU-0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 82,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "APPyKyaLQe8": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=APPyKyaLQe8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 16,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "p1p8CY1Hnx0": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=p1p8CY1Hnx0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 210,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "nL5kfhv9KIY": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=nL5kfhv9KIY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 220,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "4mw8IDVYlx0": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=4mw8IDVYlx0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 742,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "LQkXpDTbmzs": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=LQkXpDTbmzs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 81,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wB4TviEn070": {
+      "cid": "344",
+      "url": "https://www.youtube.com/watch?v=wB4TviEn070",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1027,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Wkhw1BvQf_0": {
+      "cid": "355",
+      "url": "https://www.youtube.com/watch?v=Wkhw1BvQf_0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 77,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "EjZbZJHkeag": {
+      "cid": "355",
+      "url": "https://www.youtube.com/watch?v=EjZbZJHkeag",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 145,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2Ss-RCK398k": {
+      "cid": "355",
+      "url": "https://www.youtube.com/watch?v=2Ss-RCK398k",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 107,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "qq1x90Yc7qU": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=qq1x90Yc7qU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 51,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "W1vMO5EEACY": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=W1vMO5EEACY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 541,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "BNtzuTM3Nfc": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=BNtzuTM3Nfc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 485,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "KeLxSQtJuS8": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=KeLxSQtJuS8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 101,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Z8ydRGfHDo0": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=Z8ydRGfHDo0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 166,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "caCe2iY7h-o": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=caCe2iY7h-o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2497,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZLF6ivdXvNU": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=ZLF6ivdXvNU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 41,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "3wUCPMc5rkE": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=3wUCPMc5rkE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 82,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "0aBkXHdEIRw": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=0aBkXHdEIRw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 144,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "M9KAjMbDwCY": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=M9KAjMbDwCY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 41,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_Ehb2-qn1vw": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=_Ehb2-qn1vw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 379,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Ak7Zz4FF85I": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=Ak7Zz4FF85I",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 428,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "K_t3CMEZPyk": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=K_t3CMEZPyk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 310,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "kA-h-zChaZI": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=kA-h-zChaZI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 182,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "4pL8LhuWZw8": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=4pL8LhuWZw8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 312,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "DlZPh86arSg": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=DlZPh86arSg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 178,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "XyDIVqfgb5o": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=XyDIVqfgb5o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 633,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Rq6GhOdPV3o": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=Rq6GhOdPV3o",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 15,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "8dssusBkWJk": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=8dssusBkWJk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 31,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wGsSFKBQzus": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=wGsSFKBQzus",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 31,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ORlmfEZhLx8": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=ORlmfEZhLx8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 42,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "EZn7u3lL0II": {
+      "cid": "357",
+      "url": "https://www.youtube.com/watch?v=EZn7u3lL0II",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 272,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "f6TPMKyRp8Q": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=f6TPMKyRp8Q",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 700,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "3mcnxdycbpQ": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=3mcnxdycbpQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 50,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "dpaqlifrNxo": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=dpaqlifrNxo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 436,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "vlVN3EPocdQ": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=vlVN3EPocdQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 411,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "8XRMi8YiwFU": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=8XRMi8YiwFU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 730,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "0tOiwolAGEk": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=0tOiwolAGEk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 693,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "41-6m93yNKk": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=41-6m93yNKk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 491,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "z-mMOD82FUk": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=z-mMOD82FUk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 630,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MmXTHh-g9kM": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=MmXTHh-g9kM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 757,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "XhOiIT98j6g": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=XhOiIT98j6g",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 659,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "yeqB9IC3imo": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=yeqB9IC3imo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 583,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "0yt_ajl85fI": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=0yt_ajl85fI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 980,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Il2tzuOoHJA": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=Il2tzuOoHJA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 750,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "6ZaMH1Dj4hU": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=6ZaMH1Dj4hU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 518,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OATZBy0xzck": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=OATZBy0xzck",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 665,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lZr3Y1WvsSc": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=lZr3Y1WvsSc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 872,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ypjE-EMKHWQ": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=ypjE-EMKHWQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 826,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IfY6BSfmIsA": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=IfY6BSfmIsA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 687,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "bOIIq2AE4QY": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=bOIIq2AE4QY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 283,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "8uVSPnNqOz4": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=8uVSPnNqOz4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 620,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "BpUy9BHVW6Y": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=BpUy9BHVW6Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 851,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "C8ZP5bj5cmg": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=C8ZP5bj5cmg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 465,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "UbqvHLBfGoM": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=UbqvHLBfGoM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 690,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "fd6gGGQcEuQ": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=fd6gGGQcEuQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 655,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_Hdb-fZNvS4": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=_Hdb-fZNvS4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 35,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "N82PrGDHIdU": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=N82PrGDHIdU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 484,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9zq-Tg-zRPA": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=9zq-Tg-zRPA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 626,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "p1GVdE2nxFk": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=p1GVdE2nxFk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 936,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "QM3qrMOBZRU": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=QM3qrMOBZRU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 733,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "NUzmGEtUnpw": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=NUzmGEtUnpw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 675,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zG0pp8hRF10": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=zG0pp8hRF10",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 890,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "FH9n596yyWI": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=FH9n596yyWI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 134,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "7IbiwGsc0ls": {
+      "cid": "373",
+      "url": "https://www.youtube.com/watch?v=7IbiwGsc0ls",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 258,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "iC_haGBNaM4": {
+      "cid": "379",
+      "url": "https://www.youtube.com/watch?v=iC_haGBNaM4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 178,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OnAtcqF0fvw": {
+      "cid": "379",
+      "url": "https://www.youtube.com/watch?v=OnAtcqF0fvw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 495,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "E2EswDJZd7w": {
+      "cid": "379",
+      "url": "https://www.youtube.com/watch?v=E2EswDJZd7w",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 154,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "UY7U0jJT4MM": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=UY7U0jJT4MM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 111,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ajEqeAIylzk": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=ajEqeAIylzk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1712,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lSGr-j6Apik": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=lSGr-j6Apik",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 145,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IhtY4rxtwwY": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=IhtY4rxtwwY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 140,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "MasZyqqlsr8": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=MasZyqqlsr8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 166,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IrFXFr0TOKg": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=IrFXFr0TOKg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 11,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "LBe4dhQfsYk": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=LBe4dhQfsYk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 92,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "08cN7uBqIjk": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=08cN7uBqIjk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 817,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "QnMNtOhPPUQ": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=QnMNtOhPPUQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 24,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "511CIdMjQyY": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=511CIdMjQyY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 152,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "oKVV88M5UHA": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=oKVV88M5UHA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 5020,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "7u0qqcVStzs": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=7u0qqcVStzs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 491,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "7x9JsJwzeEo": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=7x9JsJwzeEo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 23,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "LYpYY1RFRlU": {
+      "cid": "387",
+      "url": "https://www.youtube.com/watch?v=LYpYY1RFRlU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 471,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "p9mgf243oI4": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=p9mgf243oI4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 57,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "cD0dMdjxhg4": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=cD0dMdjxhg4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 936,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "QqnVHKDf5Tk": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=QqnVHKDf5Tk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 554,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Hk3gbBljALA": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=Hk3gbBljALA",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 888,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "GbxWYBBdPLI": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=GbxWYBBdPLI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 741,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "C4JirfJjdik": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=C4JirfJjdik",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2319,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Bp_QNr5glkw": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=Bp_QNr5glkw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 602,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "RC8SitmwBKs": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=RC8SitmwBKs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1281,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "qVsYv8spBW4": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=qVsYv8spBW4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 428,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "M4Q25QIkLXU": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=M4Q25QIkLXU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 785,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "poqy1an85-c": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=poqy1an85-c",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 390,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "rLqikJm-pJc": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=rLqikJm-pJc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 750,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "380gbnldc4A": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=380gbnldc4A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 256,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "LamniIO4jcg": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=LamniIO4jcg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 313,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Krc2znwluZ0": {
+      "cid": "395",
+      "url": "https://www.youtube.com/watch?v=Krc2znwluZ0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 695,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "D46IIbmy8GU": {
+      "cid": "398",
+      "url": "https://www.youtube.com/watch?v=D46IIbmy8GU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 138,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "TtnFoKMTh1g": {
+      "cid": "398",
+      "url": "https://www.youtube.com/watch?v=TtnFoKMTh1g",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 197,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1DFZEuj1GgI": {
+      "cid": "398",
+      "url": "https://www.youtube.com/watch?v=1DFZEuj1GgI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 19,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "TscXwN8V8JU": {
+      "cid": "398",
+      "url": "https://www.youtube.com/watch?v=TscXwN8V8JU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 145,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IE_qCvHEJj0": {
+      "cid": "398",
+      "url": "https://www.youtube.com/watch?v=IE_qCvHEJj0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 118,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "6FgOiude3zw": {
+      "cid": "398",
+      "url": "https://www.youtube.com/watch?v=6FgOiude3zw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 34,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "pK-niwt6orU": {
+      "cid": "400",
+      "url": "https://www.youtube.com/watch?v=pK-niwt6orU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 35,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "KLnPTv6VgzY": {
+      "cid": "400",
+      "url": "https://www.youtube.com/watch?v=KLnPTv6VgzY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 38,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "HkGyIh-_tA4": {
+      "cid": "400",
+      "url": "https://www.youtube.com/watch?v=HkGyIh-_tA4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 40,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "PFb0r-38Ruk": {
+      "cid": "400",
+      "url": "https://www.youtube.com/watch?v=PFb0r-38Ruk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 68,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "wXFYfQzjN-E": {
+      "cid": "401",
+      "url": "https://www.youtube.com/watch?v=wXFYfQzjN-E",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1036,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "B2fQhK6sqOM": {
+      "cid": "401",
+      "url": "https://www.youtube.com/watch?v=B2fQhK6sqOM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 433,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Vol2NZpNYng": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=Vol2NZpNYng",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 490,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jdZFuhulB_g": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=jdZFuhulB_g",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 150,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "-OLR1zBl3nc": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=-OLR1zBl3nc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 646,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "q4c0e6yPNzQ": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=q4c0e6yPNzQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 606,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "vP-XJiQbcac": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=vP-XJiQbcac",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 319,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "R2uQ_J9dZGM": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=R2uQ_J9dZGM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 46,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "P_oLRo9kAcs": {
+      "cid": "408",
+      "url": "https://www.youtube.com/watch?v=P_oLRo9kAcs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 574,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "PSfbuT69TUw": {
+      "cid": "418",
+      "url": "https://www.youtube.com/watch?v=PSfbuT69TUw",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 115,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "SjSrCPg73Vk": {
+      "cid": "418",
+      "url": "https://www.youtube.com/watch?v=SjSrCPg73Vk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 392,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5b2WOW_uTUo": {
+      "cid": "418",
+      "url": "https://www.youtube.com/watch?v=5b2WOW_uTUo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1179,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "WOEHFVPkBmg": {
+      "cid": "418",
+      "url": "https://www.youtube.com/watch?v=WOEHFVPkBmg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 688,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OPiyY7LGoRg": {
+      "cid": "420",
+      "url": "https://www.youtube.com/watch?v=OPiyY7LGoRg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 401,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "7GGAxQafHho": {
+      "cid": "427",
+      "url": "https://www.youtube.com/watch?v=7GGAxQafHho",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 359,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "v2QmyLa_BsU": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=v2QmyLa_BsU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1047,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "CN8SYZ459PE": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=CN8SYZ459PE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 186,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Yfez1i5fe9Y": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=Yfez1i5fe9Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 238,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "luMf5HTky_s": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=luMf5HTky_s",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 442,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "WJMtO59zP-I": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=WJMtO59zP-I",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 149,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5cZ_LeUAQsE": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=5cZ_LeUAQsE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 425,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "_K7B1I5X4Tc": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=_K7B1I5X4Tc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 511,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "vhaibNgpFys": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=vhaibNgpFys",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 244,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "XxqxSH5tanE": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=XxqxSH5tanE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 196,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "jjqn0e2YpbE": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=jjqn0e2YpbE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 652,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Svce4VgTD5Y": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=Svce4VgTD5Y",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 191,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "AVHi3jYcTeE": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=AVHi3jYcTeE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 294,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "0Nvgp8OWnXg": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=0Nvgp8OWnXg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 524,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ucupjvPIORs": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=ucupjvPIORs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 137,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "2FCDj05U_c0": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=2FCDj05U_c0",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 116,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "ZggSlNQBwAE": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=ZggSlNQBwAE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 510,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "7stw-_GlwVc": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=7stw-_GlwVc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 30,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "nwuXex5ZG38": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=nwuXex5ZG38",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 357,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5sy9xkalPcU": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=5sy9xkalPcU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 26,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OXtx1j2VuXU": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=OXtx1j2VuXU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 10,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "31z6Fd7L85A": {
+      "cid": "441",
+      "url": "https://www.youtube.com/watch?v=31z6Fd7L85A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 32,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "3MME2p_xPr4": {
+      "cid": "444",
+      "url": "https://www.youtube.com/watch?v=3MME2p_xPr4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 651,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "jpCfjznWgwY": {
+      "cid": "444",
+      "url": "https://www.youtube.com/watch?v=jpCfjznWgwY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 652,
+      "transcript_len": 0,
+      "facts_count": 2
+    },
+    "OxQWrD3IqIc": {
+      "cid": "444",
+      "url": "https://www.youtube.com/watch?v=OxQWrD3IqIc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 78,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OHXnjUrq9C8": {
+      "cid": "444",
+      "url": "https://www.youtube.com/watch?v=OHXnjUrq9C8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 190,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "15jJ3kr-aeU": {
+      "cid": "444",
+      "url": "https://www.youtube.com/watch?v=15jJ3kr-aeU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 280,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "H9WdYW47zG8": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=H9WdYW47zG8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 119,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "mENem4fGLkk": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=mENem4fGLkk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 6,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "qNJLBgiHJLg": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=qNJLBgiHJLg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 877,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "v2ENTzzEfg4": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=v2ENTzzEfg4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 244,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "DKRgy_oYLnY": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=DKRgy_oYLnY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 203,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "NSy9lKw5D0Q": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=NSy9lKw5D0Q",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 248,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "OOPHQhfsSeM": {
+      "cid": "448",
+      "url": "https://www.youtube.com/watch?v=OOPHQhfsSeM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 261,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "zIiJB9E7feo": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=zIiJB9E7feo",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 641,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "chcBjcdZQZs": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=chcBjcdZQZs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 66,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "M4WbNUparcM": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=M4WbNUparcM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 83,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Q4JsAC-FM2U": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=Q4JsAC-FM2U",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 97,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "r3P-ge0l-sg": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=r3P-ge0l-sg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 86,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "MqJRGwf-jbs": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=MqJRGwf-jbs",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 148,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "H2-7JcQHe2A": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=H2-7JcQHe2A",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 43,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9IummT26Q8U": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=9IummT26Q8U",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 19,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "fGzbFLrswYY": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=fGzbFLrswYY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 101,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "b_xRp6l3BPg": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=b_xRp6l3BPg",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 206,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "X6QYV5TaSHQ": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=X6QYV5TaSHQ",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 188,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IJztEB-vOaM": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=IJztEB-vOaM",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 395,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "GWSYKVZzj1s": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=GWSYKVZzj1s",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 305,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "YfVqfhtwtVE": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=YfVqfhtwtVE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 173,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "M8iN9gZsCp8": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=M8iN9gZsCp8",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 91,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "HFeAXKWn7lY": {
+      "cid": "480",
+      "url": "https://www.youtube.com/watch?v=HFeAXKWn7lY",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 20,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "Nl6hpcgqOFc": {
+      "cid": "482",
+      "url": "https://www.youtube.com/watch?v=Nl6hpcgqOFc",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 240,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "rwRJSELDjEU": {
+      "cid": "482",
+      "url": "https://www.youtube.com/watch?v=rwRJSELDjEU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 695,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "5zivS3Opt0w": {
+      "cid": "482",
+      "url": "https://www.youtube.com/watch?v=5zivS3Opt0w",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 265,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "mjhF2vLmKBE": {
+      "cid": "483",
+      "url": "https://www.youtube.com/watch?v=mjhF2vLmKBE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 240,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lZJcQQIcYMU": {
+      "cid": "483",
+      "url": "https://www.youtube.com/watch?v=lZJcQQIcYMU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1043,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "FO77giC7iZU": {
+      "cid": "483",
+      "url": "https://www.youtube.com/watch?v=FO77giC7iZU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 428,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "B0SS6GFJ1_I": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=B0SS6GFJ1_I",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 434,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "IbQ0aDsE1a4": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=IbQ0aDsE1a4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1869,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "tijmr--URpI": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=tijmr--URpI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 461,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "MDtmVXxmHcE": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=MDtmVXxmHcE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 35,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "fR2aa9BKQfI": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=fR2aa9BKQfI",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 437,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "1TiTPsLKAr4": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=1TiTPsLKAr4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 1873,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "9OJN5JRudyU": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=9OJN5JRudyU",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 55,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "X2YDzsX1irE": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=X2YDzsX1irE",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 187,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "wJXJb9hNMLk": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=wJXJb9hNMLk",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 193,
+      "transcript_len": 0,
+      "facts_count": 1
+    },
+    "qUcWEQGCPH4": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=qUcWEQGCPH4",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 2869,
+      "transcript_len": 0,
+      "facts_count": 0
+    },
+    "lISdksTvjII": {
+      "cid": "484",
+      "url": "https://www.youtube.com/watch?v=lISdksTvjII",
+      "checked_at": "2026-11-27T15:25:00+09:00",
+      "has_transcript": false,
+      "desc_len": 517,
+      "transcript_len": 0,
+      "facts_count": 0
     }
   },
   "camps": {
@@ -1064,6 +5555,518 @@
         "url": "https://www.youtube.com/watch?v=V0s7BV1-qnw",
         "checked_at": "2026-11-27T13:38:00+09:00",
         "evidence": "해지기 힘들어욤 쿨럭쿨럭 변산 오캠장 좋아욤 1박 2만원에욤"
+      }
+    ],
+    "129": [
+      {
+        "attr": "CHECKIN_TIME",
+        "value": "12:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=bx2oJwlGYWU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "링 솔로 캠핑│느긋하게 세팅하는 재미│12시 입실 12시 퇴실│도쿄크래프트 그라하스│갈기산 펜션 캠핑장 지천에 다슬기가?!│힘 빼고 즐기는 힐링 솔로 캠핑│느긋하게 세팅하는 재미│12시 입실 12시 퇴실│도"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 50000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=SVc4UBpJe04",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "양평군 청운면 신론리 189 💰 사이트당 50,000원 🌳 마켓포레에서 제작 및 협찬 지원하는 컨텐츠입니다.🌳 - 마켓포레 :http://www.marketfore.co.kr ☝ 영상 속 마켓포레 제"
+      }
+    ],
+    "138": [
+      {
+        "attr": "PRICE_MENTION",
+        "value": 15000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=nv3WJNlwx28",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "장인 ‘함안 강나루 오토캠핑장’입니다. 주중 15,000원, 주말 20,000원의 저렴한 사이트 이용 금액과 안그래도 넓은 사이트에 코로나19로 현재 50%만 이용해서 엄청 거리를 두고 캠핑을 즐길 수 있는"
+      }
+    ],
+    "142": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=VrBTJQ-q0no",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "ㅣ 해물라면 ㅣ라면먹방ㅣ강릉 노추산 힐링캠프(애견동반) ㅣ 시츄와 가을캠핑 가을숲에서 먹는 킹타이거새우라면 ㅣ 해물라면 ㅣ라면먹방ㅣ강릉 노추산 힐링캠프(애견동반) ㅣ 시츄와 가을캠핑 #캠핑 #강릉캠핑장 #애"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=VK5yHpf-B6g",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "서 캠핑 / 가마보코3M / 밀리터리감성 / 애견캠핑 / 감성캠핑 / 노추산힐링캠프 / camping 겨울이 오는 숲속에서 캠핑 / 가마보코3M / 밀리터리감성 / 애견캠핑 / 감성캠핑 / 노추산힐링캠프 /"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=w-1VQly7txE",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "산힐링캠프/타프개시했어요/캠핑칸K타프/오크돔/애견동반캠핑장/감성캠핑/강원도캠핑장/신혼부부캠퍼/camping 오토캠핑｜강릉노추산힐링캠프/타프개시했어요/캠핑칸K타프/오크돔/애견동반캠핑장/감성캠핑/강원도캠핑장/신"
+      }
+    ],
+    "146": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=dIKUOAdKV1Q",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "한 어묵탕. 고기폭탄 쌀국수 | 솔로캠핑 | 애견동반캠핑 | 전북 임실 강변사리 캠핑장 솔캠인듯 솔캠아닌 솔캠같은🐈🐩 | 파닭 꼬치구이와 칼칼한 어묵탕. 고기폭탄 쌀국수 | 솔로캠핑 | 애견동반캠핑 |"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 100000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=oyVOQXDgCn8",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "성수기 기준 전북 1박 10만원 글램핑장｜물놀이장+계곡포함｜임실강변사리캠핑장 성수기 기준 전북 1박 10만원 글램핑장｜물놀이장+계곡포함｜임실강변사리캠핑장 안녕하세요. 민이네가족캠핑"
+      }
+    ],
+    "148": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=l-3Ma7MUrFU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "차박영상 쏘렌토차박 강변오토캠핑장 대구캠핑 애견캠핑 강아지캠핑 a9영상 캠핑음식 캠핑요리 유나타프 하비타프"
+      }
+    ],
+    "301": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=-f6SM3n-UWU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "캠핑 솔로캠핑 솔캠 노지캠핑 노지캠 오토캠핑 애견캠핑 부부캠핑 캠핑영상 캠핑동영상 캠핑요리 캠핑한끼 차박 차박캠핑 차박추천 캠린이 차박러 프로차박러 초보차박러 뷰맛집 노을맛집 풍경맛집 미니멀웍스 minima"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=nhK6TFnN2XU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "애견동반 캠핑 | 숲 속 나만의 아지트 🏕 (feat. 폭염주의보) | 전망 좋은 바다뷰 | 해루질과 노을이 있는 곳 | 태안 곰섬캠핑장 애견동반 캠핑 | 숲"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=VhFAlyIlwdI",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "캠핑|캠핑요리 #캠핑요리 #캠핑 #부부캠핑 #애견동반 #제이터널 #제이크라 [4k화질설정하고 시청권장] 👉그래가 캠핑장 무료이용쿠폰 이벤트 . 그래가 캠핑장 무료 1박권 3명 [자유로운 댓글작성후 아래링크"
+      }
+    ],
+    "315": [
+      {
+        "attr": "SITE_SURFACE",
+        "value": "DECK",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=yw1SqQbYqK8",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "-0855 2. 이용요금(전기 이용 가능), 나무데크 5m * 3m, 시멘트 6m * 4.5m, 비수기 주중, 성수기 및 주말 및 공휴일 : 30,000원 3. B지구 사이트 알아보기 : https://ww"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 30000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=yw1SqQbYqK8",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "비수기 주중, 성수기 및 주말 및 공휴일 : 30,000원 3. B지구 사이트 알아보기 : https://www.youtube.com/watch?v=7-UC2uTuTQw&t=265s 4. 사이트 예약 : 숲"
+      },
+      {
+        "attr": "POWER_MAX_A",
+        "value": 6,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=7M3LnD0wTOQ",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "크박스 https://coupa.ng/bQli6A 스노우아울 캐리박스 https://coupa.ng/bQljaU 네이처하이크 2020년형 야전침대 https://coupa.ng/bQljij 콜맨 트레일헤드"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 20000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=5pZtq2BP-TQ",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "8,000원 평양식_물냉면8,000원 수육 20,000원 오삼불고기(2인이상)11,000원 외.. -편의시설 단체석, 주차, 예약, 남/녀 화장실 구분, 국민지원금 방송 맛있는녀석들 319회21.04.02"
+      }
+    ],
+    "320": [
+      {
+        "attr": "PRICE_MENTION",
+        "value": 20000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=wwjZIP8YQjI",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "핑장 인터넷 사전 예약필수 요금: 일반 데크 20,000원(비수기) 수원시민 30% 할인, 전기 사용료 3,000원(별도) 전화: 031-548-0075 주소: 경기 수원시 영통구 광교호수로 57지번하동 1"
+      }
+    ],
+    "331": [
+      {
+        "attr": "POWER_MAX_A",
+        "value": 23,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=OyyuZZR7gu0",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "s://m.blog.naver.com/hyuk23a 인스타그램 KIMKIM_CAMPING 구독과 좋아요 부탁드려요 *노래출처 43. Gymnopedie No.1 - Lent Et Douloureux_ 느리고"
+      }
+    ],
+    "333": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=RJVXx4kp-Vs",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "| 대설주의보에 캠핑하기 | 솔로 캠핑 | 반려견 동반 | 폭설캠핑 | 동계 좌식 캠핑 | 필굿 에어쉘터 | 광주 시민의숲 야영장 30년 살면서 이런 눈은 처음이에요 | 대설주의보에 캠핑하기 | 솔로 캠핑"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=KGPh7lDBUaM",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "그 / snow storm camping / 애견동반캠핑 / 광주시민의숲야영장 눈에 묻힐 뻔한 역대급 폭설캠핑🥶 그래도 텐트 안은 포근해🤎 / 캠핑 브이로그 / snow storm camping / 애견"
+      }
+    ],
+    "344": [
+      {
+        "attr": "SITE_SURFACE",
+        "value": "GRASS",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=9NySLxKxvEY",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "신다면 추천할 교래 자연휴양림 야영장입니다. 잔디사이트 하루 2천원. 원두막사이트 6~7천원. 자연휴양림 입장료 인당 천원별도입니다. 제주의 오랜 숲 곶자왈 속에서 캠핑 할 수 있는 특별한 경험입니다. 화장"
+      },
+      {
+        "attr": "PARKING_MODE",
+        "value": "CART_REQUIRED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=9NySLxKxvEY",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "니다. 단점이라면 주차는 입구에 하시고 짐을 손수레로 날라야한다는… 그럼에도 불구하고 추천합니다. #제주 #제주캠핑장 #제주도캠핑 #캠핑장 #제주야영장 #교래자연휴양림 #제주자연휴양림 #제주캠핑 #제주도 #"
+      },
+      {
+        "attr": "SITE_SURFACE",
+        "value": "GRASS",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=ajplhHwHIKE",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "ite location 교래자연휴양림 야영장 잔디사이트 / 제주(Jeju) .캠핑용품 camping gear 폴러스터프 투맨 카모플라쥬(독개구리) / Poler Stuff Two Man Tent (Camou"
+      },
+      {
+        "attr": "PARKING_MODE",
+        "value": "CART_REQUIRED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=0UmB9D86NkQ",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "아재와 함께길어요 일단 입구에 주차를 하고 손수레를 일명 리어카를 가지고 짐을 가지로 가시면 됩니다. 손수레는 무료 임대이오니 쓰신 후 반납은 기본 매너죠 ^^ 야영장 주변에는 취사장(2곳)과 화장실(4곳"
+      }
+    ],
+    "373": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=f6TPMKyRp8Q",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "rcamping Camping Vanlife 애견동반캠핑 솔로캠핑 캠핑 차박"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=dpaqlifrNxo",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "jji@naver.com 캠핑 차박 솔로캠핑 애견동반캠핑 설중캠핑 동계캠핑 자작캠핑카 솔캠"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=vlVN3EPocdQ",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "박텐트 피칭 5분컷, 도킹 없이 사용하기 | 애견동반캠핑 | 아이두젠 A10 max | 고창 구시포 노을캠핑장 [솔로캠핑] 🚘차박텐트 피칭 5분컷, 도킹 없이 사용하기 | 애견동반캠핑 | 아이두젠 A10"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=8XRMi8YiwFU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "0년은 더 놀러다닐거야...| 셀토스차박 | 애견동반캠핑 | 아이두젠 A10 MAX | 구시포 노을캠핑장 [솔로캠핑] 💊강이랑 10년은 더 놀러다닐거야...| 셀토스차박 | 애견동반캠핑 | 아이두젠 A10"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=41-6m93yNKk",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "애견동반 캠핑 | 화목난로 하나로 난방부터 요리까지 | 수제 육전 & 막걸리 | 풍천장어 숯불구이 | 고창 구시포 노을 캠핑장 | solo camping | 솔로"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=zG0pp8hRF10",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "?❣️ / 캠핑 브이로그 / 선셋뷰캠핑장 / 애견동반캠핑장 / 서해바다캠핑장 / 구시포노을캠핑장 나랑 노을보러 갈래 ?❣️ / 캠핑 브이로그 / 선셋뷰캠핑장 / 애견동반캠핑장 / 서해바다캠핑장 / 구시포노을"
+      },
+      {
+        "attr": "SITE_SURFACE",
+        "value": "GRAVEL",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=7IbiwGsc0ls",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "지만 노을이 멋있는 캠핑장입니다. 해변가쪽은 파쇄석이고 뒷쪽 공간은 잔디로 되어있습니다! 궁금하신점은 댓글 남겨주세요🥸🔍 오늘도 재밌게 시청해주세요~🙏🏻 ▫주말이용 4만원 (전기사용가능) ▫영상은 1"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 40000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=7IbiwGsc0ls",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "\udd78🔍 오늘도 재밌게 시청해주세요~🙏🏻 ▫주말이용 4만원 (전기사용가능) ▫영상은 1080p로 시청해주세요!"
+      }
+    ],
+    "387": [
+      {
+        "attr": "PRICE_MENTION",
+        "value": 45000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=IhtY4rxtwwY",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "1박 독채 45,000원 | 가성비 최고의 숙소 | 국립남해편백자연휴양림 | 남해여행 1박 독채 45,000원 | 가성비 최고의 숙소 | 국립남해편백자연휴양림 | 남해여행"
+      },
+      {
+        "attr": "SITE_SIZE",
+        "value": "4×6m",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=7u0qqcVStzs",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "크기가 커지는 추세를 반영해 데크의 크기를 4×6m로 확장해 더 많은 가족이 이용할 수 있도록 했습니다. 기존 야영데크는 크기가 작고(3.5×3.5m) 간격이 좁아 소음에 취약하고 사생활 보호에 어려움이"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 15000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=LYpYY1RFRlU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "한 곳입니다. 깔끔한 시설로 재단장하였으며 15,000원 저렴한 비용으로 전기,샤워시설등 머물기 정말 좋은 곳입니다 또한,주변에 관광명소가 인근에 모여있으며 드라이브하기에도 좋은 위치입니다. 오봉맨이 적극"
+      }
+    ],
+    "395": [
+      {
+        "attr": "SITE_SURFACE",
+        "value": "DECK",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=p9mgf243oI4",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "청태산자연휴양림 캠핑장 야영장 데크 사이트 둘러보기 청태산자연휴양림 캠핑장 야영장 데크 사이트 둘러보기 청태산자연휴양림 캠핑장 야영장 데크 사이트 둘러보기"
+      }
+    ],
+    "398": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=D46IIbmy8GU",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "동백꽃 동백군락지 동백꽃명소 천관산 반려견 반려견동반객실 반려견동반숙소 반려견산책로 천관산자연휴양림 억새 장흥 장흥휴양림"
+      },
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=IE_qCvHEJj0",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "나무 천관산 장흥 장흥휴양림 천관산자연휴양림 반려견동반휴양림 휴양림 숲 산 나무 자연 휴양"
+      }
+    ],
+    "401": [
+      {
+        "attr": "SITE_SIZE",
+        "value": "3.6×3.6m",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=wXFYfQzjN-E",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "8개 사이트로 구성이 되어 있고 데크 크기는 3.6*3.6m입니다. 아쉽게도 바로 위에 있는 야영장은 숙박동 공사를 진행 중입니다. 이제 이용하실 수 없고요. 오토캠핑장은 7월 개장이 예정되어 있는데요. 바"
+      },
+      {
+        "attr": "PRICE_MENTION",
+        "value": 17000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=wXFYfQzjN-E",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "생각하시면 좋겠습니다. 비수기 평일 가격은 17,000원 주말 가격은 2만원이고 성수기 가격은 동일하게 2만원이고 온수 샤워는 별도 요금을 받고 있습니다. 목공예체험장이 보이는데요 제 숲해설가님의 안내 영"
+      }
+    ],
+    "408": [
+      {
+        "attr": "PRICE_MENTION",
+        "value": 40000,
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=vP-XJiQbcac",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "이용 요금은 야영면 기준 평일 3만5천 원, 주말 4만 원이고, 글램핑은 평일 8만 원, 주말 10만 원입니다. 이용객에게는 1만 원 상당의 지역상품권도 제공됩니다. 춘천MBC 뉴스 MBC뉴스 강원 강원도"
+      }
+    ],
+    "441": [
+      {
+        "attr": "CHECKIN_TIME",
+        "value": "15:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=AVHi3jYcTeE",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "화성시 서신면 해안길 64 글램비글램핑 ⏰ 입실15:00 퇴실 11:00 🚗주차가능 📃 글램핑, 수영장, 개별바비큐, 카라반, 바닷가, 키즈테마, 갯벌등등.. #글램핑 #제부도글램핑 #제부도 #글램비글"
+      },
+      {
+        "attr": "CHECKOUT_TIME",
+        "value": "11:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=AVHi3jYcTeE",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "해안길 64 글램비글램핑 ⏰ 입실15:00 퇴실 11:00 🚗주차가능 📃 글램핑, 수영장, 개별바비큐, 카라반, 바닷가, 키즈테마, 갯벌등등.. #글램핑 #제부도글램핑 #제부도 #글램비글램핑 #글램핑캠"
+      }
+    ],
+    "444": [
+      {
+        "attr": "CHECKIN_TIME",
+        "value": "15:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=3MME2p_xPr4",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "꽉차는데. 그래 운좋케 예약이 되었습니다. 입실 : 15시(오후3시), 퇴실 : 오전 11시 충청남도 부여군 옥산면 신안로40번길 90 0507-1437-7024 #어반스케치 #그림그리는법 #풍경드로잉 I"
+      },
+      {
+        "attr": "CHECKOUT_TIME",
+        "value": "11:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=3MME2p_xPr4",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "이 되었습니다. 입실 : 15시(오후3시), 퇴실 : 오전 11시 충청남도 부여군 옥산면 신안로40번길 90 0507-1437-7024 #어반스케치 #그림그리는법 #풍경드로잉 INSTAGRAM - https"
+      },
+      {
+        "attr": "CHECKIN_TIME",
+        "value": "15:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=jpCfjznWgwY",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "꽉차는데. 그래 운좋케 예약이 되었습니다. 입실 : 15시(오후3시), 퇴실 : 오전 11시 충청남도 부여군 옥산면 신안로40번길 90 0507-1437-7024 #어반스케치 #그림그리는법 #풍경드로잉 I"
+      },
+      {
+        "attr": "CHECKOUT_TIME",
+        "value": "11:00",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=jpCfjznWgwY",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "이 되었습니다. 입실 : 15시(오후3시), 퇴실 : 오전 11시 충청남도 부여군 옥산면 신안로40번길 90 0507-1437-7024 #어반스케치 #그림그리는법 #풍경드로잉 INSTAGRAM - https"
+      }
+    ],
+    "448": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=v2ENTzzEfg4",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "lingtonterrie Bedlington 애견캠핑 애견동반캠핑"
+      }
+    ],
+    "482": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=Nl6hpcgqOFc",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "로그 재밌게 시청해 주세요💕 #경북캠핑장 #애견동반캠핑 #금오산허브하우스힐링캠프 #구미캠핑장 #김천캠핑장"
+      }
+    ],
+    "484": [
+      {
+        "attr": "PET_POLICY",
+        "value": "ALLOWED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=tijmr--URpI",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "으로 한 번쯤 다녀와 봐도 좋을듯해요 이곳은 애견동반이 가능한 캠핑장입니다 재미있게 봐주시고 좋아요 구독 눌러주세요^^ #금은모래캠핑장 #여주캠핑장 #난로 금은모래캠핑장 국공립캠핑장 애견동반 애견동반캠핑장"
+      },
+      {
+        "attr": "SITE_SIZE",
+        "value": "8×9m",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=X2YDzsX1irE",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "[vlog] 금은모래 라이딩 - 듀랑고8x9 첫 피칭! 듀랑고 미니와 비교 리뷰 ㅣ 여주 금은모래캠핑장 [vlog] 금은모래 라이딩 - 듀랑고8x9 첫 피칭! 듀랑고 미니와 비교 리뷰 ㅣ 여주 금은모"
+      },
+      {
+        "attr": "PARKING_MODE",
+        "value": "CART_REQUIRED",
+        "grade": "MENTION",
+        "source": "youtube_mention",
+        "url": "https://www.youtube.com/watch?v=wJXJb9hNMLk",
+        "checked_at": "2026-11-27T15:25:00+09:00",
+        "evidence": "] 금은모래캠핑장 l ※ 짐많은 집 아부지들 손수레주의보 [커플 캠핑] 금은모래캠핑장 l ※ 짐많은 집 아부지들 손수레주의보 안녕하세요, 강날tv 강날입니다! 금은모래캠핑장 다녀온지 벌써 2주도 넘었는데 이"
       }
     ]
   }
