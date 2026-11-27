@@ -229138,7 +229138,7 @@
   },
   "102377": {
    "name": "평택캠핑성",
-   "status": "FETCH_FAILED",
+   "status": "DISCOVERED_NOT_OPERATOR",
    "url": "https://platformdodam.com/children-play-facilities/3019",
    "checked_at": "2026-11-08T10:16:04.919Z",
    "error": "403"
