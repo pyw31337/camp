@@ -17,7 +17,8 @@ const KB = (n) => Math.round(n / 1024);
 // 2026-11-18: 히어로 테마 6종 전용 인터랙티브 효과(동물체험 꽃잎 터치비산·실내놀이 풍선/물리실·트리하우스 대형햇살·이색숙소 별빛스파이크·레포츠 실사 짚라인·농촌체험 태양회전/골든보케) 탑재로 app.js 예산 +10KB (705KB).
 // 2026-11-19: 히어로 5종 리파인(동물체험 민들레 홀씨 흩날림·실내놀이 3D 실키 리본/탄성 스쿼시·트리하우스 청량 틴들 빔·레포츠 광학 플레어·농촌체험 제자리 호흡 보케) 탑재로 app.js 예산 +5KB (710KB).
 // 2026-11-26: 그래가·땡큐캠핑·캠핑톡·국립공원/숲나들e 플랫폼 확장 및 구역객실 모달 라이트박스·댓글 기능 고도화로 app.js 예산 +8KB (718KB), dataGz +50KB (2650KB).
-const BUDGET = { appJs: 718, css: 285, dataGz: 2650, nodes: 12000, cardsMs: 8000, origImgs: 0 };
+// 2026-11-27: 지속 수집(그래가·캠핑톡·공공포털·후기 썸네일 2,916건·LOCALDATA) 반영으로 dataGz 예산 +100KB (2750KB).
+const BUDGET = { appJs: 718, css: 285, dataGz: 2750, nodes: 12000, cardsMs: 8000, origImgs: 0 };
 const app = statSync(`${root}design/renewal/app.js`).size, css = statSync(`${root}design/renewal/style.css`).size;
 import { existsSync } from "node:fs";
 const liteP = existsSync(`${root}camping-atlas/public/explore/data/campgrounds.lite.json`) ? "camping-atlas/public/explore/data/campgrounds.lite.json" : null;
