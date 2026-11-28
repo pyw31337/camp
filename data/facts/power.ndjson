@@ -535,7 +535,6 @@
 {"cid":"2968","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2975","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2977","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2982","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2987","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2990","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2992","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3793,7 +3792,6 @@
 {"cid":"osm-w840388975","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/840388975","at":"2026-11-28"}
 {"cid":"osm-w946204522","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/946204522","at":"2026-11-28"}
 {"cid":"osm-w1083753464","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1083753464","at":"2026-11-28"}
-{"cid":"osm-w1093816518","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1093816518","at":"2026-11-28"}
 {"cid":"osm-w1095611777","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1095611777","at":"2026-11-28"}
 {"cid":"osm-w1103368287","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-11-28"}
 {"cid":"osm-w1187215473","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1187215473","at":"2026-11-28"}
