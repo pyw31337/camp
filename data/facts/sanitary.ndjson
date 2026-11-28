@@ -6249,6 +6249,7 @@
 {"cid":"102383","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"102383","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102391","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"102392","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102396","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"102396","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102396","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
@@ -6671,7 +6672,7 @@
 {"cid":"loc-ff96681e","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.967Z","text":"제공"}
 {"cid":"loc-ff96681e","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.967Z"}
 {"cid":"osm-n9548742587","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9548742587","at":"2026-11-28","text":"제공"}
-{"cid":"osm-n10651918639","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-11-28","text":"24시간"}
+{"cid":"osm-n10651918639","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-11-28","text":"제공"}
 {"cid":"osm-r15731759","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-11-28","text":"제공"}
 {"cid":"osm-w256957045","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957045","at":"2026-11-28"}
 {"cid":"osm-w469664946","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469664946","at":"2026-11-28","text":"제공"}
@@ -6691,6 +6692,7 @@
 {"cid":"osm-w858869210","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/858869210","at":"2026-11-28","text":"제공"}
 {"cid":"osm-w894062894","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/894062894","at":"2026-11-28","text":"제공"}
 {"cid":"osm-w979805595","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-11-28","text":"제공"}
+{"cid":"osm-w1093816518","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1093816518","at":"2026-11-28","text":"제공"}
 {"cid":"osm-w1103368287","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-11-28","text":"24시간"}
 {"cid":"osm-w1103368287","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-11-28"}
 {"cid":"osm-w1171495739","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1171495739","at":"2026-11-28"}
@@ -6762,7 +6764,7 @@
 {"cid":"rf-1qroeie","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
 {"cid":"rf-1qtu3gf","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
 {"cid":"rf-1x439ps","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
-{"cid":"rf-11s4exc","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
+{"cid":"rf-11s4exc","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
 {"cid":"rf-14i1rvd","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
 {"cid":"rf-19o61p1","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}
 {"cid":"rf-38krg6","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-11-28"}

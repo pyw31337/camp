@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T05:52:42.399Z",
+  "generated_at": "2026-11-28T02:47:00.557Z",
   "total_lean": 2470,
   "queue": [
     {
@@ -12,7 +12,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102399",
@@ -23,7 +23,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "2496",
@@ -34,7 +34,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102388",
@@ -45,7 +45,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102386",
@@ -56,7 +56,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102381",
@@ -67,18 +67,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
-    },
-    {
-      "id": "102372",
-      "name": "멍뭉777",
-      "sido": "경기",
-      "sigungu": "가평군",
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": false,
-      "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102371",
@@ -89,7 +78,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102369",
@@ -100,7 +89,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102357",
@@ -111,7 +100,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102341",
@@ -122,7 +111,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102325",
@@ -133,7 +122,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102120",
@@ -245,17 +234,6 @@
       "hasReview": false,
       "missingScore": 6,
       "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
-    },
-    {
-      "id": "pilot-006-yeonin-valley",
-      "name": "[사설] 가평 연인산 밸리캠핑장",
-      "sido": "경기",
-      "sigungu": "가평",
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": false,
-      "missingScore": 6,
-      "lastEnrichedAt": null
     },
     {
       "id": "osm-n4788237649",
@@ -377,7 +355,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-104e0cbd",
@@ -389,7 +367,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-cbe38e1f",
@@ -401,7 +379,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c0e51afd",
@@ -413,7 +391,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9b5be366",
@@ -425,7 +403,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4dd46b57",
@@ -437,7 +415,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-20009b43",
@@ -449,7 +427,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-b72c911d",
@@ -461,7 +439,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-cbf4d2fb",
@@ -473,7 +451,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9a6b5b4c",
@@ -485,7 +463,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8292ede6",
@@ -497,7 +475,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-efafaecb",
@@ -509,7 +487,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2c1f826f",
@@ -521,7 +499,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-5495ccde",
@@ -533,7 +511,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-27cd5120",
@@ -545,7 +523,7 @@
       "hasFee": false,
       "hasReview": false,
       "missingScore": 6,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "102390",
@@ -556,7 +534,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102401",
@@ -567,7 +545,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102256",
@@ -579,7 +557,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "887",
@@ -591,7 +569,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102392",
@@ -602,7 +580,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102025",
@@ -613,7 +591,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102160",
@@ -624,7 +602,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102305",
@@ -636,7 +614,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102336",
@@ -647,7 +625,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102385",
@@ -658,7 +636,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102382",
@@ -669,7 +647,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102379",
@@ -680,7 +658,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102362",
@@ -691,7 +669,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102374",
@@ -702,7 +680,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102375",
@@ -713,7 +691,18 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
+    },
+    {
+      "id": "102372",
+      "name": "멍뭉777",
+      "sido": "경기",
+      "sigungu": "가평군",
+      "hasPhoto": false,
+      "hasFee": false,
+      "hasReview": true,
+      "missingScore": 5,
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102368",
@@ -725,7 +714,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102367",
@@ -736,7 +725,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102366",
@@ -747,7 +736,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102262",
@@ -758,7 +747,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102364",
@@ -769,7 +758,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102307",
@@ -780,7 +769,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102358",
@@ -791,7 +780,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102355",
@@ -802,7 +791,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102350",
@@ -813,7 +802,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102219",
@@ -824,7 +813,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102333",
@@ -835,7 +824,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102344",
@@ -846,7 +835,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102269",
@@ -858,7 +847,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102332",
@@ -869,7 +858,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102334",
@@ -880,7 +869,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102335",
@@ -891,7 +880,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102339",
@@ -902,7 +891,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102330",
@@ -913,7 +902,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102327",
@@ -924,7 +913,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "101477",
@@ -936,7 +925,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102321",
@@ -947,7 +936,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102322",
@@ -958,7 +947,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102191",
@@ -970,7 +959,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "102309",
@@ -2511,6 +2500,17 @@
       "lastEnrichedAt": null
     },
     {
+      "id": "pilot-006-yeonin-valley",
+      "name": "[사설] 가평 연인산 밸리캠핑장",
+      "sido": "경기",
+      "sigungu": "가평",
+      "hasPhoto": false,
+      "hasFee": false,
+      "hasReview": true,
+      "missingScore": 5,
+      "lastEnrichedAt": null
+    },
+    {
       "id": "pdu-amazing-gimpo",
       "name": "어메이징빌리지 김포점",
       "sido": "경기",
@@ -2928,7 +2928,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-63ad98ab",
@@ -2940,7 +2940,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d9f0616a",
@@ -2952,7 +2952,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-5a3ebfe9",
@@ -2964,7 +2964,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-98ea03eb",
@@ -2976,7 +2976,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-e6495161",
@@ -2988,7 +2988,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-054659b8",
@@ -3000,7 +3000,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8e443ff2",
@@ -3012,7 +3012,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-79e67935",
@@ -3024,7 +3024,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3bfff982",
@@ -3036,7 +3036,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-e8d42257",
@@ -3048,7 +3048,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-31c2b5d2",
@@ -3060,7 +3060,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c2330a2e",
@@ -3072,7 +3072,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-93cf0dbd",
@@ -3084,7 +3084,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-830cd8ed",
@@ -3096,7 +3096,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c77943a9",
@@ -3108,7 +3108,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-42ba701c",
@@ -3120,7 +3120,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c8034496",
@@ -3132,7 +3132,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-5a2b0558",
@@ -3144,7 +3144,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-17bd4d65",
@@ -3156,7 +3156,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-de0085fe",
@@ -3168,7 +3168,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-aaec4c9c",
@@ -3180,7 +3180,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1d5f1773",
@@ -3192,7 +3192,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-def16fea",
@@ -3204,7 +3204,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-04c0ab34",
@@ -3216,7 +3216,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-faf42505",
@@ -3228,7 +3228,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8495518d",
@@ -3240,7 +3240,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c44656d8",
@@ -3252,7 +3252,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-7bfeb053",
@@ -3264,7 +3264,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ec1beeb8",
@@ -3276,7 +3276,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9f7a7d2e",
@@ -3288,7 +3288,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2a507bd1",
@@ -3300,7 +3300,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ffcd968f",
@@ -3312,7 +3312,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-73bf3d3d",
@@ -3324,7 +3324,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0c0386ec",
@@ -3336,19 +3336,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-e827ee10",
-      "name": "산책",
-      "sido": "경기",
-      "sigungu": "가평군",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d176f4ec",
@@ -3360,7 +3348,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d75c8228",
@@ -3372,7 +3360,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2a44202f",
@@ -3384,7 +3372,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-27c51878",
@@ -3396,7 +3384,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-494ae543",
@@ -3408,7 +3396,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4360eda4",
@@ -3420,7 +3408,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-dd964a4d",
@@ -3432,7 +3420,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-6134d393",
@@ -3444,7 +3432,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0b1339ff",
@@ -3456,7 +3444,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-b102b7a8",
@@ -3468,7 +3456,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3afbac16",
@@ -3480,7 +3468,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-03e40fb9",
@@ -3492,7 +3480,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9bd6dff1",
@@ -3504,7 +3492,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c9392c00",
@@ -3516,7 +3504,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1a6406fe",
@@ -3528,7 +3516,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-7faafef3",
@@ -3540,7 +3528,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-546f5a00",
@@ -3552,7 +3540,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a176dcce",
@@ -3564,7 +3552,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4886a9dc",
@@ -3576,7 +3564,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1412d7fd",
@@ -3588,7 +3576,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-dd116fed",
@@ -3600,7 +3588,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-332e67bf",
@@ -3612,7 +3600,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-651171d1",
@@ -3624,7 +3612,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d96779ad",
@@ -3636,7 +3624,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-5bf1fe88",
@@ -3648,7 +3636,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4a1a0445",
@@ -3660,7 +3648,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1112058f",
@@ -3672,7 +3660,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3625c6f7",
@@ -3684,7 +3672,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-737fa84a",
@@ -3696,7 +3684,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a57092a8",
@@ -3708,7 +3696,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a791a08c",
@@ -3720,7 +3708,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-52b96b2d",
@@ -3732,7 +3720,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0d8475e6",
@@ -3744,7 +3732,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-e241d6dd",
@@ -3756,7 +3744,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1949de7d",
@@ -3768,7 +3756,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-570ab026",
@@ -3780,7 +3768,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c174306b",
@@ -3792,7 +3780,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-02e7b3ef",
@@ -3804,7 +3792,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-dd05db99",
@@ -3816,7 +3804,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d3b63677",
@@ -3828,7 +3816,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-15120c46",
@@ -3840,7 +3828,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-759ef8e7",
@@ -3852,7 +3840,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d3cde30e",
@@ -3864,19 +3852,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-30b710f8",
-      "name": "영월아트앤캠프장",
-      "sido": "강원",
-      "sigungu": "영월군",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-21eb83d4",
@@ -3888,7 +3864,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-7ab767d6",
@@ -3900,7 +3876,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-63b2d5f3",
@@ -3912,7 +3888,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-b78ea8a2",
@@ -3924,7 +3900,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4763429a",
@@ -3936,7 +3912,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d1b97daa",
@@ -3948,7 +3924,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-73f62183",
@@ -3960,7 +3936,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ebde1fbb",
@@ -3972,7 +3948,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-7ef03071",
@@ -3984,7 +3960,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-5d1ffe1c",
@@ -3996,7 +3972,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-118557e3",
@@ -4008,7 +3984,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-89a34fd2",
@@ -4020,7 +3996,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9c5ea0c2",
@@ -4032,7 +4008,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-24a569b6",
@@ -4044,7 +4020,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0c3a8dfd",
@@ -4056,7 +4032,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a1a8220d",
@@ -4068,7 +4044,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8b976df2",
@@ -4080,7 +4056,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2966b27c",
@@ -4092,7 +4068,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1657ecd0",
@@ -4104,7 +4080,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-e0c70683",
@@ -4116,7 +4092,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a8879ab8",
@@ -4128,7 +4104,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ff8f24bc",
@@ -4140,7 +4116,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-983828dd",
@@ -4152,7 +4128,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a8ea8308",
@@ -4164,7 +4140,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a5afb300",
@@ -4176,7 +4152,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8ead3b63",
@@ -4188,7 +4164,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a126bde7",
@@ -4200,7 +4176,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-695273ee",
@@ -4212,7 +4188,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c93db4b5",
@@ -4224,7 +4200,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1a20d6d5",
@@ -4236,7 +4212,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-fdf9dccf",
@@ -4248,7 +4224,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-831229db",
@@ -4260,7 +4236,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0b128b73",
@@ -4272,7 +4248,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9752f82d",
@@ -4284,7 +4260,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-e36a741e",
@@ -4296,7 +4272,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-6ebd6600",
@@ -4308,7 +4284,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4630d44c",
@@ -4320,7 +4296,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-7d6bf32f",
@@ -4332,7 +4308,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-85e75875",
@@ -4344,7 +4320,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ef9d38f0",
@@ -4356,7 +4332,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-420c0dca",
@@ -4368,7 +4344,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2eef9738",
@@ -4380,7 +4356,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d08765ae",
@@ -4392,7 +4368,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-37746f04",
@@ -4404,7 +4380,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-58e36e00",
@@ -4416,7 +4392,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c9b4b555",
@@ -4428,7 +4404,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-507158ee",
@@ -4440,7 +4416,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0cff8516",
@@ -4452,7 +4428,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0b9b608a",
@@ -4464,7 +4440,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-829aa241",
@@ -4476,7 +4452,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-186ed6ce",
@@ -4488,7 +4464,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-9fbf9c30",
@@ -4500,7 +4476,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4ce89fab",
@@ -4512,7 +4488,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c975203c",
@@ -4524,7 +4500,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-af23ccc6",
@@ -4536,7 +4512,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-58180e84",
@@ -4548,7 +4524,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-83b80381",
@@ -4560,7 +4536,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c1546820",
@@ -4572,19 +4548,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-2be2ac74",
-      "name": "웨이브글램핑",
-      "sido": "경북",
-      "sigungu": "포항시",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d8fc6251",
@@ -4596,7 +4560,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-81fde744",
@@ -4608,7 +4572,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-32f596d2",
@@ -4620,7 +4584,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-56817dbc",
@@ -4632,7 +4596,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c466e9c3",
@@ -4644,7 +4608,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0a0f4d5d",
@@ -4656,7 +4620,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c986d5b2",
@@ -4668,7 +4632,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c3680834",
@@ -4680,7 +4644,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ad7d2e05",
@@ -4692,7 +4656,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a0d9f4d3",
@@ -4704,7 +4668,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c9b64d8b",
@@ -4716,7 +4680,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-41d5654b",
@@ -4728,7 +4692,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-866fc398",
@@ -4740,7 +4704,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-00fa5a07",
@@ -4752,7 +4716,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-30a4f1d5",
@@ -4764,7 +4728,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3f936e40",
@@ -4776,7 +4740,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-6d196452",
@@ -4788,7 +4752,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2a57fe13",
@@ -4800,7 +4764,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-08ae0b13",
@@ -4812,7 +4776,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8985a3cd",
@@ -4824,7 +4788,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a3194a6f",
@@ -4836,19 +4800,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-3a67efef",
-      "name": "별빛마을",
-      "sido": "경북",
-      "sigungu": "청도군",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-39219164",
@@ -4860,19 +4812,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-12a2eb4d",
-      "name": "빗소리야영장",
-      "sido": "경북",
-      "sigungu": "청도군",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a6da6a3a",
@@ -4884,7 +4824,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-57597634",
@@ -4896,7 +4836,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-58291bf0",
@@ -4908,7 +4848,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-51c92695",
@@ -4920,7 +4860,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-31268950",
@@ -4932,7 +4872,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-c784167a",
@@ -4944,7 +4884,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-aff1fcf8",
@@ -4956,7 +4896,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3b2d3a84",
@@ -4968,7 +4908,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-31f66b61",
@@ -4980,7 +4920,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-77e4d2ec",
@@ -4992,7 +4932,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0d9c0440",
@@ -5004,7 +4944,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4e6522fe",
@@ -5016,7 +4956,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-b7df490c",
@@ -5028,7 +4968,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-fee4e44e",
@@ -5040,7 +4980,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3869a2fd",
@@ -5052,7 +4992,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-06ec3de2",
@@ -5064,7 +5004,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ae1b1524",
@@ -5076,7 +5016,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-12e0796b",
@@ -5088,7 +5028,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3f98d4c5",
@@ -5100,7 +5040,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-b9a849bf",
@@ -5112,7 +5052,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-44c8cf4e",
@@ -5124,7 +5064,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8342eceb",
@@ -5136,7 +5076,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-56afbff9",
@@ -5148,19 +5088,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-fb2a880b",
-      "name": "아쿠아마린 글램핑",
-      "sido": "경기",
-      "sigungu": "포천시",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1755c344",
@@ -5172,7 +5100,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3b0be552",
@@ -5184,7 +5112,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-fa852b19",
@@ -5196,7 +5124,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-55e38b80",
@@ -5208,7 +5136,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3c000c38",
@@ -5220,7 +5148,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1f688790",
@@ -5232,19 +5160,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-0a374149",
-      "name": "아잘리아 그린",
-      "sido": "충남",
-      "sigungu": "당진시",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ceef785b",
@@ -5256,7 +5172,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a5e8c997",
@@ -5268,7 +5184,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d3c196d4",
@@ -5280,19 +5196,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-0aea3be7",
-      "name": "들살이오토캠핑장",
-      "sido": "울산",
-      "sigungu": "울주군",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d6aed066",
@@ -5304,7 +5208,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-e353389e",
@@ -5316,7 +5220,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-0a4d6fb3",
@@ -5328,7 +5232,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2d619570",
@@ -5340,7 +5244,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4b9061b5",
@@ -5352,7 +5256,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-23daf880",
@@ -5364,19 +5268,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
-    },
-    {
-      "id": "loc-64876a45",
-      "name": "구만동 오토캠핑장",
-      "sido": "강원",
-      "sigungu": "인제군",
-      "tel": null,
-      "hasPhoto": false,
-      "hasFee": false,
-      "hasReview": true,
-      "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-205b1e58",
@@ -5388,7 +5280,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-622fc89e",
@@ -5400,7 +5292,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ac51b3f4",
@@ -5412,7 +5304,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-dc9b2aff",
@@ -5424,7 +5316,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-95408da6",
@@ -5436,7 +5328,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a78d908f",
@@ -5448,7 +5340,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d528d6f3",
@@ -5460,7 +5352,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-115e8df8",
@@ -5472,7 +5364,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-be8ba5c6",
@@ -5484,7 +5376,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-8f0093d5",
@@ -5496,7 +5388,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-4af3e483",
@@ -5508,7 +5400,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-ea416880",
@@ -5520,7 +5412,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-d9bde4ac",
@@ -5532,7 +5424,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-3120a357",
@@ -5544,7 +5436,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2823c4a2",
@@ -5556,7 +5448,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-1a4ff891",
@@ -5568,7 +5460,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 5,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "102153",
@@ -5626,7 +5518,7 @@
       "hasFee": true,
       "hasReview": false,
       "missingScore": 4,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-170a02b9",
@@ -5638,7 +5530,7 @@
       "hasFee": true,
       "hasReview": false,
       "missingScore": 4,
-      "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "2755",
@@ -5822,7 +5714,7 @@
       "hasFee": true,
       "hasReview": true,
       "missingScore": 3,
-      "lastEnrichedAt": "2026-11-14T08:41:00+09:00"
+      "lastEnrichedAt": "2026-11-28T10:32:00+09:00"
     },
     {
       "id": "101881",
@@ -6292,7 +6184,7 @@
       "hasFee": true,
       "hasReview": true,
       "missingScore": 3,
-      "lastEnrichedAt": "2026-11-27T05:28:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "101931",
@@ -10921,7 +10813,7 @@
       "hasFee": true,
       "hasReview": true,
       "missingScore": 3,
-      "lastEnrichedAt": "2026-11-26T16:51:00+09:00"
+      "lastEnrichedAt": "2026-11-28T10:32:00+09:00"
     },
     {
       "id": "101607",
@@ -15509,6 +15401,18 @@
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
     },
     {
+      "id": "loc-e827ee10",
+      "name": "산책",
+      "sido": "경기",
+      "sigungu": "가평군",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
+    },
+    {
       "id": "loc-754de92c",
       "name": "그라티아 글램핑",
       "sido": "경기",
@@ -17499,6 +17403,18 @@
       "hasReview": true,
       "missingScore": 3,
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+    },
+    {
+      "id": "loc-30b710f8",
+      "name": "영월아트앤캠프장",
+      "sido": "강원",
+      "sigungu": "영월군",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-fdd6778f",
@@ -20585,6 +20501,18 @@
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
     },
     {
+      "id": "loc-2be2ac74",
+      "name": "웨이브글램핑",
+      "sido": "경북",
+      "sigungu": "포항시",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
+    },
+    {
       "id": "loc-ca467a6e",
       "name": "보라보라카라반 캠핑장",
       "sido": "경북",
@@ -21569,6 +21497,18 @@
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
     },
     {
+      "id": "loc-3a67efef",
+      "name": "별빛마을",
+      "sido": "경북",
+      "sigungu": "청도군",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
+    },
+    {
       "id": "loc-9365eb18",
       "name": "수리덤캠핑장",
       "sido": "경북",
@@ -21639,6 +21579,18 @@
       "hasReview": true,
       "missingScore": 3,
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+    },
+    {
+      "id": "loc-12a2eb4d",
+      "name": "빗소리야영장",
+      "sido": "경북",
+      "sigungu": "청도군",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-b6c19d78",
@@ -23273,6 +23225,18 @@
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
     },
     {
+      "id": "loc-fb2a880b",
+      "name": "아쿠아마린 글램핑",
+      "sido": "경기",
+      "sigungu": "포천시",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
+    },
+    {
       "id": "loc-e483835e",
       "name": "해오름 글램핑",
       "sido": "경기",
@@ -23705,6 +23669,18 @@
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
     },
     {
+      "id": "loc-0a374149",
+      "name": "아잘리아 그린",
+      "sido": "충남",
+      "sigungu": "당진시",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
+    },
+    {
       "id": "loc-47fffac8",
       "name": "당진해양캠핑공원",
       "sido": "충남",
@@ -23967,6 +23943,18 @@
       "hasReview": true,
       "missingScore": 3,
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+    },
+    {
+      "id": "loc-0aea3be7",
+      "name": "들살이오토캠핑장",
+      "sido": "울산",
+      "sigungu": "울주군",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-a7a23cf3",
@@ -24483,6 +24471,18 @@
       "hasReview": true,
       "missingScore": 3,
       "lastEnrichedAt": "2026-11-26T10:50:00+09:00"
+    },
+    {
+      "id": "loc-64876a45",
+      "name": "구만동 오토캠핑장",
+      "sido": "강원",
+      "sigungu": "인제군",
+      "tel": null,
+      "hasPhoto": false,
+      "hasFee": true,
+      "hasReview": true,
+      "missingScore": 3,
+      "lastEnrichedAt": "2026-11-27T10:56:00+09:00"
     },
     {
       "id": "loc-2305de67",
@@ -26064,7 +26064,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 2,
-      "lastEnrichedAt": "2026-11-14T08:41:00+09:00"
+      "lastEnrichedAt": "2026-11-28T10:32:00+09:00"
     },
     {
       "id": "7637",
@@ -26088,7 +26088,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 2,
-      "lastEnrichedAt": "2026-11-14T08:41:00+09:00"
+      "lastEnrichedAt": "2026-11-28T10:32:00+09:00"
     },
     {
       "id": "7936",
@@ -26373,7 +26373,7 @@
       "hasFee": false,
       "hasReview": true,
       "missingScore": 2,
-      "lastEnrichedAt": "2026-11-26T16:51:00+09:00"
+      "lastEnrichedAt": "2026-11-28T05:21:00+09:00"
     },
     {
       "id": "101962",

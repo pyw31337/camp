@@ -396,9 +396,8 @@
 {"cid":"427","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/riramilk/224340863025","at":"2026-07-08","n":1,"text":"조용·한적"}
 {"cid":"428","attr":"REVIEW_COUNT","value":13,"grade":"MENTION","src":"review_search","n":13}
 {"cid":"428","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hyang3022/224447592623","at":"2026-10-20","n":1,"text":"가족·모임 힐링"}
-{"cid":"428","attr":"REVIEW_PRO_PET_FRIENDLY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hyang3022/224447592623","at":"2026-10-20","n":2,"text":"반려견 동반 편함"}
-{"cid":"428","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/mallangsuel/224339397821","at":"2026-07-07","n":1,"text":"조용·한적"}
-{"cid":"428","attr":"REVIEW_PRO_WATER","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/5ft10in/224372497821","at":"2026-08-09","n":2,"text":"계곡·물놀이 좋음"}
+{"cid":"428","attr":"REVIEW_PRO_PET_FRIENDLY","value":3,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/3301","at":"2026-11-16","n":3,"text":"반려견 동반 편함"}
+{"cid":"428","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/5ft10in/224372497821","at":"2026-08-09","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"428","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/alljungjin/224363984678","at":"2026-07-31","n":1,"text":"사이트 넓음"}
 {"cid":"434","attr":"REVIEW_CON_BUGS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/poporo0513/224330543965","at":"2026-06-29","n":1,"text":"벌레 많음"}
 {"cid":"434","attr":"REVIEW_COUNT","value":14,"grade":"MENTION","src":"review_search","n":14}
@@ -629,7 +628,7 @@
 {"cid":"635","attr":"REVIEW_PRO_HOT_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15449","at":"2026-02-20","n":1,"text":"온수 펑펑"}
 {"cid":"635","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonfrau/223658895271","at":"2024-11-13","n":1,"text":"조용·한적"}
 {"cid":"635","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15449","at":"2026-02-20","n":1,"text":"사이트 넓음"}
-{"cid":"640","attr":"REVIEW_COUNT","value":11,"grade":"MENTION","src":"review_search","n":11}
+{"cid":"640","attr":"REVIEW_COUNT","value":12,"grade":"MENTION","src":"review_search","n":12}
 {"cid":"640","attr":"REVIEW_PRO_CLEAN_FACILITY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qowodus123/224469207524","at":"2026-11-08","n":2,"text":"시설 깔끔·쾌적"}
 {"cid":"640","attr":"REVIEW_PRO_EASY_PARKING","value":1,"grade":"MENTION","src":"review_search","url":"https://todays-trip.tistory.com/45","at":"2026-11-07","n":1,"text":"주차 편함·옆 주차"}
 {"cid":"640","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/h824824/224474891464","at":"2026-11-13","n":1,"text":"아이들 놀기 좋음"}
@@ -1736,12 +1735,13 @@
 {"cid":"1742","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/housesoonlee/224403155765","at":"2026-09-07","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"1742","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://jrichpersom.tistory.com/394","at":"2025-05-10","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"1744","attr":"REVIEW_COUNT","value":4,"grade":"MENTION","src":"review_search","n":4}
-{"cid":"1744","attr":"REVIEW_PRO_ACCESSIBILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kukunanpinku/224465368629","at":"2026-11-07","n":1,"text":"접근성 좋음"}
+{"cid":"1744","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15646","at":"2026-11-16","n":1,"text":"반려견 동반 편함"}
+{"cid":"1744","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15646","at":"2026-11-16","n":1,"text":"사이트 넓음"}
 {"cid":"1750","attr":"REVIEW_CON_NOISE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chjpp/224315190737","at":"2026-06-14","n":1,"text":"소음·매너"}
-{"cid":"1750","attr":"REVIEW_COUNT","value":11,"grade":"MENTION","src":"review_search","n":11}
+{"cid":"1750","attr":"REVIEW_COUNT","value":12,"grade":"MENTION","src":"review_search","n":12}
 {"cid":"1750","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sevo39/224450982317","at":"2026-10-23","n":2,"text":"가족·모임 힐링"}
 {"cid":"1750","attr":"REVIEW_PRO_HOT_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sevo39/224440655188","at":"2026-10-13","n":1,"text":"온수 펑펑"}
-{"cid":"1750","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yiik007/224455631867","at":"2026-10-27","n":1,"text":"반려견 동반 편함"}
+{"cid":"1750","attr":"REVIEW_PRO_PET_FRIENDLY","value":2,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/4126","at":"2026-11-16","n":2,"text":"반려견 동반 편함"}
 {"cid":"1750","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sevo39/224440655188","at":"2026-10-13","n":1,"text":"사이트 넓음"}
 {"cid":"1770","attr":"REVIEW_CON_HARD_BOOKING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camfit/224343319791","at":"2026-07-12","n":1,"text":"예약 치열"}
 {"cid":"1770","attr":"REVIEW_CON_NOISE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camfit/224343319791","at":"2026-07-12","n":1,"text":"소음·매너"}
@@ -2309,9 +2309,7 @@
 {"cid":"2464","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/heyluna-/224290518181","at":"2026-05-24","n":1,"text":"뷰·경치 좋음"}
 {"cid":"2464","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/komensee99/224431049247","at":"2026-10-04","n":1,"text":"산책·둘레길 좋음"}
 {"cid":"2464","attr":"REVIEW_PRO_WATER","value":3,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gaheeei9624/224364309497","at":"2026-07-31","n":3,"text":"계곡·물놀이 좋음"}
-{"cid":"2472","attr":"REVIEW_COUNT","value":11,"grade":"MENTION","src":"review_search","n":11}
-{"cid":"2472","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jinhistar/224466480688","at":"2026-11-06","n":1,"text":"시설 깔끔·쾌적"}
-{"cid":"2472","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tlsdlfdh1554/224472272624","at":"2026-11-11","n":2,"text":"가족·모임 힐링"}
+{"cid":"2472","attr":"REVIEW_COUNT","value":9,"grade":"MENTION","src":"review_search","n":9}
 {"cid":"2472","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/banana26-7/224479551190","at":"2026-11-17","n":1,"text":"아이들 놀기 좋음"}
 {"cid":"2472","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hhhin999/224473973717","at":"2026-11-12","n":1,"text":"뷰·경치 좋음"}
 {"cid":"2480","attr":"REVIEW_COUNT","value":12,"grade":"MENTION","src":"review_search","n":12}
@@ -2767,10 +2765,12 @@
 {"cid":"2963","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/seven-queen/224436162527","at":"2026-10-09","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"2963","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/seven-queen/224436162527","at":"2026-10-09","n":1,"text":"조용·한적"}
 {"cid":"2963","attr":"REVIEW_PRO_WELL_KEPT","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/seven-queen/224436162527","at":"2026-10-09","n":1,"text":"관리 잘됨"}
-{"cid":"2965","attr":"REVIEW_COUNT","value":12,"grade":"MENTION","src":"review_search","n":12}
-{"cid":"2965","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hello_leyton/224465722277","at":"2026-11-05","n":2,"text":"가족·모임 힐링"}
-{"cid":"2965","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/berry_yuyu/224453253053","at":"2026-10-25","n":1,"text":"조용·한적"}
+{"cid":"2965","attr":"REVIEW_COUNT","value":14,"grade":"MENTION","src":"review_search","n":14}
+{"cid":"2965","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/justice700717/224488525695","at":"2026-11-23","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"2965","attr":"REVIEW_PRO_PET_FRIENDLY","value":2,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/2890","at":"2026-11-16","n":2,"text":"반려견 동반 편함"}
+{"cid":"2965","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/skwls5757/224478293910","at":"2026-11-15","n":1,"text":"조용·한적"}
 {"cid":"2965","attr":"REVIEW_PRO_WALK","value":2,"grade":"MENTION","src":"review_search","url":"https://cafe.daum.net/4050mountain/LlVs/456","at":"2026-02-19","n":2,"text":"산책·둘레길 좋음"}
+{"cid":"2965","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/o-_o_-o/224483802650","at":"2026-11-19","n":1,"text":"사이트 넓음"}
 {"cid":"2966","attr":"REVIEW_COUNT","value":12,"grade":"MENTION","src":"review_search","n":12}
 {"cid":"2966","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://niceturtle1.tistory.com/1153","at":"2024-06-08","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"2966","attr":"REVIEW_PRO_HEALING_NATURE","value":1,"grade":"MENTION","src":"review_search","url":"https://traveler-note.tistory.com/93","at":"2024-07-27","n":1,"text":"힐링·자연 감성"}
@@ -2798,10 +2798,17 @@
 {"cid":"2977","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
 {"cid":"2977","attr":"REVIEW_PRO_ACCESSIBILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/imwkgus/223497765126","at":"2024-07-01","n":1,"text":"접근성 좋음"}
 {"cid":"2977","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/imwkgus/223497765126","at":"2024-07-01","n":1,"text":"계곡·물놀이 좋음"}
+{"cid":"2982","attr":"REVIEW_CON_SLOPE","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15647","at":"2026-11-16","n":1,"text":"경사 있음"}
 {"cid":"2982","attr":"REVIEW_COUNT","value":13,"grade":"MENTION","src":"review_search","n":13}
-{"cid":"2982","attr":"REVIEW_PRO_HEALING_NATURE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hyveritas/224454838379","at":"2026-10-27","n":1,"text":"힐링·자연 감성"}
-{"cid":"2982","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hyveritas/224454838379","at":"2026-10-27","n":1,"text":"산책·둘레길 좋음"}
-{"cid":"2982","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/touchme6/224454886336","at":"2026-10-27","n":1,"text":"사이트 넓음"}
+{"cid":"2982","attr":"REVIEW_PRO_CLEAN_TOILET","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15647","at":"2026-11-16","n":1,"text":"화장실·샤워장 깨끗"}
+{"cid":"2982","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/3453","at":"2026-11-16","n":1,"text":"가족·모임 힐링"}
+{"cid":"2982","attr":"REVIEW_PRO_HEALING_NATURE","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/o-_o_-o/224481230396","at":"2026-11-17","n":2,"text":"힐링·자연 감성"}
+{"cid":"2982","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/3453","at":"2026-11-16","n":1,"text":"아이들 놀기 좋음"}
+{"cid":"2982","attr":"REVIEW_PRO_PET_FRIENDLY","value":2,"grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/3453","at":"2026-11-16","n":2,"text":"반려견 동반 편함"}
+{"cid":"2982","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/3453","at":"2026-11-16","n":1,"text":"조용·한적"}
+{"cid":"2982","attr":"REVIEW_PRO_SHADE","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15647","at":"2026-11-16","n":1,"text":"그늘 많음"}
+{"cid":"2982","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/3453","at":"2026-11-16","n":1,"text":"산책·둘레길 좋음"}
+{"cid":"2982","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/3453","at":"2026-11-16","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"2987","attr":"REVIEW_COUNT","value":10,"grade":"MENTION","src":"review_search","n":10}
 {"cid":"2987","attr":"REVIEW_PRO_KIDS","value":2,"grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/370","at":"2026-11-18","n":2,"text":"아이들 놀기 좋음"}
 {"cid":"2987","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://cafe.daum.net/chungwonjung/cRwM/37","at":"2026-04-28","n":1,"text":"반려견 동반 편함"}
@@ -6006,11 +6013,11 @@
 {"cid":"100070","attr":"REVIEW_PRO_STORE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ooii_kkk/224454341622","at":"2026-10-26","n":1,"text":"매점·편의 완비"}
 {"cid":"100070","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ooii_kkk/224454341622","at":"2026-10-26","n":1,"text":"사이트 넓음"}
 {"cid":"100074","attr":"REVIEW_COUNT","value":11,"grade":"MENTION","src":"review_search","n":11}
-{"cid":"100076","attr":"REVIEW_CON_OLD_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ginnysday/224125476163","at":"2025-12-28","n":1,"text":"노후된 시설"}
 {"cid":"100076","attr":"REVIEW_COUNT","value":9,"grade":"MENTION","src":"review_search","n":9}
 {"cid":"100076","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kokuma12345/224339730114","at":"2026-07-07","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"100076","attr":"REVIEW_PRO_HEALING_NATURE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/forest03_/224356625553","at":"2026-07-24","n":1,"text":"힐링·자연 감성"}
 {"cid":"100076","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kokuma12345/224339730114","at":"2026-07-07","n":1,"text":"아이들 놀기 좋음"}
+{"cid":"100076","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/13689","at":"2026-11-16","n":1,"text":"반려견 동반 편함"}
 {"cid":"100076","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kokuma12345/224339730114","at":"2026-07-07","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"100080","attr":"REVIEW_COUNT","value":8,"grade":"MENTION","src":"review_search","n":8}
 {"cid":"100080","attr":"REVIEW_PRO_CLEAN_TOILET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tjdgp117/224390913204","at":"2026-08-26","n":1,"text":"화장실·샤워장 깨끗"}
@@ -6070,10 +6077,11 @@
 {"cid":"100117","attr":"REVIEW_PRO_BBQ_FIRE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ian_world/224465126766","at":"2026-11-04","n":1,"text":"바베큐·불멍 힐링"}
 {"cid":"100117","attr":"REVIEW_PRO_CLEAN_FACILITY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xjwarr_/224461169013","at":"2026-11-01","n":2,"text":"시설 깔끔·쾌적"}
 {"cid":"100117","attr":"REVIEW_PRO_QUIET","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/soyoung4581/224454617091","at":"2026-10-26","n":2,"text":"조용·한적"}
-{"cid":"100122","attr":"REVIEW_COUNT","value":10,"grade":"MENTION","src":"review_search","n":10}
+{"cid":"100122","attr":"REVIEW_COUNT","value":9,"grade":"MENTION","src":"review_search","n":9}
 {"cid":"100122","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pja102602/224483921823","at":"2026-11-19","n":1,"text":"가족·모임 힐링"}
 {"cid":"100122","attr":"REVIEW_PRO_HEALING_NATURE","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pja102602/224483921823","at":"2026-11-19","n":2,"text":"힐링·자연 감성"}
-{"cid":"100122","attr":"REVIEW_PRO_QUIET","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pja102602/224483921823","at":"2026-11-19","n":2,"text":"조용·한적"}
+{"cid":"100122","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chummy_/224483109106","at":"2026-11-19","n":1,"text":"반려견 동반 편함"}
+{"cid":"100122","attr":"REVIEW_PRO_QUIET","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/s_eongeun/224494954271","at":"2026-11-27","n":2,"text":"조용·한적"}
 {"cid":"100126","attr":"REVIEW_COUNT","value":11,"grade":"MENTION","src":"review_search","n":11}
 {"cid":"100126","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sixcowssss/223755121746","at":"2025-02-10","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"100126","attr":"REVIEW_PRO_EASY_PARKING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hees345/224344986403","at":"2026-07-13","n":1,"text":"주차 편함·옆 주차"}
@@ -10712,10 +10720,11 @@
 {"cid":"101212","attr":"REVIEW_PRO_STARS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/panda_rucy/224435755637","at":"2026-10-08","n":1,"text":"별 보기 좋음"}
 {"cid":"101212","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kloi25/224417358802","at":"2026-09-28","n":1,"text":"사이트 넓음"}
 {"cid":"101214","attr":"REVIEW_COUNT","value":7,"grade":"MENTION","src":"review_search","n":7}
-{"cid":"101214","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bombom_bombyul/224475341278","at":"2026-11-13","n":1,"text":"가족·모임 힐링"}
+{"cid":"101214","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/woohau-/224491320145","at":"2026-11-26","n":2,"text":"가족·모임 힐링"}
 {"cid":"101214","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bombom_bombyul/224475341278","at":"2026-11-13","n":1,"text":"아이들 놀기 좋음"}
 {"cid":"101214","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://cruise.tistory.com/919","at":"2026-11-26","n":1,"text":"반려견 동반 편함"}
 {"cid":"101214","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bombom_bombyul/224475341278","at":"2026-11-13","n":1,"text":"조용·한적"}
+{"cid":"101214","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/woohau-/224491320145","at":"2026-11-26","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"101215","attr":"REVIEW_COUNT","value":12,"grade":"MENTION","src":"review_search","n":12}
 {"cid":"101215","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/greenskydj/224476257824","at":"2026-11-13","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"101215","attr":"REVIEW_PRO_FAMILY_HEALING","value":3,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/charming2421/224477378426","at":"2026-11-15","n":3,"text":"가족·모임 힐링"}
@@ -12686,10 +12695,12 @@
 {"cid":"101606","attr":"REVIEW_PRO_WATER","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gogosa123/224472811292","at":"2026-11-11","n":2,"text":"계곡·물놀이 좋음"}
 {"cid":"101607","attr":"REVIEW_COUNT","value":6,"grade":"MENTION","src":"review_search","n":6}
 {"cid":"101607","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/luvbittt/224443674164","at":"2026-10-16","n":1,"text":"반려견 동반 편함"}
-{"cid":"101608","attr":"REVIEW_COUNT","value":7,"grade":"MENTION","src":"review_search","n":7}
-{"cid":"101608","attr":"REVIEW_PRO_CLEAN_FACILITY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/happy040312/224462119014","at":"2026-11-02","n":2,"text":"시설 깔끔·쾌적"}
-{"cid":"101608","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/today_us92/224414315371","at":"2026-09-17","n":1,"text":"아이들 놀기 좋음"}
+{"cid":"101608","attr":"REVIEW_COUNT","value":9,"grade":"MENTION","src":"review_search","n":9}
+{"cid":"101608","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/happy040312/224462119014","at":"2026-11-02","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"101608","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ehaal111/224463118741","at":"2026-11-03","n":1,"text":"가족·모임 힐링"}
+{"cid":"101608","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camwoori/224370348344","at":"2026-08-06","n":1,"text":"반려견 동반 편함"}
 {"cid":"101608","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/happy040312/224462119014","at":"2026-11-02","n":1,"text":"조용·한적"}
+{"cid":"101608","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wye06/224383087418","at":"2026-08-19","n":1,"text":"사이트 넓음"}
 {"cid":"101609","attr":"REVIEW_COUNT","value":10,"grade":"MENTION","src":"review_search","n":10}
 {"cid":"101609","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/papagopapa/224276198348","at":"2026-05-16","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"101609","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/papagopapa/224276198348","at":"2026-05-16","n":1,"text":"가족·모임 힐링"}
@@ -12837,6 +12848,7 @@
 {"cid":"101639","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/juc879/224442454809","at":"2026-10-15","n":2,"text":"가족·모임 힐링"}
 {"cid":"101639","attr":"REVIEW_PRO_PET_FRIENDLY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/rom8858/224418037470","at":"2026-09-20","n":2,"text":"반려견 동반 편함"}
 {"cid":"101639","attr":"REVIEW_PRO_QUIET","value":3,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/juc879/224442454809","at":"2026-10-15","n":3,"text":"조용·한적"}
+{"cid":"101639","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/johnnygolf_/224489107516","at":"2026-11-23","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"101639","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lee7_9/224396139151","at":"2026-08-31","n":1,"text":"사이트 넓음"}
 {"cid":"101640","attr":"REVIEW_COUNT","value":11,"grade":"MENTION","src":"review_search","n":11}
 {"cid":"101640","attr":"REVIEW_PRO_CLEAN_FACILITY","value":3,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tesup_official/224456342628","at":"2026-10-28","n":3,"text":"시설 깔끔·쾌적"}
@@ -15705,6 +15717,7 @@
 {"cid":"102366","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hvvvvovvvv/224484415089","at":"2026-11-20","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"102366","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pang_doo/224478911287","at":"2026-11-17","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"102366","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hvvvvovvvv/224484415089","at":"2026-11-20","n":1,"text":"사이트 넓음"}
+{"cid":"102367","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"102368","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"102368","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blogsailing.com/15639","at":"2026-11-08","n":1,"text":"반려견 동반 편함"}
 {"cid":"102373","attr":"REVIEW_COUNT","value":3,"grade":"MENTION","src":"review_search","n":3}
@@ -15749,6 +15762,7 @@
 {"cid":"102391","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yanjang2/224452720787","at":"2026-10-25","n":1,"text":"반려견 동반 편함"}
 {"cid":"102391","attr":"REVIEW_PRO_WATER","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/joojeans/224371093675","at":"2026-08-07","n":2,"text":"계곡·물놀이 좋음"}
 {"cid":"102391","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/uj2743/224457088581","at":"2026-10-28","n":1,"text":"사이트 넓음"}
+{"cid":"102392","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"102394","attr":"REVIEW_COUNT","value":13,"grade":"MENTION","src":"review_search","n":13}
 {"cid":"102394","attr":"REVIEW_PRO_CLEAN_FACILITY","value":3,"grade":"MENTION","src":"review_search","url":"https://donyamus.auraanna.com/200","at":"2026-11-13","n":3,"text":"시설 깔끔·쾌적"}
 {"cid":"102394","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jjangu_fam/224466152256","at":"2026-11-05","n":1,"text":"가족·모임 힐링"}
