@@ -441,7 +441,6 @@
 {"cid":"7671","name":"화진해수욕장 마을번영회 야영장","sido":"경북","sigungu":"포항시","lat":36.250708,"lng":129.373247,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7671","gc_at":"2026-08-03T00:00:00+09:00"}
 {"cid":"7693","name":"영암군 국민여가 캠핑장","sido":"전남","sigungu":"영암군","lat":34.789573,"lng":126.691842,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7693","gc_at":"2026-08-03T00:00:00+09:00","kakao_place_id":"2012297671"}
 {"cid":"7830","name":"내리 캠핑장","sido":"경기","sigungu":"평택시","lat":36.975255,"lng":127.032559,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7830","gc_at":"2026-08-03T00:00:00+09:00","kakao_place_id":"1556077809"}
-{"cid":"100056","name":"운악산 글램핑","sido":"경기","sigungu":"포천시","lat":37.901349,"lng":127.311105,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100056","gc_at":"2026-08-03T00:00:00+09:00","kakao_place_id":"823164703"}
 {"cid":"100082","name":"당사현대차오션캠프","sido":"울산","sigungu":"북구","lat":35.582244,"lng":129.456757,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100082","gc_at":"2026-08-03T00:00:00+09:00","kakao_place_id":"1521726960"}
 {"cid":"100202","name":"가평오렌지글램핑","sido":"경기","sigungu":"가평군","lat":37.913205,"lng":127.576674,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100202","gc_at":"2026-08-03T00:00:00+09:00"}
 {"cid":"100541","name":"하늘소리 캠프","sido":"경북","sigungu":"상주시","lat":36.527119,"lng":128.017779,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100541","gc_at":"2026-08-03T00:00:00+09:00","kakao_place_id":"1436558863"}
@@ -3118,7 +3117,6 @@
 {"cid":"7877","name":"고재 야영장","sido":"경기","sigungu":"양평군","lat":37.427453,"lng":127.606239,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7877","gc_at":"2023-12-05T00:00:00+09:00"}
 {"cid":"101200","name":"엘지 오토캠핑장","sido":"강원","sigungu":"춘천시","lat":37.838265,"lng":127.611951,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101200","gc_at":"2023-12-05T00:00:00+09:00"}
 {"cid":"7028","name":"연몽캠핑장","sido":"경기","sigungu":"연천군","lat":37.987266,"lng":127.021143,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7028","gc_at":"2023-12-03T00:00:00+09:00","kakao_place_id":"83811507"}
-{"cid":"7883","name":"군위전투전승기념공원 캠핑장","sido":"대구","sigungu":"군위군","lat":36.110611,"lng":128.749463,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7883","gc_at":"2023-11-28T00:00:00+09:00","kakao_place_id":"160260993"}
 {"cid":"pilot-002-sureui","name":"[공립] 음성 수레의산자연휴양림 국민여가캠핑장","sido":"충북","sigungu":"음성","lat":37.07223,"lng":127.67184,"gc_at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-003-duruwell","name":"[공립] 철원 두루웰자연휴양림 야영장","sido":"강원","sigungu":"철원","lat":38.1633,"lng":127.3197,"gc_at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","name":"[사설] 춘천 행운캠핑장","sido":"강원","sigungu":"춘천","lat":37.9867,"lng":127.5732,"gc_at":"2026-10-15T09:00:00+09:00"}
@@ -6428,6 +6426,8 @@
 {"cid":"rf-1t1yxsb","name":"절물자연휴양림","sido":"제주","sigungu":"제주시","lat":33.44005,"lng":126.6252,"kakao_place_id":"8067359"}
 {"cid":"rf-19o61p1","name":"서귀포 치유의 숲","sido":"제주","sigungu":"서귀포시","lat":33.29194,"lng":126.5279,"kakao_place_id":"1766125269"}
 {"cid":"rf-enl4wf","name":"서귀포자연휴양림","sido":"제주","sigungu":"서귀포시","lat":33.3115,"lng":126.45876,"kakao_place_id":"8375194"}
+{"cid":"100056","name":"운악산 글램핑","sido":"경기","sigungu":"포천시","lat":37.901349,"lng":127.311105,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100056","gc_at":"2026-08-03T00:00:00+09:00","kakao_place_id":"823164703"}
+{"cid":"7883","name":"군위전투전승기념공원 캠핑장","sido":"대구","sigungu":"군위군","lat":36.110611,"lng":128.749463,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7883","gc_at":"2023-11-28T00:00:00+09:00","kakao_place_id":"160260993"}
 {"cid":"387","name":"국립남해편백자연휴양림","sido":"경남","sigungu":"남해군","lat":34.752144,"lng":128.020135,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=387","gc_at":"2026-09-07T00:00:00+09:00","kakao_place_id":"10188423"}
 {"cid":"8042","name":"연인산 다목적 캠핑장","sido":"경기","sigungu":"가평군","lat":37.90133,"lng":127.460367,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8042","gc_at":"2026-07-10T00:00:00+09:00","kakao_place_id":"17576058"}
 {"cid":"2399","name":"용인랜드 숲속캠핑장","sido":"경기","sigungu":"용인시","lat":37.258875,"lng":127.258253,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=2399","gc_at":"2025-11-27T00:00:00+09:00"}

@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-28T02:20:48.918Z",
+ "generated_at": "2026-11-28T02:47:23.248Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 137,
+ "count": 133,
  "items": [
   {
    "cid": "2179",
@@ -4959,7 +4959,7 @@
      {
       "grade": "OPERATOR",
       "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261128",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261128",
       "at": "2026-11-27",
       "quote": ""
      }
@@ -4976,6 +4976,41 @@
       "url": "https://blog.naver.com/c_wonny/224426287005",
       "at": "2026-09-29",
       "quote": "사이트 정보 입실 13:00"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "101378",
+   "name": "판타스틱 캠프닉",
+   "attr": "CHECKOUT_TIME",
+   "label": "퇴실 시각",
+   "ui": true,
+   "top": {
+    "value": "11:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/bbo0305/224454825112",
+      "at": "2026-10-27",
+      "quote": "글램핑존, 텐트존, 차박존은 입실 2시 퇴실 11시."
+     }
+    ]
+   },
+   "rival": {
+    "value": "12:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/starlogg/224436198387",
+      "at": "2026-10-09",
+      "quote": "퇴실시간 : 낮 12시"
      }
     ]
    }

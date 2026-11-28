@@ -1187,7 +1187,8 @@
 {"cid":"638","attr":"STAY_GLAMPING_SITES","value":35,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"640","attr":"SITE_TOTAL","value":38,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"640","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":38}
-{"cid":"640","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/shiaru/224481000106","at":"2026-11-17","quote":"다행히 풀타프존을 예약한 덕분에 마음 편히 이용이 가능했어요. 느티나무 캠핑장은 강원도"}
+{"cid":"640","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/going_lab/224491884887","at":"2026-11-27","quote":"이어지는 울미숲 오토캠핑장 (사진 출처 : 울미숲 오토캠핑장 제공(캠핏)) ​ 울미숲 오토캠핑장은"}
+{"cid":"640","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/zelkova0201/224481158002","at":"2026-11-17","quote":"영월 느티나무캠핑장, 김장체험과 겨울 풀타프존. 캠핑을 와서 함께 김장을 하는 풍경이라니, 평소의 캠핑 준비... 있"}
 {"cid":"640","attr":"STAY_GENERAL_SITES","value":38,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"643","attr":"SITE_TOTAL","value":34,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"643","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":34}
@@ -4769,7 +4770,7 @@
 {"cid":"2965","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"2965","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":21}
 {"cid":"2965","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
-{"cid":"2965","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hello_leyton/224465722277","at":"2026-11-05","text":"트리하우스","quote":"초안산 캠핑장 (서울 노원구) 트리하우스와 서울형 키즈카페가 가까워 아이와 함께하는 가족 캠핑에 잘 맞는 곳입니"}
+{"cid":"2965","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/woodsmen/224484083101","at":"2026-11-20","text":"캐빈","quote":"중랑캠핑숲 캠핑장관리소(숲속 카페 다온)와 생태연못 ⑤ 초안산캠핑장 (노원구 월계동 초안산근린공원) \"지하철 1호선 녹천역 3분! 통나무 캐빈하우스가 있는 도심 숲세권\" 초안산캠핑장 통나무 캐빈캠핑빌리지(…"}
 {"cid":"2965","attr":"STAY_AUTO_SITES","value":29,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2965","attr":"STAY_GENERAL_SITES","value":21,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2966","attr":"SITE_TOTAL","value":24,"grade":"CONFIRMED","src":"gocamping"}
@@ -23634,7 +23635,8 @@
 {"cid":"102389","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ekffo0922-/224478388069","at":"2026-11-15","quote":"단양 여행 총정리! 자연휴양림·오토캠핑장·축제·특산물·농촌체험마을까지. 예약 가능 구역은 다시 확인해야 합니다."}
 {"cid":"102390","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/is2yuri/224312414993","at":"2026-06-11","quote":"대전근교 기차소리 노을맛집캠핑장 🏕️ 현도오토캠핑장 B17 사이트 코베아고스트플러스 2박3일 후기. B17 사이트 코베아고"}
 {"cid":"102391","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ekffo0922-/224478388069","at":"2026-11-15","quote":"단양 여행 총정리! 자연휴양림·오토캠핑장·축제·특산물·농촌체험마을까지. 오토캠핑장천동오토캠핑장천동관광지와 계곡"}
-{"cid":"102392","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/gotyoujeong/224489563707","at":"2026-11-24","quote":"경북 김천 신상 오토캠핑장 대성리968 내부 시설 이용수칙. 위치 김천 신상 오토캠핑장 대성리96"}
+{"cid":"102392","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102392","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/gotyoujeong/224489563707","at":"2026-11-24","quote":"경북 김천 신상 오토캠핑장 대성리968 내부 시설 이용수칙. 배치한 것을 보면 알 수 있듯 바베큐"}
 {"cid":"102394","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://donyamus.auraanna.com/200","at":"2026-11-13","quote":"야영데크 12면과 카라반 사이트 8면, 숲속 놀이터와 산책로를 갖췄으며, 정식 개장은 2027년"}
 {"cid":"102394","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ahalddl1806/224476207727","at":"2026-11-13","text":"펜션","quote":"피포 경상북도 구미시 야은로 740-1 옥순빌딩 지하1층 같이 보면 좋아요 애견동반 캠핑장 추천 국립 김천 숲속 야영장 방문 후기 주말에 강아지랑 하루쯤 밖에서 쉬고 싶은데, 펜션은 부담스럽고 캠핑장은 반려견을 데려"}
 {"cid":"102395","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nadeuli5060/224486434549","at":"2026-11-21","text":"캐빈","quote":"야영데크는 15,000원~16,500원, 캐빈은 32,000원~40,000원이며 숙박 시 주차료..."}
@@ -28491,7 +28493,7 @@
 {"cid":"rf-s7nsj6","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dongheems3/224439932150","at":"2026-10-13","quote":"무엇보다 광주에서 가깝고, (저희집 남구 기준 40분ㅋㅋ) 생각보다 깔끔하고, 캠핑도 가능해서 보여드릴께요! 화순 한천자연휴양림은 오토캠핑장/숲속의집/에코힐링타운 요렇게 나눠져요~~ 체크인하고 관리실 바로 옆은"}
 {"cid":"rf-s7nsj6","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pongdang_pic/224431754478","at":"2026-10-05","text":"펜션","quote":"전라남도 광주 근교 화순군 한천자연휴양님 에코힐링타운 구름산책 펜션형 신축객실 숙박후기. 올해도 다녀온 여름휴가 가족여행 8월 성수기 숙박"}
 {"cid":"rf-thzepk","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kongrin7/224460911611","at":"2026-11-01","text":"통나무집","quote":"1박에 4만원대 통나무집? 11월 늦가을 단풍 국립자연휴양림 예약 및 ..... 지참) 1. 국"}
-{"cid":"rf-ui6jx0","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/danscene/224465044479","at":"2026-11-04","text":"독채","quote":"[밀양/여행팁] 20만 원 환급받고 다녀온 '반하다 밀양 반값여행' 신청법 & 독채 숙소 실전 꿀팁. 서원 선비문화체험관 청운리 안씨고가 혜산서원 민물고기"}
+{"cid":"rf-ui6jx0","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/forcjh/224486074534","at":"2026-11-21","text":"독채","quote":"휴양림 》 밀양 도래재자연휴양림 | 복층 독채 숙소 《숲속의집 A동》 #밀양가성비숙소 밀양숙박추천 🌳 휴양림 리뷰"}
 {"cid":"rf-v1yszx","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kongrin7/224460911611","at":"2026-11-01","text":"통나무집","quote":"1박에 4만원대 통나무집? 11월 늦가을 단풍 국립자연휴양림 예약 및 ..... 지참) 1. 국"}
 {"cid":"rf-vd74sa","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/twoonestar/224388539809","at":"2026-08-24","quote":"23~26 상주 성주봉자연휴양림-휴양관/문장대오토캠핑장-카라반. 같아서 성주봉자연휴양림 휴양관 1박, 문장대오토캠핑장 2박을."}
 {"cid":"rf-vd74sa","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://meew.tistory.com/1124","at":"2026-10-19","quote":"카라반 15,000원~100,000원 선 (구민 할인 적용 전 기준) 상주 성"}

@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-28T02:20:30.218Z",
+ "generated_at": "2026-11-28T02:47:05.573Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 312,
- "recoded": 202,
- "scoped": 921,
+ "dropped": 307,
+ "recoded": 200,
+ "scoped": 870,
  "items": [
   {
    "cid": "3209",
@@ -3911,16 +3911,6 @@
    "why": "크기 제한(대형견 불가 등)을 동반 불가로 읽음"
   },
   {
-   "cid": "7883",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "operator_homepage",
-   "url": "http://gwp.hana-pnc.co.kr/page_VqJl29",
-   "quote": "글램핑 및 소대(에어텐트 설치된)는 반려동물 동반이 불가합니다.",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
    "cid": "park-52130-00001-pythb",
    "attr": "SITE_TYPE",
    "value": "AUTO",
@@ -4256,6 +4246,16 @@
    "quote": "악양 슬로우시티 연계·반려견 동반 불가·방문 전 체크리스트·FAQ 포함.",
    "action": "drop",
    "why": "홍보·목록 제목(규칙 아님)"
+  },
+  {
+   "cid": "7883",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "operator_homepage",
+   "url": "http://gwp.hana-pnc.co.kr/page_VqJl29",
+   "quote": "글램핑 및 소대(에어텐트 설치된)는 반려동물 동반이 불가합니다.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "8157",
