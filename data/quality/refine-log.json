@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-28T04:55:44.183Z",
+ "generated_at": "2026-11-28T08:20:16.303Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 311,
+ "dropped": 312,
  "recoded": 202,
  "scoped": 921,
  "items": [
@@ -4185,6 +4185,16 @@
    "quote": "입실 :오후 1시부터 퇴실: 다음날 오전 11시까지 10kg 이하 애견 동반 가능 매너 타임: 오후 10시 30 ~오전 06...",
    "action": "recode",
    "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "rf-14xm2hg",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://koreatravel-guide.tistory.com/106",
+   "quote": "동절기 12~3월 영업 안 함&middot;카라반&middot;광한루원 연계&middot;남원 추어탕&middot;반려견 불가&middot;방문 전 체크리스트&middot;FAQ",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "rf-xuijdf",
